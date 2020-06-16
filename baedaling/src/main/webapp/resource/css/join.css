@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+a.button{
+	padding:5px 10px;
+	display: inline-block;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    text-align: center;
+}
+
+#content {
+  padding-top: 130px;
+  width: 100%;
+  min-height: 693px;
+}
+
+.row {
+  width: 1180px;
+  margin: 0 auto;
+}
+
+.row.margin_bottom{
+	margin-bottom:50px;
+}
+
+
+
+.row::after,
+{
+  content: "";
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+
+.row:last-child {
+  margin-bottom: 50px;
+}
+
+.single_button{
+	display:block;
+	user-select: none;
+	margin:0 auto;
+    width: 150px;
+    border: 1px solid #d9d9d9;
+    border-radius: 3px;
+    text-align: center;
+    padding: 15px;
+    font-size: 1rem;
+}
+
+.single_button:hover{
+	background-color:#002f6c;
+	color:#fff;
+}
+
+.row.border_box{
+    padding: 60px 5%;
+    border: 1px solid #d9d9d9;
+    box-sizing: border-box;
+}
+
+
+.banner_visual h2,
+.row h3 {
+  font-family: 'Do Hyeon', sans-serif;
+}
+.row h3 span {
+  font-size: 1rem;
+  color: #818181;
+  margin-left: 20px;
+}
+
+.banner_visual {
+  user-select: none;
+  background-size: cover;
+  height: 460px;
+}
+
+.banner_visual h2 {
+  font-weight: 300;
+  font-size: 3rem;
+  text-align: center;
+  padding: 116px 0 19px;
+}
+
+.banner_visual .visual_text {
+  margin-top: 10px;
+  line-height: 1.7rem;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/*lnb*/
+.lnb {
+  margin-top: 55px;
+  width: 100%;
+  text-align: center;
+  user-select: none;
+}
+
+.lnb li:first-child {
+  border-left: solid 1px #84847c;
+}
+
+.lnb li {
+  font-size: 0.85rem;
+  display: inline-block;
+  margin-right: -4px;
+  line-height: 35px;
+  color: #202023;
+  border-right: solid 1px #84847c;
+  border-top: solid 1px #84847c;
+  border-bottom: solid 1px #84847c;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.lnb li a {
+  display: block;
+  width: 178px;
+  height: 35px;
+}
+
+.lnb li:hover,
+.lnb li.on {
+  font-weight: bold;
+  opacity: 1;
+  background-color: #84847c;
+}
+.lnb li:hover a,
+.lnb li.on a {
+  color: #fff;
+}
+
+.lnb:after {
+  content: "";
+  display: block;
+  clear: both;
+  visibility: hidden;
+}
+
+.row_title {
+  width: 100%;
+  padding: 35px 0;
+  font-size: 1.8rem;
+  border-bottom: 1px solid #d9d9d9;
+}
