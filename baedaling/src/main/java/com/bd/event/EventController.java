@@ -11,4 +11,3 @@ public class EventController {
 		return ".event.eventlist";
 	}
 }
-

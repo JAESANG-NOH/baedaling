@@ -63,21 +63,3 @@
 		<button id="f_btn3">리스트</button>
 	</div>
 </div>
-
-<table  style='width: 50%; margin: 15px auto 0px; border-spacing: 0px;'>
-		<tr height='30'> 
-			 <td align='left' >
-			 	<span style='font-weight: bold;' >댓글쓰기</span><span> - 타인을 비방하거나 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
-			 </td>
-		</tr>
-		<tr >
-		   	<td align="center" style='padding:5px 5px 0px;'>
-				<textarea class='boxTA' style='height: 70px;'></textarea>
-		    </td>
-		</tr>
-		<tr align="right">
-		   <td  class="f_reply">
-		        <button type='button' style='height:37px; margin:10px; padding:10px 20px; align-items: center'>댓글 등록</button>
-		    </td>
-	    </tr>
-</table>

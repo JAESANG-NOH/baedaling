@@ -5,20 +5,20 @@
 <%
 	String cp=request.getContextPath();
 %>
-<link rel="stylesheet" href="<%=cp%>/resource/css/eventlist.css" type="text/css">
-<div class="event_container">
-	<div>
-		<h3>Event</h3>
-	</div>
+<link rel="stylesheet" href="<%=cp%>/resource/css/event.css" type="text/css">
 
-	<div>
+<div class="event_container">
+	<div style="width: 800px; margin: 20px auto;">
+		<div>
+			<h3>Event</h3>
+		</div>
 		<table style="margin: 0px auto; width: 100%; border-spacing: 0px;" >
 				<tr height="35px;">
-					<td align="left" width="50%">
+					<td align="left" style="font-size: 13px;">
 					1개(1/1 페이지)
 					</td>
 					<td align="right">
-					<span>배달ing&nbsp;>&nbsp;이벤트</span>
+					<span style="font-size: 13px;">배달ing&nbsp;>&nbsp;이벤트</span>
 					</td>
 				</tr>
 		</table>
@@ -42,15 +42,16 @@
 			</tr>
 		</table>
 		
-		<table style="width: 100%; margin: 10px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
-			<tr height="40" style="padding-top: 30px">
-				<td align="left" width="100">
+		
+		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
+			<tr height="40">
+				<td align="left">
 					<button type="button" onclick="javascript:location.href='<%=cp%>/'">글올리기</button>
 				</td>		
-				<td align="right" width="100">
+				<td align="right">
 					<button type="button" onclick="javascript:location.href='<%=cp%>/'">새로고침</button>
 				</td>
-			</tr>
+			</tr>			
 		</table>
 	</div>
 </div>
