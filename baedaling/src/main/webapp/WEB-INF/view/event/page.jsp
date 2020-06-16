@@ -7,7 +7,7 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/page.css" type="text/css">
 <div align="center" class="box">
-<h3 style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px; ">추천 게시판&nbsp;<span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"></span> </h3>
+<h3 style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px; ">EVENT&nbsp;<span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"></span> </h3>
 	<br>
 	<table  class="freeboard">
 		<tr class="f_line">
@@ -17,7 +17,7 @@
 		
 		<tr class="f_line">
 			<td align="left" style="color: gray;" class="subtitle">작성자</td>
-			<td align="left" id="subcontent">이미현</td>
+			<td align="left" id="subcontent">관리자</td>
 		</tr>
 		
 		<tr class="f_line">

@@ -9,7 +9,7 @@
 
 <div class="body-container" align="center" style="width: 700px;">
     <div class="body-title" align="center">
-     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">자유 게시판 </h3>
+     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">추천 게시판 </h3>
     </div>
     
     <div>

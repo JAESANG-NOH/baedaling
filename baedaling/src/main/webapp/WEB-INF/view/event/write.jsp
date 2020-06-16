@@ -9,7 +9,7 @@
 <div align="center" class="box">
 	<h3
 		style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
-		추천 게시판&nbsp;<span><img id="f_img2"
+		EVENT&nbsp;<span><img id="f_img2"
 			src="<%=cp%>/delivery/img/gangg.png"></span>
 	</h3>
 	<br>
@@ -22,7 +22,7 @@
 
 		<tr class="f_line">
 			<td align="left" style="color: gray;" class="subtitle">작성자</td>
-			<td align="left" id="subcontent">이미현</td>
+			<td align="left" id="subcontent">관리자</td>
 		</tr>
 
 		<tr class="f_line">
