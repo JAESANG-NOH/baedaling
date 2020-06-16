@@ -86,3 +86,8 @@ text-align: center;
 .body-container{
 	margin: 80px auto;
 }
+
+
+#list_table th,td{
+	font-size: 14px;
+}

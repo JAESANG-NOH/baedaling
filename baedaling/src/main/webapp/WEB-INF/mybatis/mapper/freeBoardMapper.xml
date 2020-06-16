@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="freeBoard">
+<insert id="insertBoard" parameterType="com.sp.bd.FreeBoard">
+	INSERT INTO freeBoard(num, userId, userName, subject, content, hitCount, created, useridx, saveFilename, originalFilename, fileSize)
+	VALUES(freeBoard_seq.NEXTVAL, #{userId}, #{userName}, #{subject}, jdbcType=VARCHAR ,0,SYSDATE,#{useridx},#{saveFilename},#{originalFilename},#{fileSize})
+</insert>
+
+</mapper>
