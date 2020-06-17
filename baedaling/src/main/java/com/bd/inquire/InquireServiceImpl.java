@@ -14,7 +14,7 @@ public class InquireServiceImpl implements InquireService {
 	private CommonDAO dao;
 
 	@Override
-	public void insertInquire(Inquire dto, String mode) throws Exception {
+	public void insertInquire(Inquire dto) throws Exception {
 		try {
 			dao.insertData("inquire.insertInquire", dto);
 		} catch (Exception e) {

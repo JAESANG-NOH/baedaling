@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface InquireService {
-	public void insertInquire(Inquire dto, String mode) throws Exception;
+	public void insertInquire(Inquire dto) throws Exception;
 	
 	public int dataCount(Map<String, Object> map);
 	public List<Inquire> listInquire(Map<String, Object> map);

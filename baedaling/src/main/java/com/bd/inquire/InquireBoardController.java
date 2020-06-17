@@ -45,6 +45,7 @@ public class InquireBoardController {
 		
 		try {
 			dto.setUserId(info.getUserId());
+			service.insertInquire(dto);
 		} catch (Exception e) {
 		}
 		
