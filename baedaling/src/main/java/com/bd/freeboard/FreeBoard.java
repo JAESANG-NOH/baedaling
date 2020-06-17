@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-public class FreeBorad {
+public class FreeBoard {
 	private int num;
 	private int listNum;
 	private int fileNum;
