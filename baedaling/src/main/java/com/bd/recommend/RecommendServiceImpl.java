@@ -74,32 +74,79 @@ public class RecommendServiceImpl implements RecommendService{
 		return result;
 	}
 	@Override
-	public Recommend readBoard(int num) {
-		// TODO Auto-generated method stub
-		return null;
+	public Recommend readPage(int num) {
+		Recommend dto = null;
+		try {
+			dto = dao.selectOne("rc.readpage", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	@Override
 	public void updateHitCount(int num) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			dao.updateData("rc.updateHitCount",num);
+		} catch (Exception e) {
+			throw e;
+		}
 		
 	}
 	@Override
 	public Recommend preReadRecommend(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Recommend dto = null;
+		try {
+			dto = dao.selectOne("rc.preReadRecommend", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	@Override
 	public Recommend nextReadRecommend(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		Recommend dto = null;
+		try {
+			dto = dao.selectOne("rc.nextReadRecommend", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 	@Override
 	public void updateRecommend(Recommend dto, String pathname) throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	@Override
 	public void deleteRecommend(int num, String pathname, String userId) throws Exception {
+		
+		
+	}
+
+	@Override
+	public List<Recommend> listFile(int num) {
+		List<Recommend> list = null;
+		try {
+			list = dao.selectList("rc.listFile", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public Recommend readFile(int fileNum) {
+		Recommend dto = null;
+		try {
+			dto = dao.selectOne("rc.readFile",fileNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public void deleteFile(Map<String, Object> map) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}

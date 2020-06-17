@@ -1,6 +1,7 @@
 package com.bd.recommend;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,8 @@ public class RecommendController {
 	private RecommendService service;
 	@Autowired
 	private MyUtil myUtil;
+	@Autowired
+	private FileManager fileManager;
 	
 	@RequestMapping("/list")
 	public String list(
@@ -97,7 +101,8 @@ public class RecommendController {
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);		
 		model.addAttribute("pageUrl", pageUrl);
-		
+		model.addAttribute("category", category);
+		model.addAttribute("key", key);
 		return ".recommendboard.list";
 	}
 	
@@ -132,5 +137,71 @@ public class RecommendController {
 		return "redirect:/recommend/list";
 	}
 	
+	@RequestMapping(value="page")
+	public String readpage(
+			@RequestParam int num,
+			@RequestParam String page,
+			@RequestParam(defaultValue="any") String category,
+			@RequestParam(defaultValue="") String key,
+			Model model
+			) throws Exception {
+		key = URLDecoder.decode(key, "utf-8");
+		String query="page="+page;
+		if(key.length()!=0) {
+			query+="&category="+category+"&key="+URLEncoder.encode(key, "UTF-8");
+		}
+		
+		service.updateHitCount(num);
+		
+		Recommend dto = service.readPage(num);
+		if(dto==null) {
+			return "redirect:/recommend/list?"+query;
+		}
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("category", category);
+		map.put("key", key);
+		map.put("num", num);
+		
+		Recommend preReadDto = service.preReadRecommend(map);
+		Recommend nextReadDto = service.nextReadRecommend(map);
+        
+		List<Recommend> listFile=service.listFile(num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
+		model.addAttribute("listFile", listFile);
+		model.addAttribute("page", page);
+		model.addAttribute("query", query);
+		
+		return ".recommendboard.page";
+	}
 	
+	@RequestMapping(value="download")
+	public void download(
+			@RequestParam int fileNum,
+			HttpServletResponse resp,
+			HttpSession session
+			)throws Exception {
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "resource" + File.separator + "recommend";
+		boolean b = false;
+		
+		Recommend dto = service.readFile(fileNum);
+		if(dto!=null) {
+			String saveFilename = dto.getSaveFilename();
+			String originalFilename = dto.getOriginalFilename();
+			
+			b = fileManager.doFileDownload(saveFilename, originalFilename, pathname, resp);
+		}
+		if(!b) {
+			try {
+				resp.setContentType("text/html; charset=utf-8");
+				PrintWriter out = resp.getWriter();
+				out.println("<script>alert('파일 다운로드가 불가능 합니다 !!!');history.back();</script>");
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+	}
 }

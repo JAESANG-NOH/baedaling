@@ -36,7 +36,7 @@
        <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
             <td>${dto.listNum}</td>
             <td align="left" style="padding-left: 10px;">
-                 <a href="">${dto.subject}</a>
+                 <a href="${pageUrl}&num=${dto.num}">${dto.subject}[${dto.replyCount}]</a>
             </td>
             <td>${dto.userName}</td>
             <td>${dto.created}</td>
@@ -47,6 +47,7 @@
       <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
          <tr height="35">
          <td align="center">
+         	${dataCount==0?"등록된 게시물이 없습니다.":paging}
          </tr>
       </table>
       <table style="width: 100%; margin: 10px auto; border-spacing: 0px;">
@@ -56,15 +57,14 @@
             </td>
             <td align="center">
                 <form name="searchForm" action="" method="post">
-                    <select name="condition" class="selectField">
-                        <option value="all" selected='selected'>모두</option>
-                        <option value="subject" >제목</option>
-                        <option value="content" >내용</option>
-                        <option value="userName" >작성자</option>
-                        <option value="created" >등록일</option>
+                    <select name="category" class="selectField">
+                        <option value="any" ${category=="any"?"selected='selected'":""}>모두</option>
+                        <option value="subject" ${category=="subject"?"selected='selected'":""}>제목</option>
+                        <option value="content" ${category=="content"?"selected='selected'":""}>내용</option>
+                        <option value="userName" ${category=="userName"?"selected='selected'":""}>작성자</option>
+                        <option value="created" ${category=="created"?"selected='selected'":""}>등록일</option>
                   </select>
                   <input type="text" name="keyword" value="" class="boxTF">
-                  
                   <button type="button" class="btn" onclick="searchList()">검색</button>
               </form>
             </td>

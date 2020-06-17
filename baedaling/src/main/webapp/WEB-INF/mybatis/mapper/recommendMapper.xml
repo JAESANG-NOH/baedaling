@@ -63,4 +63,50 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="readpage" parameterType="Integer" resultType="com.bd.recommend.Recommend">
+		SELECT num, userId, userName, subject, content, created, hitCount
+		FROM recommendboard n
+		WHERE num = #{num}
+	</select>
+	
+	<update id="updateHitCount" parameterType="Integer">
+		UPDATE recommendboard SET hitCount=hitCount+1 WHERE num = #{num}
+	</update>
+	
+	<select id="preReadRecommend" parameterType="map" resultType="com.bd.recommend.Recommend">
+		SELECT num, subject
+		FROM recommendboard n
+		<where>
+			<if test="key != null and key != '' ">
+				<include refid="search-list"/>
+			</if>
+			AND (num &gt; #{num})
+		</where>
+		ORDER BY num ASC
+		FETCH FIRST 1 ROWS ONLY
+    </select>
+    
+    <select id="nextReadRecommend" parameterType="map" resultType="com.bd.recommend.Recommend">
+		SELECT num, subject
+		FROM recommendboard n
+		<where>
+			<if test="key != null and key != '' ">
+				<include refid="search-list"/>
+			</if>
+			AND (num &lt; #{num})
+		</where>
+		ORDER BY num DESC
+		FETCH FIRST 1 ROWS ONLY
+    </select>
+	<select id="listFile" parameterType="Integer" resultType="com.bd.recommend.Recommend">
+		SELECT fileNum, num, saveFilename, originalFilename, fileSize
+		FROM recommendboardFile
+		WHERE num=#{num}    
+	</select>
+	<select id="readFile" parameterType="Integer" resultType="com.bd.recommend.Recommend">
+		SELECT fileNum, num, saveFilename, originalFilename, fileSize
+		FROM recommendboardFile
+	    WHERE fileNum=#{fileNum}      
+	</select>
 </mapper>

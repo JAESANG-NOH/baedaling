@@ -7,7 +7,7 @@ public interface RecommendService {
 	public void writeRecommend(Recommend dto, String pathname) throws Exception;
 	public List<Recommend> listRecommend(Map<String, Object> map);
 	public int dataCount(Map<String, Object> map);
-	public Recommend readBoard(int num);
+	public Recommend readPage(int num);
 	public void updateHitCount(int num) throws Exception;
 	public Recommend preReadRecommend(Map<String, Object> map);
 	public Recommend nextReadRecommend(Map<String, Object> map);
@@ -15,4 +15,7 @@ public interface RecommendService {
 	public void deleteRecommend(int num, String pathname, String userId) throws Exception;
 	
 	public void insertFile(Recommend dto) throws Exception;
+	public List<Recommend> listFile(int num);
+	public Recommend readFile(int fileNum);
+	public void deleteFile(Map<String, Object> map) throws Exception;
 }
