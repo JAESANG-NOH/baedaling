@@ -24,9 +24,9 @@ function sendOk() {
     }
 
 	f.action="<%=cp%>/freeboard/${mode}";
-
     f.submit();
 }
+
 
 </script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/write.css" type="text/css">
@@ -40,9 +40,9 @@ function sendOk() {
 <form name="freeBoardForm" method="post" enctype="multipart/form-data">	
 	<table class="freeboard">
 		<tr class="f_line">
-			<td align="left" style="font-weight: bold;" class="subtitle">제목  ${subject }</td>
-			<td align="left" id="ftitle" style="color: gray;"><input
-				class="boxTF" style="width: 95%; color: gray;"></td>
+			<td align="left" style="font-weight: bold;" class="subtitle">제목</td>
+			<td align="left" id="ftitle" style="color: gray;">
+			<input name="subject" class="boxTF" style="width: 95%; color: gray;" value=" ${dto.subject}"></td>
 		</tr>
 
 		<tr class="f_line">
@@ -53,7 +53,7 @@ function sendOk() {
 		<tr class="fcontent" align="left">
 			<td colspan="2" align="left"
 				style="padding-left: 20px; border-bottom: 1px solid #cccccc;">
-				<textarea style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.content}</textarea>
+				<textarea name="content" style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.content}</textarea>
 			</td>
 		</tr>
 
