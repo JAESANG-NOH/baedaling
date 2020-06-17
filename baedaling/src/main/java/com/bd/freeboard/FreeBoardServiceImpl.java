@@ -156,7 +156,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public void insertFile(FreeBoard dto) throws Exception {
 		try {
-			
+			dao.insertData("freeboard.insertFile", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

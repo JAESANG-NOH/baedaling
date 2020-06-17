@@ -7,4 +7,10 @@
 	VALUES(freeBoard_seq.NEXTVAL, #{userId}, #{userName}, #{subject}, jdbcType=VARCHAR ,0,SYSDATE,#{useridx})
 </insert>
 
+<insert id="insertFile" parameterType="com.bd.freeboard.FreeBoard">
+	INSERT INTO freeBoardFile(fileNum, num, saveFilename, originalFilename,fileSize)
+	 VALUES(freeBoardFile_seq.NEXTVAL, #{num}, #{saveFilename},
+					#{originalFilename}, #{fileSize})
+</insert>
+
 </mapper>
