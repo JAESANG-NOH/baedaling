@@ -28,7 +28,7 @@
       <div>
          <div class="entry" style="margin: 0px;" align="center">
             <ul>
-               <li>
+               <li style="list-style: none;">
                   <input id="inputline" type="search" placeholder="주소입력창">
                   <button type="button" onclick="/">검색</button>
                </li>
