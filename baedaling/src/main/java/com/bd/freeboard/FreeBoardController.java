@@ -37,12 +37,12 @@ public class FreeBoardController {
 			) throws Exception {
 
 		model.addAttribute("mode", "created");
-		return ".freeBoard.created";
+		return ".freeboard.created";
 	}
 
 	@RequestMapping(value="created", method=RequestMethod.POST)
 	public String createdSubmit(
-			FreeBorad dto,
+			FreeBoard dto,
 			HttpSession session) throws Exception {
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("member");
@@ -56,7 +56,7 @@ public class FreeBoardController {
 		} catch (Exception e) {
 		}
 		
-		return "redirect:/freeBoard/list";
+		return "redirect:/freeboard/list";
 	}
 
 }
