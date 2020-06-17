@@ -6,7 +6,7 @@
 	String cp=request.getContextPath();
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/list.css" type="text/css">
-<div class="body-container" align="center" style="width: 700px;">
+<div class="body-container" align="center" style="width: 900px;">
     <div class="body-title" align="center">
      <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">자유 게시판 </h3>
     </div>
@@ -24,16 +24,16 @@
       </table>
       <!-- "#EFF1F3" -->
       <table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
-        <tr align="center" bgcolor="#EFF1F3" height="35" style="border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; "> 
-            <th width="60" style="color: #787878;">번호</th>
-            <th style="color: #787878;">제목</th>
+        <tr id="list_table" align="center" bgcolor="#EFF1F3" height="50" style=" border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; "> 
+            <th width="70" style="color: #787878;">번호</th>
+            <th align="center" style="color: #787878;">제목</th>
             <th width="100" style="color: #787878;">작성자</th>
             <th width="80" style="color: #787878;">작성일</th>
             <th width="60" style="color: #787878;">조회수</th>
             <th width="50" style="color: #787878;">첨부</th>
         </tr>
        
-       <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
+       <tr align="center" bgcolor="#ffffff" height="45" style="border-bottom: 1px solid #cccccc;"> 
             <td>7</td>
             <td align="left" style="padding-left: 10px;">
                  <a href="/sp4/bbs/article?page=1&num=7">11111111111111111111111 (0)</a>
@@ -41,9 +41,9 @@
             <td>스프링</td>
             <td>2020-06-11</td>
             <td>2</td>
-            <td>
-                    </td>
+            <td>첨부파일</td>
         </tr>
+        
         <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
             <td>6</td>
             <td align="left" style="padding-left: 10px;">
