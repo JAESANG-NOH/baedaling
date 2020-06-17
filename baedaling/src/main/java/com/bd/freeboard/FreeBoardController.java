@@ -31,17 +31,17 @@ public class FreeBoardController {
 	}
 	
 	
-	@RequestMapping(value="created", method=RequestMethod.GET)
-	public String createdForm(
+	@RequestMapping(value="write", method=RequestMethod.GET)
+	public String writeForm(
 			Model model
 			) throws Exception {
 
-		model.addAttribute("mode", "created");
-		return ".freeboard.created";
+		model.addAttribute("mode", "write");
+		return ".freeboard.write";
 	}
 
-	@RequestMapping(value="created", method=RequestMethod.POST)
-	public String createdSubmit(
+	@RequestMapping(value="write", method=RequestMethod.POST)
+	public String writeSubmit(
 			FreeBoard dto,
 			HttpSession session) throws Exception {
 		
