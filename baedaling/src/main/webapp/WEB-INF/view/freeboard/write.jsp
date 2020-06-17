@@ -5,30 +5,55 @@
 <%
 	String cp = request.getContextPath();
 %>
+<script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
+
+$(function(){
+	$("form input[name=upload]").change(function(){
+		if(! $(this).val()) return;
+		
+		var b=false;
+		$("form input[name=upload]").each(function(){
+			if(! $(this).val()) {
+				b=true;
+				return;
+			}
+		});
+		if(b) return false;
+			
+		var $tr = $(this).closest("tr").clone(true); // 이벤트도 복제
+		$tr.find("input").val("");
+		$("#tb").append($tr);
+	});
+});
+
+  <c:if test="${mode=='update'}">
+  function deleteFile(fileNum) {
+		var url="<%=cp%>/notice/deleteFile";
+		$.post(url, {fileNum:fileNum}, function(data){
+			$("#f"+fileNum).remove();
+		}, "json");
+  }
+</c:if>
+
+
+
 function sendOk() {
-    var f = document.freeBoardForm;
+    var f = document.boardForm;
 
 	var str = f.subject.value;
     if(!str) {
         alert("제목을 입력하세요. ");
         f.subject.focus();
-        return;
-    }
-
-	str = f.content.value;
-    if(!str) {
-        alert("내용을 입력하세요. ");
-        f.content.focus();
-        return;
+        return false;
     }
 
 	f.action="<%=cp%>/freeboard/${mode}";
-    f.submit();
+	return true;
 }
 
-
 </script>
+
 <link rel="stylesheet" href="<%=cp%>/resource/css/write.css" type="text/css">
 <div align="center" class="box">
 	<h3
@@ -37,8 +62,9 @@ function sendOk() {
 			src="<%=cp%>/resource/img/gangg.png"></span>
 	</h3>
 	<br>
-<form name="freeBoardForm" method="post" enctype="multipart/form-data">	
+<form name="boardForm" method="post" enctype="multipart/form-data" onsubmit="return submitContents(this);">	
 	<table class="freeboard">
+		<tbody id="tb">
 		<tr class="f_line">
 			<td align="left" style="font-weight: bold;" class="subtitle">제목</td>
 			<td align="left" id="ftitle" style="color: gray;">
@@ -53,7 +79,7 @@ function sendOk() {
 		<tr class="fcontent" align="left">
 			<td colspan="2" align="left"
 				style="padding-left: 20px; border-bottom: 1px solid #cccccc;">
-				<textarea name="content" style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.content}</textarea>
+				<textarea name="content" id="content" style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.content}</textarea>
 			</td>
 		</tr>
 
@@ -63,6 +89,7 @@ function sendOk() {
 			<td><input class="boxTF" type="file" name="upload" size="53"
 				style="width: 95%;"></td>
 		</tr>
+		</tbody>
 		
 		<c:if test="${mode=='update'}">
 				   <c:forEach var="dto" items="${listFile}">
@@ -81,7 +108,7 @@ function sendOk() {
 	<table>
 		<tr>
 			<td height="100px">
-				<button class="btn" type="button" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}</button>&nbsp;&nbsp;
+				<button class="btn" type="submit" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}</button>&nbsp;&nbsp;
 				<button class="btn" type="reset">다시입력</button>&nbsp;&nbsp;
 				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/freeboard/list';">${mode=='update'?'수정취소':'등록취소'}</button>&nbsp;&nbsp;
 				  <c:if test="${mode=='update'}">
@@ -92,7 +119,8 @@ function sendOk() {
 		</tr>
 	</table>
 </form>
-    <script type="text/javascript">
+</div>
+<script type="text/javascript">
 var oEditors = [];
 nhn.husky.EZCreator.createInIFrame({
    oAppRef: oEditors,
@@ -137,4 +165,3 @@ function setDefaultFont() {
    oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 }
 </script>
-</div>
