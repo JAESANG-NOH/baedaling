@@ -18,9 +18,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	private FileManager fileManager;
 	
 	@Override
-	public void insertBoard(FreeBorad dto, String pathname) throws Exception {
+	public void insertBoard(FreeBoard dto, String pathname) throws Exception {
 		try {
-			int seq = dao.selectOne("freeBoard.seq");
+			int seq = dao.selectOne("freeboard.seq");
 			dto.setNum(seq);
 			dao.insertData("freeboard.insertFreeboard",dto);
 			
@@ -50,7 +50,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public List<FreeBorad> listBoard(Map<String, Object> map) {
+	public List<FreeBoard> listBoard(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -62,7 +62,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public FreeBorad readBoard(int num) {
+	public FreeBoard readBoard(int num) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -74,19 +74,19 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public FreeBorad preReadBoard(Map<String, Object> map) {
+	public FreeBoard preReadBoard(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public FreeBorad nextReadBoard(Map<String, Object> map) {
+	public FreeBoard nextReadBoard(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void updateBoard(FreeBorad dto, String pathname) throws Exception {
+	public void updateBoard(FreeBoard dto, String pathname) throws Exception {
 		try {
 			
 		} catch (Exception e) {
@@ -154,7 +154,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public void insertFile(FreeBorad dto) throws Exception {
+	public void insertFile(FreeBoard dto) throws Exception {
 		try {
 			
 		} catch (Exception e) {
@@ -164,13 +164,13 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public List<FreeBorad> listFile(int num) {
+	public List<FreeBoard> listFile(int num) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public FreeBorad readFile(int fileNum) {
+	public FreeBoard readFile(int fileNum) {
 		// TODO Auto-generated method stub
 		return null;
 	}
