@@ -40,7 +40,7 @@ function sendOk() {
 <form name="freeBoardForm" method="post" enctype="multipart/form-data">	
 	<table class="freeboard">
 		<tr class="f_line">
-			<td align="left" style="font-weight: bold;" class="subtitle">제목</td>
+			<td align="left" style="font-weight: bold;" class="subtitle">제목  ${subject }</td>
 			<td align="left" id="ftitle" style="color: gray;"><input
 				class="boxTF" style="width: 95%; color: gray;"></td>
 		</tr>
@@ -48,13 +48,6 @@ function sendOk() {
 		<tr class="f_line">
 			<td align="left" style="color: gray;" class="subtitle">작성자</td>
 			<td align="left" id="subcontent">${sessionScope.user.userName }</td>
-		</tr>
-
-		<tr class="f_line">
-			<td class="subtitle">작성일</td>
-			<td id="subcontent2">${created}<span style="display: inline-block; margin-left: 30px; font-weight: bold;">조회수</span><span
-				style="margin-left: 20px;">${hitCount}</span>
-			</td>
 		</tr>
 
 		<tr class="fcontent" align="left">
