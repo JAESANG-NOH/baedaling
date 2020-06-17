@@ -34,7 +34,7 @@ function sendOk() {
 	<h3
 		style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
 		자유게시판&nbsp;<span><img id="f_img2"
-			src="<%=cp%>/delivery/img/gangg.png"></span>
+			src="<%=cp%>/resource/img/gangg.png"></span>
 	</h3>
 	<br>
 <form name="freeBoardForm" method="post" enctype="multipart/form-data">	
@@ -65,7 +65,7 @@ function sendOk() {
 		</tr>
 		
 		<c:if test="${mode=='update'}">
-				   <c:forEach var="vo" items="${listFile}">
+				   <c:forEach var="dto" items="${listFile}">
 						  <tr id="f${dto.fileNum}" height="40" style="border-bottom: 1px solid #cccccc;"> 
 						      <td width="100" bgcolor="#eeeeee" style="text-align: center;">첨부된파일</td>
 						      <td style="padding-left:10px;"> 
@@ -74,7 +74,7 @@ function sendOk() {
 						      </td>
 						  </tr>
 				   </c:forEach>
-				</c:if>
+			</c:if>
 
 	</table>
 
