@@ -52,7 +52,7 @@
       <table style="width: 100%; margin: 10px auto; border-spacing: 0px;">
          <tr height="40">
             <td align="left" width="100">
-                <button type="button" class="btn" onclick="">새로고침</button>
+                <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/recommend/list'">새로고침</button>
             </td>
             <td align="center">
                 <form name="searchForm" action="" method="post">
@@ -64,6 +64,7 @@
                         <option value="created" >등록일</option>
                   </select>
                   <input type="text" name="keyword" value="" class="boxTF">
+                  
                   <button type="button" class="btn" onclick="searchList()">검색</button>
               </form>
             </td>

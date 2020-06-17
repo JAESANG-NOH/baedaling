@@ -5,6 +5,8 @@
 <%
 	String cp = request.getContextPath();
 %>
+<script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 <script type="text/javascript">
 $(function(){
 	$("form input[name=upload]").change(function(){
@@ -34,22 +36,23 @@ $(function(){
   }
 </c:if>
 
-function sendWrite(){
-	var f = document.writeForm;
+function check(){
+	var f = document.boardForm;
 	var line = f.subject.value;
 	if(!line){
 		alert("제목을 입력하세요.");
 		f.subject.focus();
-		return;
+		return false;
 	}
 	line = f.content.value;
 	if(!line){
 		alert("내용을 입력하세요.");
 		f.content.focus();
-		return;
+		return false;
 	}
 	f.action="<%=cp%>/recommend/${state}";
-	f.submit();
+	return true;
+	
 }
 </script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/write.css" type="text/css">
@@ -58,7 +61,7 @@ function sendWrite(){
 		style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">추천 게시판&nbsp;<span><img id="f_img2"src="<%=cp%>/resource/img/gangg.png"></span>
 	</h3>
 	<br>
-	<form name="writeForm" method="post" enctype="multipart/form-data">
+	<form name="boardForm" method="post" enctype="multipart/form-data" onsubmit="return submitContents(this);">>
 	<table class="freeboard">
 		<tbody id="tb">
 			<tr class="f_line">
@@ -75,7 +78,7 @@ function sendWrite(){
 			<tr class="fcontent" align="left">
 				<td colspan="2" align="left"
 					style="padding-left: 20px; border-bottom: 1px solid #cccccc;">
-					<textarea style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;" name="content"></textarea>
+					<textarea style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;"  id="content" name="content"></textarea>
 				</td>
 			</tr>
 	
@@ -88,14 +91,15 @@ function sendWrite(){
 	<table>
 		<tr>
 			<td height="100px">
-				<button class="btn" type="submit" onclick="sendWrite();">등록하기</button>&nbsp;&nbsp;
+				<button class="btn" type="submit">등록하기</button>&nbsp;&nbsp;
 				<button class="btn" type="reset">다시입력</button>&nbsp;&nbsp;
-				<button class="btn" type="button">등록취소</button>&nbsp;&nbsp;
+				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/recommend/list'">등록취소</button>&nbsp;&nbsp;
 			</td>
 		</tr>
 	</table>
 	</form>
-	<script type="text/javascript">
+</div>
+<script type="text/javascript">
 		var oEditors = [];
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef: oEditors,
@@ -139,5 +143,4 @@ function sendWrite(){
 			var nFontSize = 24;
 			oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
 		}
-	</script>
-</div>
+</script>
