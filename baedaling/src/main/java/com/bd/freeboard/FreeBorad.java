@@ -1,5 +1,7 @@
 package com.bd.freeboard;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class FreeBorad {
@@ -17,11 +19,14 @@ public class FreeBorad {
 	private int hitCount; 
 	private String created;
 	
+	//파일
 	private String originalFilename;
 	private String saveFilename; 
 	private long fileSize;
-	private MultipartFile upload;
+	private List<MultipartFile> upload;
+	private int fileCount;
 	
+	//댓글 & 좋아요
 	private int replyCount;
 	private int boardLikeCount;
 	public int getNum() {
@@ -108,11 +113,17 @@ public class FreeBorad {
 	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
-	public MultipartFile getUpload() {
+	public List<MultipartFile> getUpload() {
 		return upload;
 	}
-	public void setUpload(MultipartFile upload) {
+	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
+	}
+	public int getFileCount() {
+		return fileCount;
+	}
+	public void setFileCount(int fileCount) {
+		this.fileCount = fileCount;
 	}
 	public int getReplyCount() {
 		return replyCount;
