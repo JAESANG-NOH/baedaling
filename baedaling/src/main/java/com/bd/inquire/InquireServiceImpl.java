@@ -15,13 +15,16 @@ public class InquireServiceImpl implements InquireService {
 
 	@Override
 	public void insertInquire(Inquire dto, String mode) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			dao.insertData("inquire.insertInquire", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
-
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

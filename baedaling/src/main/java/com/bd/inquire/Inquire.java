@@ -1,16 +1,18 @@
 package com.bd.inquire;
 
 public class Inquire {
-	private int num;
-	private int type;
-	private int parent;
-	private int state;
-	private String userId;
-	private int userIdx;
-	private String email;
-	private String category;
-	private String subject;
-	private String content;
+	private int num; // 게시물 번호
+	private String userId; // 질문아이디
+	private String email; // 질문자 이메일
+	private String category; // 카테고리
+	
+	private String subject; // 제목
+	private String question; // 질문
+	private String created; // 질문일자
+	
+	private String answerId; // 답변아이디
+	private String answer; // 답변
+	private String answer_created; // 답변일자
 	
 	public int getNum() {
 		return num;
@@ -18,35 +20,11 @@ public class Inquire {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public int getType() {
-		return type;
-	}
-	public void setType(int type) {
-		this.type = type;
-	}
-	public int getParent() {
-		return parent;
-	}
-	public void setParent(int parent) {
-		this.parent = parent;
-	}
-	public int getState() {
-		return state;
-	}
-	public void setState(int state) {
-		this.state = state;
-	}
 	public String getUserId() {
 		return userId;
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
-	}
-	public int getUserIdx() {
-		return userIdx;
-	}
-	public void setUserIdx(int userIdx) {
-		this.userIdx = userIdx;
 	}
 	public String getEmail() {
 		return email;
@@ -66,12 +44,38 @@ public class Inquire {
 	public void setSubject(String subject) {
 		this.subject = subject;
 	}
-	public String getContent() {
-		return content;
+	public String getQuestion() {
+		return question;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	public String getAnswerId() {
+		return answerId;
+	}
+	public void setAnswerId(String answerId) {
+		this.answerId = answerId;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+	public String getAnswer_created() {
+		return answer_created;
+	}
+	public void setAnswer_created(String answer_created) {
+		this.answer_created = answer_created;
+	}
+	
+	
 
 }
 
