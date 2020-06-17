@@ -29,8 +29,6 @@ public class RecommendController {
 	private RecommendService service;
 	@Autowired
 	private MyUtil myUtil;
-	@Autowired
-	private FileManager FileManager;
 	
 	@RequestMapping("/list")
 	public String list(
