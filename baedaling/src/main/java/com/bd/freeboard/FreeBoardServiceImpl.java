@@ -53,7 +53,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public List<FreeBoard> listBoard(Map<String, Object> map) {
 		List<FreeBoard> list=null;
-		
+
 		try {
 			list=dao.selectList("fb.ListFreeboard", map);
 		} catch (Exception e) {

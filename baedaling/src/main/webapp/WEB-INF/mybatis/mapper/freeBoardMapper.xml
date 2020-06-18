@@ -18,25 +18,24 @@
 
 
 	<sql id="search-list">
-		<if test="condition=='all' ">
+		<if test="condition=='all'">
 			( INSTR(subject, #{keyword}) &gt; 0
 				OR DBMS_LOB.INSTR(content, #{keyword}) &gt; 0 )
 		</if>
 		<if test="condition=='subject' ">
 			INSTR(subject, #{keyword}) &gt; 0
 		</if>
-		<if test="condition=='content' ">
+		<if test="condition=='content'">
 			DBMS_LOB.INSTR( content, #{keyword}) &gt; 0 
 		</if>
-		<if test="condition=='userName' ">
+		<if test="condition=='userName'">
 			userName=#{keyword}
 		</if>
-		<if test="condition=='created' ">
+		<if test="condition=='created'">
 			( TO_CHAR(created, 'YYYY-MM-DD') = #{keyword}
 				OR TO_CHAR(created, 'YYYYMMDD') = #{keyword} )
 		</if>
 	</sql>
-
 
 	<select id="ListFreeboard" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
 		SELECT f.num, f.userId, subject, hitCount, 
@@ -54,10 +53,11 @@
 		) r ON f.num = r.num
 		
 		<where>
-			<if test="key!=null and key!=''">
+			<if test="keyword!=null and keyword!=''">
 				<include refid="search-list"/>
 			</if>
 		</where>
+
 		ORDER BY f.num DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 	</select>
@@ -67,7 +67,7 @@
 		FROM freeBoard f
 		JOIN user1 u ON f.userId = u.userId
 		<where>
-			<if test="key!=null and key!=''">
+			<if test="keyword!=null and keyword!=''">
 				<include refid="search-list"/>
 			</if>
 		</where>

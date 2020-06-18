@@ -49,12 +49,10 @@ public class FreeBoardController {
 		if(req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
 			keyword = URLDecoder.decode(keyword, "utf-8");
 		}
-		
         // 전체 페이지 수
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("condition", condition);
         map.put("keyword", keyword);
-
         dataCount = service.dataCount(map);
         if(dataCount != 0)
             total_page = myUtil.pageCount(rows,  dataCount) ;
