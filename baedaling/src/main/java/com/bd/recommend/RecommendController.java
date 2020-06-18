@@ -184,7 +184,7 @@ public class RecommendController {
 			HttpSession session
 			)throws Exception {
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "resource" + File.separator + "recommend";
+		String pathname = root + "resource" + File.separator + "recommendboard";
 		boolean b = false;
 		
 		Recommend dto = service.readFile(fileNum);
@@ -204,4 +204,5 @@ public class RecommendController {
 			}
 		}
 	}
+	
 }

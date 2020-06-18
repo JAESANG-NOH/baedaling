@@ -11,9 +11,9 @@
 				)
 			</when>
 			<when test="category=='created'">
-				(TO_CHAR(created,'YYYY-MM-DD') = #{key}
+				(TO_CHAR(r.created,'YYYY-MM-DD') = #{key}
 					OR
-				 TO_CHAR(created,'YYYYMMDD') = #{key}
+				 TO_CHAR(r.created,'YYYYMMDD') = #{key}
 				)
 			</when>
 			<when test="category=='content'">
