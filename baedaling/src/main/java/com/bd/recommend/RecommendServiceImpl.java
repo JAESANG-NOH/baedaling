@@ -1,5 +1,6 @@
 package com.bd.recommend;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -119,8 +120,23 @@ public class RecommendServiceImpl implements RecommendService{
 	}
 	@Override
 	public void deleteRecommend(int num, String pathname, String userId) throws Exception {
-		
-		
+		try {
+			List<Recommend> listFile=listFile(num);
+			if(listFile!=null) {
+				for(Recommend dto:listFile) {
+					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+				}
+			}
+			Map<String, Object> map=new HashMap<String, Object>();
+			map.put("field", "num");
+			map.put("num", num);
+			deleteFile(map);
+			
+			dao.deleteData("rc.deleteRecommend", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}	
 	}
 
 	@Override

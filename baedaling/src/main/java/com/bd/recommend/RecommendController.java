@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
@@ -203,6 +204,54 @@ public class RecommendController {
 				throw e;
 			}
 		}
+	}
+	
+	@RequestMapping(value="delete")
+	public String delete(
+			@RequestParam int num,
+			@RequestParam String page,
+			@RequestParam (defaultValue="any") String category,
+			@RequestParam (defaultValue="") String key,
+			HttpSession session
+			) throws Exception {
+		SessionInfo info = (SessionInfo) session.getAttribute("user");
+		key = URLDecoder.decode(key, "utf-8");
+		String query="page="+page;
+		if(key.length()!=0) {
+			query+="&category="+category+"&key="+URLEncoder.encode(key, "UTF-8");
+		}
+		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + "resource" + File.separator + "recommendboard";
+			service.deleteRecommend(num,pathname,info.getUserId());
+		} catch (Exception e) {
+		}
+		return "redirect:/recommend/list?"+query;
+	}
+	
+	@RequestMapping(value="deleteFile", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteFile(
+			@RequestParam int fileNum,
+			HttpSession session
+			) throws Exception {
+		
+		String root = session.getServletContext().getRealPath("/");
+		String pathname = root + "resource" + File.separator + "recommendboard";
+		
+		Recommend dto=service.readFile(fileNum);
+		if(dto!=null) {
+			fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+		}
+		
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("field", "fileNum");
+		map.put("num", fileNum);
+		service.deleteFile(map);
+		
+		Map<String, Object> model = new HashMap<>(); 
+		model.put("state", "true");
+		return model;
 	}
 	
 }

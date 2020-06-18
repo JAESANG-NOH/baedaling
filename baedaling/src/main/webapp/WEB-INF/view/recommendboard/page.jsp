@@ -5,6 +5,11 @@
 <%
 	String cp=request.getContextPath();
 %>
+<<script type="text/javascript">
+function delete_send() {
+	
+}
+</script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/page.css" type="text/css">
 <div align="center" class="box">
 <h3 style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px; ">추천 게시판&nbsp;<span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"></span> </h3>
@@ -66,7 +71,7 @@
 	</table>
 	<div class="f_button" align="right">
 		<button id="f_btn2" type="button" onclick="">수정</button>
-		<button id="f_btn" type="button" onclick="">삭제</button> 
+		<button id="f_btn" type="button" onclick="delete_send();">삭제</button> 
 		<button id="f_btn3" type="button" onclick="javascript:location.href='<%=cp%>/recommend/list?${query}';">리스트</button>
 	</div>
 </div>
