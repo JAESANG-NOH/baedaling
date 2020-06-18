@@ -25,9 +25,9 @@
       </table>
       <!-- "#EFF1F3" -->
       <table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
-        <tr id="list_table1" align="center" bgcolor="#EFF1F3" style="border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; "> 
+        <tr id="list_table" align="center" bgcolor="#EFF1F3" style="border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; "> 
             <th width="70" style="color: #787878;">번호</th>
-            <th style="color: #787878;">제목</th>
+            <th align="center" style="color: #787878;">제목</th>
             <th width="100" style="color: #787878;">작성자</th>
             <th width="80" style="color: #787878;">작성일</th>
             <th width="60" style="color: #787878;">조회수</th>
