@@ -78,8 +78,14 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Override
 	public FreeBoard readBoard(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		FreeBoard dto = null; 
+		
+		try {
+			dto = dao.selectOne("fb.readFreeBoard", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
@@ -94,14 +100,24 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Override
 	public FreeBoard preReadBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		FreeBoard dto = null;
+		try {
+			dto =dao.selectOne("fb.preReadFreeBorad", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
 	public FreeBoard nextReadBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		FreeBoard dto = null;
+		try {
+			dto =dao.selectOne("fb.nextReadFreeBorad", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
@@ -184,14 +200,26 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Override
 	public List<FreeBoard> listFile(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		List<FreeBoard> listFile=null;
+		
+		try {
+			listFile=dao.selectList("fb.listFile", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return listFile;
 	}
 
 	@Override
 	public FreeBoard readFile(int fileNum) {
-		// TODO Auto-generated method stub
-		return null;
+		FreeBoard dto = null;
+		try {
+			dto= dao.selectOne("fb.readFile", fileNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
