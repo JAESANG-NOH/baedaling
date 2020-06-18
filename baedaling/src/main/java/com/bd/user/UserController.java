@@ -42,6 +42,7 @@ public class UserController {
 		info.setUserId(dto.getUserId());
 		info.setUserName(dto.getUserName());
 		info.setSeparate(dto.getSeparate());
+		info.setUserIdx(dto.getUserIdx());
 		
 		session.setMaxInactiveInterval(30*60);
 		session.setAttribute("user", info);

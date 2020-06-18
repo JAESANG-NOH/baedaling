@@ -20,9 +20,10 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public void insertBoard(FreeBoard dto, String pathname) throws Exception {
 		try {
-			int seq = dao.selectOne("freeboard.seq");
+			int seq = dao.selectOne("fb.seq");
 			dto.setNum(seq);
-			dao.insertData("freeboard.insertFreeboard",dto);
+
+			dao.insertData("fb.insertFreeboard",dto);
 			
 			//파일 
 			if(! dto.getUpload().isEmpty()) {
@@ -51,14 +52,28 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Override
 	public List<FreeBoard> listBoard(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<FreeBoard> list=null;
+
+		try {
+			list=dao.selectList("fb.ListFreeboard", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 
 	@Override
 	public int dataCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		
+		try {
+			result=dao.selectOne("fb.dataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -69,8 +84,12 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Override
 	public void updateHitCount(int num) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			dao.updateData("fb.updateHitCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e; 
+		}
 	}
 
 	@Override
@@ -156,7 +175,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public void insertFile(FreeBoard dto) throws Exception {
 		try {
-			dao.insertData("freeboard.insertFile", dto);
+			dao.insertData("fb.insertFile", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

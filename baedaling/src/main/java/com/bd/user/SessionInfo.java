@@ -2,7 +2,7 @@ package com.bd.user;
 
 // 세션에 저장할 정보(아이디, 이름, 권한등)
 public class SessionInfo {
-	private long userIdx;
+	private int userIdx;
 	private String userId;
 	private String userName;
 	private int separate ;
@@ -10,6 +10,12 @@ public class SessionInfo {
 	private String latitude;
 	
 	
+	public int getUserIdx() {
+		return userIdx;
+	}
+	public void setUserIdx(int userIdx) {
+		this.userIdx = userIdx;
+	}
 	public String getLongitude() {
 		return longitude;
 	}
@@ -33,12 +39,6 @@ public class SessionInfo {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	public long getUserIdx() {
-		return userIdx;
-	}
-	public void setUserIdx(long userIdx) {
-		this.userIdx = userIdx;
 	}
 	public int getSeparate() {
 		return separate;
