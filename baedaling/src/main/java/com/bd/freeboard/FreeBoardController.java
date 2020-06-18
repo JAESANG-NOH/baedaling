@@ -136,6 +136,12 @@ public class FreeBoardController {
 	}
 	
 	
+	//@RequestMapping(value="page")
+	//public String write() throws Exception{
+		
+	}
+	
+	
 
-}
+//}
 

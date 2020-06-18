@@ -98,7 +98,7 @@
 		JOIN user1 u ON f.userId=u.userId
 		<where>
 			<if test="keyword != null and keyword != '' ">
-				<include refid="where-list"/>
+				<include refid="search-list"/>
 			</if>
 			AND (num &gt; #{num})
 		</where>
@@ -113,7 +113,7 @@
 		JOIN user1 u ON f.userId=u.userId
 		<where>
 			<if test="keyword != null and keyword != '' ">
-				<include refid="where-list"/>
+				<include refid="search-list"/>
 			</if>
 			AND (num &lt; #{num})
 		</where>
@@ -127,4 +127,11 @@
 		FROM freeBoardFile
 	    WHERE fileNum=#{fileNum}      
 	</select>	
+	
+	
+	<select id="listFile" parameterType="Integer" resultType="com.bd.freeboard.FreeBoard">
+		SELECT fileNum, num, saveFilename, originalFilename, fileSize
+		FROM freeBoardFile
+		WHERE num=#{num}    
+	</select>
 </mapper>
