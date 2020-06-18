@@ -8,14 +8,21 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/list.css" type="text/css">
 <div class="body-container" align="center" style="width: 900px;">
     <div class="body-title" align="center">
-     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">Q&nbsp;&&nbsp;A </h3>
+     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">Q&nbsp; &amp; &nbsp;A </h3>
     </div>
+    
+<script type="text/javascript">
+	function searchList() {
+		var f = document.searchForm;
+		f.submit();
+	}
+</script>
     
     <div>
       <table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;">
          <tr height="35">
-            <td align="left" width="50%">
-                7개(1/1 페이지)
+            <td align="left" width="50%" style="color:black;">
+                ${dataCount}개(${page}/${total_page} 페이지)
             </td>
             <td align="right">
                 &nbsp;
@@ -29,89 +36,19 @@
             <th style="color: #787878;">제목</th>
             <th width="100" style="color: #787878;">작성자</th>
             <th width="80" style="color: #787878;">작성일</th>
-            <th width="60" style="color: #787878;">조회수</th>
-            <th width="50" style="color: #787878;">첨부</th>
         </tr>
        
+      <c:forEach var="dto" items="${list}">
        <tr align="center" bgcolor="#ffffff" height="50" style="border-bottom: 1px solid #cccccc;"> 
-            <td>7</td>
+            <td>${dto.num}</td>
             <td align="left" style="padding-left: 10px;">
-                 <a href="/sp4/bbs/article?page=1&num=7">11111111111111111111111 (0)</a>
+                 <a style="color: gray;" href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
             </td>
-            <td>스프링</td>
-            <td>2020-06-11</td>
-            <td>2</td>
-            <td>
-                    </td>
+            <td>${dto.userId}</td>
+            <td>${dto.created}</td>
         </tr>
-        <tr align="center" bgcolor="#ffffff" height="45" style="border-bottom: 1px solid #cccccc;"> 
-            <td>6</td>
-            <td align="left" style="padding-left: 10px;">
-                 <a href="/sp4/bbs/article?page=1&num=6">표 (0)</a>
-            </td>
-            <td>스프링</td>
-            <td>2020-06-11</td>
-            <td>12</td>
-            <td>
-                    </td>
-        </tr>
-        <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-            <td>5</td>
-            <td align="left" style="padding-left: 10px;">
-                 <a href="/sp4/bbs/article?page=1&num=5">z (1)</a>
-            </td>
-            <td>스프링</td>
-            <td>2020-06-11</td>
-            <td>1</td>
-            <td>
-                    </td>
-        </tr>
-        <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-            <td>4</td>
-            <td align="left" style="padding-left: 10px;">
-                 <a href="/sp4/bbs/article?page=1&num=4">고도리 (2)</a>
-            </td>
-            <td>이미현</td>
-            <td>2020-06-04</td>
-            <td>43</td>
-            <td>
-                    <a href="/sp4/bbs/download?num=4"><i class="far fa-file"></i></a>
-                    </td>
-        </tr>
-        <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-            <td>3</td>
-            <td align="left" style="padding-left: 10px;">
-                 <a href="/sp4/bbs/article?page=1&num=3">영어 (3)</a>
-            </td>
-            <td>이미현</td>
-            <td>2020-06-04</td>
-            <td>56</td>
-            <td>
-                    </td>
-        </tr>
-        <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-            <td>2</td>
-            <td align="left" style="padding-left: 10px;">
-                 <a href="/sp4/bbs/article?page=1&num=2">ㅋㅋ (1)</a>
-            </td>
-            <td>이미현</td>
-            <td>2020-06-04</td>
-            <td>14</td>
-            <td>
-                    </td>
-        </tr>
-        <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-            <td>1</td>
-            <td align="left" style="padding-left: 10px;">
-                 <a href="/sp4/bbs/article?page=1&num=1">배고파 (1)</a>
-            </td>
-            <td>이미현</td>
-            <td>2020-06-04</td>
-            <td>10</td>
-            <td>
-                    </td>
-        </tr>
-        </table>
+        </c:forEach>
+    </table>
        
       <table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
          <tr height="35">
@@ -125,12 +62,12 @@
                 <button type="button" class="btn" onclick="javascript:location.href='/sp4/bbs/list';">새로고침</button>
             </td>
             <td align="center">
-                <form name="searchForm" action="/sp4/bbs/list" method="post">
+                <form name="searchForm" action="<%=cp%>/inquire/list" method="post">
                     <select name="condition" class="selectField">
                         <option value="all" selected='selected'>모두</option>
                         <option value="subject" >제목</option>
                         <option value="content" >내용</option>
-                        <option value="userName" >작성자</option>
+                        <option value="userId" >작성자</option>
                         <option value="created" >등록일</option>
                   </select>
                   <input type="text" name="keyword" value="" class="boxTF">
@@ -138,7 +75,7 @@
               </form>
             </td>
             <td align="right" width="100">
-                <button type="button" class="btn" onclick="javascript:location.href='/sp4/bbs/created';">글올리기</button>
+                <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/inquire/created';">글올리기</button>
             </td>
          </tr>
       </table>
