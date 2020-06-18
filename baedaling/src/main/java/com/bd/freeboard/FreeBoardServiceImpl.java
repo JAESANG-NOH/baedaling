@@ -79,9 +79,10 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public FreeBoard readBoard(int num) {
 		FreeBoard dto = null; 
-		
+		int cnt = 0; 
 		try {
 			dto = dao.selectOne("fb.readFreeBoard", num);
+			cnt = dao.selectOne("fb.boardLikeCount", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -102,7 +103,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	public FreeBoard preReadBoard(Map<String, Object> map) {
 		FreeBoard dto = null;
 		try {
-			dto =dao.selectOne("fb.preReadFreeBorad", map);
+			dto =dao.selectOne("fb.preReadBoard", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -113,7 +114,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	public FreeBoard nextReadBoard(Map<String, Object> map) {
 		FreeBoard dto = null;
 		try {
-			dto =dao.selectOne("fb.nextReadFreeBorad", map);
+			dto =dao.selectOne("fb.nextReadBoard", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -143,7 +144,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public void insertBoardLike(Map<String, Object> map) throws Exception {
 		try {
-			
+			dao.insertData("fb.insertBoardLike", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -152,8 +153,13 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Override
 	public int boardLikeCount(int num) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			result = dao.selectOne("fb.boardLikeCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
