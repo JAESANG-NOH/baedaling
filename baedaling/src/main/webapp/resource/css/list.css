@@ -39,7 +39,6 @@
 }
 
 
-
 .button
 {
 	display: inline-block;
@@ -71,6 +70,11 @@ text-align: center;
 
 #list_table th,td{
 	font-size: 14px;
+}
+
+#input_img{
+	width: 70px;
+	height: 67px;
 }
 
 

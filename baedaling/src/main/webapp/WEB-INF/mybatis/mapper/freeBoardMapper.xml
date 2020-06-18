@@ -76,5 +76,55 @@
 	<update id="updateHitCount" parameterType="Integer">
 		UPDATE freeBoard SET hitCount=hitCount+1 WHERE num = #{num}
 	</update>
+	
+<!-- 글보기  -->	
+	<select id="readFreeBoard" parameterType="Integer" resultType="com.bd.freeboard.FreeBoard">
+		SELECT num, f.userId, userName, subject, content, f.created, hitCount,  
+		NVL(boardLikeCount, 0) boardLikeCount
+		FROM freeBoard f
+		JOIN user1 u ON f.userId=u.userId 
+		LEFT OUTER JOIN (
+			SELECT num, COUNT(*) boardLikeCount FROM freeBoardLike
+			GROUP BY num
+		) c ON f.num = c.num
+		WHERE num = #{num}
+	</select>
 
+
+	<!-- 이전글 -->
+	<select id="preReadFreeBorad" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
+		SELECT num, subject
+		FROM freeBoard f
+		JOIN user1 u ON f.userId=u.userId
+		<where>
+			<if test="keyword != null and keyword != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (num &gt; #{num})
+		</where>
+		ORDER BY num ASC
+		FETCH FIRST 1 ROWS ONLY
+    </select>
+
+    <!-- 다음글 -->
+    <select id="nextReadFreeBorad" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
+		SELECT num, subject
+		FROM freeBoard f
+		JOIN user1 u ON f.userId=u.userId
+		<where>
+			<if test="keyword != null and keyword != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (num &lt; #{num})
+		</where>
+		ORDER BY num ASC
+		FETCH FIRST 1 ROWS ONLY
+    </select>
+
+
+	<select id="readFile" parameterType="Integer" resultType="com.bd.freeboard.FreeBoard">
+		SELECT fileNum, num, saveFilename, originalFilename, fileSize
+		FROM freeBoardFile
+	    WHERE fileNum=#{fileNum}      
+	</select>	
 </mapper>
