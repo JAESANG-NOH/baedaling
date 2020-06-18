@@ -72,10 +72,10 @@ public class InquireBoardController {
 		List<Inquire> list = service.listInquire(map);
 
 		// 리스트 번호
-		int num, n=0;
+		int listNum, n=0;
 		for(Inquire dto : list) {
-			num = dataCount-(offset+n);
-			dto.setNum(num);
+			listNum = dataCount-(offset+n);
+			dto.setListNum(listNum);
 			n++;
 		}
 		String query="";
@@ -147,11 +147,22 @@ public class InquireBoardController {
 		
 		if(keyword.length() != 0) {
 			query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "UTF-8");
-			
 		}
+		
+		// 해당 레코드 가져오기
+		Inquire dto = service.readInquire(num);
+		if(dto==null)
+			return "redirect:/inquire/list?"+query;
+		
+		dto.setQuestion(myUtil.htmlSymbols(dto.getQuestion()));
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		model.addAttribute("query", query);
+		
+		
+		
 		return ".inquire.article";
-		
-		
 	}
 
 	

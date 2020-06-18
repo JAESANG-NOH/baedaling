@@ -42,7 +42,7 @@
        <tr align="center" bgcolor="#ffffff" height="50" style="border-bottom: 1px solid #cccccc;"> 
             <td>${dto.num}</td>
             <td align="left" style="padding-left: 10px;">
-                 <a style="color: gray;" href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
+                 <a href="${articleUrl}&num=${dto.num}" style="color: gray;">${dto.subject}</a>
             </td>
             <td>${dto.userId}</td>
             <td>${dto.created}</td>
