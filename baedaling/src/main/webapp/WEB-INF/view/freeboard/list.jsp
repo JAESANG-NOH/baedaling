@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/list.css" type="text/css">
 <div class="body-container" align="center">
     <div class="body-title" align="center">
-     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">자유 게시판 <span><img id="input_img" src="<%=cp%>/resource/img/gangg.png"> </span></h3>
+     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">자유 게시판 <span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"> </span></h3>
     </div>
     
     <div>
