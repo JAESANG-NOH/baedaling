@@ -58,7 +58,7 @@ function sendOk() {
 <div align="center" class="box">
 	<h3
 		style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
-		공지사항&nbsp;<span><img id="f_img2"
+			공지사항&nbsp;${mode=='update'?'수정':'등록'}&nbsp;<span><img id="f_img2"
 			src="<%=cp%>/resource/img/gangg.png"></span>
 	</h3>
 	<br>

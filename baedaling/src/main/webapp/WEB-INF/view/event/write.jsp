@@ -10,7 +10,7 @@
 	<h3
 		style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
 		EVENT&nbsp;<span><img id="f_img2"
-			src="<%=cp%>/delivery/img/gangg.png"></span>
+			src="<%=cp%>/resource/img/gangg.png""></span>
 	</h3>
 	<br>
 	<table class="freeboard">
@@ -45,8 +45,6 @@
 			<td><input class="boxTF" type="file" name="upload" size="3"
 				style="width: 95%;"></td>
 		</tr>
-
-
 	</table>
 
 	<table>
@@ -57,5 +55,18 @@
 				<button class="btn" type="button">등록취소</button>&nbsp;&nbsp;
 			</td>
 		</tr>
+		<tr height="35" style="border-bottom: 1px solid #cccccc;">
+				<td colspan="2" align="left" style="padding-left: 5px; color: gray;">
+			       	이전글 :
+			        <a href=""> 이전글입니다.</a>
+				</td>
+			</tr>
+			
+			<tr height="35" style="border-bottom: 1px solid #cccccc;">
+				<td colspan="2" align="left" style="padding-left: 5px; color: gray;">
+			       	다음글 :
+			        <a href=""> 다음글입니다.</a>
+				</td>
+			</tr>
 	</table>
 </div>
