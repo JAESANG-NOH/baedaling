@@ -13,9 +13,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
@@ -77,7 +79,7 @@ public class FreeBoardController {
         
         String query = "";
         String listUrl = cp+"/freeboard/list";
-        String articleUrl = cp+"/freeboard/write?page=" + current_page;
+        String articleUrl = cp+"/freeboard/page?page=" + current_page;
         if(keyword.length()!=0) {
         	query = "condition=" +condition + 
         	         "&keyword=" + URLEncoder.encode(keyword, "utf-8");	
@@ -85,7 +87,7 @@ public class FreeBoardController {
         
         if(query.length()!=0) {
         	listUrl = cp+"/freeboard/list?" + query;
-        	articleUrl = cp+"/freeboard/write?page=" + current_page + "&"+ query;
+        	articleUrl = cp+"/freeboard/page?page=" + current_page + "&"+ query;
         }
         
         String paging = myUtil.paging(current_page, total_page, listUrl);
@@ -136,12 +138,85 @@ public class FreeBoardController {
 	}
 	
 	
-	//@RequestMapping(value="page")
-	//public String write() throws Exception{
+	@RequestMapping(value="page")
+	public String page(
+			@RequestParam int num,
+			@RequestParam String page,
+			@RequestParam(defaultValue="all") String condition,
+			@RequestParam(defaultValue="") String keyword,
+			Model model) throws Exception{
 		
+		keyword = URLDecoder.decode(keyword, "utf-8");
+		
+		String query="page="+page;
+		if(keyword.length()!=0) {
+			query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "UTF-8");
+		}
+
+		service.updateHitCount(num);
+
+		FreeBoard dto = service.readBoard(num);
+		if(dto==null)
+			return "redirect:/freeboard/list?"+query;
+        
+		// 이전 글, 다음 글
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		map.put("num", num);
+
+		FreeBoard preReadDto = service.preReadBoard(map);
+		FreeBoard nextReadDto = service.nextReadBoard(map);
+        
+		//파일 
+		List<FreeBoard> listFile = service.listFile(num);
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
+		model.addAttribute("listFile", listFile);
+		model.addAttribute("page", page);
+		model.addAttribute("query", query);
+		
+		return ".freeboard.page";
 	}
 	
 	
+	@RequestMapping(value="insertBoardLike", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertBoardLike(
+			@RequestParam int num,
+			HttpSession session 
+			){
+		String state="true";
+		int boardLikeCount=0;
+		SessionInfo info=(SessionInfo)session.getAttribute("user");
+		
+		Map<String, Object> paramMap=new HashMap<>();
+		paramMap.put("num", num);
+		paramMap.put("userIdx", info.getUserIdx());
+		
+		try {
+			service.insertBoardLike(paramMap);
+		} catch (Exception e) {
+			e.printStackTrace();
+			state="false";
+		}
+			
+		boardLikeCount = service.boardLikeCount(num);
+		
+		Map<String, Object> model=new HashMap<>();
+		model.put("state", state);
+		model.put("boardLikeCount", boardLikeCount);
+		
+		return model;
+	}
+	
+	
+	
+	
+	
+	
 
-//}
+}
 

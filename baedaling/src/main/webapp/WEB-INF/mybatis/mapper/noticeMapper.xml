@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<select id="seq" resultType="Integer">
+		SELECT notice_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.bd.notice.Notice">
+		INSERT INTO notice(num, userName, userId, subject, content, checkNotice, hitCount, created, userIdx)
+		VALUES(#{num}, #{userName}, #{userId}, #{subject},
+					#{content}, #{checkNotice}, 0, SYSDATE, #{userIdx})
+	</insert>
+	
+ 	<sql id="where-list">
+		<if test="condition=='all' ">
+			( INSTR(subject, #{keyword}) &gt; 0
+				OR DBMS_LOB.INSTR(content, #{keyword}) &gt; 0 )
+		</if>
+		<if test="condition=='subject' ">
+			INSTR(subject, #{keyword}) &gt; 0
+		</if>
+		<if test="condition=='content' ">
+			DBMS_LOB.INSTR( content, #{keyword}) &gt; 0 
+		</if>
+		<if test="condition=='userName' ">
+			userName=#{keyword}
+		</if>
+		<if test="condition=='created' ">
+			( TO_CHAR(created, 'YYYY-MM-DD') = #{keyword}
+				OR TO_CHAR(created, 'YYYYMMDD') = #{keyword} )
+		</if>
+	</sql>
+	
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0)
+		FROM notice n
+		JOIN user1 m ON n.userId=m.userId
+		<where>
+			<if test="keyword != null and keyword!=''  ">
+				<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+	
+ 	<select id="listNotice" parameterType="map" resultType="com.bd.notice.Notice">
+		SELECT n.num, n.userId, n.userName, subject, hitCount, created
+		FROM notice n
+		JOIN user1 m ON n.userId=m.userId
+		LEFT OUTER JOIN (
+			SELECT num, COUNT(*) fileCount FROM noticeFile
+			GROUP BY num
+		) f ON n.num=f.num
+		<where>
+			<if test="keyword != null and keyword != ''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY num DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	 </select>
+	 
+   <select id="readNotice" parameterType="Integer" resultType="com.bd.notice.Notice">
+		SELECT num, n.userId, n.userName, subject, content, created, hitCount
+		FROM notice n
+		JOIN user1 m ON n.userId=m.userId 
+		WHERE num = #{num}
+	</select>
+	  
+	 
+	<insert id="insertFile" parameterType="com.bd.notice.Notice">
+		INSERT INTO noticeFile(fileNum, num, saveFilename, 
+					originalFilename, fileSize) VALUES
+				(noticeFile_seq.NEXTVAL, #{num}, #{saveFilename},
+					#{originalFilename}, #{fileSize})
+	</insert>
+	
+ 	<select id="listFile" parameterType="Integer" resultType="com.bd.notice.Notice">
+		SELECT fileNum, num, saveFilename, originalFilename, fileSize
+		FROM noticeFile
+		WHERE num=#{num}    
+	</select>
+
+
+</mapper>
