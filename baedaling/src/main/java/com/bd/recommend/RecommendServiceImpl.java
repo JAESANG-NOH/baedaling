@@ -77,8 +77,11 @@ public class RecommendServiceImpl implements RecommendService{
 	@Override
 	public Recommend readPage(int num) {
 		Recommend dto = null;
+		int count = 0;
 		try {
+			count = dao.selectOne("rc.rocommendLikeCount", num);
 			dto = dao.selectOne("rc.readpage", num);
+			dto.setRecommendLikeCount(count);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -119,7 +122,7 @@ public class RecommendServiceImpl implements RecommendService{
 		
 	}
 	@Override
-	public void deleteRecommend(int num, String pathname, String userId) throws Exception {
+	public void deleteRecommend(int num, String pathname) throws Exception {
 		try {
 			List<Recommend> listFile=listFile(num);
 			if(listFile!=null) {
@@ -163,9 +166,76 @@ public class RecommendServiceImpl implements RecommendService{
 
 	@Override
 	public void deleteFile(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			dao.deleteData("rc.deleteFile", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
+
+	@Override
+	public void insertRecommendLike(Map<String, Object> map) throws Exception {
+		try {
+			dao.insertData("rc.insertRecommendLike", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public int recommendLikeCount(int num) {
+		int result=0;
+		try {
+			result=dao.selectOne("rc.rocommendLikeCount", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public void insertReply(RecommendReply dto) throws Exception {
+		try {
+			dao.insertData("rc.insertReply", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<RecommendReply> listReply(Map<String, Object> map) {
+		List<RecommendReply> list = null;
+		try {
+			list = dao.selectList("rc.listReply",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public void deleteReply(Map<String, Object> map) throws Exception {
+		try {
+			dao.deleteData("rc.deleteReply", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 	
+	@Override
+	public int replyCount(Map<String, Object> map) {
+		int result=0;
+		try {
+			result=dao.selectOne("rc.replyCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 }

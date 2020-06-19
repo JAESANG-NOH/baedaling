@@ -23,7 +23,7 @@ public class Recommend {
 	private int fileCount;
 
 	private int replyCount;
-	private int boardLikeCount;
+	private int recommendLikeCount;
 	
 
 	
@@ -123,10 +123,11 @@ public class Recommend {
 	public void setReplyCount(int replyCount) {
 		this.replyCount = replyCount;
 	}
-	public int getBoardLikeCount() {
-		return boardLikeCount;
+	public int getRecommendLikeCount() {
+		return recommendLikeCount;
 	}
-	public void setBoardLikeCount(int boardLikeCount) {
-		this.boardLikeCount = boardLikeCount;
+	public void setRecommendLikeCount(int recommendLikeCount) {
+		this.recommendLikeCount = recommendLikeCount;
 	}
+	
 }
