@@ -12,10 +12,15 @@ public interface InquireService {
 	
 	public Inquire readInquire(int num); // 글보기
 	
+	public Inquire preReadInquire(Map<String, Object> map); // 이전글
+	public Inquire nextReadInquire(Map<String, Object> map); // 다음글 
 	
-	public void updateInquireAdmin(Inquire dto) throws Exception; // admin이 답변달기
 	public void updateInquire(Inquire dto) throws Exception; // 유저가 글수정
+	public void updateInquireAdmin(Inquire dto) throws Exception; // admin이 답변달기
 
-	public void deleteInquire(int num) throws Exception; // 유저, 어드민 글삭제
+	public void deleteInquire(int num, String pathname, String userId) throws Exception; // 유저, 어드민 글삭제
+	
+	
+
 	
 }

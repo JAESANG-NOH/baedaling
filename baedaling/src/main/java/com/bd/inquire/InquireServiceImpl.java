@@ -60,23 +60,63 @@ public class InquireServiceImpl implements InquireService {
 		return dto;
 	}
 
+	@Override
+	public Inquire preReadInquire(Map<String, Object> map) {
+		Inquire dto=null;
+		
+		try {
+			dto=dao.selectOne("inquire.preReadInquire", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return dto;
+	}
+	
+	@Override
+	public Inquire nextReadInquire(Map<String, Object> map) {
+		Inquire dto = null;
+		
+		try {
+			dto=dao.selectOne("inquire.nextReadInquire", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
 
 	@Override
 	public void updateInquire(Inquire dto) throws Exception {
-		// TODO Auto-generated method stub
-		
+		dao.updateData("inquire.updateInquire", dto);
 	}
 	
 	@Override
 	public void updateInquireAdmin(Inquire dto) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			dao.insertData("inquire.updateInquireAdmin", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
 
 	@Override
-	public void deleteInquire(int num) throws Exception {
-		// TODO Auto-generated method stub
+	public void deleteInquire(int num, String pathname, String userId) throws Exception {
+		try {
+			Inquire dto = readInquire(num);
+			if(dto==null || (! userId.equals("admin") && !userId.equals(dto.getUserId()))) {
+				return;
+			}
+			dao.deleteData("inquire.deleteInquire", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 		
 	}
+
+
+
 
 }

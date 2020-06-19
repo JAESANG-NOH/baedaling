@@ -1,5 +1,6 @@
 package com.bd.inquire;
 
+import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -156,7 +157,19 @@ public class InquireBoardController {
 		
 		dto.setQuestion(myUtil.htmlSymbols(dto.getQuestion()));
 		
+		// 이전글 다음글
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		map.put("num", num);
+		
+		Inquire preReadDto = service.preReadInquire(map);
+		Inquire nextReadDto = service.nextReadInquire(map);
+		
 		model.addAttribute("dto", dto);
+		model.addAttribute("preReadDto", preReadDto);
+		model.addAttribute("nextReadDto", nextReadDto);
+		
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 		
@@ -164,6 +177,79 @@ public class InquireBoardController {
 		
 		return ".inquire.article";
 	}
+	@RequestMapping(value="delete")
+	public String delete(
+			@RequestParam int num,
+			@RequestParam String page,
+			@RequestParam(defaultValue="all") String condition,
+			@RequestParam(defaultValue="") String keyword,
+			HttpSession session 
+			) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("user");
+		
+		keyword = URLDecoder.decode(keyword, "utf-8");
+		String query="page="+page;
+		if(keyword.length()!=0) {
+			query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "UTF-8");
+		}
+		
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+"uploads"+File.separator+"inquire";
+		
+		service.deleteInquire(num, pathname, info.getUserId());
+		
+	return "redirect:/inquire/list?"+query;
+		
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int num,
+			@RequestParam String page,
+			HttpSession session,
+			Model model
+			) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("user");
+		
+		Inquire dto = service.readInquire(num);
+		if(dto==null) {
+			return "redirect:/inquire/list?page="+page;
+		}
+		if(! info.getUserId().equals(dto.getUserId())) {
+			return "redirect:/inquire/list?page="+page;
+		}
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", "update");
+		model.addAttribute("page", page);
+		
+		return ".inquire.created";
+		
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updateSubmit(
+			Inquire dto,
+			@RequestParam String page,
+			HttpSession session
+			) throws Exception {
+		
+		/*
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+"uploads"+File.separator+"inquire";		
+		*/
+		
+		try {
+			service.updateInquire(dto);
+		} catch (Exception e) {
+		}
+		return "redirect:/inquire/list";
+	}
+	
+	// 답변
+	
+	
+	
 
 	
 }

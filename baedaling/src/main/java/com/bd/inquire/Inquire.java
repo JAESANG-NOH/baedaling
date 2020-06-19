@@ -16,8 +16,6 @@ public class Inquire {
 	
 	private int listNum;
 	
-	
-	
 	public int getNum() {
 		return num;
 	}
