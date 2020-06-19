@@ -28,6 +28,26 @@
 	});
 } */
 
+function deleteBoard() {
+	
+	  var q = "num=${dto.num}&${query}";
+	  var url = "<%=cp%>/notice/delete?" + q;
+
+	  if(confirm("위 자료를 삭제 하시 겠습니까 ? "))
+	  	location.href=url;
+}
+function updateBoard() {
+	
+	  var q = "num=${dto.num}&page=${page}";
+	  var url = "<%=cp%>/notice/update?" + q;
+
+	  location.href=url;
+	
+
+	
+}
+
+
 
 </script>
 
@@ -62,7 +82,7 @@
 		<c:forEach var="vo" items="${listFile}">
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 		    	<td colspan="2" align="left" style="padding-left: 5px; color: gray;">
-					 <a href="<%=cp%>/recommend/download?fileNum=${vo.fileNum}">${vo.originalFilename}</a>
+					 <a href="<%=cp%>/notice/download?fileNum=${vo.fileNum}">${vo.originalFilename}</a>
 			          (<fmt:formatNumber value="${vo.fileSize/1024}" pattern="0.00"/> KByte)
 				</td>
 			</tr>
@@ -87,8 +107,10 @@
 		</tr>
 	</table>
 	<div class="f_button" align="right">
-		<button id="f_btn2">수정</button>
-		<button id="f_btn">삭제</button> 
-		<button id="f_btn3">리스트</button>
+		<c:if test="${sessionScope.user.userName=='관리자'}">
+		<button type="button" id="f_btn2" onclick="updateBoard();">수정</button>
+		<button type="button" id="f_btn" onclick="deleteBoard()">삭제</button>
+	</c:if>	 
+		<button type="button" id="f_btn3" onclick="javascript:location.href='<%=cp%>/notice/list?${query}';">리스트</button>
 	</div>
 </div>

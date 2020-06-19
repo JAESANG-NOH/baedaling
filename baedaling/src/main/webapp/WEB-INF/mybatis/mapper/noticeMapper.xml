@@ -11,6 +11,15 @@
 					#{content}, #{checkNotice}, 0, SYSDATE, #{userIdx})
 	</insert>
 	
+	<insert id="insertFile" parameterType="com.bd.notice.Notice">
+		INSERT INTO noticeFile(fileNum, num, saveFilename, 
+					originalFilename, fileSize) VALUES
+				(noticeFile_seq.NEXTVAL, #{num}, #{saveFilename},
+					#{originalFilename}, #{fileSize})
+	</insert>
+	
+	
+	
  	<sql id="where-list">
 		<if test="condition=='all' ">
 			( INSTR(subject, #{keyword}) &gt; 0
@@ -34,7 +43,6 @@
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*), 0)
 		FROM notice n
-		JOIN user1 m ON n.userId=m.userId
 		<where>
 			<if test="keyword != null and keyword!=''  ">
 				<include refid="where-list"/>
@@ -43,9 +51,8 @@
 	</select>
 	
  	<select id="listNotice" parameterType="map" resultType="com.bd.notice.Notice">
-		SELECT n.num, n.userId, n.userName, subject, hitCount, created
+		SELECT n.num, n.userId, n.userName, subject, hitCount, created,NVL(fileCount, 0) fileCount
 		FROM notice n
-		JOIN user1 m ON n.userId=m.userId
 		LEFT OUTER JOIN (
 			SELECT num, COUNT(*) fileCount FROM noticeFile
 			GROUP BY num
@@ -59,26 +66,81 @@
 		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 	 </select>
 	 
+	 <select id="checkList" resultType="com.bd.notice.Notice">
+		SELECT n.num, checkNotice, userId, userName, subject, hitCount, 
+		       created, NVL(fileCount, 0) fileCount, userIdx,
+				NVL(fileCount, 0) fileCount
+		FROM notice n
+		LEFT OUTER JOIN (
+			SELECT num, COUNT(*) fileCount FROM noticeFile
+			GROUP BY num
+		) f ON n.num=f.num
+		WHERE checkNotice =  1
+		ORDER BY created DESC ,num DESC
+	</select>
+	 
+	 
+	 
    <select id="readNotice" parameterType="Integer" resultType="com.bd.notice.Notice">
 		SELECT num, n.userId, n.userName, subject, content, created, hitCount
 		FROM notice n
-		JOIN user1 m ON n.userId=m.userId 
 		WHERE num = #{num}
 	</select>
 	  
-	 
-	<insert id="insertFile" parameterType="com.bd.notice.Notice">
-		INSERT INTO noticeFile(fileNum, num, saveFilename, 
-					originalFilename, fileSize) VALUES
-				(noticeFile_seq.NEXTVAL, #{num}, #{saveFilename},
-					#{originalFilename}, #{fileSize})
-	</insert>
-	
  	<select id="listFile" parameterType="Integer" resultType="com.bd.notice.Notice">
 		SELECT fileNum, num, saveFilename, originalFilename, fileSize
 		FROM noticeFile
 		WHERE num=#{num}    
 	</select>
 
+	<select id="readFile" parameterType="Integer" resultType="com.bd.notice.Notice">
+		SELECT fileNum, num, saveFilename, originalFilename, fileSize
+		FROM noticeFile
+	    WHERE fileNum=#{fileNum}      
+	</select>
+	
+	<delete id="deleteFile" parameterType="map">
+		DELETE FROM noticeFile WHERE ${field} = #{num}
+	</delete>
+	
+	<select id="preReadNotice" parameterType="map" resultType="com.bd.notice.Notice">
+		SELECT num, subject
+		FROM notice n
+		<where>
+			<if test="keyword != null and keyword != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (num &gt; #{num})
+		</where>
+		ORDER BY num ASC
+		FETCH FIRST 1 ROWS ONLY
+    </select>
+	
+	<select id="nextReadNotice" parameterType="map" resultType="com.bd.notice.Notice">
+		SELECT num, subject
+		FROM notice 
+		<where>
+			<if test="keyword != null and keyword != '' ">
+				<include refid="where-list"/>
+			</if>
+			AND (num &lt; #{num})
+		</where>
+		ORDER BY num DESC
+		FETCH FIRST 1 ROWS ONLY
+    </select>
+	
+	<update id="updateNotice" parameterType="com.bd.notice.Notice">
+		UPDATE notice SET subject=#{subject},
+				content=#{content}, checkNotice=#{checkNotice}
+		WHERE num=#{num}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="Integer">
+		DELETE FROM notice WHERE num=#{num}
+	</delete>
+	
+	<update id="updateHitCount" parameterType="Integer">
+		UPDATE notice SET hitCount=hitCount+1 WHERE num = #{num}
+	</update>
 
 </mapper>

@@ -26,19 +26,44 @@ function sendOk() {
 	f.action="<%=cp%>/fcnotice/${mode}";
     f.submit();
 }
-
-
+<c:if test="${mode=='update'}">
+function deleteFile(fileNum) {
+		var url="<%=cp%>/fcnotice/deleteFile";
+		$.post(url, {fileNum:fileNum}, function(data){
+			$("#f"+fileNum).remove();
+		}, "json");
+}
+</c:if>
+$(function(){
+	$("form input[name=upload]").change(function(){
+		if(! $(this).val()) return;
+		
+		var b=false;
+		$("form input[name=upload]").each(function(){
+			if(! $(this).val()) {
+				b=true;
+				return false;
+			}
+		});
+		if(b) return false;
+		
+		var $tr = $(this).closest("tr").clone(true); // 이벤트도 복제
+		$tr.find("input").val("");
+		$("#tb").append($tr);
+	});
+});
 </script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/write.css" type="text/css">
 <div align="center" class="box">
 	<h3
 		style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
-		자유게시판&nbsp;<span><img id="f_img2"
+		가맹점공지사항&nbsp;<span><img id="f_img2"
 			src="<%=cp%>/resource/img/gangg.png"></span>
 	</h3>
 	<br>
 <form name="fcNoticeForm" method="post" enctype="multipart/form-data">	
 	<table class="freeboard">
+	<tbody id="tb">
 		<tr class="f_line">
 			<td align="left" style="font-weight: bold;" class="subtitle">제목</td>
 			<td align="left" id="ftitle" style="color: gray;">
@@ -49,7 +74,14 @@ function sendOk() {
 			<td align="left" style="color: gray;" class="subtitle">작성자</td>
 			<td align="left" id="subcontent">${sessionScope.user.userName }</td>
 		</tr>
-
+		
+		<tr class="f_line">
+			<td align="left" style="color: gray;" class="subtitle">중요</td>
+			<td align="left" id="subcontent">
+				<input type="checkbox" name="important" value="1" ${dto.notice==1 ? "checked='checked' ":"" } > 공지
+			</td>
+		</tr>
+		
 		<tr class="fcontent" align="left">
 			<td colspan="2" align="left"
 				style="padding-left: 20px; border-bottom: 1px solid #cccccc;">
@@ -61,9 +93,10 @@ function sendOk() {
 			style="border-bottom: 1px solid #DDDFE0; height: 50px">
 			<td align="left" style="font-weight: bold;" class="subtitle">첨부파일</td>
 			<td><input class="boxTF" type="file" name="upload" size="53"
-				style="width: 95%;"></td>
+				style="width: 95%; color: black"></td>
 		</tr>
-		
+	</tbody>
+	<tfoot>	
 		<c:if test="${mode=='update'}">
 				   <c:forEach var="dto" items="${listFile}">
 						  <tr id="f${dto.fileNum}" height="40" style="border-bottom: 1px solid #cccccc;"> 
@@ -75,7 +108,7 @@ function sendOk() {
 						  </tr>
 				   </c:forEach>
 			</c:if>
-
+	</tfoot>
 	</table>
 
 	<table>
@@ -92,49 +125,5 @@ function sendOk() {
 		</tr>
 	</table>
 </form>
-    <script type="text/javascript">
-var oEditors = [];
-nhn.husky.EZCreator.createInIFrame({
-   oAppRef: oEditors,
-   elPlaceHolder: "content",
-   sSkinURI: "<%=cp%>/resource/se/SmartEditor2Skin.html",   
-   htParams : {bUseToolbar : true,
-      fOnBeforeUnload : function(){
-         //alert("아싸!");
-      }
-   }, //boolean
-   fOnAppLoad : function(){
-      //예제 코드
-      //oEditors.getById["content"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text입니다."]);
-   },
-   fCreator: "createSEditor2"
-});
-
-function pasteHTML() {
-   var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입합니다.<\/span>";
-   oEditors.getById["content"].exec("PASTE_HTML", [sHTML]);
-}
-
-function showHTML() {
-   var sHTML = oEditors.getById["content"].getIR();
-   alert(sHTML);
-}
-   
-function submitContents(elClickedObj) {
-   oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);   // 에디터의 내용이 textarea에 적용됩니다.
-   
-   // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("content").value를 이용해서 처리하면 됩니다.
-   
-   try {
-      // elClickedObj.form.submit();
-      return check();
-   } catch(e) {}
-}
-
-function setDefaultFont() {
-   var sDefaultFont = '돋움';
-   var nFontSize = 24;
-   oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
-}
-</script>
+    
 </div>

@@ -37,21 +37,54 @@
   }
 </c:if>
  --%>
+ function sendOk() {
+	    var f = document.noticeForm;
+
+		var str = f.subject.value;
+	    if(!str) {
+	        alert("제목을 입력하세요. ");
+	        f.subject.focus();
+	        return;
+	    }
+
+		str = f.content.value;
+	    if(!str) {
+	        alert("내용을 입력하세요. ");
+	        f.content.focus();
+	        return;
+	    }
+
+		f.action="<%=cp%>/notice/${mode}";
+	    f.submit();
+	}
+	<c:if test="${mode=='update'}">
+	function deleteFile(fileNum) {
+			var url="<%=cp%>/notice/deleteFile";
+			$.post(url, {fileNum:fileNum}, function(data){
+				$("#f"+fileNum).remove();
+			}, "json");
+	}
+	</c:if>
+	$(function(){
+		$("form input[name=upload]").change(function(){
+			if(! $(this).val()) return;
+			
+			var b=false;
+			$("form input[name=upload]").each(function(){
+				if(! $(this).val()) {
+					b=true;
+					return false;
+				}
+			});
+			if(b) return false;
+			
+			var $tr = $(this).closest("tr").clone(true); // 이벤트도 복제
+			$tr.find("input").val("");
+			$("#tb").append($tr);
+		});
+	});
 
 
-function sendOk() {
-    var f = document.noticeForm;
-
-	var str = f.subject.value;
-    if(!str) {
-        alert("제목을 입력하세요. ");
-        f.subject.focus();
-        return false;
-    }
-
-	f.action="<%=cp%>/notice/${mode}";
-	return true;
-}
 
 </script>
 
