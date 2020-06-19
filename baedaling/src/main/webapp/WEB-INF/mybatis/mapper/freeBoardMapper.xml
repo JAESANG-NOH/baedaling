@@ -11,12 +11,6 @@
 	VALUES(#{num}, #{userId}, #{userName}, #{subject}, #{content,jdbcType=VARCHAR} ,0 ,SYSDATE ,#{useridx} )
 </insert>
 
-<insert id="insertFile" parameterType="com.bd.freeboard.FreeBoard">
-	INSERT INTO freeBoardFile(fileNum, num, saveFilename, originalFilename,fileSize)
-	 VALUES(freeBoardFile_seq.NEXTVAL, #{num}, #{saveFilename},#{originalFilename}, #{fileSize})
-</insert>
-
-
 	<sql id="search-list">
 		<if test="condition=='all'">
 			( INSTR(subject, #{keyword}) &gt; 0
@@ -77,6 +71,8 @@
 		UPDATE freeBoard SET hitCount=hitCount+1 WHERE num = #{num}
 	</update>
 	
+	
+	
 <!-- 글보기  -->	
 	<select id="readFreeBoard" parameterType="Integer" resultType="com.bd.freeboard.FreeBoard">
 		SELECT num, userId, userName, subject, content, created, hitCount
@@ -115,13 +111,37 @@
 		FETCH FIRST 1 ROWS ONLY
     </select>
 
+	<!-- 수정 -->
+	<update id="updateFreeboard" parameterType="com.bd.freeboard.FreeBoard">
+		UPDATE freeBoard SET subject=#{subject}, content=#{content, jdbcType=VARCHAR}
+		WHERE num = #{num}
+	</update>
+	
+	
 
+	<!-- 삭제 -->
+	<delete id="deleteFreeBoard" parameterType="Integer">
+		DELETE FROM freeBoard WHERE num = #{num}
+	</delete>
+	
+	
+	
+<!-- 파일 -->
+
+	<insert id="insertFile" parameterType="com.bd.freeboard.FreeBoard">
+		INSERT INTO freeBoardFile(fileNum, num, saveFilename, originalFilename,fileSize)
+		 VALUES(freeBoardFile_seq.NEXTVAL, #{num}, #{saveFilename},#{originalFilename}, #{fileSize})
+	</insert>
+
+	<delete id="deleteFile" parameterType="map">
+		DELETE FROM freeBoardFile WHERE ${field} = #{num}
+	</delete>
+	
 	<select id="readFile" parameterType="Integer" resultType="com.bd.freeboard.FreeBoard">
 		SELECT fileNum, num, saveFilename, originalFilename, fileSize
 		FROM freeBoardFile
 	    WHERE fileNum=#{fileNum}      
 	</select>	
-	
 	
 	<select id="listFile" parameterType="Integer" resultType="com.bd.freeboard.FreeBoard">
 		SELECT fileNum, num, saveFilename, originalFilename, fileSize
@@ -142,8 +162,22 @@
 	
 	<!-- 댓글 -->
 	<insert id="insertReply" parameterType="com.bd.freeboard.FreeBoard">
-		INSERT INTO 
-	
+		INSERT INTO freeBoardReply(replyNum, num, userId, userName, content,created, userIdx)
+			VALUES(freeBoardReply_seq.NEXTVAL, #{num}, #{userId}, #{userName}, #{content}, SYSDATE, #{userIdx})
 	</insert>
+	
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) FROM freeBoardReply
+		WHERE num=#{num}
+	</select>
+	
+	<select id="listReply" parameterType="map" resultType="com.bd.freeboard.Reply">
+		SELECT replyNum, userId, userName, num, content, TO_CHAR(created,'YYYY-MM-DD') created
+		FROM freeBoardReply 
+		WHERE num=#{num}
+		ORDER BY replyNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
+	
 	
 </mapper>

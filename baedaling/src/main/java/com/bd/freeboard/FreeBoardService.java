@@ -12,7 +12,7 @@ public interface FreeBoardService {
 	public FreeBoard preReadBoard(Map<String, Object> map);
 	public FreeBoard nextReadBoard(Map<String, Object> map);
 	public void updateBoard(FreeBoard dto, String pathname)throws Exception;
-	public void deleteBoard(int num, String pathname, String userId) throws Exception;
+	public void deleteBoard(int num, String pathname) throws Exception;
 
 	//파일
 	public void insertFile(FreeBoard dto) throws Exception;

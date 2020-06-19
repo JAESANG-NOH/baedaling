@@ -7,6 +7,8 @@ public class Reply {
 	private String userName;
 	private String content;
 	private String created;
+	private int userIdx;
+	
 	public int getReplyNum() {
 		return replyNum;
 	}
@@ -42,6 +44,12 @@ public class Reply {
 	}
 	public void setCreated(String created) {
 		this.created = created;
+	}
+	public int getUserIdx() {
+		return userIdx;
+	}
+	public void setUserIdx(int userIdx) {
+		this.userIdx = userIdx;
 	}
 	
 	

@@ -1,47 +1,47 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-   String cp = request.getContextPath();
+	String cp=request.getContextPath();
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 
-<table style='width: 54%; margin:20px auto; border-spacing: 0px; align-content: center;'>
-	<thead align="center"  style="height: 30px; background-color: #C8C8C8;">
-		<tr height='35' style="width: 600px;">
+<table style='width: 100%; margin: 10px auto 30px; border-spacing: 0px;'>
+	<thead id='listReplyHeader'>
+		<tr height='35'>
 		    <td colspan='2'>
-		           <div align="center" style='float: left;'><span style='color: gray ; font-weight: bold; '>댓글 ${replyCount}20개</span> <span style="">[댓글 목록, ${pageNo}/${total_page} 페이지]</span></div>
+		       <div style='clear: both;'>
+		           <div style='float: left;'><span style='color: #3EA9CD; font-weight: bold;'>댓글 ${replyCount}개</span> <span>[댓글 목록, ${pageNo}/${total_page} 페이지]</span></div>
 		           <div style='float: right; text-align: right;'></div>
+		       </div>
 		    </td>
 		</tr>
 	</thead>
+	
+	<tbody id='listReplyBody'>
+	<c:forEach var="vo" items="${listReply}">
+	    <tr height='35' style='background: #eeeeee;'>
+	       <td width='50%' style='padding:5px 5px; border:1px solid #cccccc; border-right:none;'>
+	           <span><b>${vo.userName}</b></span>
+	        </td>
+	       <td width='50%' style='padding:5px 5px; border:1px solid #cccccc; border-left:none;' align='right'>
+	           <span>${vo.created}</span> |
+	           <span class="deleteReply" style="cursor: pointer;" data-replyNum='${vo.replyNum}' data-pageNo='${pageNo}'>삭제</span>
+	        </td>
+	    </tr>
+	    <tr>
+	        <td colspan='2' valign='top' style='padding:5px 5px;'>
+	              ${vo.content}
+	        </td>
+	    </tr>
+	</c:forEach>
+	</tbody>
+	
+	<tfoot id='listReplyFooter'>
+		<tr height='40' align="center">
+            <td colspan='2' >
+              ${paging}
+            </td>
+           </tr>
+	</tfoot>
 </table>
-
-     
-<div align="center">
-    	<table style="width: 54%; margin:20px auto; border: 1px solid gray; ">
-    		<tr  height="25px">
-    			<td style="color: gray; font-weight: bold; font-size: 14px;"><span style="color: #38BCC6;"><i class="far fa-user"></i></span> 작성자</td>
-    		</tr>
-    		
-    		<tr>
-    			<td style="color: gray; font-size: 14px;">댓글내용나올부분</td>
-    		</tr>
-
-    		<tr>
-    			<td style="color: #D3D7D8;">날짜</td>
-    		</tr>
-    		
-    	</table>
-	</div>
-
-
-</body>
-</html>

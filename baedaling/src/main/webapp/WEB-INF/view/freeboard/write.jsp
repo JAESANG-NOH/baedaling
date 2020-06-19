@@ -29,7 +29,7 @@ $(function(){
 
   <c:if test="${mode=='update'}">
   function deleteFile(fileNum) {
-		var url="<%=cp%>/notice/deleteFile";
+		var url="<%=cp%>/freeboard/deleteFile";
 		$.post(url, {fileNum:fileNum}, function(data){
 			$("#f"+fileNum).remove();
 		}, "json");
@@ -108,7 +108,7 @@ function sendOk() {
 	<table>
 		<tr>
 			<td height="100px">
-				<button class="btn" type="submit" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}</button>&nbsp;&nbsp;
+				<button class="btn" type="button" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}</button>&nbsp;&nbsp;
 				<button class="btn" type="reset">다시입력</button>&nbsp;&nbsp;
 				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/freeboard/list';">${mode=='update'?'수정취소':'등록취소'}</button>&nbsp;&nbsp;
 				  <c:if test="${mode=='update'}">
