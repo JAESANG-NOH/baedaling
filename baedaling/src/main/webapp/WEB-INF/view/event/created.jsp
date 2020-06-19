@@ -58,7 +58,7 @@ function sendOk() {
 <div align="center" class="box">
 	<h3
 		style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
-		이벤트&nbsp;<span><img id="f_img2"
+		이벤트&nbsp;${mode=='update'?'수정':'등록'}<span><img id="f_img2"
 			src="<%=cp%>/resource/img/gangg.png"></span>
 	</h3>
 	<br>
@@ -68,7 +68,7 @@ function sendOk() {
 				<tr class="f_line">
 					<td align="left" style="font-weight: bold;" class="subtitle">제목</td>
 					<td align="left" id="ftitle" style="color: gray;">
-					<input name="subject" class="boxTF" style="width: 95%; color: gray;" value=" ${dto.subject}"></td>
+					<input name="subject" class="boxTF" style="width: 95%; color: gray;" value="${dto.subject}"></td>
 				</tr>
 				<tr class="f_line">
 					<td align="left" style="color: gray;" class="subtitle">작성자</td>
@@ -76,13 +76,14 @@ function sendOk() {
 				</tr>
 				
 				<tr class="f_line">
-					<td align="left" style="color: gray;" class="subtitle">이벤트 기간 설정
+					<td align="left" style="color: gray;" class="subtitle">이벤트 기간</td>
+					<td align="left" id="subcontent" >
 						<input type="date" name="start_date" value="2020-05-22" maxlength="10">~
 						<input type="date" name="end_date" value="2020-05-23" maxlength="10">
 					</td>
+					
 				</tr>
 					
-				<!-- 스마트 에디터 -->
 				<tr class="fcontent" align="left">
 					<td colspan="2" align="left"
 						style="padding-left: 20px; border-bottom: 1px solid #cccccc;">
@@ -92,7 +93,7 @@ function sendOk() {
 		
 				<tr align="left" height="100"
 					style="border-bottom: 1px solid #DDDFE0; height: 50px">
-					<td align="left" style="font-weight: bold;" class="subtitle">베너 이미지 첨부</td>
+					<td align="left" style="font-weight: bold;" class="subtitle">베너 이미지</td>
 					<td><input class="boxTF" type="file" name="upload" size="53"
 						style="width: 95%;"></td>
 				</tr>

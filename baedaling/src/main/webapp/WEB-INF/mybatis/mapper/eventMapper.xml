@@ -32,9 +32,13 @@
 		</where>		
 	</select>
 	
+	<update id="updateHitCount" parameterType="Integer">
+		UPDATE event SET hitCount=hitCount+1 WHERE num = #{num}
+	</update>
+	
 		<select id="listEvent" parameterType="map" resultType="com.bd.event.Event">
-		SELECT num, e.userId, e.userName, subject, start_date, end_date, eventState, imageFilename, 
-		       TO_CHAR(e.created, 'yyyy-mm-dd') created
+		SELECT num, e.userId, e.userName, TO_CHAR(start_date, 'YYYY-MM-DD') start_date,
+		TO_CHAR(end_date, 'YYYY-MM-DD') end_date, eventState, imageFilename
 		FROM event e
 		JOIN user1 u ON e.userId = u.userId
 		<where>
@@ -47,8 +51,7 @@
 	</select>
 	
 	<select id="readEvent" parameterType="Integer" resultType="com.bd.event.Event">
-		SELECT num, e.userId, e.userName, subject, imageFilename, 
-				content, created
+		SELECT num, e.userId, e.userName, subject, content, created
 		FROM event e
 		JOIN user1 u ON e.userId = u.userId
 		WHERE num=#{num}
@@ -85,8 +88,7 @@
 	</select>
 	
 	<update id="updateEvent" parameterType="com.bd.event.Event">
-		UPDATE event SET subject=#{subject}, imageFilename=#{imageFilename},
-				content=#{content}
+		UPDATE event SET subject=#{subject}, imageFilename=#{imageFilename}, content=#{content}
 		WHERE num=#{num}
 	</update>
 	
