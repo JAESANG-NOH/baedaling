@@ -5,6 +5,132 @@
 <%
 	String cp=request.getContextPath();
 %>
+<script type="text/javascript">
+$(function(){
+	listPage(1);
+});
+
+function ajaxJSON(url, type, query, fn) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data) {
+			fn(data);
+		}
+		,beforeSend:function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		login();
+	    		return false;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+function ajaxHTML(url, type, query, selector) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data) {
+			$(selector).html(data);
+		}
+		,beforeSend:function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		login();
+	    		return false;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+function listPage(page) {
+	var url = "<%=cp%>/recommend/listReply";
+	var query = "num=${dto.num}&pageNo="+page;
+	var selector = "#listReply";
+	
+	ajaxHTML(url, "get", query, selector);
+}
+
+function login() {
+	location.href="<%=cp%>/user/login";
+}
+$(function(){
+	$(".btnSendRecommendLike").click(function(){
+		if(! confirm("추천!")) {
+			return false;
+		}
+		
+		var url="<%=cp%>/recommend/insertRecommendLike";
+		var num="${dto.num}";
+		var query = {num:num};
+		
+		var fn = function(data){
+			var state=data.state;
+			if(state=="true") {
+				var count = data.recommendLikeCount;
+				$("#recommendLikeCount").text(count);
+			} else if(state=="false") {
+				alert("추천은 한번만 가능합니다.");
+			}
+		};
+		
+		ajaxJSON(url, "post", query, fn);
+	});
+});
+
+$(function(){
+	$(".btnSendReply").click(function(){
+		var num="${dto.num}";
+		var $tb = $(this).closest("table");
+		var content=$tb.find("textarea").val().trim();
+		if(! content) {
+			$tb.find("textarea").focus();
+			return false;
+		}
+		content = encodeURIComponent(content);
+		
+		var url="<%=cp%>/recommend/insertReply";
+		var query="num="+num+"&content="+content;
+		
+		var fn = function(data){
+			$tb.find("textarea").val("");
+			
+			var state=data.state;
+			if(state=="true") {
+				listPage(1);
+			} else if(state=="false") {
+				alert("댓글을 추가 하지 못했습니다.");
+			}
+		};
+		
+		ajaxJSON(url, "post", query, fn);
+	});
+});
+
+
+
+</script>
+
+<script type="text/javascript">
+function delete_send() {
+	  var q = "num=${dto.num}&${query}";
+	  var url = "<%=cp%>/recommend/delete?"+q;
+	  alert(url);
+	  if(confirm("위 자료를 삭제 하시 겠습니까 ? ")){
+	  	location.href=url;
+	  }
+}
+</script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/page.css" type="text/css">
 <div align="center" class="box">
 <h3 style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px; ">추천 게시판&nbsp;<span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"></span> </h3>
@@ -34,7 +160,7 @@
 	
 		<tr style="border-bottom: 1px solid #cccccc;">
 			<td colspan="2" height="40" style="padding-bottom: 15px;" align="center">
-					<a href=""><span style="color:#38BCC6;"><i class="fab fa-gratipay fa-3x"></i></span></a>&nbsp;&nbsp;<span id="boardLikeCount" style="color: gray;">0</span>
+					<a type="button" class="btnSendRecommendLike"><span style="color:#38BCC6;"><i class="fab fa-gratipay fa-3x"></i></span></a>&nbsp;&nbsp;<span id="recommendLikeCount" style="color: gray;">${dto.recommendLikeCount}</span>
 			</td> 
 		</tr>
 		<c:forEach var="vo" items="${listFile}">
@@ -66,11 +192,10 @@
 	</table>
 	<div class="f_button" align="right">
 		<button id="f_btn2" type="button" onclick="">수정</button>
-		<button id="f_btn" type="button" onclick="">삭제</button> 
+		<button id="f_btn" type="button" onclick="delete_send();">삭제</button> 
 		<button id="f_btn3" type="button" onclick="javascript:location.href='<%=cp%>/recommend/list?${query}';">리스트</button>
 	</div>
 </div>
-
 <table  style='width: 50%; margin: 15px auto 0px; border-spacing: 0px;'>
 		<tr height='30'> 
 			 <td align='left' >
@@ -84,7 +209,8 @@
 		</tr>
 		<tr align="right">
 		   <td  class="f_reply">
-		        <button type='button' style='height:37px; margin:10px; padding:10px 20px; align-items: center'>댓글 등록</button>
+		        <button type='button' class="btnSendReply" style='height:37px; margin:10px; padding:10px 20px; align-items: center'>댓글 등록</button>
 		    </td>
 	    </tr>
 </table>
+<div id="listReply" style="width:1000px; margin: 0px auto;"></div>

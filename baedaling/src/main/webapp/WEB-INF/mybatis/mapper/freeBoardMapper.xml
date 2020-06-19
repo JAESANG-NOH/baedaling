@@ -79,21 +79,15 @@
 	
 <!-- 글보기  -->	
 	<select id="readFreeBoard" parameterType="Integer" resultType="com.bd.freeboard.FreeBoard">
-		SELECT num, f.userId, userName, subject, content, f.created, hitCount,  
-		NVL(boardLikeCount, 0) boardLikeCount
-		FROM freeBoard f
-		JOIN user1 u ON f.userId=u.userId 
-		LEFT OUTER JOIN (
-			SELECT num, COUNT(*) boardLikeCount FROM freeBoardLike
-			GROUP BY num
-		) c ON f.num = c.num
-		WHERE num = #{num}
+		SELECT num, userId, userName, subject, content, created, hitCount
+		FROM freeBoard 
+		WHERE num = #{num}	
 	</select>
 
 
 	<!-- 이전글 -->
-	<select id="preReadFreeBorad" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
-		SELECT num, subject
+	<select id="preReadBoard" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
+		SELECT f.num, subject
 		FROM freeBoard f
 		JOIN user1 u ON f.userId=u.userId
 		<where>
@@ -107,8 +101,8 @@
     </select>
 
     <!-- 다음글 -->
-    <select id="nextReadFreeBorad" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
-		SELECT num, subject
+    <select id="nextReadBoard" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
+		SELECT f.num, subject
 		FROM freeBoard f
 		JOIN user1 u ON f.userId=u.userId
 		<where>
@@ -134,4 +128,22 @@
 		FROM freeBoardFile
 		WHERE num=#{num}    
 	</select>
+	
+	<!-- 좋아요 -->
+		<insert id="insertBoardLike" parameterType="map">
+		INSERT INTO freeBoardLike(num, userIdx) VALUES (#{num}, #{userIdx})
+	</insert>
+      
+	<!-- 게시글 좋아요 개수 -->
+	<select id="boardLikeCount" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*) FROM freeBoardLike WHERE num=#{num}
+	</select>
+	
+	
+	<!-- 댓글 -->
+	<insert id="insertReply" parameterType="com.bd.freeboard.FreeBoard">
+		INSERT INTO 
+	
+	</insert>
+	
 </mapper>

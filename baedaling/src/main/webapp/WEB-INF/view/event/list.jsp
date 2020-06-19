@@ -7,11 +7,19 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/event.css" type="text/css">
 
+<script type="text/javascript">
+//function 
+
+
+</script>
+
+
 <div class="event_container">
 	<div style="width: 800px; margin: 20px auto;">
 		<div>
 			<h3>Event</h3>
 		</div>
+		<form name="eventForm" action="<%=cp%>/event/list" method="post">
 		<table style="margin: 0px auto; width: 100%; border-spacing: 0px;" >
 				<tr height="35px;">
 					<td align="left" style="font-size: 13px;">
@@ -22,6 +30,7 @@
 					</td>
 				</tr>
 		</table>
+		
 		<table style="width: 100%; margin: 0px auto; border-spacing: 0; border-collapse:collapse;">
 			<tr align="center" height="35" style="border-top: 2px solid #828282; border-bottom: 1px solid #828282; background: #41CDCD;">
 				<th width="60" style="color:white;">번호</th>
@@ -34,24 +43,37 @@
 			<tr align="center" height="180" style="border-bottom: 1px solid #cccccc;">
 				<td>1</td>
 				<td>
-					<a href="#"><img src="<%=cp%>/delivery/img/simple.png" width="350" height="150"></a>
+					<a href="#"><img src="<%=cp%>/resource/img/simple.png" width="350" height="150"></a>
 				</td>
+				
+				
 				<td>2020-06-15<br>&nbsp;~&nbsp;2020-07-17</td>
 				<td>진행중</td>
 				<td>3</td>
 			</tr>
+			
+			
 		</table>
 		
+		<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
+		   <tr height="35">
+				<td align="center">
+			        ${dataCount==0?"등록된 게시물이 없습니다.":paging}
+				</td>
+		   </tr>
+		</table>
 		
 		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
 			<tr height="40">
 				<td align="left">
-					<button type="button" onclick="javascript:location.href='<%=cp%>/'">글올리기</button>
+					<button type="button" onclick="javascript:location.href='<%=cp%>/event/created'">글올리기</button>
 				</td>		
 				<td align="right">
-					<button type="button" onclick="javascript:location.href='<%=cp%>/'">새로고침</button>
+					<button type="button" onclick="javascript:location.href='<%=cp%>/event/list'">새로고침</button>
 				</td>
-			</tr>			
+			</tr>		
 		</table>
+		</form>
+		
 	</div>
 </div>

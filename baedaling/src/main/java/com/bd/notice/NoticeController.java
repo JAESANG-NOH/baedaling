@@ -1,8 +1,10 @@
-package com.bd.event;
+package com.bd.notice;
 
 import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.bd.common.MyUtil;
 import com.bd.user.SessionInfo;
 
-@Controller("event.eventController")
-@RequestMapping("/event/*")
-public class EventController {
+@Controller("notice.noticeController")
+@RequestMapping("/notice/*")
+public class NoticeController {
 	@Autowired
-	private EventService service;
+	private NoticeService service;
 	@Autowired
 	private MyUtil myUtil;
 	
@@ -37,7 +39,7 @@ public class EventController {
 			Model model
 			) throws Exception {
 		
-		int rows = 5;
+		int rows = 10;
 		int total_page = 0;
 		int dataCount = 0;
 		
@@ -53,38 +55,55 @@ public class EventController {
 		dataCount = service.dataCount(map);
 		if(dataCount !=0) total_page = myUtil.pageCount(rows, dataCount);
 		
+		
 		if(total_page < current_page) current_page = total_page;
+		
+		List<Notice> noticeList = null;
+		if(current_page==1) {
+			noticeList = service.listNoticeTop();
+		}
 		
 		int offset = (current_page-1) * rows;
 		if(offset < 0) offset = 0;
 		map.put("offset", offset);
 		map.put("rows", rows);
 		
-		List<Event> list = service.listEvent(map);
+		List<Notice> list = service.listNotice(map);
 		
+		Date endDate = new Date();
+		long gap;
 		int listNum, n = 0;
-		for(Event dto : list) {
+		for(Notice dto : list) {
 			listNum = dataCount - (offset+n);
 			dto.setListNum(listNum);
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	        Date beginDate = formatter.parse(dto.getCreated());
+			
+	        gap=(endDate.getTime() - beginDate.getTime()) / (60*60* 1000);
+            dto.setGap(gap);
+            
+            dto.setCreated(dto.getCreated().substring(0, 10));
 			n++;
 		}
 		
 		String cp=req.getContextPath();
         String query = "";
-        String listUrl = cp+"/event/list";
-        String articleUrl = cp+"/event/article?page=" + current_page;
+        String listUrl = cp+"/notice/list";
+        String articleUrl = cp+"/notice/article?page=" + current_page;
         if(keyword.length()!=0) {
         	query = "condition=" + condition + 
         	         "&keyword=" + URLEncoder.encode(keyword, "utf-8");	
         }
         
         if(query.length()!=0) {
-        	listUrl = cp+"/event/list?" + query;
-        	articleUrl = cp+"/event/article?page=" + current_page + "&"+ query;
+        	listUrl = cp+"/notice/list?" + query;
+        	articleUrl = cp+"/notice/article?page=" + current_page + "&"+ query;
         }
         
         String paging = myUtil.paging(current_page, total_page, listUrl);
 		
+		model.addAttribute("noticeList", noticeList);
 		model.addAttribute("list", list);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);
@@ -95,34 +114,46 @@ public class EventController {
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 		
-		return ".event.list";
+		return ".notice.list";
 	}
 	
 	@RequestMapping(value="created", method=RequestMethod.GET)
-	public String createdForm(Model model) throws Exception {
+	public String createdForm(
+			Model model,
+			HttpSession session
+			) throws Exception {
+		
+		//SessionInfo info = (SessionInfo)session.getAttribute("user");
+		
+		
 		model.addAttribute("mode", "created");
-		return ".event.created";
+		return ".notice.created";
 	}
 	
 	@RequestMapping(value="created", method=RequestMethod.POST)
 	public String createdSubmit(
-			Event dto,
-			HttpSession session) throws Exception {
-		
-		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator+"event";
+			Notice dto,
+			HttpSession session
+			) throws Exception {
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("user");
 		
+		
 		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + "resource" + File.separator + "notice";		
+			
 			dto.setUserId(info.getUserId());
-			service.insertEvent(dto, path);
+			dto.setUserName(info.getUserName());
+			dto.setUserIdx(info.getUserIdx());
+			service.insertNotice(dto, pathname);
 		} catch (Exception e) {
 		}
-		return "redirect:/event/list";
+		
+		return "redirect:/notice/list";
 	}
 	
-	@RequestMapping(value="article", method=RequestMethod.GET)
+	/*@RequestMapping(value="/notice/article")
 	public String article(
 			@RequestParam int num,
 			@RequestParam String page,
@@ -136,97 +167,47 @@ public class EventController {
 		if(keyword.length()!=0) {
 			query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "UTF-8");
 		}
+		
+		service.updateHitCount(num);
 
-		Event dto = service.readEvent(num);
-		if (dto == null)
-			return "redirect:/event/list?"+query;
+		Notice dto = service.readNotice(num);
+		if(dto==null) {
+			return "redirect:/notice/list?"+query;
+		}
 		
-		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
-		
-		// 이전 글, 다음 글
+        dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+         
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
 		map.put("num", num);
 
-		Event preReadDto = service.preReadEvent(map);
-		Event nextReadDto = service.nextReadEvent(map);
-		
+		Notice preReadDto = service.preReadNotice(map);
+		Notice nextReadDto = service.nextReadNotice(map);
+        
+		List<Notice> listFile=service.listFile(num);
+				
 		model.addAttribute("dto", dto);
 		model.addAttribute("preReadDto", preReadDto);
 		model.addAttribute("nextReadDto", nextReadDto);
-		
+		model.addAttribute("listFile", listFile);
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 		
-		return ".event.article";
+		return ".notice.article";
 	}
 	
-	@RequestMapping(value="update", method=RequestMethod.GET)
-	public String updateForm(
-			@RequestParam int num,
-			@RequestParam String page,
-			HttpSession session,
-			Model model) throws Exception {
-		
-		SessionInfo info=(SessionInfo)session.getAttribute("user");
-		
-		Event dto = service.readEvent(num);
-		if (dto == null)
-			return "redirect:/event/list?page="+page;
-
-		// 글을 등록한 사람만 수정 가능
-		if(! dto.getUserId().equals(info.getUserId())) {
-			return "redirect:/photo/list?page="+page;
-		}
-		
-		model.addAttribute("dto", dto);
-		model.addAttribute("page", page);
-		model.addAttribute("mode", "update");
-		
-		return ".event.created";
+    public String updateForm() throws Exception {
+		return ".notice.created";
+	}*/
+    /*		
+	public String updateSubmit() throws Exception {
+		return "redirect:/notice/list?page="+page; 
 	}
 	
-	@RequestMapping(value="update", method=RequestMethod.POST)
-	public String updateSubmit(
-			Event dto,
-			@RequestParam String page,
-			HttpSession session) throws Exception {
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"event";
-		
-		try {
-			service.updateEvent(dto, pathname);
-		} catch (Exception e) {
-		}
-		
-		return "redirect:/event/article?num="+dto.getNum()+"&page="+page;
+	public String delete() throws Exception {
+		return "redirect:/notice/list?"+query;
 	}
+	*/
 	
-	@RequestMapping(value="delete", method=RequestMethod.GET)
-	public String delete(
-			@RequestParam int num,
-			@RequestParam String page,
-			@RequestParam(defaultValue="all") String condition,
-			@RequestParam(defaultValue="") String keyword,
-			HttpSession session) throws Exception {
-		
-		keyword = URLDecoder.decode(keyword, "utf-8");
-		String query="page="+page;
-		if(keyword.length()!=0) {
-			query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "UTF-8");
-		}
-		
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"event";
-		
-		SessionInfo info=(SessionInfo)session.getAttribute("user");
-		
-		try {
-			service.deleteEvent(num, pathname, info.getUserId());
-		} catch (Exception e) {
-		}
-		
-		return "redirect:/event/list?"+query;
-	}
 }

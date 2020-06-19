@@ -5,11 +5,17 @@
 <%
 	String cp=request.getContextPath();
 %>
+<script type="text/javascript">
+function search(){
+	 var f = document.searchForm;
+	 f.action = "<%=cp%>/recommend/list";
+	 f.submit();
+}
+</script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/list.css" type="text/css">
-
 <div class="body-container" align="center">
     <div class="body-title" align="center">
-     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">추천 게시판 </h3>
+     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">추천 게시판 <span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"></span></h3>
     </div>
     
     <div>
@@ -26,8 +32,8 @@
       <!-- "#EFF1F3" -->
       <table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
         <tr id="list_table" align="center" bgcolor="#EFF1F3" style="border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; "> 
-            <th width="70" style="color: #787878;">번호</th>
-            <th align="center" style="color: #787878;">제목</th>
+            <th width="60" style="color: #787878;">번호</th>
+            <th style="color: #787878;">제목</th>
             <th width="100" style="color: #787878;">작성자</th>
             <th width="80" style="color: #787878;">작성일</th>
             <th width="60" style="color: #787878;">조회수</th>
@@ -56,7 +62,7 @@
                 <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/recommend/list'">새로고침</button>
             </td>
             <td align="center">
-                <form name="searchForm" action="" method="post">
+                <form name="searchForm" method="get">
                     <select name="category" class="selectField">
                         <option value="any" ${category=="any"?"selected='selected'":""}>모두</option>
                         <option value="subject" ${category=="subject"?"selected='selected'":""}>제목</option>
@@ -64,8 +70,8 @@
                         <option value="userName" ${category=="userName"?"selected='selected'":""}>작성자</option>
                         <option value="created" ${category=="created"?"selected='selected'":""}>등록일</option>
                   </select>
-                  <input type="text" name="keyword" value="" class="boxTF">
-                  <button type="button" class="btn" onclick="searchList()">검색</button>
+                  <input type="text" name="key" value="" class="boxTF">
+                  <button type="button" class="btn" onclick="search();">검색</button>
               </form>
             </td>
             <td align="right" width="100">

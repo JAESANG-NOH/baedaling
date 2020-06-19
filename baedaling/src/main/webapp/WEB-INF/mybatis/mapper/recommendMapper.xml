@@ -99,14 +99,50 @@
 		ORDER BY num DESC
 		FETCH FIRST 1 ROWS ONLY
     </select>
+    
 	<select id="listFile" parameterType="Integer" resultType="com.bd.recommend.Recommend">
 		SELECT fileNum, num, saveFilename, originalFilename, fileSize
 		FROM recommendboardFile
 		WHERE num=#{num}    
 	</select>
+	
 	<select id="readFile" parameterType="Integer" resultType="com.bd.recommend.Recommend">
 		SELECT fileNum, num, saveFilename, originalFilename, fileSize
 		FROM recommendboardFile
 	    WHERE fileNum=#{fileNum}      
+	</select>
+	
+	<delete id="deleteRecommend" parameterType="Integer">
+		DELETE FROM recommendboard WHERE num=#{num}
+	</delete>
+	
+	<delete id="deleteFile" parameterType="map">
+		DELETE FROM recommendboardFile WHERE ${field} = #{num}
+	</delete>
+	
+	<insert id="insertRecommendLike" parameterType="map">
+		INSERT INTO RECOMMENDBOARDLIKE(num, userIdx) VALUES (#{num}, #{userIdx})
+	</insert>
+	
+	<select id="rocommendLikeCount" parameterType="Integer" resultType="Integer">
+		SELECT COUNT(*) FROM RECOMMENDBOARDLIKE WHERE num=#{num}
+	</select>
+	
+	<insert id="insertReply" parameterType="com.bd.recommend.RecommendReply">
+		INSERT INTO recommendBoardReply(replyNum, num, userId, userName, content, created, userIdx)
+			VALUES (RECOMMENDBOARDREPLY_SEQ.NEXTVAL, #{num}, #{userId}, #{userName}, #{content}, SYSDATE, #{userIdx})
+	</insert>
+	
+	<select id="listReply" parameterType="map" resultType="com.bd.recommend.RecommendReply">
+		SELECT replyNum, userId, userName, num, content, TO_CHAR(created,'YYYY-MM-DD') created
+		FROM recommendBoardReply
+		WHERE num=#{num}
+		ORDER BY replyNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
+	
+	<select id="replyCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*), 0) FROM recommendBoardReply
+		WHERE num=#{num}
 	</select>
 </mapper>
