@@ -211,9 +211,9 @@ public class FreeBoardController {
 			Model model	) throws Exception {
 		SessionInfo info=(SessionInfo)session.getAttribute("user");
 		
-		/*if(! info.getUserId().equals("admin")) {
+		if(! info.getUserId().equals("admin")) {
 			return "redirect:/freeboard/list?page="+page;
-		}*/
+		}
 
 		FreeBoard dto = service.readBoard(num);
 		if(dto==null) {
@@ -263,7 +263,7 @@ public class FreeBoardController {
 			@RequestParam String page,
 			HttpSession session
 			) throws Exception {
-		SessionInfo info=(SessionInfo)session.getAttribute("user");
+//		SessionInfo info=(SessionInfo)session.getAttribute("user");
 		
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+"resource"+File.separator+"freeboard";
