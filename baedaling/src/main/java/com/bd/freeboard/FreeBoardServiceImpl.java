@@ -56,7 +56,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		List<FreeBoard> list=null;
 
 		try {
-			list=dao.selectList("fb.ListFreeboard", map);
+			list=dao.selectList("fb.listFreeboard", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -31,7 +31,7 @@
 		</if>
 	</sql>
 
-	<select id="ListFreeboard" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
+	<select id="listFreeboard" parameterType="map" resultType="com.bd.freeboard.FreeBoard">
 		SELECT f.num, f.userId, subject, hitCount, 
 		TO_CHAR(f.created,'YYYY-MM-DD') created, f.userName, 
 		NVL(replyCount,0) replyCount, NVL(fileCount, 0) fileCount
@@ -117,14 +117,11 @@
 		WHERE num = #{num}
 	</update>
 	
-	
 
 	<!-- 삭제 -->
 	<delete id="deleteFreeBoard" parameterType="Integer">
 		DELETE FROM freeBoard WHERE num = #{num}
 	</delete>
-	
-	
 	
 <!-- 파일 -->
 
@@ -159,9 +156,8 @@
 		SELECT COUNT(*) FROM freeBoardLike WHERE num=#{num}
 	</select>
 	
-	
 	<!-- 댓글 -->
-	<insert id="insertReply" parameterType="com.bd.freeboard.FreeBoard">
+	<insert id="insertReply" parameterType="com.bd.freeboard.Reply">
 		INSERT INTO freeBoardReply(replyNum, num, userId, userName, content,created, userIdx)
 			VALUES(freeBoardReply_seq.NEXTVAL, #{num}, #{userId}, #{userName}, #{content}, SYSDATE, #{userIdx})
 	</insert>

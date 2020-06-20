@@ -33,7 +33,7 @@ public class FreeBoardController {
 	private FileManager fileManager;
 	
 	
-	@RequestMapping(value= "list")
+	@RequestMapping("list")
 	public String list(
 			@RequestParam(value="page", defaultValue="1") int current_page,
 			@RequestParam(defaultValue="all") String condition,
@@ -69,7 +69,8 @@ public class FreeBoardController {
 
         List<FreeBoard> list = service.listBoard(map);
         
-        int listNum, n = 0;
+        int listNum =0;
+        int n = 0;
         for(FreeBoard dto : list) {
             listNum = dataCount - (offset + n);
             dto.setListNum(listNum);
@@ -209,11 +210,11 @@ public class FreeBoardController {
 			@RequestParam String page,
 			HttpSession session,			
 			Model model	) throws Exception {
-		SessionInfo info=(SessionInfo)session.getAttribute("user");
+//		SessionInfo info=(SessionInfo)session.getAttribute("user");
 		
-		if(! info.getUserId().equals("admin")) {
-			return "redirect:/freeboard/list?page="+page;
-		}
+//		if(! info.getUserId().equals("admin")) {
+//			return "redirect:/freeboard/list?page="+page;
+//		}
 
 		FreeBoard dto = service.readBoard(num);
 		if(dto==null) {
@@ -237,16 +238,16 @@ public class FreeBoardController {
 			@RequestParam String page,
 			HttpSession session) throws Exception {
 
-		SessionInfo info=(SessionInfo)session.getAttribute("user");
-		if(! info.getUserId().equals("admin")) {
-			return "redirect:/freeboard/list?page="+page;
-		}
+//		SessionInfo info=(SessionInfo)session.getAttribute("user");
+//		if(! info.getUserId().equals("admin")) {
+//			return "redirect:/freeboard/list?page="+page;
+//		}
 		
 		try {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + File.separator + "resource" + File.separator + "freeboard";		
 			
-			dto.setUserId(info.getUserId());
+	//		dto.setUserId(info.getUserId());
 			service.updateBoard(dto, pathname);
 		} catch (Exception e) {
 		}
@@ -260,7 +261,6 @@ public class FreeBoardController {
 	@ResponseBody
 	public Map<String, Object> deleteFile(
 			@RequestParam int fileNum,
-			@RequestParam String page,
 			HttpSession session
 			) throws Exception {
 //		SessionInfo info=(SessionInfo)session.getAttribute("user");
@@ -273,9 +273,6 @@ public class FreeBoardController {
 			fileManager.doFileDelete(dto.getSaveFilename(),pathname);
 		}
 		
-//		if(! info.getUserId().equals(dto.getUserId())) {
-//			return "redirect:/freeboard/list?page="+page;
-//		}
 		Map<String, Object> map=new HashMap<String, Object>();
 		map.put("field", "fileNum");
 		map.put("num", fileNum);
@@ -286,12 +283,7 @@ public class FreeBoardController {
 		model.put("state", "true");
 		return model;
 	
-		
-		
 	}
-	
-	
-	
 	
 	@RequestMapping(value="insertBoardLike", method=RequestMethod.POST)
 	@ResponseBody
