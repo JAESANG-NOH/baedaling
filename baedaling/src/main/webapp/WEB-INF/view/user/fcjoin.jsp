@@ -5,13 +5,16 @@
 <%
 	String cp=request.getContextPath();
 %>
-<link rel="stylesheet" href="<%=cp%>/resource/css/join.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/fcjoin.css" type="text/css">
  <div id="container_join">
 		<div id="head_line">
 			<span>BAEDALING</span>
+			<br>
+			<span style="font-size: 40px;">FRANCHISE</span>
 		</div>
+		
 		<div id="body_line">
-		<form id="" name="">
+		<form action="" id="">
 			<table>
 				<tr class="etch_list1">
 					<td class="textinfo_tr">아이디</td>
@@ -94,6 +97,59 @@
 				
 				<tr class="etch_list1">
 					<td class="textinfo_tr">주소</td>
+				</tr>
+				<tr class="etch_list2">
+					<td class="inputinfo_tr"><input type="text" class="input_normal" style="width: 270px; margin-right: 10px;"><button type="button" class="city_search_btn">주소검색</button></td>
+				</tr>
+				<tr class="etch_list2">
+					<td class="inputinfo_tr"><input type="text" class="input_normal"></td>
+				</tr>
+				<tr class="etch_list2">
+					<td class="inputinfo_tr"><input type="text" class="input_normal"></td>
+				</tr>
+				<tr class="etch_list3">
+					<td id="message_line7"></td>
+				</tr>
+				
+				<tr class="etch_list1">
+					<td class="textinfo_tr">업체명</td>
+				</tr>
+				<tr class="etch_list2">
+					<td class="inputinfo_tr"><input type="text" class="input_normal"></td>
+				<tr class="etch_list3">
+					<td id="message_line1"></td>
+				</tr>
+				
+				<tr class="etch_list1">
+					<td class="textinfo_tr">상호명</td>
+				</tr>
+				<tr class="etch_list2">
+					<td class="inputinfo_tr"><input type="text" class="input_normal"></td>
+				<tr class="etch_list3">
+					<td id="message_line1"></td>
+				</tr>
+
+				<tr class="etch_list1">
+					<td class="textinfo_tr">사업자 등록번호</td>
+				</tr>
+				<tr class="etch_list2">
+					<td class="inputinfo_tr"><input type="text" class="input_normal"></td>
+				<tr class="etch_list3">
+					<td id="message_line1"></td>
+				</tr>
+
+				<tr class="etch_list1">
+					<td class="textinfo_tr">업체 전화번호</td>
+				</tr>
+				<tr class="etch_list2">
+					<td class="inputinfo_tr"><input type="text" class="input_normal"></td>
+				</tr>
+				<tr class="etch_list3">
+					<td id="message_line6"></td>
+				</tr>
+				
+				<tr class="etch_list1">
+					<td class="textinfo_tr">업체 주소</td>
 				</tr>
 				<tr class="etch_list2">
 					<td class="inputinfo_tr"><input type="text" class="input_normal" style="width: 270px; margin-right: 10px;"><button type="button" class="city_search_btn">주소검색</button></td>

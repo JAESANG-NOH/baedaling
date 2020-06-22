@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller("user.userController")
 @RequestMapping("/user/*")
@@ -61,7 +62,46 @@ public class UserController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("user");
 		session.invalidate();
-		
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="joincheck", method=RequestMethod.GET)
+	public String joincheck() {
+		return ".user.joincheck";
+	}
+	
+	@RequestMapping(value="join", method=RequestMethod.GET)
+	public String joinForm1(
+			Model model
+			) {
+		model.addAttribute("state","user");
+		return  ".user.join";
+	}
+	
+	@RequestMapping(value="fcjoin", method=RequestMethod.GET)
+	public String joinForm2(
+			Model model
+			) {
+		model.addAttribute("state","user");
+		return  ".user.fcjoin";
+	}
+	
+	@RequestMapping(value="join", method=RequestMethod.POST)
+	public String joinSubmit(
+			User dto,
+			final RedirectAttributes reAttr,
+			Model model
+			 ){
+		try {
+			service.insertUser(dto);
+		} catch (Exception e) {
+			return ".user.join";
+		}
+		String message = dto.getUserName()+"님의 회원가입이 정상적으로 처리되었습니다.<br>5초후 로그인 화면으로 이동합니다.<br>";
+		
+		reAttr.addFlashAttribute("message",message);
+		reAttr.addFlashAttribute("title","회원 가입");
+		
+		return "redirect:/user/completepage";
 	}
 }

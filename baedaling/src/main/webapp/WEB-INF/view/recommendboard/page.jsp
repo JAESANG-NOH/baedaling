@@ -117,6 +117,25 @@ $(function(){
 	});
 });
 
+$(function(){
+	$("body").on("click", ".deleteReply", function(){
+		if(! confirm("게시물을 삭제하시겠습니까 ? ")) {
+		    return false;
+		}
+		
+		var replyNum=$(this).attr("data-replyNum");
+		var page=$(this).attr("data-pageNo");
+		
+		var url="<%=cp%>/recommend/deleteReply";
+		var query="replyNum="+replyNum+"&mode=reply";
+		
+		var fn = function(data){
+			listPage(page);
+		};
+		
+		ajaxJSON(url, "post", query, fn);
+	});
+});
 
 
 </script>

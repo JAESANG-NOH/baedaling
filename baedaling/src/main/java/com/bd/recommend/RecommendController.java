@@ -345,4 +345,24 @@ public class RecommendController {
 		
 		return "/recommendboard/listReply";
 	}
+	
+	@RequestMapping(value="deleteReply", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteReply(
+			@RequestParam Map<String, Object> paramMap
+			) {
+		
+		String state="true";
+		try {
+			service.deleteReply(paramMap);
+		} catch (Exception e) {
+			state="false";
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("state", state);
+		return map;
+	}
+	
+	
 }

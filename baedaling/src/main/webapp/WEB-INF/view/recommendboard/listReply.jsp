@@ -31,7 +31,7 @@
 	        </td>
 	    </tr>
 	    <tr>
-	        <td colspan='2' valign='top' style='padding:5px 5px;'>
+	        <td colspan='2' valign='top' style='padding:5px 5px; height: 50px; padding-top: 10px; padding-left: 20px'>
 	              ${vo.content}
 	        </td>
 	    </tr>

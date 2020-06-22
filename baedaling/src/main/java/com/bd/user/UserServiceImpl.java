@@ -28,31 +28,38 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void insertUser(User dto) throws Exception {
-		// TODO Auto-generated method stub
-		
+		try {
+			dao.insertData("user.insertUser", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
 	public void updateMembership(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void updateLastLogin(String userId) throws Exception {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void updateUser(User dto) throws Exception {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public User readUser(String userId) {
-		// TODO Auto-generated method stub
+		User dto = null;
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return null;
 	}
 
