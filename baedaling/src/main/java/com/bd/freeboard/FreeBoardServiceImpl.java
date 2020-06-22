@@ -1,5 +1,6 @@
 package com.bd.freeboard;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +56,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		List<FreeBoard> list=null;
 
 		try {
-			list=dao.selectList("fb.ListFreeboard", map);
+			list=dao.selectList("fb.listFreeboard", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -124,7 +125,22 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public void updateBoard(FreeBoard dto, String pathname) throws Exception {
 		try {
-			
+			dao.updateData("fb.updateFreeboard", dto);
+			if(! dto.getUpload().isEmpty()) {
+				for(MultipartFile mf:dto.getUpload()) { 
+					String saveFilename=fileManager.doFileUpload(mf, pathname);
+					if(saveFilename==null) continue;
+					
+					String originalFilename=mf.getOriginalFilename();
+					long fileSize=mf.getSize();
+					
+					dto.setOriginalFilename(originalFilename);
+					dto.setSaveFilename(saveFilename);
+					dto.setFileSize(fileSize);
+					
+					insertFile(dto);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -132,9 +148,20 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public void deleteBoard(int num, String pathname, String userId) throws Exception {
+	public void deleteBoard(int num, String pathname) throws Exception {
 		try {
+			List<FreeBoard> listFile = listFile(num);
+			if(listFile!=null) {
+				for(FreeBoard dto : listFile) {
+					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
+				}
+			}
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("field", "num");
+			map.put("num", num);
+			deleteFile(map);
 			
+			dao.deleteData("fb.deleteFreeBoard", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -165,7 +192,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public void insertReply(Reply dto) throws Exception {
 		try {
-			
+			dao.insertData("fb.insertReply", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -174,20 +201,29 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Override
 	public List<Reply> listReply(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Reply> list = null; 
+		try {
+			list =dao.selectList("fb.listReply", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
 	public int replyCount(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result=0;
+		try {
+			result=dao.selectOne("fb.replyCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@Override
 	public void deleteReply(Map<String, Object> map) throws Exception {
 		try {
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
@@ -231,7 +267,7 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	@Override
 	public void deleteFile(Map<String, Object> map) throws Exception {
 		try {
-			
+			dao.deleteData("fb.deleteFile", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

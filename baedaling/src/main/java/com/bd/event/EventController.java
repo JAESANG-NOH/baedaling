@@ -110,12 +110,14 @@ public class EventController {
 			HttpSession session) throws Exception {
 		
 		String root = session.getServletContext().getRealPath("/");
-		String path = root + "uploads" + File.separator+"event";
+		String path = root + "resource" + File.separator+"event";
 		
 		SessionInfo info = (SessionInfo)session.getAttribute("user");
 		
 		try {
 			dto.setUserId(info.getUserId());
+			dto.setUserName(info.getUserName());
+			dto.setUserIdx(info.getUserIdx());
 			service.insertEvent(dto, path);
 		} catch (Exception e) {
 		}
@@ -141,7 +143,9 @@ public class EventController {
 		if (dto == null)
 			return "redirect:/event/list?"+query;
 		
-		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
+		service.updateHitCount(num);
+		
+		//dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
 		
 		// 이전 글, 다음 글
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -177,7 +181,7 @@ public class EventController {
 
 		// 글을 등록한 사람만 수정 가능
 		if(! dto.getUserId().equals(info.getUserId())) {
-			return "redirect:/photo/list?page="+page;
+			return "redirect:/event/list?page="+page;
 		}
 		
 		model.addAttribute("dto", dto);
@@ -218,7 +222,7 @@ public class EventController {
 		}
 		
 		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"event";
+		String pathname=root+"resource"+File.separator+"event";
 		
 		SessionInfo info=(SessionInfo)session.getAttribute("user");
 		

@@ -14,7 +14,9 @@ public class FcNotice {
 	private String created;
 	private int hitCount;
 	private int important;
-	private long userIdx;
+	private int userIdx;
+	
+	private int fileCount;
 	
 	private int fileNum;
 	private String saveFilename;
@@ -83,10 +85,11 @@ public class FcNotice {
 		this.important = important;
 	}
 	
-	public long getUserIdx() {
+	
+	public int getUserIdx() {
 		return userIdx;
 	}
-	public void setUserIdx(long userIdx) {
+	public void setUserIdx(int userIdx) {
 		this.userIdx = userIdx;
 	}
 	public int getFileNum() {
@@ -114,5 +117,11 @@ public class FcNotice {
 		this.fileSize = fileSize;
 	}
 	
+	public int getFileCount() {
+		return fileCount;
+	}
+	public void setFileCount(int fileCount) {
+		this.fileCount = fileCount;
+	}
 	
 }

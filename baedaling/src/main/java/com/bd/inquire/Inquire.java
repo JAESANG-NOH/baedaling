@@ -14,6 +14,8 @@ public class Inquire {
 	private String answer; // 답변
 	private String answer_created; // 답변일자
 	
+	private int listNum;
+	
 	public int getNum() {
 		return num;
 	}
@@ -74,8 +76,13 @@ public class Inquire {
 	public void setAnswer_created(String answer_created) {
 		this.answer_created = answer_created;
 	}
-	
-	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+
 
 }
 

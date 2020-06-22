@@ -7,23 +7,19 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/event.css" type="text/css">
 
-<script type="text/javascript">
-//function 
-
-
-</script>
-
 
 <div class="event_container">
 	<div style="width: 800px; margin: 20px auto;">
-		<div>
-			<h3>Event</h3>
+		<div align="center">
+			<h3 style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
+			이벤트&nbsp;<span><img width="70px" height="70px"
+			src="<%=cp%>/resource/img/gangg.png"></span></h3>
 		</div>
 		<form name="eventForm" action="<%=cp%>/event/list" method="post">
 		<table style="margin: 0px auto; width: 100%; border-spacing: 0px;" >
 				<tr height="35px;">
 					<td align="left" style="font-size: 13px;">
-					1개(1/1 페이지)
+					  ${dataCount}개(${page}/${total_page} 페이지)
 					</td>
 					<td align="right">
 					<span style="font-size: 13px;">배달ing&nbsp;>&nbsp;이벤트</span>
@@ -39,20 +35,28 @@
 				<th width="120" style="color:white;" align="left">&nbsp;기간</th>
 				<th width="80" style="color:white;">조회수</th>
 			</tr>
-		
+			
+			<c:forEach var="dto" items="${list}">
 			<tr align="center" height="180" style="border-bottom: 1px solid #cccccc;">
-				<td>1</td>
+				<td>${dto.listNum}</td>
 				<td>
-					<a href="#"><img src="<%=cp%>/resource/img/simple.png" width="350" height="150"></a>
+					<a href="${articleUrl}&num=${dto.num}"><img src="<%=cp%>/resource/event/${dto.imageFilename}" width="350" height="150"></a>
 				</td>
-				
-				
-				<td>2020-06-15<br>&nbsp;~&nbsp;2020-07-17</td>
+				<td>${dto.start_date}<br>&nbsp;~&nbsp;${dto.end_date}</td>
 				<td>진행중</td>
-				<td>3</td>
+				<td>${dto.hitCount}</td>
 			</tr>
+			</c:forEach>
 			
-			
+		</table>
+		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
+			<tr height="100">
+				<td align="right">
+					<button type="button" onclick="javascript:location.href='<%=cp%>/event/list'">새로고침</button>
+					<button type="button" onclick="javascript:location.href='<%=cp%>/event/created'">등록하기</button>
+				</td>		
+				
+			</tr>		
 		</table>
 		
 		<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
@@ -63,16 +67,6 @@
 		   </tr>
 		</table>
 		
-		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
-			<tr height="40">
-				<td align="left">
-					<button type="button" onclick="javascript:location.href='<%=cp%>/event/created'">글올리기</button>
-				</td>		
-				<td align="right">
-					<button type="button" onclick="javascript:location.href='<%=cp%>/event/list'">새로고침</button>
-				</td>
-			</tr>		
-		</table>
 		</form>
 		
 	</div>

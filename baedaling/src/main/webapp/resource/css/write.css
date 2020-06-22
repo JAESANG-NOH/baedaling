@@ -40,6 +40,7 @@
 #ftitle{
    width: 800px;
    color: gray;
+   border-bottom: 1px solid #DDDFE0;
 }
 
 .f_line{
@@ -81,7 +82,7 @@
 #subcontent{
    width: 750px;
    color: gray;
-   border: 1px solid #DDDFE0; 
+   border-bottom: 1px solid #DDDFE0; 
    border-right: none;
    border-left: none;
    height: 20px;

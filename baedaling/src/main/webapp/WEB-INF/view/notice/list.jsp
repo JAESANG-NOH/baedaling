@@ -41,9 +41,9 @@ function searchList() {
 		      <th width="50" style="color: #787878;">첨부</th>
 		  </tr>
 		 
-		<c:forEach var="dto" items="${noticeList}">
+		<c:forEach var="dto" items="${checkList}" begin="0" end="4">
 		  <tr align="center" bgcolor="#ffffff" height="35" style="border-bottom: 1px solid #cccccc;"> 
-		      <td><span style="display: inline-block;padding:1px 3px; background: #ED4C00;color: #FFFFFF">공지</span></td>
+		      <td><span style="display: inline-block;padding:1px 3px; background: #ED4C00;color: #FFFFFF">긴급!</span></td>
 		      <td align="left" style="padding-left: 10px;">
 		           <a href="${articleUrl}&num=${dto.num}">${dto.subject}</a>
 		      </td>
@@ -51,8 +51,10 @@ function searchList() {
 		      <td>${dto.created}</td>
 		      <td>${dto.hitCount}</td>
 		      <td>
-             	      
-		      </td>
+		        <c:if test="${dto.fileCount > 0}">
+		      		<a href="<%=cp%>/notice/zipdownload?num=${dto.num}"><i class="fas fa-file-archive"></i></a>
+		      	</c:if>
+		       </td>
 		  </tr>
 		</c:forEach>
 		 
@@ -66,10 +68,10 @@ function searchList() {
 		      <td>${dto.created}</td>
 		      <td>${dto.hitCount}</td>
 		      <td>
-		           <c:if test="${dto.gap < 1}">
-		              <i class="fas fa-file-upload"></i>
-		           </c:if>                 
-		      </td>
+		        <c:if test="${dto.fileCount > 0}">
+		      		<a href="<%=cp%>/notice/zipdownload?num=${dto.num}"><i class="fas fa-file-archive"></i></a>
+		      	</c:if>
+		       </td>
 		  </tr>
 		  </c:forEach>
 		</table>
