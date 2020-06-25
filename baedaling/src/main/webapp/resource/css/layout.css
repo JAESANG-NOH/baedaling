@@ -547,13 +547,66 @@ text-align: center;
 }
 
 #menu a{
-       font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+   font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
    font-size:17px;
    margin-top: 3px;
 }
 
+.img_title_box{
+	padding-left: 20px;
+	padding-top: 10px;
+	font-size: 15px;
+	font-weight: 600;
+	color: #616161;
+}
+
 
 #inputline {
-   width: 260px;
-    height: 25px;
+	vertical-align: middle;
+    width: 299px;
+    height: 35px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-width: thin;
+}
+
+#inputbutton {
+	vertical-align: middle;
+    width: 70px;
+    height: 36px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 4px;
+    border-width: thin;
+    margin: -4px;
+    background: #38bcc6;
+    color: white;
+    font-weight: 600;
+    font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+}
+
+#point_result_list{
+	width: 365px;
+    max-height: 200px;
+    border: 1px solid #c8c8c8;
+    overflow: scroll;
+    position: absolute;
+    background: white;
+    transform: translateX(-50%);
+    left: 50%;
+    
+}
+
+.point_search_ul{
+	list-style: none; 
+	text-align: left;
+}
+
+.point_search_li{
+	border-bottom: 1px solid #c8c8c8; 
+	line-height: 17px;
+	padding: 4px 5px;
+}
+
+.point_search_b{
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
 }

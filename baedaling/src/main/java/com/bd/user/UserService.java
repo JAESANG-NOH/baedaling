@@ -9,6 +9,8 @@ public interface UserService {
 	public User loginUser(String userId);
 	
 	public void insertUser(User dto) throws Exception;
+	public void insertfcUser(User dto) throws Exception;
+	
 	
 	public void updateMembership(Map<String, Object> map) throws Exception;
 	public void updateLastLogin(String userId) throws Exception;
