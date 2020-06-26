@@ -117,6 +117,7 @@ public class UserController {
 	public String location(
 			@RequestParam String ln,
 			@RequestParam String lt,
+			@RequestParam String addr,
 			HttpSession session
 			) {
 		if(ln==null||lt==null) {
@@ -126,7 +127,7 @@ public class UserController {
 		Sessionlocation location = new Sessionlocation();
 		location.setLongitude(ln);
 		location.setLatitude(lt);
-		
+		location.setAddr(addr);
 		session.setMaxInactiveInterval(30*60);
 		session.setAttribute("location", location);
 		return "";

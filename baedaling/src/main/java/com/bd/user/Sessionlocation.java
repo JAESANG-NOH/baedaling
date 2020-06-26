@@ -3,7 +3,14 @@ package com.bd.user;
 public class Sessionlocation {
 	private String longitude;
 	private String latitude;
+	private String addr;
 	
+	public String getAddr() {
+		return addr;
+	}
+	public void setAddr(String addr) {
+		this.addr = addr;
+	}
 	public String getLongitude() {
 		return longitude;
 	}

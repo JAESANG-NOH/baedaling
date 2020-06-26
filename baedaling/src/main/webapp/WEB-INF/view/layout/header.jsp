@@ -93,16 +93,17 @@
 			    	var item = result[0].address;
 			    	var x = item.x;
 			    	var y = item.y;
-			    	ajaxPoint(x,y)
+			    	var addr = item.address_name;
+			    	ajaxPoint(x,y,addr)
 			    }
 			};
 			geocoder.addressSearch(point, callback);
 		});
 	});
 	
-	function ajaxPoint(x,y){
+	function ajaxPoint(x,y,addr){
 		var url = "<%=cp%>/user/location";
-		var query = "ln="+x+"&lt="+y;
+		var query = "ln="+x+"&lt="+y+"&addr="+addr;
 		var fn = function(){
 		};
 		ajaxJSON(url, "post", query, fn);

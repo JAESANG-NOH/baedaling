@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bd.common.DistanceManager;
 import com.bd.common.MyUtil;
-import com.bd.user.SessionInfo;
+import com.bd.user.Sessionlocation;
 
 @Controller("restaurants.restaurantsController")
 @RequestMapping("/restaurants/*")
@@ -28,21 +28,28 @@ public class RestaurantsController {
 	public String list(
 			@RequestParam(value="page", defaultValue="1") int current_page,
 			@RequestParam(value="scope", defaultValue="default") String scope,
-			@RequestParam(defaultValue="category") String category,
 			HttpServletRequest req,
 			HttpSession session,
 			Model model
 			) throws Exception{
+		
+		Sessionlocation location = (Sessionlocation) session.getAttribute("location");
 		String cp = req.getContextPath();
+		
+		if(location==null) {
+			return "redirect:/";
+		}
+		
+		
 		
 		int rows = 20;
 		int total_page = 0;
 		int dataCount = 0;
-		
-		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		String city = location.getAddr().trim();
+		city = city.substring(0,city.indexOf(" "));
+		System.out.println(city);
 		
 		Map<String, Object> map = new HashMap<String,Object>();
-		
 		
 		return ".restaurantsmenu.list";
 	}
