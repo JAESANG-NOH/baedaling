@@ -138,6 +138,17 @@ $(function(){
 });
 
 
+function updateBoard() {
+	
+	  var q = "num=${dto.num}&page=${page}";
+	  var url = "<%=cp%>/recommend/update?" + q;
+
+	  location.href=url;
+	
+
+	
+}
+
 </script>
 
 <script type="text/javascript">
@@ -210,7 +221,7 @@ function delete_send() {
 		</tr>
 	</table>
 	<div class="f_button" align="right">
-		<button id="f_btn2" type="button" onclick="">수정</button>
+		<button id="f_btn2" type="button" onclick="updateBoard()">수정</button>
 		<button id="f_btn" type="button" onclick="delete_send();">삭제</button> 
 		<button id="f_btn3" type="button" onclick="javascript:location.href='<%=cp%>/recommend/list?${query}';">리스트</button>
 	</div>

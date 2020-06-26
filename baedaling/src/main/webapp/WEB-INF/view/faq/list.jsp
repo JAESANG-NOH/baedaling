@@ -83,7 +83,7 @@ function deleteBoard(num) {
 			    자주 묻는 질문들 리스트 입니다.
 			</div>
 		
-			<table style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+			<table style="width: 100%; border-collapse: collapse; border-spacing: 0; table-layout: fixed;">
 			  <thead>
 			  <tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <th width="60" style="color: #787878;">번호</th>

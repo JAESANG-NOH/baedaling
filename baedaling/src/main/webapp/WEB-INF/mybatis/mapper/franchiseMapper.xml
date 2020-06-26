@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fc">
+	<select id="seq" resultType="Integer">
+		SELECT restaurants_seq.NEXTVAL FROM dual
+	</select>
+	<select id="readBoard" parameterType="Integer" resultType="com.bd.franchise.Franchise">
+		SELECT r.restaurantsNum, openingHour, endingHour, fctel, mutualName,licenseNumber,introduce,origin, minorder,name, 
+			addr1, addr2
+		FROM restaurantsInfo if
+		JOIN restaurants r ON if.restaurantsnum = r.restaurantsnum 
+		WHERE r.restaurantsNum = #{restaurantsNum}
+	</select>
+	
+	<select id="listMenu" parameterType="Integer" resultType="com.bd.franchise.FranchiseMenu">
+		SELECT menuNum, menuName, restaurantsNum, saveFilename, menucategoryNum, menuPrice
+		FROM restaurantmenu 
+		WHERE restaurantsNum = #{restaurantsNum}
+	</select>
+	
+	<select id="listCategory" resultType="com.bd.franchise.FranchiseMenu">
+		SELECT menuCategoryNum, menuCategoryName
+		FROM menuCategory
+		ORDER BY menuCategoryNum
+	</select>
+	
+	<select id="readMenu" parameterType="Integer" resultType="com.bd.menu.Menu">
+		SELECT menuNum, menuName, menuPrice, restaurantsNum, menuCategoryNum, saveFilename,originalFilename, origin, enabled, menuInfo
+		FROM restaurantmenu
+		WHERE menuNum = #{menuNum}
+	</select>
+	
+	
+
+</mapper>
