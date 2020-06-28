@@ -54,13 +54,22 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public Board readBoard(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		Board dto = null;
+		try {
+			dto = dao.selectOne("faq.readFaq",num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 	@Override
 	public void updateBoard(Board dto) throws Exception {
-		// TODO Auto-generated method stub
+		try {
+			dao.updateData("faq.updateBoard",dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

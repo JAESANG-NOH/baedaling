@@ -71,4 +71,17 @@
 	<delete id="deleteBoard">
 		DELETE FROM faq WHERE num = #{num}
 	</delete>
+	
+	<update id="updateBoard" parameterType="com.bd.faq.Board">
+		UPDATE faq SET categoryNum = #{categoryNum}, subject=#{subject}, content = #{content}
+			WHERE num = #{num}
+	</update>
+	
+	<select id="readFaq" parameterType="Integer" resultType="com.bd.faq.Board">
+		SELECT num, subject, content, f.categoryNum
+			FROM faq f
+			JOIN faqCategory c ON f.categoryNum = c.categoryNum
+		WHERE num = #{num}	
+	</select>
+	
 </mapper>
