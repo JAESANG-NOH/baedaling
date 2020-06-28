@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("foodorder.foodOrderController")
+@RequestMapping("/dashboard/*")
 public class FoodOrderController {
 	@Autowired
 	private FoodOrderService service;
 	
-	@RequestMapping(value="/dashboard/orderlist")
+	@RequestMapping(value="orderlist")
 	public String orderList(
 			@RequestParam int restaurantsNum,
 			Model model
@@ -40,7 +41,7 @@ public class FoodOrderController {
 		map.put("foodOrderState", "배달중");
 		List<FoodOrder> list3 = service.readOrder(map);
 		orderCount3 = service.orderCount(map);
-
+		
 		model.addAttribute("list1", list1);
 		model.addAttribute("list2",list2);
 		model.addAttribute("list3",list3);
@@ -49,5 +50,23 @@ public class FoodOrderController {
 		model.addAttribute("orderCount3", orderCount3);
 		return "/dashboard/orderlist";
 	}
-
+	
+	
+	@RequestMapping(value="salesList")
+	public String page(
+			@RequestParam int restaurantsNum,
+			Model model
+			) throws Exception{
+		List<FoodOrder> bestlist = service.bestMenuChart(restaurantsNum);
+		FoodOrder today = service.todaySalesRead(restaurantsNum);
+		FoodOrder month = service.monthlySalesRead(restaurantsNum);
+		FoodOrder annual = service.annualSalesRead(restaurantsNum);
+		model.addAttribute("today",today);
+		model.addAttribute("month",month);
+		model.addAttribute("annual",annual);
+		model.addAttribute("bestlist",bestlist);
+		
+		return "/dashboard/salesList";
+	}
+	
 }

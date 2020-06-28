@@ -35,4 +35,54 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		return result;
 	}
 
+	//매출
+	@Override
+	public FoodOrder todaySalesRead(int restaurantsNum) {
+		FoodOrder dto = null;
+		try {
+			dto = dao.selectOne("fo.todaySales", restaurantsNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	
+	}
+
+	@Override
+	public FoodOrder monthlySalesRead(int restaurantsNum) {
+		FoodOrder dto = null;
+		try {
+			dto = dao.selectOne("fo.monthlySales", restaurantsNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public FoodOrder annualSalesRead(int restaurantsNum) {
+		FoodOrder dto = null;
+		try {
+			dto = dao.selectOne("fo.annualSales", restaurantsNum);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public List<FoodOrder> bestMenuChart(int restaurantsNum) {
+		List<FoodOrder> list = null;
+		try {
+			list = dao.selectList("fo.monthlyBest", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	
 }

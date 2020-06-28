@@ -20,7 +20,40 @@ public class FoodOrder {
 	private int qty;
 	private String menuName;
 	
+	//매출 
+	private int todaySales;
+	private int monthSales;
+	private int annualSales;
 	
+	//베스트메뉴
+	private String bestSales;
+	
+	public String getBestSales() {
+		return bestSales;
+	}
+	public void setBestSales(String bestSales) {
+		this.bestSales = bestSales;
+	}
+	public int getTodaySales() {
+		return todaySales;
+	}
+	public void setTodaySales(int todaySales) {
+		this.todaySales = todaySales;
+	}
+	
+	public int getAnnualSales() {
+		return annualSales;
+	}
+	public void setAnnualSales(int annualSales) {
+		this.annualSales = annualSales;
+	}
+	public int getMonthSales() {
+		return monthSales;
+	}
+	public void setMonthSales(int monthSales) {
+		this.monthSales = monthSales;
+	}
+
 	public String getMenuName() {
 		return menuName;
 	}

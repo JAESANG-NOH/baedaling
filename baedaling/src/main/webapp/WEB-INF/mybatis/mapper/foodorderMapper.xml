@@ -6,7 +6,7 @@
 	SELECT foodorder_seq.NEXTVAL FROM dual
 </select>
 
-<!-- 글보기 -->
+<!-- 오더 리스트 -->
 <select id="orderComplete" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
     SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
 		   foodOrderTotalPrice, foodOrderAddr, foodOrderHowPay,
@@ -20,12 +20,49 @@
     WHERE f.restaurantsNum = #{restaurantsNum} AND INSTR(foodOrderState , #{foodOrderState}) =1
 </select>
 
-
+<!-- 주문 내역 수  -->
 <select id="orderCount" parameterType="map" resultType="Integer">
  SELECT COUNT(foodOrderState) FROM foodorder f
  JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
  WHERE INSTR(foodOrderState , #{foodOrderState}) =1 AND restaurantsNum = #{restaurantsNum}
 </select>
 
+
+<!-- 일별 매출  -->
+<select id="todaySales" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+SELECT SUM(foodOrderTotalPrice) todaySales
+FROM foodorder f
+JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum 
+WHERE TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD') AND f.restaurantsNum = #{restaurantsNum}
+</select>
+
+<!-- 월별 매출  -->
+<select id="monthlySales" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+SELECT SUM(foodOrderTotalPrice) monthSales
+FROM foodorder f
+JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum 
+WHERE TO_CHAR(foodOrderCompletionDate,'YYMM') = TO_CHAR(SYSDATE,'YYMM') AND f.restaurantsNum = #{restaurantsNum}
+</select>
+
+<!-- 연매출  -->
+<select id="annualSales" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+SELECT SUM(foodOrderTotalPrice) annualSales
+FROM foodorder f
+JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum 
+WHERE TO_CHAR(foodOrderCompletionDate,'YY') = TO_CHAR(SYSDATE,'YY') AND f.restaurantsNum = #{restaurantsNum}
+</select>
+
+
+<!-- 이달의 메뉴별 판매 수량 -->
+<select id="monthlyBest" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+SELECT rm.menuNum, rm.menuName, SUM(qty*foodOrderTotalPrice) bestSales 
+FROM foodorder f 
+JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
+JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+WHERE TO_CHAR(foodOrderCompletionDate,'YYMM') = TO_CHAR(SYSDATE,'YYMM') AND f.restaurantsNum = #{restaurantsNum}  
+GROUP BY rm.menuName, rm.menuNum
+ORDER BY bestSales desc
+</select>
 
 </mapper>

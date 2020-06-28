@@ -27,6 +27,7 @@ ul li{
 }
 	
 .sidebox{
+	position : fixed;
 	background-color:#38BCC6;
 	height: 100%;
 	width: 15%;
@@ -62,44 +63,39 @@ a:active {
 
 
 #dashboard_box{
-	position: relative;
-    top: 30px;
-    left : 300px;
-	width: 1400px;
-	height: 300px;
-	background-color: white;
-}
-
-#dashboard_box2{
-	position: relative;
-    top: 30px;
-    left : 0px;
-	width: 1400px;
-	height: 300px;
-	background-color: white;
+width: 100%;
+margin: 0px;
 }
 
 #dash_title{
 	font-size: 35px;
-	padding : 10px;
 	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+	width: 1400px;
+}
+
+#dash_title2{
+	width : 800px;
 }
 
 #dash_table{
-	width: 800px;
-	height: 250px;
-	margin: 0px auto;
+	width: 1400px;
+	height: 400px;
+	margin-top : 0px;
+	margin-left : 250px;
+	background-color: white; 
 }
 
 
 #dash_table2{
-	width: 1000px;
-	height: 200px;
-	margin: 0px auto;
+	width: 1400px;
+	height: 400px;
+	margin-top: 20px;
+	margin-left: 250px;
+	background-color: white;
 }
 
 
 #waiting_text{
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 16px;
 }
