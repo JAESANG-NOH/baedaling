@@ -93,7 +93,7 @@
 	
 	<div>
 		<ul style="text-align: center;">
-			<li style="margin-top:150px; font-weight:bold; font-size: 17spx; color: black;">오늘매출 <span>${today.todaySales} 원</span></li>
+			<li style="margin-top:150px; font-weight:bold; font-size: 17px; color: black;">오늘매출 <span>${today.todaySales} 원</span></li>
 		</ul>
 	</div>
 	
