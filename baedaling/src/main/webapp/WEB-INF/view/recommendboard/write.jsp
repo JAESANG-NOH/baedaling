@@ -8,6 +8,9 @@
 <script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <script type="text/javascript">
+
+
+
 $(function(){
 	$("form input[name=upload]").change(function(){
 		if(! $(this).val()) return;
@@ -27,9 +30,9 @@ $(function(){
 	});
 });
 
-  <c:if test="${mode=='update'}">
+  <c:if test="${state=='update'}">
   function deleteFile(fileNum) {
-		var url="<%=cp%>/notice/deleteFile";
+		var url="<%=cp%>/recommend/deleteFile";
 		$.post(url, {fileNum:fileNum}, function(data){
 			$("#f"+fileNum).remove();
 		}, "json");
@@ -67,7 +70,7 @@ function check(){
 			<tr class="f_line">
 				<td align="left" style="font-weight: bold;" class="subtitle">제목</td>
 				<td align="left" id="ftitle" style="color: gray;">
-				<input class="boxTF" style="width: 95%; color: gray;" name="subject"></td>
+				<input class="boxTF" style="width: 95%; color: gray;" name="subject" value=" ${dto.subject}"></td>
 			</tr>
 	
 			<tr class="f_line">
@@ -78,7 +81,7 @@ function check(){
 			<tr class="fcontent" align="left">
 				<td colspan="2" align="left"
 					style="padding-left: 20px; border-bottom: 1px solid #cccccc;">
-					<textarea style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;"  id="content" name="content"></textarea>
+					<textarea style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;"  id="content" name="content">${dto.content}</textarea>
 				</td>
 			</tr>
 	
@@ -87,6 +90,23 @@ function check(){
 				<td><input type="file" name="upload" size="53" style="color: #585858;"></td>
 			</tr>
 		</tbody>
+		<tfoot>
+			<c:if test="${state=='update'}">
+				   <c:forEach var="dto" items="${listFile}">
+						  <tr id="f${dto.fileNum}" height="40" style="border-bottom: 1px solid #cccccc;"> 
+						      <td width="100" bgcolor="#eeeeee" style="text-align: center;">첨부된파일</td>
+						      <td style="padding-left:10px;"> 
+								<a href="javascript:deleteFile('${dto.fileNum}');"><i class="far fa-trash-alt"></i></a> 
+								${dto.originalFilename}
+						      </td>
+						  </tr>
+				   </c:forEach>
+			</c:if>
+		
+		</tfoot>
+		
+		
+		
 	</table>
 	<table>
 		<tr>
@@ -94,6 +114,10 @@ function check(){
 				<button class="btn" type="submit">등록하기</button>&nbsp;&nbsp;
 				<button class="btn" type="reset">다시입력</button>&nbsp;&nbsp;
 				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/recommend/list'">등록취소</button>&nbsp;&nbsp;
+				<c:if test="${state=='update'}">
+			         	 <input type="hidden" name="num" value="${dto.num}">
+			        	 <input type="hidden" name="page" value="${page}">
+			        </c:if>
 			</td>
 		</tr>
 	</table>

@@ -5,7 +5,7 @@
 	<select id="loginUser" parameterType="String" resultType="com.bd.user.User">
 		SELECT userIdx, userId, userName, userPwd, enabled, created_date, separate
 		FROM user1 
-		WHERE userId = #{userId} AND enabled = 0
+		WHERE userId = #{userId} AND enabled = 1
 	</select>
 	<select id="selectidx" resultType="Integer">
 		SELECT user_seq.NEXTVAL FROM dual

@@ -60,6 +60,12 @@ function deleteBoard(num) {
 		}
 	
 	}
+function updateBoard(num){
+	 var q = "num="+ num +"&page=${page}";
+	  var url = "<%=cp%>/faq/update?" + q;
+
+	  location.href=url;
+}
 </script>
 
 <div class="body-container" style="width: 800px; margin: 0px auto; color: black;">
@@ -83,7 +89,7 @@ function deleteBoard(num) {
 			    자주 묻는 질문들 리스트 입니다.
 			</div>
 		
-			<table style="width: 100%; border-collapse: collapse; border-spacing: 0;">
+			<table style="width: 100%; border-collapse: collapse; border-spacing: 0; table-layout: fixed;">
 			  <thead>
 			  <tr align="center" bgcolor="#eeeeee" height="35" style="border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
 			      <th width="60" style="color: #787878;">번호</th>
@@ -108,14 +114,18 @@ function deleteBoard(num) {
 			  </tr>
 			  <c:if test="${sessionScope.user.userId!='admin'}">
 			  <tr class="faqContent" align="left" height="35" style="display:none; border: 1px solid #ccc;"> 
-			      <td colspan="4" style="padding:10px; ">${dto.content}</td>
+			      <td colspan="4" style="padding:10px; word-break:break-all;">${dto.content}</td>
 			  </tr>
 			  </c:if>
 			  
 			  <c:if test="${sessionScope.user.userId=='admin'}">
 			  <tr class="faqContent" align="left" height="35" style="display:none; border: 1px solid #ccc;"> 
 			      <td colspan="3" style="padding:10px; ">${dto.content}</td>
-			      <td><button type="button" onclick="deleteBoard(${dto.num})">삭제</button> </td>
+			      <td>
+			      	<button type="button" onclick="updateBoard(${dto.num})">수정</button> 
+			      	<button type="button" onclick="deleteBoard(${dto.num})">삭제</button>
+			      </td>
+			      
 			  </tr>
 			  </c:if>
 			</c:forEach>

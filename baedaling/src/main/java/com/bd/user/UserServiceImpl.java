@@ -80,12 +80,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void updateUser(User dto) throws Exception {
-		try {
-			dao.updateData("user.updateuser1", dto);
-			dao.updateData("user.updateuser2", dto);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
 	}
 
 	@Override

@@ -12,29 +12,31 @@ import com.bd.common.FileManager;
 import com.bd.common.dao.CommonDAO;
 
 @Service("recommend.recommendService")
-public class RecommendServiceImpl implements RecommendService{
+public class RecommendServiceImpl implements RecommendService {
 	@Autowired
 	private FileManager fileManager;
 	@Autowired
 	private CommonDAO dao;
+
 	@Override
 	public void writeRecommend(Recommend dto, String pathname) throws Exception {
 		try {
 			int seq = dao.selectOne("rc.seq");
 			dto.setNum(seq);
-			dao.insertData("rc.insertRecommend",dto);
-			if(! dto.getUpload().isEmpty()) {
-				for(MultipartFile mf:dto.getUpload()) {
-					String saveFilename=fileManager.doFileUpload(mf, pathname);
-					if(saveFilename==null) continue;
+			dao.insertData("rc.insertRecommend", dto);
+			if (!dto.getUpload().isEmpty()) {
+				for (MultipartFile mf : dto.getUpload()) {
+					String saveFilename = fileManager.doFileUpload(mf, pathname);
+					if (saveFilename == null)
+						continue;
 
-					String originalFilename=mf.getOriginalFilename();
-					long fileSize=mf.getSize();
-					
+					String originalFilename = mf.getOriginalFilename();
+					long fileSize = mf.getSize();
+
 					dto.setOriginalFilename(originalFilename);
 					dto.setSaveFilename(saveFilename);
 					dto.setFileSize(fileSize);
-					
+
 					insertFile(dto);
 				}
 			}
@@ -43,7 +45,7 @@ public class RecommendServiceImpl implements RecommendService{
 			throw e;
 		}
 	}
-	
+
 	@Override
 	public void insertFile(Recommend dto) throws Exception {
 		try {
@@ -53,7 +55,7 @@ public class RecommendServiceImpl implements RecommendService{
 			throw e;
 		}
 	}
-	
+
 	@Override
 	public List<Recommend> listRecommend(Map<String, Object> map) {
 		List<Recommend> list = null;
@@ -64,16 +66,18 @@ public class RecommendServiceImpl implements RecommendService{
 		}
 		return list;
 	}
+
 	@Override
 	public int dataCount(Map<String, Object> map) {
 		int result = 0;
 		try {
-			result = dao.selectOne("rc.dataCount",map);
+			result = dao.selectOne("rc.dataCount", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
+
 	@Override
 	public Recommend readPage(int num) {
 		Recommend dto = null;
@@ -87,15 +91,17 @@ public class RecommendServiceImpl implements RecommendService{
 		}
 		return dto;
 	}
+
 	@Override
 	public void updateHitCount(int num) throws Exception {
 		try {
-			dao.updateData("rc.updateHitCount",num);
+			dao.updateData("rc.updateHitCount", num);
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 	}
+
 	@Override
 	public Recommend preReadRecommend(Map<String, Object> map) {
 		Recommend dto = null;
@@ -106,6 +112,7 @@ public class RecommendServiceImpl implements RecommendService{
 		}
 		return dto;
 	}
+
 	@Override
 	public Recommend nextReadRecommend(Map<String, Object> map) {
 		Recommend dto = null;
@@ -116,30 +123,53 @@ public class RecommendServiceImpl implements RecommendService{
 		}
 		return dto;
 	}
+
 	@Override
 	public void updateRecommend(Recommend dto, String pathname) throws Exception {
-		
-		
+		try {
+			dao.updateData("rc.updateRecommend", dto);
+
+			if (!dto.getUpload().isEmpty()) {
+				for (MultipartFile mf : dto.getUpload()) {
+					String saveFilename = fileManager.doFileUpload(mf, pathname);
+					if (saveFilename == null)
+						continue;
+
+					String originalFilename = mf.getOriginalFilename();
+					long fileSize = mf.getSize();
+
+					dto.setOriginalFilename(originalFilename);
+					dto.setSaveFilename(saveFilename);
+					dto.setFileSize(fileSize);
+
+					insertFile(dto);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
+
 	@Override
 	public void deleteRecommend(int num, String pathname) throws Exception {
 		try {
-			List<Recommend> listFile=listFile(num);
-			if(listFile!=null) {
-				for(Recommend dto:listFile) {
+			List<Recommend> listFile = listFile(num);
+			if (listFile != null) {
+				for (Recommend dto : listFile) {
 					fileManager.doFileDelete(dto.getSaveFilename(), pathname);
 				}
 			}
-			Map<String, Object> map=new HashMap<String, Object>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("field", "num");
 			map.put("num", num);
 			deleteFile(map);
-			
+
 			dao.deleteData("rc.deleteRecommend", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
-		}	
+		}
 	}
 
 	@Override
@@ -157,7 +187,7 @@ public class RecommendServiceImpl implements RecommendService{
 	public Recommend readFile(int fileNum) {
 		Recommend dto = null;
 		try {
-			dto = dao.selectOne("rc.readFile",fileNum);
+			dto = dao.selectOne("rc.readFile", fileNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -172,7 +202,7 @@ public class RecommendServiceImpl implements RecommendService{
 			e.printStackTrace();
 			throw e;
 		}
-		
+
 	}
 
 	@Override
@@ -187,9 +217,9 @@ public class RecommendServiceImpl implements RecommendService{
 
 	@Override
 	public int recommendLikeCount(int num) {
-		int result=0;
+		int result = 0;
 		try {
-			result=dao.selectOne("rc.rocommendLikeCount", num);
+			result = dao.selectOne("rc.rocommendLikeCount", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -210,7 +240,7 @@ public class RecommendServiceImpl implements RecommendService{
 	public List<RecommendReply> listReply(Map<String, Object> map) {
 		List<RecommendReply> list = null;
 		try {
-			list = dao.selectList("rc.listReply",map);
+			list = dao.selectList("rc.listReply", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -226,16 +256,16 @@ public class RecommendServiceImpl implements RecommendService{
 			throw e;
 		}
 	}
-	
+
 	@Override
 	public int replyCount(Map<String, Object> map) {
-		int result=0;
+		int result = 0;
 		try {
-			result=dao.selectOne("rc.replyCount", map);
+			result = dao.selectOne("rc.replyCount", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	
+
 }

@@ -118,7 +118,7 @@ function sendOk() {
 			        <select class="selectField" name="categoryNum" style="width: 150px;">
 			        	<option value="">:: 분류 선택 ::</option>
 			        	<c:forEach var="vo" items="${groupList}">
-			        		<option value="${vo.categoryNum}" ${dto.CategoryNum==vo.categoryNum?"selected='selected'":""}>${vo.category}</option>
+			        		<option value="${vo.categoryNum}" ${dto.categoryNum==vo.categoryNum?"selected='selected'":""}>${vo.category}</option>
 			        	</c:forEach>
 			        </select>
 
