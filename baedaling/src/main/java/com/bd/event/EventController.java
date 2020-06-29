@@ -155,7 +155,6 @@ public class EventController {
 
 		Event preReadDto = service.preReadEvent(map);
 		Event nextReadDto = service.nextReadEvent(map);
-		
 		model.addAttribute("dto", dto);
 		model.addAttribute("preReadDto", preReadDto);
 		model.addAttribute("nextReadDto", nextReadDto);
@@ -173,16 +172,12 @@ public class EventController {
 			HttpSession session,
 			Model model) throws Exception {
 		
-		SessionInfo info=(SessionInfo)session.getAttribute("user");
+		// SessionInfo info=(SessionInfo)session.getAttribute("user");
 		
 		Event dto = service.readEvent(num);
+		
 		if (dto == null)
 			return "redirect:/event/list?page="+page;
-
-		// 글을 등록한 사람만 수정 가능
-		if(! dto.getUserId().equals(info.getUserId())) {
-			return "redirect:/event/list?page="+page;
-		}
 		
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);
@@ -196,9 +191,10 @@ public class EventController {
 			Event dto,
 			@RequestParam String page,
 			HttpSession session) throws Exception {
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"event";
 		
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+"resource"+File.separator+"event";
+		System.out.println(dto.getNum()+"ppppppppppppppppppppppppppppppppppp");
 		try {
 			service.updateEvent(dto, pathname);
 		} catch (Exception e) {

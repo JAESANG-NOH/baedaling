@@ -3,9 +3,9 @@
 <mapper namespace="event">
 	<insert id="insertEvent" parameterType="com.bd.event.Event">
 		INSERT INTO event(num, userId, userName, subject, content, hitCount, created,
-			userIdx, eventState, start_date, end_date, imageFilename)
+			userIdx, start_date, end_date, imageFilename)
 			VALUES (event_seq.NEXTVAL, #{userId}, #{userName}, #{subject}, #{content}, 0, SYSDATE,
-			#{userIdx}, #{eventState}, #{start_date}, #{end_date}, #{imageFilename})
+			#{userIdx}, #{start_date}, #{end_date}, #{imageFilename})
 	</insert>
 
 	<sql id="where-list">
@@ -38,7 +38,11 @@
 	
 		<select id="listEvent" parameterType="map" resultType="com.bd.event.Event">
 		SELECT num, e.userId, e.userName, TO_CHAR(start_date, 'YYYY-MM-DD') start_date,
-		TO_CHAR(end_date, 'YYYY-MM-DD') end_date, eventState, imageFilename
+		TO_CHAR(end_date, 'YYYY-MM-DD') end_date, imageFilename, hitCount,
+		CASE
+   		    WHEN end_date &lt; SYSDATE THEN '마    감'
+    	    ELSE '진  행  중'
+		END AS eventState
 		FROM event e
 		JOIN user1 u ON e.userId = u.userId
 		<where>
@@ -51,7 +55,7 @@
 	</select>
 	
 	<select id="readEvent" parameterType="Integer" resultType="com.bd.event.Event">
-		SELECT num, e.userId, e.userName, subject, content, created
+		SELECT num, e.userId, e.userName, subject, content, created, hitCount, imageFilename
 		FROM event e
 		JOIN user1 u ON e.userId = u.userId
 		WHERE num=#{num}

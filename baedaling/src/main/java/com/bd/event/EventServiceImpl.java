@@ -108,6 +108,7 @@ public class EventServiceImpl implements EventService {
 				
 				dto.setImageFilename(bannerFilename);
 			}
+		
 			dao.updateData("event.updateEvent", dto);
 			
 		} catch (Exception e) {
