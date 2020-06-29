@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
@@ -364,5 +365,42 @@ public class RecommendController {
 		return map;
 	}
 	
+	@RequestMapping(value="update", method = RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int num,
+			@RequestParam String page,
+			Model model
+			) throws Exception{
+		Recommend dto = service.readPage(num);
+		if(dto == null) {
+			return "redirect:/recomend/list";
+		}
+		List<Recommend> listFile = service.listFile(num);
+		
+		model.addAttribute("state","update");
+		model.addAttribute("page",page);
+		model.addAttribute("dto",dto);
+		model.addAttribute("listFile",listFile);
+		
+		
+		
+		return ".recommendboard.write";
+	}
 	
+	@RequestMapping(value="update",method=RequestMethod.POST)
+	public String updateSubmit(Recommend dto,
+			@RequestParam String page,
+			HttpSession session) {
+		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + "resource" + File.separator + "recommendboard";
+
+			service.updateRecommend(dto, pathname);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "redirect:/recommend/list?page=" + page;
+	}
 }
