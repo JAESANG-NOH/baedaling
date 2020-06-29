@@ -29,13 +29,45 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void insertUser(User dto) throws Exception {
 		try {
-			dao.insertData("user.insertUser", dto);
+			if(dto.getYear()!=null&&dto.getMonth()!=null&&dto.getDate()!=null) {
+				dto.setBirth(dto.getYear()+""+dto.getMonth()+""+dto.getDate());
+			}
+			int idx = dao.selectOne("user.selectidx");
+			dto.setUserIdx(idx);
+			dto.setSeparate(0);
+			dao.insertData("user.insertuser0", idx);
+			dao.insertData("user.insertuser1", dto);
+			dao.insertData("user.insertuser2", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 	}
 
+	@Override
+	public void insertfcUser(User dto) throws Exception {
+		try {
+			if(dto.getYear()!=null&&dto.getMonth()!=null&&dto.getDate()!=null) {
+				dto.setBirth(dto.getYear()+""+dto.getMonth()+""+dto.getDate());
+			}
+			int idx = dao.selectOne("user.selectidx");
+			int fcnum = dao.selectOne("user.selectfcnum");
+			dto.setUserIdx(idx);
+			dto.setRestaurantsNum(fcnum);
+			dto.setSeparate(1);
+			dao.insertData("user.insertuser0", idx);
+			dao.insertData("user.insertuser1", dto);
+			dao.insertData("user.insertuser2", dto);
+			
+			dao.insertData("user.insertRestaurants", dto);
+			dao.insertData("user.insertRestaurantsInfo", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	
 	@Override
 	public void updateMembership(Map<String, Object> map) throws Exception {
 		
@@ -92,5 +124,6 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

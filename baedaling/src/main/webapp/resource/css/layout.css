@@ -524,13 +524,16 @@ margin-bottom: 5px;
 text-align: center;
 }
 
+
 .menu-Box {
-   width: 210px; height: 210px;
-   float: center;
+   width: 240px; 
+   height: 200px;
    margin: 10px auto;
-   padding:10px 10px 10px 10px;
-   display: block;   
+   padding: 10px 10px 17px 20px;
+   display: block;
+   border: 1px solid #E3E1E1;   
 }
+
 
 .menuContainer {
    
@@ -547,11 +550,18 @@ text-align: center;
 }
 
 #menu a{
-       font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+   font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
    font-size:17px;
    margin-top: 3px;
 }
 
+#menu_text{
+	text-align: center;
+	font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+	color: gray;
+	font-size: 15px;
+	margin-left: 100px;
+}
 
 #inputline {
    width: 260px;

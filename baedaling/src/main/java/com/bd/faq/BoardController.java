@@ -154,4 +154,44 @@ public class BoardController {
 		
 		return "redirect:/faq/list?"+query;
 	}
+	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int num,
+			@RequestParam String page,
+			Model model
+			) {
+		
+		Board dto = service.readBoard(num);
+		if(dto == null) {
+			return "redirect:/list?page="+page;
+		}
+		
+		List<Board> groupList = service.listCategory();
+		
+		model.addAttribute("mode","update");
+		model.addAttribute("groupList",groupList);
+		model.addAttribute("page",page);
+		model.addAttribute("dto",dto);
+		
+		return ".faq.created";
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updateSubmit(
+			Board dto,
+			@RequestParam String page
+			) throws Exception {
+		try {
+			service.updateBoard(dto);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "redirect:/faq/list?page="+page;
+	}
+	
+	@RequestMapping(value="imsi")
+	public String imsi() {
+		return ".faq.menuList";
+	}
 }

@@ -13,8 +13,7 @@
     height: 15px;
     font-weight: 700;
     font-size: 13px;
-    color: #4c4c4c;;
-	
+    color: #4c4c4c;	
 }
 
 .inputinfo_tr{
@@ -70,6 +69,7 @@
     color: white;
     border-radius: 2px;
     margin-bottom: 50px;
+    margin-top: 30px;
 }
 #head_line{
 	text-align: center;
@@ -79,4 +79,15 @@
     margin-top: 48px;
     margin-bottom: 35px;
     color: #28a5a0e0
+}
+
+#find_lck_btn{
+	margin: 0px;
+    padding: 0px;
+    width: 200px;
+    height: 30px;
+    background: #30b9b4;
+    color: white;
+    border: 1px solid #c8c8c8;
+    font-weight: 600;
 }
