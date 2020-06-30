@@ -158,6 +158,39 @@ $(function(){
 </script>
 </head>
 <body>
+<div class="sideOrderBox" >
+<aside class="sideOrderBox2">
+   <table style="width: 330px; border:1px solid #DCDBDB; height: 200px; background-color: white;">
+      <tr id="orderBoxTitile">
+         <td colspan="3" style="color: white; font-size: 15.4px;">&nbsp; 주문표<a href=""><span style="float: right; padding-right: 20px; color: white;"><i class="fas fa-trash-alt"></i></span></a> </td>
+      </tr>
+   
+      <tr height="40px;">
+         <td colspan="3" style="padding: 15px; font-size: 14px;">양념치킨</td>
+      </tr>
+      
+      <tr height="40px;">
+         <td style="padding: 15px; font-size: 14px;"><button style="width: 23px;">X</button></td>
+         <td>15,000 원</td>
+         <td><button style="width: 23px; background-color:white; border:0.5px solid #38BCC6;"><span style="color: #38BCC6;">-</span></button> 1 <button style="background-color:white; width: 23px; border: 0.5px solid #38BCC6;"><span style="color: #38BCC6;">+</span></button> </td>
+      </tr>
+      
+      <tr height="35px;">
+         <td colspan="3" style="border-top:1.5px solid #DCDBDB; text-align: right;">배달요금 2,000원 별도</td>
+      </tr>
+      
+      <tr height="40px;">
+         <td colspan="3" style="background-color:#fff8eb; color:red; text-align: right; font-size: 15px; border-top:1px solid #DCDBDB; ">합계 : 30,000 원</td>
+      </tr>
+      
+      <tr height="46px;" style="padding-top: 10px;">
+         <td colspan="3" style="background-color:#38BCC6; text-align: center; color:white; font-size: 17px; border-top:1px solid #DCDBDB; ">주문하기</td>
+      </tr>
+   </table>
+
+
+</aside>
+</div>
 
 
 
