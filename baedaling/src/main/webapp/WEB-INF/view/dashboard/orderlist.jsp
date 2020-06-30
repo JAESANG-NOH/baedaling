@@ -13,21 +13,70 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://unpkg.com/@kfonts/bm-hanna-pro/index.css" />
 <link rel="stylesheet" href="<%=cp%>/resource/css/dashboard.css" type="text/css">
+
+<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=cp%>/resource/js/util-jquery.js"></script>
+
 <script type="text/javascript">
-/* $("#orderManage").on("click", function (e) {
-	e.preventDefault();
-	var thisTarget = $(this).attr("href");
-	$(window).scrollTop($(thisTarget).offset().top);
+
+function ajaxJSON(url, type, query, fn) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data) {
+			fn(data);
+		}
+		,beforeSend:function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		login();
+	    		return false;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+$(function(){
+	$("body").on("click", ".btnOrderOk", function(){
+		if(! confirm("주문을 받을까요? "))
+		    return;
+		var foodorderNum=$(this).attr("data-foodorderNum");
+		var url = "<%=cp%>/dashboard/updateOrder";
+		var query = "foodorderNum="+foodorderNum;
+		var fn = function(data) {
+			
+		}
+
+		//alert(foodorderNum);
+		ajaxJSON(url, "post", query, fn);
+	});
 });
 
 
 
-$("#delivery_ok").on("click", function (e) {
-	e.preventDefault();
-	var thisTarget = $(this).attr("href");
-	$(window).scrollTop($(thisTarget).offset().top);
+$(function(){
+	$("body").on("click", ".btnOrderCancel", function(){
+		var foodorderNum=$(this).attr("data-foodorderNum");
+		if(! confirm("주문을 취소할까요?"))
+		    return;
+		var url = "<%=cp%>/dashboard/updateOrder";
+		var query = "foodorderNum="+foodorderNum;
+		var fn = function(data) {
+			
+		}
+
+		alert(foodorderNum);
+		
+	});
 });
- */
+
+
+
 
 </script>
 </head>
@@ -131,7 +180,8 @@ $("#delivery_ok").on("click", function (e) {
 		<td width="300px;">${dto.foodOrderAddr}</td>
 		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
 		<td width="150px;">${dto.foodOrderDate}</td>
-		<td width="100px;"><button>확인</button><button>취소</button></td>
+		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" class="btnOrderOk">확인</button>
+							<button type="button" data-foodorderNum="${dto.foodorderNum}" class="btnOrderCancel">취소</button></td>
 	</tr>
 </c:forEach>
 </table>

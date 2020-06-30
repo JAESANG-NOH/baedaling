@@ -132,5 +132,5 @@ public class UserController {
 		session.setAttribute("location", location);
 		return "";
 	}
-	
+
 }

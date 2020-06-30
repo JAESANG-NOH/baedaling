@@ -15,6 +15,7 @@
 			이벤트&nbsp;<span><img width="70px" height="70px"
 			src="<%=cp%>/resource/img/gangg.png"></span></h3>
 		</div>
+		
 		<form name="eventForm" action="<%=cp%>/event/list" method="post">
 		<table style="margin: 0px auto; width: 100%; border-spacing: 0px;" >
 				<tr height="35px;">
@@ -37,26 +38,17 @@
 			</tr>
 			
 			<c:forEach var="dto" items="${list}">
-			<tr align="center" height="180" style="border-bottom: 1px solid #cccccc;">
+			<tr align="center" height="140" style="border-bottom: 1px solid #41CDCD;">
 				<td>${dto.listNum}</td>
 				<td>
-					<a href="${articleUrl}&num=${dto.num}"><img src="<%=cp%>/resource/event/${dto.imageFilename}" width="350" height="150"></a>
+					<a href="${articleUrl}&num=${dto.num}"><img src="<%=cp%>/resource/event/${dto.imageFilename}" width="340" height="92"></a>
 				</td>
 				<td>${dto.start_date}<br>&nbsp;~&nbsp;${dto.end_date}</td>
-				<td>진행중</td>
+				<td>${dto.eventState}</td>
 				<td>${dto.hitCount}</td>
 			</tr>
 			</c:forEach>
 			
-		</table>
-		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
-			<tr height="100">
-				<td align="right">
-					<button type="button" onclick="javascript:location.href='<%=cp%>/event/list'">새로고침</button>
-					<button type="button" onclick="javascript:location.href='<%=cp%>/event/created'">등록하기</button>
-				</td>		
-				
-			</tr>		
 		</table>
 		
 		<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
@@ -67,7 +59,15 @@
 		   </tr>
 		</table>
 		
-		</form>
+		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
+			<tr height="100">
+				<td align="right">
+					<button type="button" onclick="javascript:location.href='<%=cp%>/event/list'">새로고침</button>
+					<button type="button" onclick="javascript:location.href='<%=cp%>/event/created'">등록하기</button>
+				</td>				
+			</tr>		
+		</table>
 		
+		</form>
 	</div>
 </div>

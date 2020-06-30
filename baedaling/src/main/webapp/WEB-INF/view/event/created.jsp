@@ -9,37 +9,7 @@
 <script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
 
-<%-- $(function(){
-	$("form input[name=upload]").change(function(){
-		if(! $(this).val()) return;
-		
-		var b=false;
-		$("form input[name=upload]").each(function(){
-			if(! $(this).val()) {
-				b=true;
-				return;
-			}
-		});
-		if(b) return false;
-			
-		var $tr = $(this).closest("tr").clone(true); // 이벤트도 복제
-		$tr.find("input").val("");
-		$("#tb").append($tr);
-	});
-});
-
-  <c:if test="${mode=='update'}">
-  function deleteFile(fileNum) {
-		var url="<%=cp%>/notice/deleteFile";
-		$.post(url, {fileNum:fileNum}, function(data){
-			$("#f"+fileNum).remove();
-		}, "json");
-  }
-</c:if>
- --%>
-
-
-function sendOk() {
+function check() {
     var f = document.eventForm;
 
 	var str = f.subject.value;
@@ -48,7 +18,16 @@ function sendOk() {
         f.subject.focus();
         return false;
     }
-
+    
+    var mode="${mode}";
+    if(mode=="created"||mode=="update" && f.upload.value!="") {
+		if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.upload.value)) {
+			alert('이미지 파일만 가능합니다.(bmp 파일은 불가) !!!');
+			f.upload.focus();
+			return;
+		}
+	}
+    
 	f.action="<%=cp%>/event/${mode}";
 	return true;
 }
@@ -78,8 +57,8 @@ function sendOk() {
 				<tr class="f_line">
 					<td align="left" style="color: gray;" class="subtitle">이벤트 기간</td>
 					<td align="left" id="subcontent" >
-						<input type="date" name="start_date" value="2020-05-22" maxlength="10">~
-						<input type="date" name="end_date" value="2020-05-23" maxlength="10">
+						<input type="date" name="start_date" value="${dto.start_date}" maxlength="10">~
+						<input type="date" name="end_date" value="${dto.end_date}" maxlength="10">
 					</td>
 					
 				</tr>
@@ -103,13 +82,14 @@ function sendOk() {
 	<table>
 		<tr>
 			<td height="100px">
-				<button class="btn" type="submit" onclick="sendOk();">${mode=='update'?'수정완료':'등록하기'}</button>&nbsp;&nbsp;
-				<button class="btn" type="reset">다시입력</button>&nbsp;&nbsp;
-				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/list';">${mode=='update'?'수정취소':'등록취소'}</button>&nbsp;&nbsp;
+				<button class="btn" type="submit">${mode=='update'?'수정완료':'등록하기'}</button>
+				<button class="btn" type="reset">다시입력</button>
+				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/list';">${mode=='update'?'수정취소':'등록취소'}</button>
 				  <c:if test="${mode=='update'}">
 			         	 <input type="hidden" name="num" value="${dto.num}">
 			        	 <input type="hidden" name="page" value="${page}">
-			        </c:if>
+			        	 <input type="hidden" name="imageFilename" value="${dto.imageFilename}">
+			      </c:if>
 			</td>
 		</tr>
 	</table>

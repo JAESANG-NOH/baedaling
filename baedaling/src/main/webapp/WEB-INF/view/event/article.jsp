@@ -5,6 +5,16 @@
 <%
 	String cp = request.getContextPath();
 %>
+<script type="text/javascript">
+function delete_send() {
+	var q = "num=${dto.num}&${query}";
+	var url = "<%=cp%>/event/delete?" + q;
+
+	if(confirm("위 자료를 삭제 하시 겠습니까 ? ")) {
+			location.href=url;
+	}
+}
+</script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/write.css" type="text/css">
 
 <div align="center" class="box">
@@ -27,15 +37,15 @@
 
 		<tr class="f_line">
 			<td class="subtitle">작성일</td>
-			<td id="subcontent2">${dto.created}<span style="display: inline-block; margin-left: 30px; font-weight: bold;">조회수</span><span
-				style="margin-left: 20px;">${dto.hitCount}</span>
+			<td id="subcontent2">${dto.created}<span style="display: inline-block; margin-left: 30px; font-weight: bold;">조회수</span>
+			<span style="margin-left: 20px;">${dto.hitCount}</span>
 			</td>
 		</tr>
 
 		<tr class="fcontent" align="left">
 			<td colspan="2" align="left"
 				style="padding-left: 20px; border-bottom: 1px solid #cccccc;">
-				<textarea style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.content}</textarea>
+				<div style="margin: 0px; width: 940px; min-height:300px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.content}</div>
 			</td>
 		</tr>
 	</table>
@@ -43,8 +53,8 @@
 	<table>
 		<tr height="45">
 			<td>
-				<button class="btn" type="submit" onclick="javascript:location.href='<%=cp%>/event/created';">수정</button>&nbsp;&nbsp;
-				<button class="btn" type="submit" onclick="javascript:location.href='<%=cp%>/event/list';">삭제</button>&nbsp;&nbsp;
+				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/update?num=${dto.num}&page=${page}';">수정</button>
+				<button class="btn" type="submit" onclick="delete_send();">삭제</button>
 				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/list';">리스트</button>
 			</td>
 		</tr>

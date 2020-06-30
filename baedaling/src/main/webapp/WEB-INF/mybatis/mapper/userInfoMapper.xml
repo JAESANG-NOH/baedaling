@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userinfo">
+
+<select id="readMypage" parameterType="INTEGER" resultType="com.bd.mypage.Mypage">
+	SELECT u1.userIdx, userId, userName, birth, tel, email, addr1, addr2, TO_CHAR(created_date, 'YYYY-MM-DD') created_date
+	FROM user1 u1
+	LEFT OUTER JOIN user2 u2 ON u1.userIdx = u2.userIdx
+	WHERE u1.userIdx = #{userIdx}
+</select>
+
+
+</mapper>

@@ -12,7 +12,7 @@ public class Event {
 	private String content;
 	private int hitCount;
 	private String created;
-	private int eventState;
+	private String eventState;
 	private String start_date;
 	private String end_date;
 	private String imageFilename;
@@ -92,11 +92,11 @@ public class Event {
 		this.created = created;
 	}
 
-	public int getEventState() {
+	public String getEventState() {
 		return eventState;
 	}
 
-	public void setEventState(int eventState) {
+	public void setEventState(String eventState) {
 		this.eventState = eventState;
 	}
 
