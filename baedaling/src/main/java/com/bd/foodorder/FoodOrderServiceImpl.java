@@ -23,6 +23,33 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 		return list;
 	}
+	
+	//주문 상태 변경 
+	@Override
+	public void updateOrderState(Map<String, Object> map) throws Exception {
+		try {
+			dao.updateData("fo.updateState", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+	
+	
+	@Override
+	public void deleteOrder(int foodorderNum) throws Exception {
+		try {
+			dao.deleteData("fo.deletedetailOrder", foodorderNum);
+			dao.deleteData("fo.deleteOrder", foodorderNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	
 
 	@Override
 	public int orderCount(Map<String, Object> map) {
@@ -83,6 +110,33 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 		return list;
 	}
+
+	@Override
+	public Map<String,Object> montlyChart(int restaurantsNum) {
+		Map<String, Object> map = null;
+		try {
+			map= dao.selectOne("fo.monthlySalesChart", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
+
+	@Override
+	public List<FoodOrder> allList(Map<String, Object> map) {
+		List<FoodOrder> list = null;
+		try {
+			list = dao.selectList("fo.allOrderList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+
+
+	}
+
+
+	
 
 	
 }

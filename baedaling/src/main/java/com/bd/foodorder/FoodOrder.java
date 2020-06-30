@@ -1,5 +1,11 @@
 package com.bd.foodorder;
 
+import java.util.Map;
+
+/**
+ * @author sist
+ *
+ */
 public class FoodOrder {
 	private int foodorderNum;
 	private int foodOrderTotalPrice;
@@ -13,6 +19,22 @@ public class FoodOrder {
 	private String foodOrderPayCompletionDate; //결제 완료시간 
 	private String memo;
 	private int idx;
+	private int restaurantsNum;
+	private Map<String, Object> mSales;
+	
+	
+	public Map<String, Object> getmSales() {
+		return mSales;
+	}
+	public void setmSales(Map<String, Object> mSales) {
+		this.mSales = mSales;
+	}
+	public int getRestaurantsNum() {
+		return restaurantsNum;
+	}
+	public void setRestaurantsNum(int restaurantsNum) {
+		this.restaurantsNum = restaurantsNum;
+	}
 	
 	//orderdetail
 	private int menuNum;

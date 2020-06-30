@@ -43,13 +43,65 @@ function ajaxJSON(url, type, query, fn) {
 
 $(function(){
 	$("body").on("click", ".btnOrderOk", function(){
-		if(! confirm("주문을 받을까요? "))
+		if(! confirm("주문을 받을까요?"))
 		    return;
 		var foodorderNum=$(this).attr("data-foodorderNum");
-		var url = "<%=cp%>/dashboard/updateOrder";
-		var query = "foodorderNum="+foodorderNum;
+		var orderState = $(this).attr("data-orderState");
+		var url = "<%=cp%>/dashboard/updateState";
+		var query = "foodorderNum="+foodorderNum+"&orderState=" + orderState;
 		var fn = function(data) {
+			var state = data.state;
+			if(state == false){
+				alert("다시 시도해주세요");
+			}
 			
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum=21";
+		}
+
+		//alert(foodorderNum);
+		ajaxJSON(url, "post", query, fn);
+	});
+});
+
+
+$(function(){
+	$("body").on("click", ".btnResOk", function(){
+		if(! confirm("라이더를 요청 할까요? "))
+		    return;
+		var foodorderNum=$(this).attr("data-foodorderNum");
+		var orderState = $(this).attr("data-orderState");
+		var url = "<%=cp%>/dashboard/updateState";
+		var query = "foodorderNum="+foodorderNum+"&orderState=" + orderState;
+		var fn = function(data) {
+			var state = data.state;
+			if(state == false){
+				alert("다시 시도해주세요");
+			}
+			
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum=21";
+		}
+
+		//alert(foodorderNum);
+		ajaxJSON(url, "post", query, fn);
+	});
+});
+
+
+$(function(){
+	$("body").on("click", ".btnDeliOk", function(){
+		if(! confirm("배달이 완료되었습니까?"))
+		    return;
+		var foodorderNum=$(this).attr("data-foodorderNum");
+		var orderState = $(this).attr("data-orderState");
+		var url = "<%=cp%>/dashboard/updateState";
+		var query = "foodorderNum="+foodorderNum+"&orderState=" + orderState;
+		var fn = function(data) {
+			var state = data.state;
+			if(state == false){
+				alert("다시 시도해주세요");
+			}
+			
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum=21";
 		}
 
 		//alert(foodorderNum);
@@ -59,19 +111,24 @@ $(function(){
 
 
 
+
+
+
 $(function(){
-	$("body").on("click", ".btnOrderCancel", function(){
+	$("body").on("click", ".btnOrderDelete", function(){
 		var foodorderNum=$(this).attr("data-foodorderNum");
-		if(! confirm("주문을 취소할까요?"))
+		if(! confirm("완료된 주문을 삭제할까요?"))
 		    return;
-		var url = "<%=cp%>/dashboard/updateOrder";
+		var url = "<%=cp%>/dashboard/delete";
 		var query = "foodorderNum="+foodorderNum;
 		var fn = function(data) {
-			
+			var state = data.state;
+			if(state == false){
+				alert("다시 시도해주세요");
 		}
-
-		alert(foodorderNum);
-		
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum=21";
+		}
+		ajaxJSON(url, "post", query, fn);
 	});
 });
 
@@ -154,7 +211,7 @@ $(function(){
 		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount1}</td>
 		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount2}</td>
 		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount3}</td>
-		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;</td>
+		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount4}</td>
 	</tr>
 
 </table>
@@ -180,8 +237,10 @@ $(function(){
 		<td width="300px;">${dto.foodOrderAddr}</td>
 		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
 		<td width="150px;">${dto.foodOrderDate}</td>
-		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" class="btnOrderOk">확인</button>
-							<button type="button" data-foodorderNum="${dto.foodorderNum}" class="btnOrderCancel">취소</button></td>
+		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="접수완료" class="btnOrderOk">확인</button>
+							<button type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="주문취소" class="btnOrderCancel">취소</button>
+							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
+							</td>
 	</tr>
 </c:forEach>
 </table>
@@ -207,7 +266,10 @@ $(function(){
 		<td width="300px;">${dto.foodOrderAddr}</td>
 		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
 		<td width="150px;">${dto.foodOrderDate}</td>
-		<td width="100px;"><button>확인</button><button>취소</button></td>
+		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달중" class="btnResOk">라이더요청</button>
+							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
+							</td>
+		
 	</tr>
 </c:forEach>
 </table>
@@ -233,6 +295,9 @@ $(function(){
 		<td width="300px;">${dto.foodOrderAddr}</td>
 		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
 		<td width="200px;">${dto.foodOrderDate}</td>
+		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달완료" class="btnDeliOk">완료</button>
+							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
+							</td>
 	</tr>
 </c:forEach>
 </table>
@@ -248,17 +313,21 @@ $(function(){
 	</tr>
 
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text"></td>
-		<td width="300px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text"></td>
-		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text"></td>
-		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text"></td>
+		<td width="100px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">No</td>
+		<td width="300px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
+		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문내역</td>
+		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문시간</td>
 	</tr>
-<c:forEach var="dto" items="">	
+	
+<c:forEach var="dto" items="${list4}">	
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;"></td>
-		<td width="300px;"></td>
-		<td width="200px;"></td>
-		<td width="200px;"></td>
+		<td width="100px;">${dto.foodorderNum}</td>
+		<td width="300px;">${dto.foodOrderAddr}</td>
+		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
+		<td width="200px;">${dto.foodOrderDate}</td>
+		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" class="btnOrderDelete">삭제</button>
+							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum}">
+							</td>
 	</tr>
 </c:forEach>
 </table>

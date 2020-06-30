@@ -15,35 +15,38 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/dashboard.css" type="text/css">
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.min.js"></script>
 
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 
 <script type="text/javascript">
-<%-- $(function(data) {
-	var url = "<%=cp%>/hchart/line";
-	
-	$.getJSON(url, function(qty){
+$(function() {
+	var url ="<%=cp%>/dashboard/pie3d?restaurantsNum=${restaurantsNum}";
+	$.getJSON(url, function(data) {
 		//console.log(data);
-		Highcharts.chart('lineContainer', {
-
-		    title: {
-		        text: '이 달의 메뉴'
-		    },
-
-		    xAxis: {
-				categories:[qty.menuName]
-		    },
-
-		    yAxis: {
-		       	title:{
-					text:'판매량'		       		
+		
+		Highcharts.chart('pie3dContainer', {
+		    chart: {
+		        type: 'pie',
+		        options3d: {
+		            enabled: true,
+		            alpha: 45
 		        }
 		    },
-
-		    list: data.series
+		    title: {
+		        text: ''
+		    },
+		    plotOptions: {
+		        pie: {
+		            innerSize: 100,
+		            depth: 45
+		        }
+		    
+		    },
+		    series: data
 		});
 	});
-}); --%>
+});
 
 </script>
 </head>
@@ -110,15 +113,18 @@
 		</td>
 	</tr>
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" id="waiting_text"></td>
-		<td width="200px;" id="waiting_text"></td>
-		<td width="200px;" id="waiting_text"></td>
+		<td width="100px;" id="waiting_text">no</td>
+		<td width="200px;" id="waiting_text">메뉴</td>
+		<td width="200px;" id="waiting_text">가격</td>
 	</tr>
+	
+	<c:forEach var="vo" items="${list}">	
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" ></td>
-		<td width="200px;" ></td>
-		<td width="200px;" ></td>
+		<td width="100px;" id="waiting_text">${vo.foodorderNum}</td>
+		<td width="200px;" id="waiting_text">${vo.menuNum}-${vo.menuName}</td>
+		<td width="200px;" id="waiting_text">${vo.foodOrderTotalPrice}</td>
 	</tr>
+	</c:forEach>
 </table>
 </div>
 
@@ -131,17 +137,15 @@
 		</td>
 	</tr>
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" id="waiting_text">No</td>
 		<td width="200px;" id="waiting_text">이달의 베스트메뉴</td>
-		<td width="200px;" id="waiting_text">판매금액</td>
 	</tr>
-<c:forEach var="vo" items="${bestlist}">	
+	
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" >${vo.menuNum}</td>
-		<td width="200px;" >${vo.menuName}</td>
-		<td width="200px;" >${vo.bestSales}</td>
+		<td width="100%">
+			<div id="pie3dContainer"></div>
+		</td>
 	</tr>
-</c:forEach>
+
 </table>
 </div>
 
@@ -153,18 +157,12 @@
 		</td>
 	</tr>
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" id="waiting_text"></td>
+		<td width="100px;" id="waiting_text" style="color: red;"></td>
 		<td width="200px;" id="waiting_text"></td>
 		<td width="200px;" id="waiting_text"></td>
-	</tr>
-	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" ></td>
-		<td width="200px;" ></td>
-		<td width="200px;" ></td>
 	</tr>
 </table>
 </div>
-
 
 </body>
 </html>
