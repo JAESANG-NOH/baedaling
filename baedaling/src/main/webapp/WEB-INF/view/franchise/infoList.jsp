@@ -12,8 +12,7 @@
 </ul>
 
 <ul style="padding: 10px;">
-	<li>Bhc 청라점은 8월1일부로 기존에 제공되던 245캔 콜라를 제공하지 않습니다.</li>
-	<li>음료가 필요하신분은 추가주문 부탁드립니다.</li>
+	<li>${dto.introduce }</li>
 </ul>
 
 <ul id="info_title">
@@ -31,7 +30,7 @@
 </ul>
 
 <ul id="info_content2">
-	<li>  <span id="light_gray">최소주문금액</span>   0원</li>
+	<li>  <span id="light_gray">최소주문금액</span>  ${dto.minorder }원</li>
 	<li>  <span id="light_gray">결제수단</span>   신용카드, 현금, 요기서 결제</li>
 </ul>
 
@@ -40,8 +39,8 @@
 </ul>
 
 <ul id="info_content2">
-	<li>  <span id="light_gray">상호명</span>   비에이치씨 청라점</li>
-	<li>  <span id="light_gray">사업자등록번호</span>   111-11-1111</li>
+	<li>  <span id="light_gray">상호명</span>   ${dto.mutualName }</li>
+	<li>  <span id="light_gray">사업자등록번호</span>   ${dto.licenseNumber }</li>
 </ul>
 
 
@@ -50,8 +49,7 @@
 </ul>
 
 <ul id="info_content2">
-	<li> *닭고기 : 국내산</li>
-	<li> *소고기(돼지고기) : 국내산</li>
+	<li> ${dto.origin }</li>
 </ul>
 
 </div>

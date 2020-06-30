@@ -13,6 +13,7 @@ public class FranchiseMenu {
 	private String menuCategoryName;
 	private String saveFilename;
 	private String originalFilename;
+	
 	public int getMenuNum() {
 		return menuNum;
 	}

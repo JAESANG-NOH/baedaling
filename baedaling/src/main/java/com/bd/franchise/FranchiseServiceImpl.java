@@ -1,6 +1,7 @@
 package com.bd.franchise;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,5 +45,31 @@ public class FranchiseServiceImpl implements FranchiseService {
 		}
 		return list;
 	}
+
+	
+
+	@Override
+	public List<FranchiseMenu> detailList(Map<String, Object> map) {
+		List<FranchiseMenu> list = null;
+		try {
+			list = dao.selectList("fc.detailMenu",map);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return list;
+	}
+
+	@Override
+	public FranchiseMenu readMenu(int menuNum) {
+		FranchiseMenu dto = null;
+		try {
+			dto = dao.selectOne("fc.readMenu",menuNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	
 
 }

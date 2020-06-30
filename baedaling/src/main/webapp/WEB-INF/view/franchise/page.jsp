@@ -15,6 +15,30 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/tabs.css" type="text/css">
 
 <script type="text/javascript">
+function ajaxJSON(url, type, query, fn) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data) {
+			fn(data);
+		}
+		,beforeSend:function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		login();
+	    		return false;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+
+
 
 function ajaxHTML(url, type, query, selector) {
 	$.ajax({
@@ -76,9 +100,68 @@ function listPage(){
 	ajaxHTML(url, "get", query, selector);
 }
 
+$(function(){
+	$("body").on("click",".listCatrgory",function(){
+		var restaurnatsNum = ${dto.restaurantsNum}
+		var menuCategoryNum = $(this).attr("data-menuCategoryNum");
+		var $tr = $(this).next(".detailCategory");
+		var isVisible = $tr.is(':visible');
+		if(isVisible){
+			$tr.hide();
+		}else{
+			$tr.find("td").load("<%=cp%>/franchise/detailMenu?menuCategoryNum="+menuCategoryNum + "&restaurantsNum=" + restaurnatsNum);
+			
+			$tr.show();
+		}
+		
+		
+	});
+});
+
+$(function(){
+	$("body").on("click",".menuName",function(){
+		var menuNum = $(this).attr("data-menuNum");
+		$("form[name=readMenuForm]").each(function(){
+			this.reset();
+		});
+		
+		$('#readMenu-dialog').dialog({
+			  modal: true,
+			  height: 650,
+			  width: 600,
+			  title: '메뉴 정보',
+			  open: function(){
+				var f = document.readMenuForm;
+				
+				var url = "<%=cp%>/franchise/read";
+				var query = "menuNum="+menuNum;
+				var fn = function(data){
+					var dto = data.dto;
+					var menuName = dto.menuName;
+					var menuPrice = dto.menuPrice;
+					var saveFilename = dto.saveFilename;
+					
+					f.menuName.value = menuName;
+					f.menuPrice.value = menuPrice;
+					
+					$(".detail-image").attr("src", "<%=cp%>/uploads/menu/"+saveFilename);
+			};
+				ajaxJSON(url, "get", query, fn);
+				  
+			  },
+			  
+			  close: function(event, ui) {
+			  }
+		});
+	});
+});
 </script>
 </head>
 <body>
+
+
+
+
 	<div class="storeBox">
 		<div class="store_basic">
 			<ul>
@@ -87,7 +170,7 @@ function listPage(){
 			<div id="store_content">
 				<ul>
 					<li><img id="store_img" alt="logo"
-						src="<%=cp%>/delivery/img/bhc.png"></li>
+						src="<%=cp%>/delivery/img/bhc.png" onerror="this.src='<%=cp%>/resource/img/ready.jpg'"></li>
 				</ul>
 				<div id="st_content">
 					<ul>
@@ -137,80 +220,9 @@ function listPage(){
 			
 			
 			
-			<%-- <!-- 	메뉴 -->
-
-			<div class="all_menuList" style="width: 600px; margin: 0px auto;">
-
-
-			</div>
-
-			<!-- 카테고리 클릭화면 -->
-
-			<!-- 메뉴 리스트 -->
-
-			<div class="menuList_content" style="width: 100%"></div>
-
-			<!-- 리뷰 리스트 -->
-
-			<div class="reviewList" style="width: 100px;"></div>
-
-			<!-- 가게 정보 -->
-			<div class="storeInfo" style="width: 100px;">
-				<div class="infoContent">
-					<ul id="info_title">
-						<li style="width: 200px;"><i class="fas fa-bullhorn"></i><span
-							style="font-size: 14px;"> 사장님알림</span></li>
-					</ul>
-
-					<ul style="padding: 10px;">
-						<li>${dto.introduce}</li>
-					</ul>
-
-					<ul id="info_title">
-						<li><span style="font-size: 14px;"><i
-								class="fas fa-store"></i> 업체정보</span></li>
-					</ul>
-
-					<ul id="info_content2">
-						<li><span id="light_gray">영업시간</span> ${dto.openingHour} -
-							${endingHour}</li>
-						<li><span id="light_gray">전화번호</span>${dto.fctel}</li>
-						<li><span id="light_gray">주소</span> ${dto.addr1 } ${dto.addr2 }</li>
-					</ul>
-
-					<ul id="info_title">
-						<li><span style="font-size: 14px;"><i
-								class="far fa-credit-card"></i> 결제정보</span></li>
-					</ul>
-
-					<ul id="info_content2">
-						<li><span id="light_gray">최소주문금액</span>${dto.minorder}</li>
-						<li><span id="light_gray">결제수단</span> 신용카드, 현금, 요기서 결제</li>
-					</ul>
-
-					<ul id="info_title">
-						<li><span style="font-size: 14px;"><i
-								class="far fa-credit-card"></i> 사업자정보</span></li>
-					</ul>
-
-					<ul id="info_content2">
-						<li><span id="light_gray">상호명</span> ${dto.mutualName}</li>
-						<li><span id="light_gray">사업자등록번호</span> ${dto.licenseNumber}</li>
-					</ul>
-
-
-					<ul id="info_title">
-						<li><span style="font-size: 14px;"><i
-								class="far fa-file-alt"></i> 원산지정보</span></li>
-					</ul>
-
-					<ul id="info_content2">
-						<li>* ${dto.origin}</li>
-					</ul>
-				</div>
-
-			</div> --%>
+			
 		</div>
+
 
 
 	</div>
