@@ -23,9 +23,10 @@ public interface FoodOrderService {
 	public Map<String, Object> montlyChart(int restaurantsNum);
 	
 	//가맹점상세정보
-/*	public FoodOrder readInfo(int restaurantsNum);
+	public FoodOrder readInfo(int restaurantsNum);
+	public List<FoodOrder> listFile(int restaurantsNum);
 	public void updateInfo(int restaurantsNum);
-	public void insertFile(FoodOrder)*/
+	public void insertFile(FoodOrder dto) throws Exception;
 	
 }
 

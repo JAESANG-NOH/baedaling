@@ -206,7 +206,6 @@ public class FoodOrderController {
 	@RequestMapping(value="updateState",method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String, Object> updateState(
-			@RequestParam int restaurantsNum,
 			@RequestParam int foodorderNum,
 			@RequestParam String orderState
 			) throws Exception{
@@ -250,20 +249,25 @@ public class FoodOrderController {
 	}
 	
 	
-	@RequestMapping(value="fcinfo_write", method=RequestMethod.GET )
-	public String fcpageUpdate(
+	@RequestMapping("fcinfo_read")
+	public String infoPage(
 			@RequestParam int restaurantsNum,
 			Model model
-			) {
-		try {
-//			service.updateInfo(dto);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			)throws Exception{
 		
-		return "dashboard/fcinfo_write";
+		//String query="restaurantsNum="+restaurantsNum;
+		FoodOrder dto = service.readInfo(restaurantsNum);
+	//	if(dto==null)
+	//		return "redirect:/dashboard/orderlist?"+query;
+		
+		List<FoodOrder> listFile = service.listFile(restaurantsNum);
+		model.addAttribute("dto", dto);
+		model.addAttribute("listFile", listFile);
+	//	model.addAttribute("query", query);
+		
+		return "dashboard/fcinfo_read";
 	}
 	
-
+	
 	
 }

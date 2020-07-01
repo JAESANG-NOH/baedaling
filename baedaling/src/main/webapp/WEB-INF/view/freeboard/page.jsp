@@ -176,7 +176,7 @@ $(function(){
 		<c:forEach var="vo" items="${listFile}">
 			<tr height="35" style="border-bottom: 1px solid #cccccc;">
 		    	<td colspan="2" align="left" style="padding-left: 5px; color: gray;">
-					 <a href="<%=cp%>/recommend/download?fileNum=${vo.fileNum}">${vo.originalFilename}</a>
+					 <a href="<%=cp%>/freeboard/download?fileNum=${vo.fileNum}">${vo.originalFilename}</a>
 			          (<fmt:formatNumber value="${vo.fileSize/1024}" pattern="0.00"/> KByte)
 				</td>
 			</tr>

@@ -394,7 +394,7 @@ public class FreeBoardController {
 			HttpServletResponse resp,
 			HttpSession session) throws Exception {
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "notice";
+		String pathname = root + "resource" + File.separator + "freeboard";
 
 		boolean b = false;
 		
@@ -412,6 +412,7 @@ public class FreeBoardController {
 				PrintWriter out = resp.getWriter();
 				out.println("<script>alert('파일 다운로드가 불가능 합니다.');history.back();</script>");
 			} catch (Exception e) {
+				throw e;
 			}
 		}
 	}
@@ -422,7 +423,7 @@ public class FreeBoardController {
 			HttpServletResponse resp,
 			HttpSession session) throws Exception {
 		String root = session.getServletContext().getRealPath("/");
-		String pathname = root + "uploads" + File.separator + "notice";
+		String pathname = root + "resource" + File.separator + "freeboard";
 
 		boolean b = false;
 		

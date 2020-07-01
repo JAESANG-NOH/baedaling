@@ -131,8 +131,38 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 			e.printStackTrace();
 		}
 		return list;
+	}
 
+	@Override
+	public FoodOrder readInfo(int restaurantsNum) {
+		FoodOrder dto = null;
+		try {
+			dto=dao.selectOne("fo.readInfo", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
 
+	@Override
+	public void updateInfo(int restaurantsNum) {
+	}
+
+	@Override
+	public void insertFile(FoodOrder dto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<FoodOrder> listFile(int restaurantsNum) {
+		List<FoodOrder> listFile = null;
+		try {
+			listFile=dao.selectList("fo.fcFileList", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listFile;
 	}
 
 

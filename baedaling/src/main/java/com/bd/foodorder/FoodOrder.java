@@ -23,14 +23,62 @@ public class FoodOrder {
 	private Map<String, Object> mSales;
 	
 	//가맹점 상세정보 
+	private String name;
 	private String introduce;
 	private String openingHour;
 	private String endingHour;
-	private String fcTel;
+	private String fctel;
 	private String mutualName; 
 	private String licenseNumber;
 	private String origin;
+	private String minorder;
+	private String deliTime;
+	private String zip;
+	private String addr1;
+	private String addr2;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getAddr1() {
+		return addr1;
+	}
+	public void setAddr1(String addr1) {
+		this.addr1 = addr1;
+	}
+	public String getAddr2() {
+		return addr2;
+	}
+	public void setAddr2(String addr2) {
+		this.addr2 = addr2;
+	}
+	public String getFctel() {
+		return fctel;
+	}
+	public void setFctel(String fctel) {
+		this.fctel = fctel;
+	}
+	public String getMinorder() {
+		return minorder;
+	}
+	public void setMinorder(String minorder) {
+		this.minorder = minorder;
+	}
+	public String getDeliTime() {
+		return deliTime;
+	}
+	public void setDeliTime(String deliTime) {
+		this.deliTime = deliTime;
+	}
 	public String getIntroduce() {
 		return introduce;
 	}
@@ -49,12 +97,7 @@ public class FoodOrder {
 	public void setEndingHour(String endingHour) {
 		this.endingHour = endingHour;
 	}
-	public String getFcTel() {
-		return fcTel;
-	}
-	public void setFcTel(String fcTel) {
-		this.fcTel = fcTel;
-	}
+	
 	public String getMutualName() {
 		return mutualName;
 	}

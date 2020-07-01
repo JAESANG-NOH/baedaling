@@ -134,15 +134,22 @@ ORDER BY bestSales desc
  
  <!-- 가맹점 정보-->
  
-<!--  <select id="readInfo" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-      SELECT r.restaurantsNum, openingHour, endingHour, fctel, mutualName,licenseNumber,introduce,origin, minorder, name, 
-         addr1, addr2, fileNum,  saveFileName,separate
+  <select id="readInfo" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+        SELECT r.restaurantsNum, TO_CHAR(openingHour,'HH24:MI') openingHour, TO_CHAR(endingHour,'HH24:MI') endingHour, deliTime, fctel, mutualName,licenseNumber,introduce,origin, minorder, name, 
+         addr1, addr2
       FROM restaurantsInfo if
       JOIN restaurants r ON if.restaurantsnum = r.restaurantsnum 
-      JOIN restaurantfile rf ON t.restaurantsNum = rf.restaurantsNum 
       WHERE r.restaurantsNum = #{restaurantsNum}
-  </select> -->
+  </select> 
 
+	<select id="fcFileList" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+		SELECT fileNum, rf.restaurantsNum, saveFilename, separate
+		FROM restaurantfile rf 
+		JOIN  restaurants r ON rf.restaurantsNum=r.restaurantsNum
+		WHERE rf.restaurantsNum=#{restaurantsNum}    
+	</select>
+	
+	<!-- 파일보기 -->
 	
  
  	<!-- <update id="fc_detailInfo" parameterType="com.bd.foodorder.FoodOrder">

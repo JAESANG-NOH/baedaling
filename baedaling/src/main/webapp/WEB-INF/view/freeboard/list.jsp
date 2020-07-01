@@ -52,7 +52,7 @@
             <td>${dto.hitCount}</td>
             <td>
              <c:if test="${dto.fileCount != 0}">
-                <a href="<%=cp%>/freeBoard/zipdownload?num=${dto.num}"><i class="far fa-file"></i>${fileCount}</a>
+                <a href="<%=cp%>/freeboard/zipdownload?num=${dto.num}"><i class="far fa-file"></i>${fileCount}</a>
              </c:if>		      
 		   
             </td>
