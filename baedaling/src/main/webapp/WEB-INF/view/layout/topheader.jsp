@@ -22,7 +22,7 @@
 			<a href="#">관리자</a>
 		</c:if>
 		<c:if test="${sessionScope.user.separate=='1'}">
-			<a href="#">점주</a>
+			<a href="<%=cp%>/dashboard/orderlist?restaurantsNum=21">점주</a>
 		</c:if>
 </div>
 </c:if>

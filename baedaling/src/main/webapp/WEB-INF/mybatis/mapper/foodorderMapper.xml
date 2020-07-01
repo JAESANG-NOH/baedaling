@@ -122,5 +122,35 @@ ORDER BY bestSales desc
                 JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
                 WHERE f.restaurantsNum =  #{restaurantsNum}  AND TO_CHAR(foodOrderCompletionDate,'YYYY') = TO_CHAR(SYSDATE,'YYYY')
  </select>
+ 
+<select id="readinfo" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+      SELECT r.restaurantsNum, openingHour, endingHour, fctel, mutualName,licenseNumber,introduce,origin, minorder,name, 
+         addr1, addr2,
+      FROM restaurantsInfo if
+      JOIN restaurants r ON if.restaurantsnum = r.restaurantsnum 
+      WHERE r.restaurantsNum = #{restaurantsNum}
+   </select>
+ 
+ 
+ <!-- 가맹점 정보-->
+ 
+<!--  <select id="readInfo" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+      SELECT r.restaurantsNum, openingHour, endingHour, fctel, mutualName,licenseNumber,introduce,origin, minorder, name, 
+         addr1, addr2, fileNum,  saveFileName,separate
+      FROM restaurantsInfo if
+      JOIN restaurants r ON if.restaurantsnum = r.restaurantsnum 
+      JOIN restaurantfile rf ON t.restaurantsNum = rf.restaurantsNum 
+      WHERE r.restaurantsNum = #{restaurantsNum}
+  </select> -->
+
+	
+ 
+ 	<!-- <update id="fc_detailInfo" parameterType="com.bd.foodorder.FoodOrder">
+ 		UPDATE restaurantsInfo SET openingHour = TO_DATE(#{openingHour}, 'HH24:MI'), endingHour = TO_DATE(#{openingHour}, 'HH24:MI'), 
+ 				mutualName=#{mutualName}, licenseNumber=#{licenseNumber}, introduce=#{introduce},
+ 				origin=#{origin}, minorder=#{minorder}
+ 		WHERE restaurantsnum = #{restaurantsnum}
+ 	</update> -->
+ 
 </mapper>
 

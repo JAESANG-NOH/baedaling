@@ -22,7 +22,57 @@ public class FoodOrder {
 	private int restaurantsNum;
 	private Map<String, Object> mSales;
 	
+	//가맹점 상세정보 
+	private String introduce;
+	private String openingHour;
+	private String endingHour;
+	private String fcTel;
+	private String mutualName; 
+	private String licenseNumber;
+	private String origin;
 	
+	public String getIntroduce() {
+		return introduce;
+	}
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
+	public String getOpeningHour() {
+		return openingHour;
+	}
+	public void setOpeningHour(String openingHour) {
+		this.openingHour = openingHour;
+	}
+	public String getEndingHour() {
+		return endingHour;
+	}
+	public void setEndingHour(String endingHour) {
+		this.endingHour = endingHour;
+	}
+	public String getFcTel() {
+		return fcTel;
+	}
+	public void setFcTel(String fcTel) {
+		this.fcTel = fcTel;
+	}
+	public String getMutualName() {
+		return mutualName;
+	}
+	public void setMutualName(String mutualName) {
+		this.mutualName = mutualName;
+	}
+	public String getLicenseNumber() {
+		return licenseNumber;
+	}
+	public void setLicenseNumber(String licenseNumber) {
+		this.licenseNumber = licenseNumber;
+	}
+	public String getOrigin() {
+		return origin;
+	}
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
 	public Map<String, Object> getmSales() {
 		return mSales;
 	}

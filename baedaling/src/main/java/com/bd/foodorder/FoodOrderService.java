@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public interface FoodOrderService {
+	
+	//주문관리
 	public List<FoodOrder> readOrder(Map<String, Object> map);
 	public int orderCount(Map<String, Object> map);
 	public void updateOrderState(Map<String, Object> map) throws Exception;
@@ -19,5 +21,11 @@ public interface FoodOrderService {
 	//차트
 	public List<FoodOrder> bestMenuChart(int restaurantsNum);
 	public Map<String, Object> montlyChart(int restaurantsNum);
+	
+	//가맹점상세정보
+/*	public FoodOrder readInfo(int restaurantsNum);
+	public void updateInfo(int restaurantsNum);
+	public void insertFile(FoodOrder)*/
+	
 }
 

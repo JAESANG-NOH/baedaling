@@ -42,7 +42,7 @@ function searchList() {
         	<tr id="list_table2" align="center" bgcolor="#ffffff" style="border-bottom: 1px solid #cccccc; background: #E6E6E6"> 
 		            <td><span style="display: inline-block;padding:1px 3px; background: #ED4C00;color: #FFFFFF; ">중요!</span></td>
 		            <td align="left" style="padding-left: 10px;">
-		                 <a href="${articleUrl}&num=${vo.num}">${vo.subject }</a>
+		                 <a href="${articleUrl}&num=${vo.num}">${vo.subject}</a>
 		            </td>
 		            <td>${vo.userName }</td>
 		            <td>${vo.created }</td>

@@ -119,26 +119,94 @@ public class FoodOrderController {
 	
 	
 	
-/*	@RequestMapping(value="lineChart", produces="application/json;charset=utf-8")
+	@RequestMapping(value="barChart", produces="application/json;charset=utf-8")
 	@ResponseBody
-	public Map<String, Object> lineChart(
+	public String lineChart(
 			@RequestParam int restaurantsNum
 			)throws Exception{
-		Map<String, Object> model = new HashMap<>();
-		List<Map<String, Object>> list = new ArrayList<>();
-		Map<String, Object> map; 
 		
-		map = new HashMap<>();
+		Map<String, Object> sSales = service.montlyChart(restaurantsNum);
 		
+		JSONArray arr = new JSONArray();
 		
+		JSONObject ob;
+		ob = new JSONObject();
+		ob.put("name", "1월");
+		ob.put("y", sSales.get("M01"));
+		arr.put(ob);
 		
-		return 
-	}*/
+		ob = new JSONObject();
+		ob.put("name", "2월");
+		ob.put("y", sSales.get("M02"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "3월");
+		ob.put("y", sSales.get("M03"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "4월");
+		ob.put("y", sSales.get("M04"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "5월");
+		ob.put("y", sSales.get("M05"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "6월");
+		ob.put("y", sSales.get("M06"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "7월");
+		ob.put("y", sSales.get("M07"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "8월");
+		ob.put("y", sSales.get("M08"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "9월");
+		ob.put("y", sSales.get("M09"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "10월");
+		ob.put("y", sSales.get("M10"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "11월");
+		ob.put("y", sSales.get("M11"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "12월");
+		ob.put("y", sSales.get("M12"));
+		arr.put(ob);
+		
+		JSONObject job = new JSONObject();
+		job.put("name", "월별 판매현황");
+		job.put("colorByPoint", true);
+		job.put("data", arr);
+
+		
+		JSONArray jarr = new JSONArray();
+		jarr.put(job);
+
+		return jarr.toString(); 
+	}
 	
 	
 	@RequestMapping(value="updateState",method=RequestMethod.POST, produces="application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String, Object> updateState(
+			@RequestParam int restaurantsNum,
 			@RequestParam int foodorderNum,
 			@RequestParam String orderState
 			) throws Exception{
@@ -181,6 +249,20 @@ public class FoodOrderController {
 		return model;
 	}
 	
+	
+	@RequestMapping(value="fcinfo_write", method=RequestMethod.GET )
+	public String fcpageUpdate(
+			@RequestParam int restaurantsNum,
+			Model model
+			) {
+		try {
+//			service.updateInfo(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "dashboard/fcinfo_write";
+	}
 	
 
 	
