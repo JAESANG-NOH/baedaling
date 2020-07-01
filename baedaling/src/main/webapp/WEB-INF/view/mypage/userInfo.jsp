@@ -13,12 +13,12 @@
         <div class="body-left">
             <div class="list-group">
                 <div class="list-group-item lefthead"> 마이페이지</div>
-                <a href="#" class="list-group-item active">회원정보</a>
+                <a href="<%=cp%>/mypage/userInfo" class="list-group-item active">회원정보</a>
                 <a href="<%=cp%>/mypage/order/list" class="list-group-item">주문내역</a>
                 <a href="#" class="list-group-item">내가 쓴 게시물</a>
                 <a href="#" class="list-group-item">내가 쓴 리뷰</a>
                 <a href="#" class="list-group-item">내가 쓴 댓글</a>
-                <a href="#" class="list-group-item">회원정보수정</a>
+                <a href="<%=cp%>/mypage/complete/message" class="list-group-item">회원정보수정</a>
                 <a href="#" class="list-group-item">회원탈퇴</a>
             </div>     
         </div>
@@ -31,13 +31,13 @@
                  <div id="mypage_container">
                  	<div class="alert-info">
 			    		<p style="text-align: center;"><i class="fas fa-info-circle"></i>
-			    		<span style="font-weight: bold; font-size: 16px;">&nbsp;${sessionScope.user.userId}</span>님의 회원 정보입니다. </p>
+			    		<span style="font-weight: bold; font-size: 16px;">&nbsp;${sessionScope.user.userName}</span>님의 회원 정보입니다. </p>
 					</div>
                       <div class="mypage_box">
 	                      <table border="1" style="border-color:#cccccc; margin: auto; width:95%; border-collapse: collapse; border-spacing: 0;">
 	                      	<tr align="center" height="35" >
 	                      		<td>아이디</td>
-	                      		<td>${sessionScope.user.userId}</td>
+	                      		<td>${dto.userId}</td>
 	                      	</tr>
 	                      	<tr align="center" height="35">
 	                      		<td>이&nbsp;름</td>
@@ -58,8 +58,8 @@
 	                      	<tr align="center" height="35">
 	                      		<td>주&nbsp;소</td>
 	                      		<td>
-	                      			${dto.addr1} <br>
-	                      			${dto.addr2}
+	                      			[&nbsp;${dto.zip}&nbsp;] ${dto.addr1} <br>
+	                      									 ${dto.addr2}
 	                      			</td>
 	                      	</tr>
 	                      	<tr align="center" height="35">

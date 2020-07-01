@@ -37,15 +37,4 @@
 		VALUES(#{restaurantsNum},#{fctel},#{mutualName},#{licenseNumber})
 	</insert>
 	
-	<update id="updateuser1" parameterType="com.bd.user.User">
-		UPDATE user SET user1 userName=#{userName}, userPwd=#{userPwd}
-		WHERE userIdx = #{userIdx}
-	</update>
-	
-	<update id="updateuser2" parameterType="com.bd.user.User">
-		UPDATE user SET user2 birth=#{birth}, email=#{email}, zip=#{zip}, tel=#{tel},
-		addr1=#{addr1}, addr2=#{addr2}, longitude=#{longitude}, latitude=#{latitude}
-		WHERE userIdx = #{userIdx}
-	</update>
-	
 </mapper>
