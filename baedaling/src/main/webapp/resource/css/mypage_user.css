@@ -5,11 +5,9 @@
     text-align:left;
 }
 
-.container{
-    clear:both;
-    width:100%;
+.mypage_container{
+	padding-top: 20px;
 }
-
 .footer{
     clear:both;
     width:100%;
