@@ -1,6 +1,7 @@
 package com.bd.rerestaurants;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,14 +21,18 @@ import com.bd.user.Sessionlocation;
 @RequestMapping("/restaurants/*")
 public class RestaurantsController {
 	@Autowired
+	private RestaurantsService service;
+	@Autowired
 	private DistanceManager distance;
 	@Autowired
 	private MyUtil myUtil;
 	
 	@RequestMapping(value="list")
 	public String list(
+			@RequestParam int typecategorynum,
 			@RequestParam(value="page", defaultValue="1") int current_page,
-			@RequestParam(value="scope", defaultValue="default") String scope,
+			@RequestParam(value="state", defaultValue="distance") String state,
+			@RequestParam(value="typecategorynum", defaultValue="13") String scope,
 			HttpServletRequest req,
 			HttpSession session,
 			Model model
@@ -41,16 +46,58 @@ public class RestaurantsController {
 		}
 		
 		
+		Map<String, Object> map = new HashMap<String,Object>();
 		
 		int rows = 20;
 		int total_page = 0;
 		int dataCount = 0;
+		
 		String city = location.getAddr().trim();
 		city = city.substring(0,city.indexOf(" "));
-		System.out.println(city);
 		
-		Map<String, Object> map = new HashMap<String,Object>();
+		String longitude = location.getLongitude();
+		String latitude = location.getLatitude();
 		
+		map.put("city", city);
+		map.put("typecategorynum", typecategorynum);
+		map.put("longitude",longitude);
+		map.put("latitude", latitude);
+		
+		dataCount = service.dataCount(map);
+		total_page = myUtil.pageCount(rows, dataCount);
+		
+		if(current_page>total_page) {
+			current_page = total_page;
+		}
+		int offset = (current_page-1)*rows;
+		if(offset<0) {
+			offset = 0;
+		}
+		
+		map.put("rows", rows);
+		map.put("offset", offset);
+		
+		List<Restaurants> list = service.listRestaurants(map);
+
+		String query = "";
+        
+        query = "state="+distance+"&typecategorynum="+typecategorynum;
+
+        String listUrl = cp+"/restaurants/list?"+query;
+        String articleUrl = cp+"/restaurants/page?page="+current_page+"&"+query;
+
+        
+        String paging = myUtil.paging(current_page, total_page, listUrl);
+        
+        model.addAttribute("list", list);
+        model.addAttribute("articleUrl", articleUrl);
+        model.addAttribute("page", current_page);
+        model.addAttribute("dataCount", dataCount);
+        model.addAttribute("total_page", total_page);
+        model.addAttribute("paging", paging);
+        
+        model.addAttribute("state", state);
+        
 		return ".restaurantsmenu.list";
 	}
 }

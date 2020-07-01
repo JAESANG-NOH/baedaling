@@ -14,7 +14,7 @@
 		SELECT restaurants_seq.NEXTVAL FROM dual 
 	</select>
 	
-	
+	 
 	<insert id="insertuser0" parameterType="INTEGER">
 		INSERT INTO user0(userIdx,membership) VALUES(#{idx},0)
 	</insert>

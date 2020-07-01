@@ -6,13 +6,14 @@
    String cp = request.getContextPath();
 %>
 <script type="text/javascript">
-function bgLabel(ob, id) {
-    if(!ob.value) {
-	    document.getElementById(id).style.display="";
-    } else {
-	    document.getElementById(id).style.display="none";
-    }
-}
+$(function(){
+	$(".text_login").onclick(function(){
+		$("this").toggle();
+	});
+});
+</script>
+
+<script type="text/javascript">
 
 function sendLogin(){
 	var f = document.loginForm;
@@ -47,14 +48,14 @@ function sendLogin(){
 			<table style="margin: 15px auto; width: 100%; border-spacing: 0px;">
 				<tr align="center" height="60">
 					<td> 
-					 	<label class="lbl">아이디</label>
+					 	<label class="lbl text_login">아이디</label>
 						<input type="text" name="userId" id="userId" class="loginTF" maxlength="15">
 					</td>
 				</tr>
 				<tr align="center" height="60">
 					<td>
-						<label class="lbl">패스워드</label>
-						<input type="text" name="userPwd" id="userPwd" class="loginTF" maxlength="15">
+						<label class="lbl text_login">패스워드</label>
+						<input type="password" name="userPwd" id="userPwd" class="loginTF" maxlength="15">
 					</td>
 				</tr>
 		  		<tr align="center" height="65" > 

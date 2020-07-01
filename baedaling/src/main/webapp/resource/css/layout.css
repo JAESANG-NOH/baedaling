@@ -534,6 +534,9 @@ text-align: center;
    border: 1px solid #E3E1E1;   
 }
 
+.menuContainer a :hover{
+	opacity: 0.4;
+}
 
 .menuContainer {
    
@@ -545,7 +548,6 @@ text-align: center;
 }
 
 .menunu{
-   border-top: 1px solid #D8D8D8;
    width: 100%;
 }
 
@@ -563,7 +565,127 @@ text-align: center;
 	margin-left: 100px;
 }
 
+
+
+
 #inputline {
-   width: 260px;
-    height: 25px;
+	vertical-align: middle;
+    width: 299px;
+    height: 35px;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-width: thin;
+}
+
+#inputbutton {
+	vertical-align: middle;
+    width: 70px;
+    height: 36px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 4px;
+    border-width: thin;
+    margin: -4px;
+    background: #38bcc6;
+    color: white;
+}
+
+#point_result_list{
+	width: 365px;
+    max-height: 150px;
+    border: 1px solid #c8c8c8;
+    overflow: scroll;
+    margin-top: 1px;
+    position: absolute;
+    left: 50%;
+    transform:translateX(-50%);
+}
+
+.point_search_ul{
+	list-style: none; 
+	text-align: left;
+}
+
+.point_search_li{
+	border-bottom: 1px solid #c8c8c8; 
+	line-height: 17px;
+	padding: 4px 5px;
+}
+
+.point_search_b{
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+}
+
+.top_bbs_sub{
+	display: none;
+    position: absolute;
+    top: 9%;
+    left: 43.5%;
+    background: #38bcc6;
+    width: 156px;
+    padding: 0px;
+    height: 120px;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    transform: translateX(-50%);
+}
+
+
+
+
+
+
+
+
+
+.snip1275 {
+  font-family: 'Raleway', Arial, sans-serif;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.snip1275 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.snip1275 li {
+  display: inline-block;
+  list-style: outside none none;
+  padding: 0;
+}
+.snip1275 a {
+  padding: 0.3em 0;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  text-decoration: none;
+}
+.snip1275 a:before,
+.snip1275 a:after {
+  height: 4px;
+  position: absolute;
+  content: '';
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+  background-color: #429aa0;
+  width: 0;
+}
+.snip1275 a:before {
+  top: 0;
+  right: 0;
+}
+.snip1275 a:after {
+  bottom: 0;
+  left: 0;
+}
+.snip1275 a:hover,
+.snip1275 .current a {
+  color: #ffffff;
+}
+.snip1275 a:hover:before,
+.snip1275 .current a:before,
+.snip1275 a:hover:after,
+.snip1275 .current a:after {
+  width: 100%;
 }

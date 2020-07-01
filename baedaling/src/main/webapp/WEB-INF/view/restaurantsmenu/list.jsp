@@ -6,76 +6,39 @@
 	String cp=request.getContextPath();
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/restaurantsmenulist.css" type="text/css">
-<div class="menu_content_box">
+<div class="menu_content_box" style="min-height: 400px;">
+<form name="listform" >
 	<div class="select_sort">
-		<select>
-			<option>기본 정렬순</option>
-			<option>별점순</option>
-			<option>리뷰순</option>
+		<select name="sort_type">
+			<option value="distance" ${state=="distance"?"selected='selected'":""}>기본 거리순</option>
+			<option value="star" ${state=="star"?"selected='selected'":""}>별점순</option>
+			<option value="review" ${state=="review"?"selected='selected'":""}>리뷰순</option>
 		</select>
 	</div>
-	<div class="menu_content_etch_line lineheader">
+	
+<c:forEach var="dto" items="${list}" varStatus="status">
+	<c:if test="${status.index==0}">
+           <c:out value="<div class='menu_content_etch_line lineheader'>" escapeXml="false"/>
+    </c:if>
+    <c:if test="${status.index!=0 && status.index%2==0}">
+           <c:out value="</div><div class='menu_content_etch_line lineheader'>" escapeXml="false"/>
+    </c:if>
 		<table class="fc_list_table">
-			<tr >
+			<tr>
 				<td class="menu_td1"><div class="menu_img_box"><img alt="" src=""></div></td>
 				<td class="menu_td2">
-					<b>혼밥대왕-은평점</b>
+					<b>${dto.name}</b>
 					<br>
-					<span>★4.7 | 리뷰:94 | 사장님댓글:94</span>
+					<span>★4.7 | 리뷰:94 | 거리:${dto.distance}</span>
 					<br>
 					<div>
 						<div class="coupon_line">쿠폰할인</div>
-						<div class="delivery_time">50~90분</div>
+						<div class="delivery_time">영업시간:${dto.openinghour}~${dto.endinghour}</div>
 					</div>
 				</td>
 			</tr>
 		</table>
-		<table class="fc_list_table">
-		<tr >
-			<td class="menu_td1"><div class="menu_img_box"><img alt="" src=""></div></td>
-			<td class="menu_td2">
-				<b>혼밥대왕-은평점</b>
-				<br>
-				<span>★4.7 | 리뷰:94 | 사장님댓글:94</span>
-				<br>
-				<div>
-					<div class="coupon_line">쿠폰할인</div>
-					<div class="delivery_time">50~90분</div>
-				</div>
-			</td>
-		</tr>
-		</table>
-	</div>
-	<div class="menu_content_etch_line">
-		<table class="fc_list_table">
-			<tr >
-				<td class="menu_td1"><div class="menu_img_box"><img alt="" src=""></div></td>
-				<td class="menu_td2">
-					<b>혼밥대왕-은평점</b>
-					<br>
-					<span>★4.7 | 리뷰:94 | 사장님댓글:94</span>
-					<br>
-					<div>
-						<div class="coupon_line">쿠폰할인</div>
-						<div class="delivery_time">50~90분</div>
-					</div>
-				</td>
-			</tr>
-		</table>
-		<table class="fc_list_table">
-		<tr >
-			<td class="menu_td1"><div class="menu_img_box"><img alt="" src=""></div></td>
-			<td class="menu_td2">
-				<b>혼밥대왕-은평점</b>
-				<br>
-				<span>★4.7 | 리뷰:94 | 사장님댓글:94</span>
-				<br>
-				<div>
-					<div class="coupon_line">쿠폰할인</div>
-					<div class="delivery_time">50~90분</div>
-				</div>
-			</td>
-		</tr>
-		</table>
-	</div>
+</c:forEach>
+<c:out value="</div>" escapeXml="false"/>
+	</form>
 </div>

@@ -47,6 +47,7 @@
 		});
 	}
 	
+	var surl="";
 	$(function(){
 		$("#inputbutton").click(function(){
 			var url="<%=cp%>/point/search";
@@ -54,6 +55,7 @@
 			var query="point="+point;
 			var out="";
 			var fn=function(data) {
+				surl="ok";
 				$('#point_result_list').find('li').remove();
 				$(data).find('newAddressListAreaCdSearchAll').each(function(){
 					var lnmAdres = $('lnmAdres',this).text();
@@ -82,6 +84,14 @@
 			$(this).css("background", "white");
 		});		
 	});	
+	
+	$(function(){
+		$(".top_bbs_sub").add(".top_bbs_sub").parent().hover(function(){
+			$('.top_bbs_sub').show();
+		},function(){
+			$('.top_bbs_sub').hide();
+		});
+	});
 	
 	$(function(){
 		$("body").on("click",".point_search_ul li", function(){
@@ -114,12 +124,17 @@
 <div id="menu-wrapper" >
       <div id="menu" class="container">
          <a href="<%=cp%>/main"><img align="left" src="<%=cp%>/resource/img/logo.png" id="logo-img"></a>
-         	<ul>
-            	<li><a href="#">공지사항</a></li>
-               	<li><a href="#">자유게시판</a></li>
-               	<li><a href="#">포토갤러리</a></li>
-				<li><a href="#">이벤트</a></li>
-				<li><a href="#">고객센터</a></li>
+         	<ul class="snip1275">
+            	<li><a href="#" data-hover="주문">주문</a></li>
+               	<li><a href="#" data-hover="게시판">게시판</a>
+               		<ul class="top_bbs_sub" style="padding: 0px;">
+               			<li class="sub_li"><a href="#" data-hover="자유게시판">자유게시판</a></li>
+               			<li class="sub_li"><a href="#" data-hover="추천게시판">추천게시판</a>
+               		</ul>
+               	</li>
+               	<li><a href="#" data-hover="이벤트">이벤트</a></li>
+				<li><a href="#" data-hover="공지사항">공지사항</a></li>
+				<li><a href="#" data-hover="고객센터">고객센터</a></li>
 			</ul>
       </div>
    </div>
@@ -143,3 +158,4 @@
          </div>
       </div>
    </div>
+   <hr style="border: 0.5px solid #D8D8D8;">
