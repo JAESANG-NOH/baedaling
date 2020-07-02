@@ -3,6 +3,7 @@ package com.bd.inquire;
 public class Inquire {
 	private int num; // 게시물 번호
 	private String userId; // 질문아이디
+	private String userName;
 	private String email; // 질문자 이메일
 	private String category; // 카테고리
 	
@@ -11,6 +12,7 @@ public class Inquire {
 	private String created; // 질문일자
 	
 	private String answerId; // 답변아이디
+	private String answerName;
 	private String answer; // 답변
 	private String answer_created; // 답변일자
 	
@@ -81,6 +83,18 @@ public class Inquire {
 	}
 	public void setListNum(int listNum) {
 		this.listNum = listNum;
+	}
+	public String getAnswerName() {
+		return answerName;
+	}
+	public void setAnswerName(String answerName) {
+		this.answerName = answerName;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 

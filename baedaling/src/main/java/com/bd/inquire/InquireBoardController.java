@@ -1,6 +1,5 @@
 package com.bd.inquire;
 
-import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
@@ -26,6 +25,7 @@ public class InquireBoardController {
 	
 	@Autowired
 	private InquireService service;
+	
 	@Autowired
 	private MyUtil myUtil;
 	
@@ -35,9 +35,10 @@ public class InquireBoardController {
 			@RequestParam(defaultValue="all") String condition,
 			@RequestParam(defaultValue="") String keyword,
 			HttpServletRequest req,
+			HttpSession session,
 			Model model
 			) throws Exception {
-		
+		SessionInfo info=(SessionInfo)session.getAttribute("user");
 		String cp = req.getContextPath();
 		
 		int rows=10;
@@ -52,6 +53,7 @@ public class InquireBoardController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
+		map.put("userId", info.getUserId());
 		
 		dataCount=service.dataCount(map);
 		if(dataCount != 0) {
@@ -140,8 +142,11 @@ public class InquireBoardController {
 			@RequestParam String page,
 			@RequestParam(defaultValue="all") String condition,
 			@RequestParam(defaultValue="") String keyword,
+			HttpSession session,
 			Model model
 			) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("user");
+		
 		keyword = URLDecoder.decode(keyword, "utf-8");
 		
 		String query="page="+page;
@@ -152,10 +157,17 @@ public class InquireBoardController {
 		
 		// 해당 레코드 가져오기
 		Inquire dto = service.readInquire(num);
-		if(dto==null)
+		if(dto==null) {
 			return "redirect:/inquire/list?"+query;
+		}
+		if((! info.getUserId().equals("admin")) &&  (! dto.getUserId().equals(info.getUserId()))) {
+			return "redirect:/inquire/list?"+query;
+		}
 		
 		dto.setQuestion(myUtil.htmlSymbols(dto.getQuestion()));
+		if(dto.getAnswer()!=null) {
+			dto.setAnswer(myUtil.htmlSymbols(dto.getAnswer()));
+		}
 		
 		// 이전글 다음글
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -173,10 +185,9 @@ public class InquireBoardController {
 		model.addAttribute("page", page);
 		model.addAttribute("query", query);
 		
-		
-		
 		return ".inquire.article";
 	}
+	
 	@RequestMapping(value="delete")
 	public String delete(
 			@RequestParam int num,
@@ -192,11 +203,8 @@ public class InquireBoardController {
 		if(keyword.length()!=0) {
 			query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "UTF-8");
 		}
-		
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"inquire";
-		
-		service.deleteInquire(num, pathname, info.getUserId());
+			
+		service.deleteInquire(num, info.getUserId());
 		
 	return "redirect:/inquire/list?"+query;
 		
@@ -234,11 +242,6 @@ public class InquireBoardController {
 			HttpSession session
 			) throws Exception {
 		
-		/*
-		String root=session.getServletContext().getRealPath("/");
-		String pathname=root+"uploads"+File.separator+"inquire";		
-		*/
-		
 		try {
 			service.updateInquire(dto);
 		} catch (Exception e) {
@@ -246,10 +249,47 @@ public class InquireBoardController {
 		return "redirect:/inquire/list";
 	}
 	
-	// 답변
 	
+	// 답변폼
+	@RequestMapping(value="updateAdmin", method=RequestMethod.GET)
+	public String updateAdminForm(
+			@RequestParam int num,
+			@RequestParam String page,
+			HttpSession session,
+			Model model
+			) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("user");
+		
+		Inquire dto = service.readInquire(num);
+		if(dto==null) {
+			return "redirect:/inquire/list?page="+page;
+		}
+		if(! info.getUserId().equals("admin")) {
+			return "redirect:/inquire/list?page="+page;
+		}
+		
+		model.addAttribute("dto", dto);
+		model.addAttribute("mode", "update");
+		model.addAttribute("page", page);
+		
+		return ".inquire.adminUpdate";
+		
+	}
 	
-	
-
+	@RequestMapping(value="updateAdmin", method=RequestMethod.POST)
+	public String updateAdminFormSubmit(
+			Inquire dto,
+			@RequestParam String page,
+			HttpSession session
+			) throws Exception {
+		SessionInfo info=(SessionInfo)session.getAttribute("user");
+		
+		try {
+			dto.setAnswerId(info.getUserId());
+			service.updateInquireAdmin(dto);
+		} catch (Exception e) {
+		}
+		return "redirect:/inquire/list";
+	}
 	
 }

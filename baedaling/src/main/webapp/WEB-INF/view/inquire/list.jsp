@@ -36,6 +36,7 @@
             <th style="color: #787878;">제목</th>
             <th width="100" style="color: #787878;">작성자</th>
             <th width="80" style="color: #787878;">작성일</th>
+            <th width="80" style="color: #787878;">처리결과</th>
         </tr>
        
       <c:forEach var="dto" items="${list}">
@@ -46,6 +47,7 @@
             </td>
             <td>${dto.userId}</td>
             <td>${dto.created}</td>
+            <td>${not empty dto.answer ? "답변완료" : "답변대기"}</td>
         </tr>
         </c:forEach>
     </table>
