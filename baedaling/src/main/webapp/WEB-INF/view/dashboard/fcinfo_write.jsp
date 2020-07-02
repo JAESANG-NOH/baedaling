@@ -33,7 +33,7 @@ function check() {
     }
     
     var mode="${mode}";
-    if(mode=="created"||mode=="update" && f.upload.value!="") {
+    if(mode=="update" && f.upload.value!="") {
 		if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.upload.value)) {
 			alert('이미지 파일만 가능합니다.(bmp 파일은 불가)');
 			f.upload.focus();
@@ -42,9 +42,19 @@ function check() {
 		alert("등록이 완료되었습니다.")
 	}
     
-	f.action="<%=cp%>/dashboard/";
+	f.action="<%=cp%>/dashboard/${mode}";
 	return true;
 }
+
+
+<c:if test="${mode=='update'}">
+function deleteFile(fileNum) {
+		var url="<%=cp%>/dashboard/deleteFile";
+		$.post(url, {fileNum:fileNum}, function(data){
+			$("#f"+fileNum).remove();
+		}, "json");
+}
+</c:if>
 
 </script>
 </head>
@@ -127,10 +137,10 @@ function check() {
 					<ul id="info_content2">
 						<li>
 							<span id="light_gray">영업시간</span>
-							<input type="datetime" name="${dto.openingHour}"> - <input type="datetime" name="${dto.endingHour}">
+							<input type="text" name="openingHour" value="${dto.openingHour}"> - <input type="datetime" name="endingHour" value="${dto.endingHour}">
 						</li>
 						<li>
-							<span id="light_gray">전화번호</span> <input type="text" name="fcTel" value="${dto.fcTel}">
+							<span id="light_gray">전화번호</span> <input type="datetime" name="fctel" value="${dto.fctel}">
 						</li>
 					</ul>
 					<ul id="info_title">
@@ -141,12 +151,27 @@ function check() {
 							<span id="light_gray">최소주문금액</span>
 								<input type="text" name="minorder" value="${dto.minorder}">원
 						</li>
+					</ul>
+					
+					<ul >
 						<li>
-							<span id="light_gray">결제수단</span>
-								<input type="checkbox" name=""> 신용카드
-								<input type="checkbox" name=""> 현금
-								<input type="checkbox" name=""> 요기서 결제
+							<span id="light_gray">파일첨부</span>
+							<input type="file" name="upload" size="53">1로고 
+							<input type="file" name="upload" size="53">2배경 
 						</li>
+						
+					<c:if test="${mode=='update'}">
+						 <c:forEach var="dto" items="${listFile}">
+						<li id="f${dto.fileNum}">
+							<span id="light_gray">1.로고파일</span>
+								<a  style="color: gray;" href="javascript:deleteFile('${dto.fileNum}');"><i class="far fa-trash-alt"></i></a> 
+						</li>
+						<li id="f${dto.fileNum}">
+							<span id="light_gray">1.배경이미지</span>
+								<a style="color: gray;" href="javascript:deleteFile('${dto.fileNum}');"><i class="far fa-trash-alt"></i></a> 
+						</li>
+					 </c:forEach>
+					</c:if>
 					</ul>
 					<ul id="info_title">
 						<li>
@@ -174,6 +199,9 @@ function check() {
 					<ul>
 						<li>
 							<button type="submit">등록하기</button> <button type="reset">다시입력</button>
+					<c:if test="${mode=='update'}">
+			         	 <input type="hidden" name="restaurantsNum" value="${dto.restaurantsNum}">
+			        </c:if>
 						</li>
 					</ul>
 				</form>

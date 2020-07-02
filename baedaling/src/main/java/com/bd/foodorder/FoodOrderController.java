@@ -1,8 +1,11 @@
 package com.bd.foodorder;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bd.common.FileManager;
+
 
 @Controller("foodorder.foodOrderController")
 @RequestMapping("/dashboard/*")
 public class FoodOrderController {
 	@Autowired
 	private FoodOrderService service;
+	@Autowired
+	private FileManager fileManager;
 	
 	@RequestMapping(value="orderlist")
 	public String orderList(
@@ -114,9 +121,6 @@ public class FoodOrderController {
 		
 		return arr.toString();
 	}
-	
-	
-	
 	
 	
 	@RequestMapping(value="barChart", produces="application/json;charset=utf-8")
@@ -255,10 +259,9 @@ public class FoodOrderController {
 			Model model
 			)throws Exception{
 		
-		//String query="restaurantsNum="+restaurantsNum;
 		FoodOrder dto = service.readInfo(restaurantsNum);
-	//	if(dto==null)
-	//		return "redirect:/dashboard/orderlist?"+query;
+		if(dto==null)
+			return "redirect:/dashboard/orderlist?";
 		
 		List<FoodOrder> listFile = service.listFile(restaurantsNum);
 		model.addAttribute("dto", dto);
@@ -269,5 +272,60 @@ public class FoodOrderController {
 	}
 	
 	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int restaurantsNum,
+			Model model
+			) throws Exception{
+		FoodOrder dto = service.readInfo(restaurantsNum);
+		if(dto==null) {
+			return "redirect:/dachboard/orderlist?";
+		}
+		List<FoodOrder> listFile = service.listFile(restaurantsNum);
+		model.addAttribute("mode", "update");
+		model.addAttribute("dto", dto);
+		model.addAttribute("listFile", listFile);
+		
+		return "dashboard/fcinfo_write";
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updateSubmit(
+			FoodOrder dto,
+			HttpSession session
+			)throws Exception{
+		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + File.separator + "resource" + File.separator + "dashboard";
+			service.updateInfo(dto, pathname);
+		} catch (Exception e) {
+		}
+		return "redirect:/dashboard/fcinfo_read?restaurantsNum="+dto.getRestaurantsNum();
+	}
+	
+	@RequestMapping(value="deleteFile", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteFile(
+			@RequestParam int fileNum,
+			HttpSession session
+			)throws Exception{
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+"resource"+File.separator+"dashboard";
+		
+		FoodOrder dto = service.readFile(fileNum);
+		if(dto!=null) {
+			fileManager.doFileDelete(dto.getSaveFilename(),pathname);
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("field", "fileNum");
+		map.put("num", fileNum);
+		service.deleteFile(map);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", "true");
+		return model;
+		
+	}
 	
 }

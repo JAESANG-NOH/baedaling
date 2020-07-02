@@ -1,6 +1,9 @@
 package com.bd.foodorder;
 
+import java.util.List;
 import java.util.Map;
+
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author sist
@@ -36,7 +39,38 @@ public class FoodOrder {
 	private String zip;
 	private String addr1;
 	private String addr2;
+	  
+	//파일 
+	private int fileNum;
+	private String saveFilename;
+	private int separate;
+	private List<MultipartFile> upload;
+
+	public int getSeparate() {
+		return separate;
+	}
+	public void setSeparate(int separate) {
+		this.separate = separate;
+	}
+	public int getFileNum() {
+		return fileNum;
+	}
+	public void setFileNum(int fileNum) {
+		this.fileNum = fileNum;
+	}
 	
+	public String getSaveFilename() {
+		return saveFilename;
+	}
+	public void setSaveFilename(String saveFilename) {
+		this.saveFilename = saveFilename;
+	}
+	public List<MultipartFile> getUpload() {
+		return upload;
+	}
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
+	}
 	public String getName() {
 		return name;
 	}

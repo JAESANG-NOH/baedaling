@@ -5,13 +5,17 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.bd.common.FileManager;
 import com.bd.common.dao.CommonDAO;
 
 @Service("foodorder.foodorderService")
 public class FoodOrderServiceImpl implements FoodOrderService{
 	@Autowired
 	private CommonDAO dao;
+	@Autowired
+	private FileManager fileManager;
 
 	@Override
 	public List<FoodOrder> readOrder(Map<String, Object> map) {
@@ -144,15 +148,7 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		return dto;
 	}
 
-	@Override
-	public void updateInfo(int restaurantsNum) {
-	}
 
-	@Override
-	public void insertFile(FoodOrder dto) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public List<FoodOrder> listFile(int restaurantsNum) {
@@ -163,6 +159,60 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 			e.printStackTrace();
 		}
 		return listFile;
+	}
+
+	@Override
+	public void updateInfo(FoodOrder dto, String pathname) {
+		int i = 1;
+		try {
+			dao.updateData("fo.updateInfo", dto);
+			
+			if(! dto.getUpload().isEmpty()) {
+				for(MultipartFile mf:dto.getUpload()) { 
+					String saveFilename=fileManager.doFileUpload(mf, pathname);
+					if(saveFilename==null) continue;
+					
+					dto.setSaveFilename(saveFilename);
+					dto.setSeparate(i);
+					insertFile(dto);
+					i++;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+
+	@Override
+	public void insertFile(FoodOrder dto) throws Exception {
+		try {
+			dao.insertData("fo.insertFile", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	
+	public void deleteFile(Map<String, Object> map) throws Exception{
+		try {
+			dao.deleteData("fo.deleteFile", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e; 
+		}
+	}
+
+	@Override
+	public FoodOrder readFile(int fileNum) {
+		FoodOrder dto = null;
+		try {
+			dto =dao.selectOne("fo.readFile", fileNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
 	}
 
 

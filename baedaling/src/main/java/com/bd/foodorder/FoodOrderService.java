@@ -25,8 +25,9 @@ public interface FoodOrderService {
 	//가맹점상세정보
 	public FoodOrder readInfo(int restaurantsNum);
 	public List<FoodOrder> listFile(int restaurantsNum);
-	public void updateInfo(int restaurantsNum);
+	public void updateInfo(FoodOrder dto, String pathname);
 	public void insertFile(FoodOrder dto) throws Exception;
-	
+	public FoodOrder readFile(int fileNum);
+	public void deleteFile(Map<String, Object> map) throws Exception;
 }
 

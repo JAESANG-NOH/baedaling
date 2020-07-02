@@ -135,7 +135,7 @@ ORDER BY bestSales desc
  <!-- 가맹점 정보-->
  
   <select id="readInfo" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-        SELECT r.restaurantsNum, TO_CHAR(openingHour,'HH24:MI') openingHour, TO_CHAR(endingHour,'HH24:MI') endingHour, deliTime, fctel, mutualName,licenseNumber,introduce,origin, minorder, name, 
+       SELECT r.restaurantsNum, TO_CHAR(openingHour,'HH24:MI') openingHour, TO_CHAR(endingHour,'HH24:MI') endingHour, deliTime, fctel, mutualName,licenseNumber,introduce,origin, minorder, name, 
          addr1, addr2
       FROM restaurantsInfo if
       JOIN restaurants r ON if.restaurantsnum = r.restaurantsnum 
@@ -149,15 +149,28 @@ ORDER BY bestSales desc
 		WHERE rf.restaurantsNum=#{restaurantsNum}    
 	</select>
 	
-	<!-- 파일보기 -->
+	<insert id="insertFile" parameterType="com.bd.foodorder.FoodOrder">
+		INSERT INTO restaurantfile(fileNum, restaurantsNum, saveFilename, separate)
+			VALUES(restaurantfile_seq.NEXTVAL, #{restaurantsNum}, #{saveFilename}, #{separate})
+	</insert>
 	
  
- 	<!-- <update id="fc_detailInfo" parameterType="com.bd.foodorder.FoodOrder">
- 		UPDATE restaurantsInfo SET openingHour = TO_DATE(#{openingHour}, 'HH24:MI'), endingHour = TO_DATE(#{openingHour}, 'HH24:MI'), 
+ 	<update id="updateInfo" parameterType="com.bd.foodorder.FoodOrder">
+ 		UPDATE restaurantsInfo SET openingHour = TO_DATE( #{openingHour}, 'HH24:MI'), endingHour = TO_DATE( #{endingHour}, 'HH24:MI'), 
  				mutualName=#{mutualName}, licenseNumber=#{licenseNumber}, introduce=#{introduce},
  				origin=#{origin}, minorder=#{minorder}
- 		WHERE restaurantsnum = #{restaurantsnum}
- 	</update> -->
+ 		WHERE restaurantsNum = #{restaurantsNum}
+ 	</update>
+ 
+ 	<select id="readFile" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+ 		SELECT fileNum, restaurantsNum, saveFilename, separate
+ 		FROM restaurantfile
+ 		WHERE restaurantsnum = #{restaurantsNum}
+ 	</select>
+ 	
+ 	<delete id="deleteFile" parameterType="map">
+		DELETE FROM restaurantfile WHERE ${field} = #{restaurantsNum}
+	</delete>	
  
 </mapper>
 
