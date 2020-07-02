@@ -99,6 +99,15 @@ $(function(){
 	        return false;
 	    }
 	    
+	    str = f.fcName.value;
+	    str = str.trim();
+	    $messageon = $messageline.find("#message_line9");
+	    if(!str) {
+	    	$messageon.html("<span style='color:red; text-align:centor;'>업체명을 입력하세요.</span>");
+	        f.tel1.focus();
+	        return false;
+	    }
+	    
 	    $('#longitude').val(marker.getPosition().Ga);
 	    $('#latitude').val(marker.getPosition().Ha);
 	    
@@ -225,7 +234,7 @@ $(function(){
 				<tr class="etch_list2">
 					<td class="inputinfo_tr"><input type="text" class="input_normal" name="fcName"></td>
 				<tr class="etch_list3">
-					<td id="message_line1"></td>
+					<td id="message_line9"></td>
 				</tr>
 				
 				<tr class="etch_list1">
@@ -234,7 +243,7 @@ $(function(){
 				<tr class="etch_list2">
 					<td class="inputinfo_tr"><input type="text" class="input_normal" name="mutualName"></td>
 				<tr class="etch_list3">
-					<td id="message_line1"></td>
+					<td id="message_line10"></td>
 				</tr>
 
 				<tr class="etch_list1">
@@ -243,7 +252,7 @@ $(function(){
 				<tr class="etch_list2">
 					<td class="inputinfo_tr"><input type="text" class="input_normal" name="licenseNumber"></td>
 				<tr class="etch_list3">
-					<td id="message_line1"></td>
+					<td id="message_line11"></td>
 				</tr>
 				
 				<tr class="etch_list1">
@@ -268,7 +277,7 @@ $(function(){
 						</select>
 					</td>
 				<tr class="etch_list3">
-					<td id="message_line1"></td>
+					<td id="message_line12"></td>
 				</tr>
 				
 				<tr class="etch_list1">
@@ -278,7 +287,7 @@ $(function(){
 					<td class="inputinfo_tr"><input type="text" class="input_normal" name="fctel"></td>
 				</tr>
 				<tr class="etch_list3">
-					<td id="message_line6"></td>
+					<td id="message_line13"></td>
 				</tr>
 				
 				<tr class="etch_list1">
@@ -294,7 +303,7 @@ $(function(){
 					<td class="inputinfo_tr"><input type="text" class="input_normal" id="fcaddr2" name="fcaddr2"></td>
 				</tr>
 				<tr class="etch_list3">
-					<td id="message_line7">
+					<td id="message_line14">
 						<span style='color:red; text-align:centor; font-size: 12px;'>정확한 주소설정을 위해 마커를 이용하여 위치를 표시해 주세요.</span>
 					</td>
 				</tr>

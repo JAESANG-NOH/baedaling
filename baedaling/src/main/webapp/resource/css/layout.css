@@ -618,8 +618,22 @@ text-align: center;
 .top_bbs_sub{
 	display: none;
     position: absolute;
-    top: 9%;
+    top: 9.5%;
     left: 43.5%;
+    background: #38bcc6;
+    width: 156px;
+    padding: 0px;
+    height: 120px;
+    border-bottom-right-radius: 22px;
+    border-bottom-left-radius: 22px;
+    transform: translateX(-50%);
+}
+
+.top_bbs_sub2{
+	display: none;
+    position: absolute;
+    top: 9.5%;
+    left: 62.5%;
     background: #38bcc6;
     width: 156px;
     padding: 0px;
