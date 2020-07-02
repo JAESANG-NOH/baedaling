@@ -7,7 +7,6 @@
 %>
 <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/@kfonts/bm-hanna-pro/index.css" />
-<link rel="stylesheet" href="<%=cp%>/delivery/css/mainstyle.css" type="text/css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=29c323b80554e07678426dcb232dd593&libraries=services"></script>
 <script type="text/javascript">
 	function ajaxJSON(url, type, query, fn) {
@@ -94,6 +93,14 @@
 	});
 	
 	$(function(){
+		$(".top_bbs_sub2").add(".top_bbs_sub2").parent().hover(function(){
+			$('.top_bbs_sub2').show();
+		},function(){
+			$('.top_bbs_sub2').hide();
+		});
+	});
+	
+	$(function(){
 		$("body").on("click",".point_search_ul li", function(){
 			var point = $(this).attr('data_point');
 			point.replace(/ *\([^)]*\) */g, "");
@@ -115,6 +122,7 @@
 		var url = "<%=cp%>/user/location";
 		var query = "ln="+x+"&lt="+y+"&addr="+addr;
 		var fn = function(){
+			$("#inputline").val(addr);
 		};
 		ajaxJSON(url, "post", query, fn);
 	}
@@ -125,16 +133,21 @@
       <div id="menu" class="container">
          <a href="<%=cp%>/main"><img align="left" src="<%=cp%>/resource/img/logo.png" id="logo-img"></a>
          	<ul class="snip1275">
-            	<li><a href="#" data-hover="주문">주문</a></li>
+            	<li><a href="<%=cp%>/main" data-hover="주문">주문</a></li>
                	<li><a href="#" data-hover="게시판">게시판</a>
                		<ul class="top_bbs_sub" style="padding: 0px;">
-               			<li class="sub_li"><a href="#" data-hover="자유게시판">자유게시판</a></li>
-               			<li class="sub_li"><a href="#" data-hover="추천게시판">추천게시판</a>
+               			<li class="sub_li"><a href="<%=cp%>/freeboard/list" data-hover="자유게시판">자유게시판</a></li>
+               			<li class="sub_li"><a href="<%=cp%>/recommend/list" data-hover="추천게시판">추천게시판</a>
                		</ul>
                	</li>
-               	<li><a href="#" data-hover="이벤트">이벤트</a></li>
-				<li><a href="#" data-hover="공지사항">공지사항</a></li>
-				<li><a href="#" data-hover="고객센터">고객센터</a></li>
+               	<li><a href="<%=cp%>/event/list" data-hover="이벤트">이벤트</a></li>
+				<li><a href="<%=cp%>/notice/list" data-hover="공지사항">공지사항</a></li>
+				<li><a href="#" data-hover="고객센터">고객센터</a>
+					<ul class="top_bbs_sub2" style="padding: 0px;">
+               			<li class="sub_li"><a href="<%=cp%>/freeboard/list" data-hover="1:1문의">1:1문의</a></li>
+               			<li class="sub_li"><a href="<%=cp%>/faq/list" data-hover="FAQ">FAQ</a>
+               		</ul>
+				</li>
 			</ul>
       </div>
    </div>
@@ -147,7 +160,7 @@
          <div class="entry" style="margin: 0px;" align="center">
             <ul>
                <li style="list-style: none;">
-                  <input id="inputline" type="search" placeholder="주소입력창">
+                  <input id="inputline" type="search" placeholder="주소입력창" value="">
                   <button id="inputbutton" type="button">검색</button>
                </li>
             </ul>

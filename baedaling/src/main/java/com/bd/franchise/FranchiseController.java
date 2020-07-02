@@ -99,6 +99,18 @@ public class FranchiseController {
 		return map;
 	}
 	
+	
+	@RequestMapping(value="review")
+	public String review(
+			@RequestParam int restaurantsNum,
+			Model model
+			) throws Exception{
+		
+		
+		
+		return "franchise/reviewList";
+	}
+	
 }
 
 

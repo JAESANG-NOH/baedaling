@@ -39,7 +39,15 @@ $(function() {
 		    plotOptions: {
 		        pie: {
 		            innerSize: 100,
-		            depth: 45
+		            depth: 45,
+		            colors: [
+			            '#38BCC6', 
+			            '#0588A9',
+			            '#89D4E8',
+			            '#F2F2F2',
+			            '#D0ECF3',
+			            '#0CA7D7'
+			        ],
 		        }
 		    
 		    },
@@ -47,6 +55,63 @@ $(function() {
 		});
 	});
 });
+
+$(function() {
+	var url ="<%=cp%>/dashboard/barChart?restaurantsNum=${restaurantsNum}";
+	$.getJSON(url, function(data) {
+		console.log(data);
+		// Create the chart
+		Highcharts.chart('barContainer', {
+		    chart: {
+		        type: 'column'
+		    },
+		    title: {
+		        text: '2020년 월별 판매현황'
+		    },
+		    accessibility: {
+		        announceNewData: {
+		            enabled: true
+		        }
+		    },
+		    xAxis: {
+		        type: 'category'
+		    },
+		    yAxis: {
+		        title: {
+		            text: '총 판매금액'
+		        }
+
+		    },
+		    legend: {
+		        enabled: false
+		    },
+		    plotOptions: {
+		        series: {
+		            borderWidth: 0,
+		            dataLabels: {
+		                enabled: true
+		            },
+		            colors: [
+			            '#38BCC6', 
+			            '#0588A9',
+			            '#89D4E8',
+			            '#FAF0DA',
+			            '#F2F2F2',
+			            '#D0ECF3',
+			            '#0CA7D7',
+			            '#FAC44E'
+			            
+			        ]
+		        }
+		    },
+
+		    series: data
+
+		});
+
+	});
+});
+
 
 </script>
 </head>
@@ -152,14 +217,14 @@ $(function() {
 <div id="dashboard_box">
 <table id="dash_table2">
 	<tr id="dash_title">
-		<td colspan="3" style="padding-left : 20px;">
+		<td style="padding-left : 20px;">
 			연매출  <span style="color: #38BCC6;">${annual.annualSales} </span>원
 		</td>
 	</tr>
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" id="waiting_text" style="color: red;"></td>
-		<td width="200px;" id="waiting_text"></td>
-		<td width="200px;" id="waiting_text"></td>
+		<td width="100%">
+			<div id="barContainer"></div>
+		</td>
 	</tr>
 </table>
 </div>

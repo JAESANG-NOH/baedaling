@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
@@ -125,9 +124,7 @@ public class RecommendController {
 		SessionInfo info=(SessionInfo)session.getAttribute("user");
 		
 		String root = session.getServletContext().getRealPath("/");
-		System.out.println(root);
 		String pathname = root+"resource"+File.separator+"recommendboard";
-		System.out.println(pathname);
 		try {
 			dto.setUserId(info.getUserId());
 			dto.setUserName(info.getUserName());

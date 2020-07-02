@@ -96,6 +96,8 @@ function listPage(){
 	}
 	
 	url = url + purl;
+	$("#contentLayout").empty();
+	
 	var selector = "#contentLayout";
 	ajaxHTML(url, "get", query, selector);
 }
@@ -131,23 +133,23 @@ $(function(){
 			  width: 600,
 			  title: '메뉴 정보',
 			  open: function(){
-				var f = document.readMenuForm;
 				
 				var url = "<%=cp%>/franchise/read";
 				var query = "menuNum="+menuNum;
 				var fn = function(data){
 					var dto = data.dto;
+					var menuNum = dto.menuNum;
 					var menuName = dto.menuName;
 					var menuPrice = dto.menuPrice;
 					var saveFilename = dto.saveFilename;
 					
-					f.menuName.value = menuName;
-					f.menuPrice.value = menuPrice;
+					$("#readMenu-dialog input[name=menuNum]").val(menuNum);
+					$("#readMenu-dialog input[name=menuName]").val(menuName);
+					$("#readMenu-dialog input[name=menuPrice]").val(menuPrice);
 					
 					$(".detail-image").attr("src", "<%=cp%>/uploads/menu/"+saveFilename);
-			};
+				};
 				ajaxJSON(url, "get", query, fn);
-				  
 			  },
 			  
 			  close: function(event, ui) {
@@ -155,45 +157,171 @@ $(function(){
 		});
 	});
 });
+
+$(function(){
+	$("body").on("click",".buyAdd",function(){
+		var totalBuyAmt = parseInt($("#totalBuyAmt").text());
+		
+		var menuNum = $(this).closest("table").find("input[name=menuNum]").val();
+		var menuName = $(this).closest("table").find("input[name=menuName]").val();
+		var menuPrice = parseInt($(this).closest("table").find("input[name=menuPrice]").val());
+		var qty = 1;
+		
+		var t = "#buyTr"+menuNum;
+		if($(t).length){
+			qty = $(t+" input[name=quantity]").val();
+			if(! qty){
+				qty = 0;
+			}
+			
+			pty = parseInt(qty)+1;
+			
+			$(t+" input[name=quantity]").val(pty);
+			$(t+" .productPrice").text(pty*menuPrice);
+			
+			totalBuyAmt = totalBuyAmt + menuPrice;
+			$("#totalBuyAmt").text(totalBuyAmt);
+			$('#readMenu-dialog').dialog("close");
+			
+			return;
+		}
+		
+		
+		var $tr, $td, $input;
+		
+		var vprice = "<span class='productPrice'>" + menuPrice + "</span>원";
+		
+		$tr = $("<tr height='40px'>");
+		$td = $("<td>",{colspan:"3",style:"padding: 15px; font-size: 14px;", html:menuName});
+		$tr.append($td);
+		$("#buyList").append($tr);
+		
+		$tr = $("<tr height='40px' id='buyTr"+menuNum+"'>");
+		
+		$td = $("<td>",{style:"padding: 15px; font-size: 14px;"});
+		$input = $("<input>",{"type":"button", "class":"btn buyCancel", "data-code":menuNum, "data-price":menuPrice, "value":"X"});
+		$td.append($input);
+		$tr.append($td);
+		
+		$td  = $("<td>",{html:vprice});
+		$tr.append($td);
+		
+		$td = $("<td>");
+		$input = $("<input>",{"type":"button", "style":"background-color:white; width: 23px; border: 0.5px solid #38BCC6;", "class":"btn btnMinus", "value":"-"});
+		$td.append($input);
+		$input = $("<input>",{"type":"text","style":"width: 23px;", "name":"quantity", "value":qty, "readonly":"readonly"});
+		$td.append($input);
+		$input = $("<input>",{"type":"button", "style":"background-color:white; width: 23px; border: 0.5px solid #38BCC6;", "class":"btn btnPlus", "value":"+"});
+		$td.append($input);
+		
+		$tr.append($td);
+		$("#buyList").append($tr);
+		$('#readMenu-dialog').dialog("close");
+		
+		totalBuyAmt=totalBuyAmt+menuPrice;
+		$("#totalBuyAmt").text(totalBuyAmt);
+	
+	});
+});
+
+$(function(){
+	$("body").on("click",".buyCancel", function(){
+		var menuNum = $(this).attr("data-code")
+		var menuPrice = parseInt($(this).attr("data-price"));
+		var t = "#buyTr"+menuNum;
+		var qty = $(t+" input[name=quantity]").val();
+		if(! qty){
+			qty = 0;
+		}
+		
+		$(t).prev().remove();
+		$(t).remove();
+		
+		
+		var totalBuyAmt = parseInt($("#totalBuyAmt").text());
+		totalBuyAmt=totalBuyAmt-(menuPrice*parseInt(qty));
+		$("#totalBuyAmt").text(totalBuyAmt);
+	});
+});
+
+$(function(){
+	$("body").on("click",".btnPlus", function(){
+		var menuPrice = parseInt($(this).closest("tr").find(".buyCancel").attr("data-price"));
+		var qty = parseInt($(this).parent().children("input[name=quantity]").val());
+		var productPrice = parseInt($(this).closest("tr").find(".productPrice").text());
+		var totalBuyAmt = parseInt($("#totalBuyAmt").text());
+		
+		qty = qty +1;
+		productPrice = productPrice+menuPrice;
+		
+		$(this).prev().val(qty);
+		$(this).closest("tr").find(".productPrice").text(productPrice);
+		
+		totalBuyAmt=totalBuyAmt+menuPrice;
+		$("#totalBuyAmt").text(totalBuyAmt);
+	});
+	
+	$("body").on("click",".btnMinus", function(){
+		var menuPrice = parseInt($(this).closest("tr").find(".buyCancel").attr("data-price"));
+		var qty = parseInt($(this).parent().children("input[name=quantity]").val());
+		var productPrice = parseInt($(this).closest("tr").find(".productPrice").text());
+		var totalBuyAmt = parseInt($("#totalBuyAmt").text());
+		
+		if(qty<=0){
+			return;
+		}
+		
+		qty = qty-1;
+		productPrice = productPrice-menuPrice;
+		
+		$(this).next().val(qty);
+		$(this).closest("tr").find(".productPrice").text(productPrice);
+		
+		totalBuyAmt=totalBuyAmt-menuPrice;
+		$("#totalBuyAmt").text(totalBuyAmt);
+	});
+});
+
+$(function(){
+	$("body").on("click",".allCancel", function(){
+		$("#buyList").remove();
+		$("#totalBuyAmt").text(0);
+	})
+});
+
 </script>
 </head>
 <body>
-<div class="sideOrderBox" >
+
+<div class="sideOrderBox" style="overflow: scroll; max-height: 400px;">
 <aside class="sideOrderBox2">
-   <table style="width: 330px; border:1px solid #DCDBDB; height: 200px; background-color: white;">
-      <tr id="orderBoxTitile">
-         <td colspan="3" style="color: white; font-size: 15.4px;">&nbsp; 주문표<a href=""><span style="float: right; padding-right: 20px; color: white;"><i class="fas fa-trash-alt"></i></span></a> </td>
-      </tr>
-   
-      <tr height="40px;">
-         <td colspan="3" style="padding: 15px; font-size: 14px;">양념치킨</td>
-      </tr>
+   <table style="width: 330px; border:1px solid #DCDBDB; height: 200px; background-color: white; max-height: 400px;">
       
-      <tr height="40px;">
-         <td style="padding: 15px; font-size: 14px;"><button style="width: 23px;">X</button></td>
-         <td>15,000 원</td>
-         <td><button style="width: 23px; background-color:white; border:0.5px solid #38BCC6;"><span style="color: #38BCC6;">-</span></button> 1 <button style="background-color:white; width: 23px; border: 0.5px solid #38BCC6;"><span style="color: #38BCC6;">+</span></button> </td>
-      </tr>
+	      <tr class="orderBoxTitile">
+	         <td colspan="3" style="color: white; font-size: 15.4px;">&nbsp; 주문표<a class="allCancel"><span style="float: right; padding-right: 20px; color: white;"><i class="fas fa-trash-alt"></i></span></a> </td>
+	      </tr>
+	   
+	     
+	      <tbody id = "buyList">
+	      </tbody>
+	      
+	      <tr height="35px;">
+	         <td colspan="3" style="border-top:1.5px solid #DCDBDB; text-align: right;">배달요금 2,000원 별도</td>
+	      </tr>
+	      
+	      <tr height="40px;">
+	         <td  colspan="3" style="background-color:#fff8eb; color:red; text-align: right; font-size: 15px; border-top:1px solid #DCDBDB; "><span>합계 :</span> <span id="totalBuyAmt">0</span><span>원</span></td>
+	      </tr>
+	      
+	      <tr height="46px;" style="padding-top: 10px;">
+	         <td colspan="3" style="background-color:#38BCC6; text-align: center; color:white; font-size: 17px; border-top:1px solid #DCDBDB; ">주문하기</td>
+	      </tr>
       
-      <tr height="35px;">
-         <td colspan="3" style="border-top:1.5px solid #DCDBDB; text-align: right;">배달요금 2,000원 별도</td>
-      </tr>
-      
-      <tr height="40px;">
-         <td colspan="3" style="background-color:#fff8eb; color:red; text-align: right; font-size: 15px; border-top:1px solid #DCDBDB; ">합계 : 30,000 원</td>
-      </tr>
-      
-      <tr height="46px;" style="padding-top: 10px;">
-         <td colspan="3" style="background-color:#38BCC6; text-align: center; color:white; font-size: 17px; border-top:1px solid #DCDBDB; ">주문하기</td>
-      </tr>
    </table>
 
 
 </aside>
 </div>
-
-
-
 
 	<div class="storeBox">
 		<div class="store_basic">
@@ -229,17 +357,6 @@ $(function(){
 					</li>
 				</ul>
 			</div>
-			
-			<!-- <div class="st_subClick" style="height: 40px;">
-				<button id="st_menu_btn">
-					메뉴<span style="padding-left: 3px;">42</span>
-				</button>
-				<button id="st_review_btn">
-					리뷰<span style="padding-left: 3px;">192</span>
-				</button>
-				<button id="st_info">정보</button>
-			</div> -->
-
 
 			<div style="clear: both;">
 				<ul class="tabs">				 
@@ -248,15 +365,8 @@ $(function(){
 						<li id="tab-2" data-tab="2" style="width: 150px">정보</li>
 				</ul>
 			</div>
-			
 			<div id="contentLayout"></div>
-			
-			
-			
-			
 		</div>
-
-
 
 	</div>
 

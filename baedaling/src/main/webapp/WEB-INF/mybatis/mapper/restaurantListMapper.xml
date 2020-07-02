@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rsl">
+
+	<sql id="where-list">
+		<choose>
+			<when test="condition=='userId'">
+				INSTR(userId, #{keyword}) &gt;=1
+			</when>
+			<otherwise>
+				INSTR(${condition}, #{keyword}) &gt;=1
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 가게 개수 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*)
+		FROM restaurants r
+		LEFT OUTER JOIN user1 u ON r.userIdx = u.userIdx
+		LEFT OUTER JOIN restaurantsInfo r1 ON r.restaurantsNum=r1.restaurantsNum
+		<where>
+			<if test="keyword!=null and keyword!='' ">
+				<include refid="where-list"/>
+			</if>
+			<if test="enabled!=''">
+				AND enabled = #{enabled}
+			</if>
+				AND separate=1
+		</where>
+		
+	</select>
+	
+	<!-- 가게 리스트  -->
+	<select id="listRestaurant" parameterType="map" resultType="com.bd.restaurantList.RestaurantList">
+		SELECT u.userIdx, name, u.userId, mutualName, licenseNumber, enabled,
+				addr1, addr2
+		FROM restaurants r
+		LEFT OUTER JOIN user1 u ON r.userIdx = u.userIdx
+		LEFT OUTER JOIN restaurantsInfo r1 ON r.restaurantsNum=r1.restaurantsNum
+		
+		<where>
+			<if test="keyword!=null and keyword!='' ">
+				<include refid="where-list"/>
+			</if>
+			<if test="enabled!=''">
+				AND enabled = #{enabled}
+			</if>
+				AND separate=1
+		</where>
+		
+		ORDER BY u.userIdx DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY 
+	</select>
+	
+	<!-- 가게 상세표 -->
+	<select id="readUser" parameterType="String" resultType="com.bd.restaurantList.RestaurantList">
+		SELECT u.userIdx, name, u.userId, mutualName, licenseNumber, u.enabled,
+				addr1, addr2
+		FROM restaurants r
+		LEFT OUTER JOIN user1 u ON r.userIdx = u.userIdx
+		LEFT OUTER JOIN restaurantsInfo r1 ON r.restaurantsNum=r1.restaurantsNum
+		WHERE userId=#{userId}
+	</select>
+	
+	<!-- alter창 가게수정 -->
+	<update id="updateUserEnabled" parameterType="map">
+		UPDATE user1 SET enabled=#{enabled} WHERE userId=#{userId}
+	</update>
+	
+
+</mapper>
