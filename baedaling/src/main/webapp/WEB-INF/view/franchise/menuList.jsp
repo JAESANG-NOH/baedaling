@@ -39,43 +39,40 @@
 
 <div id="readMenu-dialog" style="display: none;">
 		<form name="readMenuForm">
-			<table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
+			<table style="width: 100%;  margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			  <tr>
-			      <td>
-			        <img class="detail-image"  onerror="this.src='<%=cp%>/resource/img/ready.jpg'">
+			      <td colspan="2">
+			        <img class="detail-image"  onerror="this.src='<%=cp%>/resource/img/ready.jpg'" style="display: block; width: 100%;  height: 300px;">
 			      </td>
 			  </tr>
 			
 			  <tr>
-			      <td>
+			      <td colspan="2">
 			        <input class="detail-text" type="text" name="menuName" readonly="readonly">
 			      </td>
 			  </tr>
 			
 			  <tr>
 			     
-			      <td>
+			      <td colspan="2">
 			        <input class="detail-price" type="text" name="menuPrice" readonly="readonly">
 			      </td>
 			  </tr>
 			
 			  <tr>
 			      
-			      <td>
-			       	<span>수량 : </span>
-			       	<span><input type="button" class="btn btnPlus" value="-"></span>
-			       	<span id="buyQty">0</span>개
-			       	<span><input type="button" class="btn btnMinus" value="+"></span>
+			      <td style="width: 50%; text-align: center">
+			       	<span class="buyAdd">구매</span>
+			      </td>
+			      <td style="width: 50%; text-align: center">
+			      	<span>취소</span>
 			      </td>
 			  </tr>
-			  
 			  <tr>
-			      
-			      <td >
-			        asd
-			      </td>
+			  	<td colspan="2">
+			  		<input type="hidden" name="menuNum">
+			  	</td>
 			  </tr>
-			  
 			 
 			  </table>
 		</form>
