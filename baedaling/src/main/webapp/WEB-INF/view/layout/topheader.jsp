@@ -22,7 +22,11 @@
 			<a href="#">관리자</a>
 		</c:if>
 		<c:if test="${sessionScope.user.separate=='1'}">
+<<<<<<< HEAD
 			<a href="<%=cp%>/dashboard/orderlist?restaurantsNum=${restaurantsNum}">점주</a>
+=======
+			<a href="<%=cp%>/dashboard/orderlist?restaurantsNum=21">점주</a>
+>>>>>>> branch 'master' of https://github.com:443/JAESANG-NOH/baedaling
 		</c:if>
 </div>
 </c:if>
