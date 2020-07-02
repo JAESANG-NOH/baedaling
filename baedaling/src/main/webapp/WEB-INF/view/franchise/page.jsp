@@ -284,7 +284,7 @@ $(function(){
 
 $(function(){
 	$("body").on("click",".allCancel", function(){
-		$("#buyList").remove();
+		$("#buyList").empty();
 		$("#totalBuyAmt").text(0);
 	})
 });
@@ -345,7 +345,7 @@ $(function(){
 									class="far fa-question-circle"></i></a> </span>
 						</li>
 					</ul>
-					<input type="hidden" name = "restaurantsNum" value = "${dto.restaurantsNum }">
+					<input type="hidden" name = "restaurantsNum" value = "${dto.restaurantsNum}">
 				</div>
 			</div>
 			<div id="st_notice">

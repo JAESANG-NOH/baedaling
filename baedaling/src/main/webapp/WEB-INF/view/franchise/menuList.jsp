@@ -47,25 +47,37 @@
 			  </tr>
 			
 			  <tr>
-			      <td colspan="2">
-			        <input class="detail-text" type="text" name="menuName" readonly="readonly">
+			      <td colspan="2" class="detail-text" id="menuName" style="text-align: center; font-size: 25px; padding-top :15px;">
+			       <!--  <input class="detail-text" type="text" name="menuName" readonly="readonly"> -->
+			      		치즈케이크 블랙타이거피자 
 			      </td>
 			  </tr>
-			
 			  <tr>
-			     
-			      <td colspan="2">
-			        <input class="detail-price" type="text" name="menuPrice" readonly="readonly">
-			      </td>
+			  	<td style="text-align:center; color: #999999; padding: 10px;" colspan="2">인기 메뉴 블랙타이거 슈림프와 단종 메뉴 치즈케이크 샌드 콜라보</td>
 			  </tr>
 			
+			  <tr style="height: 50px;">
+			      <td style="border-top: 1px solid #f0f0f0; border-bottom:1px solid #f0f0f0;">
+			      	가격 
+			        <!-- <input class="detail-price" type="text" name="menuPrice" readonly="readonly"> -->
+			      </td >
+			      <td style="border-top: 1px solid #f0f0f0; border-bottom:1px solid #f0f0f0; text-align: right;">
+			      	<span style="text-align:right; font-weight: bold; padding-right: 15px; font-size: 14px;">30,000</span>원 
+			      </td>
+			  </tr>
+					
+				<tr height="60px;" style="background-color: #f0f0f0;">
+					<td style="font-weight: bold;">총 주문금액</td>
+					<td style="font-size: 23px; color: red; text-align: right; padding-right: 10px;">35,900 원</td>
+				</tr>
+				
 			  <tr>
 			      
-			      <td style="width: 50%; text-align: center">
-			       	<span class="buyAdd">구매</span>
+			      <td style="width: 50%; text-align: center; background-color:#38BCC6; color: white; height: 60px;">
+			       	<span class="buyAdd" style="font-weight: bold;">주문표에 추가</span>
 			      </td>
-			      <td style="width: 50%; text-align: center">
-			      	<span>취소</span>
+			      <td style="width: 50%; text-align: center; background-color:#555555; color: white; height: 60px;">
+			      	<span style="font-weight: border: ;">취소</span>
 			      </td>
 			  </tr>
 			  <tr>
