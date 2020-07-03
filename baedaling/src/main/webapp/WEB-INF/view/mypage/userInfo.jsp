@@ -8,17 +8,17 @@
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 
-<div class="container">
+<div class="mypage_container">
     <div class="body-container">
         <div class="body-left">
             <div class="list-group">
                 <div class="list-group-item lefthead"> 마이페이지</div>
                 <a href="<%=cp%>/mypage/userInfo" class="list-group-item active">회원정보</a>
-                <a href="<%=cp%>/mypage/order/list" class="list-group-item">주문내역</a>
+                <a href="<%=cp%>/mypage/userorderList" class="list-group-item">주문내역</a>
                 <a href="#" class="list-group-item">내가 쓴 게시물</a>
                 <a href="#" class="list-group-item">내가 쓴 리뷰</a>
                 <a href="#" class="list-group-item">내가 쓴 댓글</a>
-                <a href="<%=cp%>/mypage/complete/message" class="list-group-item">회원정보수정</a>
+                <a href="<%=cp%>/mypage/message" class="list-group-item">회원정보수정</a>
                 <a href="#" class="list-group-item">회원탈퇴</a>
             </div>     
         </div>
