@@ -172,5 +172,33 @@ ORDER BY bestSales desc
 		DELETE FROM restaurantfile WHERE ${field} = #{restaurantsNum}
 	</delete>	
  
-</mapper>
+ 
+ 
+ 
+ <!--  리뷰
+ <select id="reviewList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
+ 	SELECT rv.foodorderNum, rv.content, TO_CHAR(rv.created,'YY-MM-DD'), starCount, reviewNum, u.userName, rm.menuName,reviewNum
+	FROM review rv
+	JOIN restaurants r ON rv.restaurantsNum = r.restaurantsNum
+	JOIN restaurantMenu rm ON r.restaurantsNum = rm.restaurantsNum
+	JOIN user1 u ON rv.userIdx = u.userIdx
+	JOIN foodorder f ON rv.foodorderNum = f.foodorderNum
+	JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+	WHERE r.restaurantsNum = #{restaurantsNum}
+	ORDER BY f.num DESC
+	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+ </select>
+ 
+ 
+ 	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0)
+		FROM review rv
+		JOIN restaurants r ON rv.restaurantsNum = r.restaurantsNum
+		JOIN restaurantMenu rm ON r.restaurantsNum = rm.restaurantsNum
+		JOIN user1 u ON rv.userIdx = u.userIdx
+		JOIN foodorder f ON rv.foodorderNum = f.foodorderNum
+		JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+        where r.restaurantsNum =#{restaurantsNum}
+	 </select>
+ --></mapper>
 

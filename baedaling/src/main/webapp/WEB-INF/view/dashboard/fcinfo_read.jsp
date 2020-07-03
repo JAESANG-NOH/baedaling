@@ -84,6 +84,7 @@ function updateSend() {
 
 </aside>
 </div>
+
 <div style="width: 25px; height:5px; background-color: #F9F9FA">&nbsp;</div>
 <div class="storeBox">
 <div class="store_basic">

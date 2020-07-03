@@ -55,7 +55,7 @@ $(function(){
 				alert("다시 시도해주세요");
 			}
 			
-			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum=21";
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum="+restaurantsNum;
 		}
 
 		//alert(foodorderNum);
@@ -78,7 +78,7 @@ $(function(){
 				alert("다시 시도해주세요");
 			}
 			
-			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum=21";
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum="+restaurantsNum;
 		}
 
 		//alert(foodorderNum);
@@ -101,7 +101,7 @@ $(function(){
 				alert("다시 시도해주세요");
 			}
 			
-			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum=21";
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum="+restaurantsNum;
 		}
 
 		//alert(foodorderNum);
@@ -126,7 +126,7 @@ $(function(){
 			if(state == false){
 				alert("다시 시도해주세요");
 		}
-			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum=21";
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum="+restaurantsNum;
 		}
 		ajaxJSON(url, "post", query, fn);
 	});

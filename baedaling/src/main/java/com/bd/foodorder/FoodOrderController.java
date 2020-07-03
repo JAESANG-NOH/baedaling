@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.FileManager;
+import com.bd.common.MyUtil;
+import com.bd.user.SessionInfo;
 
 
 @Controller("foodorder.foodOrderController")
@@ -27,6 +30,8 @@ public class FoodOrderController {
 	private FoodOrderService service;
 	@Autowired
 	private FileManager fileManager;
+	@Autowired
+	private MyUtil myUtil;
 	
 	@RequestMapping(value="orderlist")
 	public String orderList(
@@ -327,5 +332,55 @@ public class FoodOrderController {
 		return model;
 		
 	}
+	
+	
+	@RequestMapping("myReviewList")
+	public String reviewList(
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			HttpSession session,
+			HttpServletRequest req,
+			Model model) {
+		
+		int rows = 10; // 한 화면에 보여주는 게시물 수
+		int total_page = 0;
+		int reviewCount = 0;
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		Map<String, Object> map = new HashMap<String, Object>();
+		reviewCount  = service.reviewCount(map);
+
+		   if(reviewCount != 0)
+	            total_page = myUtil.pageCount(rows, reviewCount) ;
+
+	        if(total_page < current_page) 
+	            current_page = total_page;
+
+	        int offset = (current_page-1) * rows;
+			if(offset < 0) offset = 0;
+	        map.put("offset", offset);
+	        map.put("rows", rows);
+	        map.put("restaurantsNum ",info.getRestaurantsNum());
+	        System.out.println(info.getRestaurantsNum());
+	     List<FoodOrder> list = service.reviewList(map);
+	     int listNum =0;
+	     int n = 0;
+	     
+	     for(FoodOrder dto : list) {
+	    	 listNum = reviewCount - (offset + n);
+	    	 dto.setListNum(listNum);
+	    	 n++;
+	     }
+	     
+	     //페이징 (ajax)
+	     String paging = myUtil.pagingMethod(current_page, total_page, "listPage");
+	     model.addAttribute("list", list);
+	     model.addAttribute("pageNo", current_page);
+	     model.addAttribute("reviewCount", reviewCount);
+	     model.addAttribute("total_page", total_page);
+	     model.addAttribute("paging", paging);		
+		
+		 return "dashboard/myReviewList";
+	}
+	
+	
 	
 }

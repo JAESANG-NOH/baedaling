@@ -29,5 +29,10 @@ public interface FoodOrderService {
 	public void insertFile(FoodOrder dto) throws Exception;
 	public FoodOrder readFile(int fileNum);
 	public void deleteFile(Map<String, Object> map) throws Exception;
+	
+	
+	//리뷰
+	public List<FoodOrder> reviewList(Map<String, Object> map);
+	public int reviewCount(Map<String, Object> map);
 }
 

@@ -215,6 +215,29 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		return dto;
 	}
 
+	@Override
+	public List<FoodOrder> reviewList(Map<String, Object> map) {
+		List<FoodOrder> list = null;
+		try {
+			list =dao.selectList("fo.reviewList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int reviewCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("fo.dataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+		return result;
+	}
+
 
 	
 	

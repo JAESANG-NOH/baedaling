@@ -45,6 +45,54 @@ public class FoodOrder {
 	private String saveFilename;
 	private int separate;
 	private List<MultipartFile> upload;
+	
+	// 리뷰리스트 & 댓글 
+	private String content;
+	private String created;
+	private int starCount;
+	private int reviewNum;
+	private String userName;
+	private int listNum;
+	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	public int getStarCount() {
+		return starCount;
+	}
+	public void setStarCount(int starCount) {
+		this.starCount = starCount;
+	}
+	public int getReviewNum() {
+		return reviewNum;
+	}
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
+
+
+	
 
 	public int getSeparate() {
 		return separate;
