@@ -65,12 +65,7 @@ function forwordreview(foodOrderNum,restaurantsNum){
                  </div>
 			<div class="order_container">
 				<div style="width: 100%; margin: 20px auto;">
-			
-<<<<<<< HEAD
-					<form name="orderForm" method="post">
-=======
-					<form name="orderForm" method="GET">
->>>>>>> branch 'master' of https://github.com:443/JAESANG-NOH/baedaling
+				<form name="orderForm" method="GET">
 					<table style="margin: auto; width: 800px; border-spacing: 0px;" >
 							<tr height="35px;">
 								<td align="left" style="font-size: 13px;">
