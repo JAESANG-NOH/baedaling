@@ -200,5 +200,4 @@ public class MypageController {
 	public String orderDetail() throws Exception {
 		return ".mypage.orderdetail";
 	}
-	
 }

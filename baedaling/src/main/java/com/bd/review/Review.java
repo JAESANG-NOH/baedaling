@@ -10,7 +10,49 @@ public class Review {
 	private int restaurantsNum;
 	private int savefilename;
 	
+	private int num;
+	private int listNum;
+	private String userName;
+	private String subject;
+	private String hitCount;
+	private int replyCount;
 	
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getHitCount() {
+		return hitCount;
+	}
+	public void setHitCount(String hitCount) {
+		this.hitCount = hitCount;
+	}
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
 	public int getSavefilename() {
 		return savefilename;
 	}
@@ -59,6 +101,4 @@ public class Review {
 	public void setRestaurantsNum(int restaurantsNum) {
 		this.restaurantsNum = restaurantsNum;
 	}
-	
-	
 }

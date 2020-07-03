@@ -31,7 +31,7 @@
 			<div class="order_container">
 				<div style="width: 100%; margin: 20px auto;">
 			
-					<form name="orderForm" action="<%=cp%>/mypage/userorderList" method="post">
+					<form name="orderForm" method="post">
 					<table style="margin: auto; width: 800px; border-spacing: 0px;" >
 							<tr height="35px;">
 								<td align="left" style="font-size: 13px;">
@@ -73,7 +73,7 @@
 					<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 					   <tr height="35">
 							<td align="center">
-						        ${dataCount==0? "등록된 게시물이 없습니다." : paging}
+						        ${dataCount==0? "주문 내역이 없습니다." : paging}
 							</td>
 					   </tr>
 					</table>
