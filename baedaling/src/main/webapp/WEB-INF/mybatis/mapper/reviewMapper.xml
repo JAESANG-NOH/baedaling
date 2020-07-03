@@ -9,4 +9,6 @@
 		INSERT INTO review(foodOrderNum,userIdx,content,created,starCount,reviewNum,restaurantsNum) 
 		VALUES(#{foodOrderNum},#{userIdx},#{content},SYSDATE,#{starCount},#{reviewNum},#{restaurantsNum})
 	</insert>
+	
+
 </mapper>

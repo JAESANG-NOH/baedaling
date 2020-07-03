@@ -37,4 +37,7 @@
 		VALUES(#{restaurantsNum},#{fctel},#{mutualName},#{licenseNumber})
 	</insert>
 	
+	<select id="readRestaurantsNum" parameterType="Integer" resultType="Integer">
+		SELECT RestaurantsNum FROM restaurants WHERE userIdx = #{userIdx}
+	</select>
 </mapper>
