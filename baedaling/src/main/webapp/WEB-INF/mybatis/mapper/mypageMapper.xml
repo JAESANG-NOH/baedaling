@@ -24,15 +24,15 @@
 	WHERE userIdx = #{userIdx}
 </update>
 
-	<select id="dataCount" parameterType="map" resultType="Integer">
-		SELECT NVL(COUNT(*),0)
-		FROM foodorder f
-		JOIN user1 u1 ON f.userIdx = u1.userIdx
-		LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
-    	LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
-    	LEFT OUTER JOIN restaurantsInfo ri ON ri.restaurantsNum = f.restaurantsNum
-    	WHERE u1.userIdx = #{userIdx}
-	</select>
+<select id="dataCount" parameterType="map" resultType="Integer">
+	SELECT NVL(COUNT(*),0)
+	FROM foodorder f
+	JOIN user1 u1 ON f.userIdx = u1.userIdx
+	LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+    LEFT OUTER JOIN restaurantsInfo ri ON ri.restaurantsNum = f.restaurantsNum
+    WHERE u1.userIdx = #{userIdx}
+</select>
 
 <!-- 주문내역 -->
 <select id="orderList" parameterType="map" resultType="com.bd.mypage.Mypage">
@@ -48,8 +48,10 @@
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>
 
-
-
+<!-- 리뷰 작성 확인 -->
+<select id="checkReview" parameterType="map" resultType="Integer">
+	SELECT COUNT(*) FROM review WHERE restaurantsNum=#{restaurantsNum} AND foodOrderNum=#{foodOrderNum} AND userIdx=#{userIdx}
+</select>
 
 
 </mapper>

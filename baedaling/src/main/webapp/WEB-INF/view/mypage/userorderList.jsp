@@ -7,6 +7,41 @@
 %>
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_order.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
+<script type="text/javascript">
+
+$(function(){
+	$("body").on("click",".review_btn",function(){
+		var url = "<%=cp%>/mypage/checkReview";
+		var foodOrderNum = $(this).attr("data-orderNum");
+		var restaurantsNum = $(this).attr("data-restaurantsNum");
+		var query = "foodOrderNum="+foodOrderNum+"&restaurantsNum="+restaurantsNum;
+		
+		$.ajax({
+			type:"post"
+			,url:url
+			,data:query
+			,dataType:"json"
+			,success:function(data) {
+				var ok = data.passed;
+				if(ok=="true"){
+					forwordreview(foodOrderNum,restaurantsNum);
+				} else {
+					alert("이미 리뷰를 작성하셨습니다.")
+				}
+			}
+		    ,error:function(jqXHR) {
+		    	console.log(e.responseText);
+		    }
+		});
+		
+	});
+});
+</script>
+<script>
+function forwordreview(foodOrderNum,restaurantsNum){
+  	location.href = "<%=cp%>/review/write?foodOrderNum="+foodOrderNum+"&restaurantsNum="+restaurantsNum;
+}
+</script>
 
 <div class="mypage_container">
     <div class="body-container">
@@ -31,7 +66,11 @@
 			<div class="order_container">
 				<div style="width: 100%; margin: 20px auto;">
 			
+<<<<<<< HEAD
 					<form name="orderForm" method="post">
+=======
+					<form name="orderForm" method="GET">
+>>>>>>> branch 'master' of https://github.com:443/JAESANG-NOH/baedaling
 					<table style="margin: auto; width: 800px; border-spacing: 0px;" >
 							<tr height="35px;">
 								<td align="left" style="font-size: 13px;">
@@ -62,9 +101,9 @@
 							<td>${dto.foodOrderTotalPrice}원</td>
 							<td>${dto.foodOrderDate}</td>
 							<td>
-								<button type="button" class="btn btn1">리뷰쓰기</button> <br>
-								<button type="button" class="btn btn2">가게보기</button> <br>
-								<button type="button" class="btn btn3" onclick="javascript:location.href='<%=cp%>/mypage/orderdetail';">주문상세</button>
+								<button type="button" class="btn btn1 review_btn" data-orderNum="${dto.foodOrderNum}" data-restaurantsNum="${dto.restaurantsNum}">리뷰쓰기</button> <br>
+								<button type="button" class="btn btn2" onclick="javascript:location.href='<%=cp%>/franchise/page?restaurantsNum=${dto.restaurantsNum}'">가게보기</button> <br>
+								<button type="button" class="btn btn3" onclick="">주문상세</button>
 							</td>
 						</tr>	
 						</c:forEach>
@@ -85,9 +124,6 @@
 							</td>				
 						</tr>			
 					</table>
-						<input type="hidden" name="restaurantsNum" value="${dto.restaurantsNum}">
-						<input type="hidden" name="foodOrderNum" value="${dto.foodOrderNum}">
-					
 					</form>
 					</div>
 				</div>

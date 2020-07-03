@@ -32,9 +32,6 @@
 	margin : 6px;
 	display: inline-block;
 }
- .fc_list_table :hover{	
-    background: #e1fbfd;
-}
 .fc_list_table b{
 	font-size: 18px;
 }

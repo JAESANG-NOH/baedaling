@@ -1,8 +1,5 @@
 package com.bd.review;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,24 +23,15 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<Review> mycontentList(Map<String, Object> map) {
-		List<Review> list = null;
+	public double starpoint(int num) {
+		double point = 0.0;
 		try {
-			list = dao.selectList("rv.mycontentList", map);
+			point = dao.selectOne("star.readStar",num);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return list;
+		return point;
 	}
 
-	@Override
-	public int dataCount(Map<String, Object> map) {
-		int result = 0;
-		try {
-			result = dao.selectOne("rv.dataCount", map);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
+
 }

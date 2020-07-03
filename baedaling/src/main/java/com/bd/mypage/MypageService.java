@@ -12,4 +12,5 @@ public interface MypageService {
 	public List<Mypage> orderlist(Map<String, Object> map);
 	public int dataCount(Map<String, Object> map);
 	
+	public int checkReview(Map<String, Object>map);
 }
