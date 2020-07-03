@@ -25,5 +25,5 @@ public interface UserService {
 	public List<User> listUser(Map<String, Object> map);
 	
 	public void generatePwd(User dto) throws Exception;
-	public int readRestaurantsNum(String userIdx);
+	public int readRestaurantsNum(int userIdx);
 }

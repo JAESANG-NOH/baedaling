@@ -47,12 +47,13 @@ public class UserController {
 		info.setSeparate(dto.getSeparate());
 		info.setUserIdx(dto.getUserIdx());
 		
+		if(info.getSeparate()==1) {
+			int restaurantsNum = service.readRestaurantsNum(dto.getUserIdx());
+			info.setRestaurantsNum(restaurantsNum);
+		}
 		session.setMaxInactiveInterval(30*60);
 		session.setAttribute("user", info);
 		
-		if(info.getSeparate()==2) {
-			
-		}
 		
 		String uri=(String)session.getAttribute("preLoginURI");
 		session.removeAttribute("preLoginURI");

@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public int readRestaurantsNum(String userIdx) {
+	public int readRestaurantsNum(int userIdx) {
 		int result = 0;
 		try {
 			result = dao.selectOne("user.readRestaurantsNum",userIdx);
