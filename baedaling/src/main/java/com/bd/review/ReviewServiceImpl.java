@@ -22,5 +22,16 @@ public class ReviewServiceImpl implements ReviewService{
 		}
 	}
 
+	@Override
+	public double starpoint(int num) {
+		double point = 0.0;
+		try {
+			point = dao.selectOne("star.readStar",num);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return point;
+	}
+
 
 }

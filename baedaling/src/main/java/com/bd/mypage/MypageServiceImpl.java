@@ -1,6 +1,6 @@
 package com.bd.mypage;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,21 +58,24 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public boolean checkPwd(int userIdx, String userPwd) {
-		boolean result = false; 
+	public int dataCount(Map<String, Object> map) {
+		int result = 0;
 		try {
-			 Map<Object, Object> map = new HashMap<>();
-			 map.put("userIdx", userIdx);
-			 map.put("userPwd", userPwd);
-			 
-			int count = dao.selectOne("mypage.checkPwd", map);
-			
-			 if(count==1) result = true;
-			 
+			result = dao.selectOne("mypage.dataCount", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
 
+	@Override
+	public List<Mypage> orderlist(Map<String, Object> map) {
+		List<Mypage> list = null;
+		try {
+			list = dao.selectList("mypage.orderList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

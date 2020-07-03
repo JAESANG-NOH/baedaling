@@ -144,7 +144,7 @@
 				<li><a href="<%=cp%>/notice/list" data-hover="공지사항">공지사항</a></li>
 				<li><a href="#" data-hover="고객센터">고객센터</a>
 					<ul class="top_bbs_sub2" style="padding: 0px;">
-               			<li class="sub_li"><a href="<%=cp%>/inquire/list" data-hover="1:1문의">1:1문의</a></li>
+               			<li class="sub_li"><a href="<%=cp%>/inquire/created" data-hover="1:1문의">1:1문의</a></li>
                			<li class="sub_li"><a href="<%=cp%>/faq/list" data-hover="FAQ">FAQ</a>
                		</ul>
 				</li>
