@@ -26,7 +26,7 @@ public class FranchiseController {
 		
 		Franchise dto= service.readBoard(restaurantsNum);
 		if(dto==null) {
-			return "redirect:/franchise/list?";
+			return "redirect:/restaurants/list";
 		}
 		
 		model.addAttribute("dto", dto);
