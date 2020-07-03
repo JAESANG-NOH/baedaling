@@ -78,4 +78,15 @@ public class MypageServiceImpl implements MypageService {
 		}
 		return list;
 	}
+
+	@Override
+	public int checkReview(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("mypage.checkReview",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

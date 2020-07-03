@@ -50,6 +50,10 @@ public class UserController {
 		session.setMaxInactiveInterval(30*60);
 		session.setAttribute("user", info);
 		
+		if(info.getSeparate()==2) {
+			
+		}
+		
 		String uri=(String)session.getAttribute("preLoginURI");
 		session.removeAttribute("preLoginURI");
 		if(uri==null)
