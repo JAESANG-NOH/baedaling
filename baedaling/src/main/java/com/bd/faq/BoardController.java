@@ -190,8 +190,5 @@ public class BoardController {
 		return "redirect:/faq/list?page="+page;
 	}
 	
-	@RequestMapping(value="imsi")
-	public String imsi() {
-		return ".faq.menuList";
-	}
+	
 }
