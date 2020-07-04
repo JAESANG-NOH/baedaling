@@ -79,16 +79,15 @@ margin: 0px;
 
 #dash_table{
 	width: 1400px;
-	height: 400px;
+	height: 100px;
 	margin-top : 0px;
 	margin-left : 320px;
 	background-color: white; 
 }
 
-
 #dash_table2{
 	width: 1400px;
-	height: 400px;
+	height: 100px;
 	margin-top: 20px;
 	margin-left: 320px;
 	background-color: white;
