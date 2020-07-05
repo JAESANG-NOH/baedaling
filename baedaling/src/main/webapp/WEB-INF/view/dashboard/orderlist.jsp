@@ -112,6 +112,30 @@ $(function(){
 
 
 
+$(function(){
+	$("body").on("click", ".btnOrderCancel", function(){
+		if(! confirm("주문을 취소할까요?"))
+		    return;
+		var foodorderNum=$(this).attr("data-foodorderNum");
+		var orderState = $(this).attr("data-orderState");
+		var url = "<%=cp%>/dashboard/updateState";
+		var query = "foodorderNum="+foodorderNum+"&orderState=" + orderState;
+		var fn = function(data) {
+			var state = data.state;
+			if(state == false){
+				alert("다시 시도해주세요");
+			}
+			alert("주문이 취소되었습니다.")
+			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum="+restaurantsNum;
+		}
+
+		//alert(foodorderNum);
+		ajaxJSON(url, "post", query, fn);
+	});
+});
+
+
+
 
 
 $(function(){
@@ -246,7 +270,7 @@ $(function(){
 </table>
 </div>
 
-<div id="dashboard_box">
+<div id="dash3board_box">
 <table id="dash_table2">
 	<tr id="dash_title">
 		<td colspan="3" style="padding-left : 20px;">

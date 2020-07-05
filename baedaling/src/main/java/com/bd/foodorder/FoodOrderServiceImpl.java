@@ -53,7 +53,6 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		
 	}
 
-	
 
 	@Override
 	public int orderCount(Map<String, Object> map) {
@@ -137,6 +136,9 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		return list;
 	}
 
+	
+//가맹점 정보 
+	
 	@Override
 	public FoodOrder readInfo(int restaurantsNum) {
 		FoodOrder dto = null;
@@ -183,7 +185,18 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 	}
 	
-
+	
+	@Override
+	public void updateFcState(Map<String, Object> map) throws Exception {
+		try {
+			dao.updateData("fo.updateFcState", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	@Override
 	public void insertFile(FoodOrder dto) throws Exception {
 		try {
@@ -230,13 +243,37 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 	public int reviewCount(Map<String, Object> map) {
 		int result = 0;
 		try {
-			result = dao.selectOne("fo.dataCount", map);
+			result = dao.selectOne("fo.reviewCount", map);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 				
 		return result;
 	}
+
+	@Override
+	public List<FoodOrder> replyList(Map<String, Object> map) {
+		List<FoodOrder> list = null;
+		try {
+			list =dao.selectList("fo.replyList", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int replyCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("fo.replyCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+				
+		return result;
+	}
+
 
 
 	

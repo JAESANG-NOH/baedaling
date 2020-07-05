@@ -21,10 +21,12 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/fcinfo.css" type="text/css">
 <script type="text/javascript">
 function updateSend() {
-	  var q = "restaurantsNum=${dto.restaurantsNum}";
+	  var q = "restaurantsNum=restaurantsNum";
 	  var url = "<%=cp%>/dashboard/update?" + q;
 		  	location.href=url;
 	}
+
+
 
 </script>
 
@@ -93,8 +95,8 @@ function updateSend() {
 	</ul>
 <div id="store_content">	
 	<ul>
-		<li><img id="store_img" alt="logo" src="<%=cp%>/delivery/img/bhc.png"></li>
-	</ul>
+		<li><img id="store_img" alt="logo" src="<%=cp%>/resource/dashboard/"></li>
+	</ul>																	
 	<div id="st_content">	
 	<ul>
 		<li><span style="color:#F2D51B ">&nbsp;★★★★☆</span> 4.5</li>

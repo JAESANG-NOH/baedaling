@@ -112,7 +112,6 @@ $(function() {
 	});
 });
 
-
 </script>
 </head>
 <body>
@@ -174,22 +173,30 @@ $(function() {
 <table id="dash_table">
 	<tr id="dash_title">
 		<td colspan="3" style="padding-left : 20px;">
-			오늘매출 <span style="color: #38BCC6;">${today.todaySales} </span>원
+			오늘매출 <span style="color: #38BCC6;">${today.todaySales} </span>원  <span style="font-size: 18px;">- 전체 판매 리스트</span>
+		</td>
+		<td style="font-size: 20px;">
+			  ${dataCount}개 (${pageNo}/${total_page} 페이지)
 		</td>
 	</tr>
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;" id="waiting_text">no</td>
 		<td width="200px;" id="waiting_text">메뉴</td>
 		<td width="200px;" id="waiting_text">가격</td>
+		<td width="200px;" id="waiting_text">완료시간</td>
 	</tr>
 	
 	<c:forEach var="vo" items="${list}">	
 	<tr style="width: 800px; text-align: center;">
-		<td width="100px;" id="waiting_text">${vo.foodorderNum}</td>
-		<td width="200px;" id="waiting_text">${vo.menuNum}-${vo.menuName}</td>
-		<td width="200px;" id="waiting_text">${vo.foodOrderTotalPrice}</td>
+		<td width="100px;" >${vo.foodorderNum}</td>
+		<td width="200px;" >${vo.menuNum}-${vo.menuName}</td>
+		<td width="200px;" >${vo.foodOrderTotalPrice}</td>
+		<td width="200px;" >${vo.foodOrderCompletionDate}</td>
 	</tr>
 	</c:forEach>
+	<tr style=" border: 1px solid #E6E5E5; text-align: center; width: 800px; height: 45px;">
+			<td style="width:200px; font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro'; color: gray;">${dataCount==0 ? "판매내역이 없습니다.":paging}</td>
+		</tr>
 </table>
 </div>
 

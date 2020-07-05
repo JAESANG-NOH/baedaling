@@ -104,7 +104,6 @@ public class FreeBoardController {
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
 		
-		
 		return ".freeboard.list";
 	}
 	

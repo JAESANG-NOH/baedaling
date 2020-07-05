@@ -5,10 +5,6 @@ import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
-/**
- * @author sist
- *
- */
 public class FoodOrder {
 	private int foodorderNum;
 	private int foodOrderTotalPrice;
@@ -25,7 +21,7 @@ public class FoodOrder {
 	private int restaurantsNum;
 	private Map<String, Object> mSales;
 	
-	//가맹점 상세정보 
+	//가맹점 정보 
 	private String name;
 	private String introduce;
 	private String openingHour;
@@ -39,7 +35,9 @@ public class FoodOrder {
 	private String zip;
 	private String addr1;
 	private String addr2;
-	  
+	
+	private int ready;
+	
 	//파일 
 	private int fileNum;
 	private String saveFilename;
@@ -323,6 +321,14 @@ public class FoodOrder {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	
+	public int getReady() {
+		return ready;
+	}
+	public void setReady(int ready) {
+		this.ready = ready;
+	}
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -347,6 +353,7 @@ public class FoodOrder {
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
+
 	
 	
 	
