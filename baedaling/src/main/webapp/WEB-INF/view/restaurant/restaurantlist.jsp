@@ -5,9 +5,86 @@
 <%
 	String cp=request.getContextPath();
 %>
+
 <link rel="stylesheet" href="<%=cp%>/resource/css/restaurants_list.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/tabs.css" type="text/css">
+
 
 <script type="text/javascript">
+
+function ajaxJSON(url, type, query, fn) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,dataType:"json"
+		,success:function(data) {
+			fn(data);
+		}
+		,beforeSend:function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		login();
+	    		return false;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+function ajaxHTML(url, type, query, selector) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data) {
+			if($.trim(data)=="error") {
+				listPage(1);
+				return false;
+			}	
+			$(selector).html(data);
+		}
+		,beforeSend:function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		login();
+	    		return false;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
+
+
+
+
+$(function(){
+	$("#tab-1").addClass("active");
+
+	$("ul.tabs li").click(function() {
+		tab = $(this).attr("data-tab");
+		
+		$("ul.tabs li").each(function(){
+			$(this).removeClass("active");
+		});
+		
+		$("#tab-"+tab).addClass("active");
+		
+		var url="<%=cp%>/restaurant/restaurantWaitlist";	
+		location.href=url;
+		
+		
+	});
+});
+
+
+
+
 
 function searchList() {
 	var f=document.searchForm;
@@ -93,15 +170,20 @@ function updateOk() {
 function selectStateChange() {
 	
 }
-
 </script>
-
 <div class="list_container">
 	<div style="width: 100%; margin: 20px auto;">
 		<div align="left">
 			<h2 style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 25px;">
 			|&nbsp;가맹점 목록&nbsp;<span><img width="70px" height="70px"
 			src="<%=cp%>/resource/img/gangg.png"></span></h2>
+		</div>
+		
+		<div style="clear: both;">
+			<ul class="tabs">
+				<li id="tab-1" data-tab="1">가게 계정 정보</li>
+				<li id="tab-2" data-tab="2">대기 중인 가게</li>
+			</ul>
 		</div>
 		
 		<table style="margin: 0px auto; width: 100%; border-spacing: 0px;" >
@@ -151,7 +233,7 @@ function selectStateChange() {
 		<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
 		   <tr height="35">
 				<td align="center">
-			        ${dataCount==0?"등록된 게시물이 없습니다.":paging}
+			        ${dataCount==0?"등록된 가맹점이 없습니다.":paging}
 				</td>
 		   </tr>
 		</table>
@@ -177,6 +259,6 @@ function selectStateChange() {
 			      </td>		
 			</tr>		
 		</table>
-	</div>
 	<div id="user-dialog" style="display: none"></div>
+	</div>
 </div>

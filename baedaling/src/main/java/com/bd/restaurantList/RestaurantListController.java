@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.MyUtil;
-import com.bd.user.SessionInfo;
 
 @Controller("restaurantList.restaurantListController")
 @RequestMapping("/restaurant/*")
@@ -30,6 +29,133 @@ public class RestaurantListController {
 	@Autowired
 	private MyUtil myUtil;
 	
+	@RequestMapping("restaurantWaitlist")
+	public String restaurantsWaitlist(
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			@RequestParam(defaultValue="name") String condition,
+			@RequestParam(defaultValue="") String keyword,
+			@RequestParam(defaultValue="1") String ready,
+			HttpServletRequest req,
+			HttpSession session,
+			Model model
+			) throws Exception {
+		
+		String cp = req.getContextPath();
+		
+		int rows=5;
+		int total_page=0;
+		int dataCount=0;
+		
+		if(req.getMethod().equalsIgnoreCase("GET")) {
+			keyword=URLDecoder.decode(keyword, "utf-8");
+		}
+		
+		// 전체 페이지 수
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ready", ready);
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		dataCount=service.waitDataCount(map);
+		
+		if(dataCount != 0) {
+			total_page = myUtil.pageCount(rows, dataCount);
+		}
+		
+		if(total_page<current_page) {
+			current_page=total_page;
+		}
+		
+		// 리스트에 출력할 데이터를 가져오기
+		int offset=(current_page-1)*rows;
+		if(offset<0) offset=0;
+		map.put("offset", offset);
+		map.put("rows", rows);
+		
+		// 글 리스트
+		List<RestaurantList> list = service.listWaitRestaurant(map);
+		
+		// 리스트 번호
+		int listNum, n=0;
+		for(RestaurantList dto : list) {
+			listNum = dataCount-(offset+n);
+			dto.setListNum(listNum);
+			n++;
+		}
+		String query="";
+		String listUrl=cp+"/restaurant/restaurantWaitlist";
+		
+		if(keyword.length()!=0) {
+			query="condition="+condition+"&keyword="+URLEncoder.encode(keyword, "utf-8");
+		 }
+		if(ready.length()!=0) {
+			if(query.length()!=0)
+				query=query+"&ready="+ready;
+			else
+				query="ready="+ready;
+		}
+		
+		if(query.length()!=0) {
+
+			listUrl = cp+"/restaurant/restaurantWaitlist?"+query;
+		}
+		
+		String paging=myUtil.paging(current_page, total_page, listUrl);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("listUrl", listUrl);
+		model.addAttribute("page", current_page);
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+		model.addAttribute("ready", ready);
+		model.addAttribute("condition", condition);
+		model.addAttribute("keyword", keyword);
+		
+		return ".restaurant.restaurantsWaitList";
+	}
+	// AJAX-Text
+	@RequestMapping(value="/restaurant/detaileRestaurant")
+	public String detaileRestaurant(
+			@RequestParam String userId,
+			Model model
+			) throws Exception {
+		RestaurantList dto = service.readUser(userId);
+		// List<RestaurantList> listState = service.listUserState(userId);
+		
+		model.addAttribute("dto", dto);
+		// model.addAttribute("listState", listState);
+		
+		return "restaurant/detaileRestaurant";
+	}
+	@RequestMapping(value="/restaurant/updateUserState", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> updateUserState(
+			RestaurantList dto
+			) throws Exception {
+		
+		String state="true";
+		
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("userId", dto.getUserId());
+			if(dto.getStateCode()==1) {
+				map.put("enabled", 1);
+			} else {
+				map.put("enabled", 0);
+			}
+			service.updateUserEnabled(map);
+			// service.insertUserState(dto);
+		} catch (Exception e) {
+			state="false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
+	}
+	
+	
 	@RequestMapping("restaurantlist")
 	public String restaurantslist(
 			@RequestParam(value="page", defaultValue="1") int current_page,
@@ -40,7 +166,6 @@ public class RestaurantListController {
 			HttpSession session,
 			Model model
 			) throws Exception {
-		SessionInfo info = (SessionInfo)session.getAttribute("user");
 		String cp = req.getContextPath();
 		
 		int rows=20;
@@ -117,45 +242,24 @@ public class RestaurantListController {
 		
 		return ".restaurant.restaurantlist";
 	}
-	// AJAX-Text
-	@RequestMapping(value="/restaurant/detaileRestaurant")
-	public String detaileRestaurant(
-			@RequestParam String userId,
-			Model model
-			) throws Exception {
-		RestaurantList dto = service.readUser(userId);
-		// List<RestaurantList> listState = service.listUserState(userId);
-		
-		model.addAttribute("dto", dto);
-		// model.addAttribute("listState", listState);
-		
-		return "restaurant/detaileRestaurant";
-	}
-	@RequestMapping(value="/restaurant/updateUserState", method=RequestMethod.POST)
+	
+	@RequestMapping(value="updateRestaurant", method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, Object> updateUserState(
-			RestaurantList dto
-			) throws Exception {
-		
-		String state="true";
-		
+	public Map<String, Object> updateRestaurant(
+			@RequestParam int restaurantsNum
+			){
+		String state = "true";
 		try {
-			Map<String, Object> map = new HashMap<>();
-			map.put("userId", dto.getUserId());
-			if(dto.getStateCode()==1) {
-				map.put("enabled", 1);
-			} else {
-				map.put("enabled", 0);
-			}
-			service.updateUserEnabled(map);
-			// service.insertUserState(dto);
+			service.updateReady(restaurantsNum);
+
 		} catch (Exception e) {
-			state="false";
+			state = "false";
 		}
-		
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
 		return model;
 	}
+	
+	
 	
 }

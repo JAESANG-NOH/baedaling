@@ -9,12 +9,25 @@ public class RestaurantList {
 	private String licenseNumber; // 사업자등록번호(restaurantsInfo)
 	private String addr1; // 주소1(restaurants)
 	private String addr2; // 주소2(restaurants)
+	private int restaurantsNum;
 	
 	private int stateCode;
 	private int enabled;
+	private int ready;
 	
 	
-	
+	public int getRestaurantsNum() {
+		return restaurantsNum;
+	}
+	public void setRestaurantsNum(int restaurantsNum) {
+		this.restaurantsNum = restaurantsNum;
+	}
+	public int getReady() {
+		return ready;
+	}
+	public void setReady(int ready) {
+		this.ready = ready;
+	}
 	public int getStateCode() {
 		return stateCode;
 	}

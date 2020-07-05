@@ -70,4 +70,32 @@ public class RestaurantListServiceImpl implements RestaurantListService {
 		}
 		
 	}
+
+	@Override
+	public List<RestaurantList> listWaitRestaurant(Map<String, Object> map) {
+		List<RestaurantList> list = null;
+		try {
+			list = dao.selectList("rsl.listWaitRestaurant",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int waitDataCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("rsl.watiDataCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public void updateReady(int restaurantsNum) throws Exception {
+		dao.updateData("rsl.updateReady",restaurantsNum);
+		
+	}
 }
