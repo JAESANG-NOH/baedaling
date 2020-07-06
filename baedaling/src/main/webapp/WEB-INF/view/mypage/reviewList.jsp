@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_reviewlist.css" type="text/css">
 
 <div class="container">
+
+
+
     <div class="body-container">
         <div class="body-left">
             <div class="list-group">
