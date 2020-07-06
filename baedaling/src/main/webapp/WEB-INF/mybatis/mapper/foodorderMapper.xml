@@ -161,9 +161,9 @@ ORDER BY bestSales desc
  		WHERE restaurantsNum = #{restaurantsNum}
  	</update>
  	
- 	<update id="updateFcState" parameterType="map">
- 		UPDATE restaurants SET ready = #{ready}
- 		WHERE restaurantsnum = #{restaurantsNum}
+ 	<update id="updateFcState" parameterType="com.bd.foodorder.FoodOrder">
+ 		UPDATE restaurants SET ready = 1
+ 		WHERE restaurantsnum = #{restaurantsNum} and ready=0
  	</update>
  
  	<select id="readFile" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
@@ -180,28 +180,24 @@ ORDER BY bestSales desc
  
  
  <select id="reviewList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
- 	SELECT rv.foodorderNum, rv.content, TO_CHAR(rv.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, rm.menuName,reviewNum
-	FROM review rv
-	JOIN restaurants r ON rv.restaurantsNum = r.restaurantsNum
-	JOIN restaurantMenu rm ON r.restaurantsNum = rm.restaurantsNum
-	JOIN user1 u ON rv.userIdx = u.userIdx
-	JOIN foodorder f ON rv.foodorderNum = f.foodorderNum
-	JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
-	WHERE r.restaurantsNum = #{restaurantsNum}
-	ORDER BY rv.reviewNum DESC
+ 	SELECT r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+   FROM review r
+   JOIN foodorder f ON r.foodorderNum = f.foodorderNum
+   JOIN orderdetail o ON o.foodorderNum = f.foodorderNum
+   JOIN restaurantMenu rm ON rm.menuNum = o.menuNum
+   JOIN user1 u ON r.userIdx = u.userIdx
+   WHERE r.restaurantsNum = #{restaurantsNum}
+   group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'), starCount, reviewNum, 
+    u.userName
+	ORDER BY r.reviewNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
  </select>
  
- 
+
  	<select id="reviewCount" parameterType="map" resultType="Integer">
-		SELECT NVL(COUNT(*),0)
-		FROM review rv
-		JOIN restaurants r ON rv.restaurantsNum = r.restaurantsNum
-		JOIN restaurantMenu rm ON r.restaurantsNum = rm.restaurantsNum
-		JOIN user1 u ON rv.userIdx = u.userIdx
-		JOIN foodorder f ON rv.foodorderNum = f.foodorderNum
-		JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
-        WHERE r.restaurantsNum =#{restaurantsNum}
+   SELECT NVL(COUNT(*),0) 
+   FROM review 
+   WHERE restaurantsNum = #{restaurantsNum}
 	 </select>
 	 
 
@@ -214,11 +210,27 @@ ORDER BY bestSales desc
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>
 
- 	<select id="replyCount" parameterType="map" resultType="Integer">
+ <select id="replyCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*),0)
 		FROM reviewReply rp
 		JOIN review rv ON rp.reviewNum = rv.reviewNum
         WHERE restaurantsNum =#{restaurantsNum}
-	 </select>
+ </select>
+
+ <select id="reviewRead" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+ 	SELECT r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+   FROM review r
+   JOIN foodorder f ON r.foodorderNum = f.foodorderNum
+   JOIN orderdetail o ON o.foodorderNum = f.foodorderNum
+   JOIN restaurantMenu rm ON rm.menuNum = o.menuNum
+   JOIN user1 u ON r.userIdx = u.userIdx
+   WHERE r.reviewNum = #{reviewNum}
+   group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'), starCount, reviewNum, u.userName
+ </select>	 
+ 
+ <!-- <update id="updateReply" parameterType="com.bd.foodorder.FoodOrder">
+ 	UPDATE review SET reply = #{reply}, replyCreated = #{replyCreated} WHERE replyNum = #{replyNum} 
+ </update> -->
+
 </mapper>
 

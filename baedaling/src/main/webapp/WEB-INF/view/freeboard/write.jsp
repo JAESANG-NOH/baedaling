@@ -27,7 +27,7 @@ $(function(){
 	});
 });
 
-  <c:if test="${mode=='update'}">
+<c:if test="${mode=='update'}">
   function deleteFile(fileNum) {
 		var url="<%=cp%>/freeboard/deleteFile";
 		$.post(url, {fileNum:fileNum}, function(data){

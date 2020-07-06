@@ -54,14 +54,15 @@ $(function(){
 			if(state == false){
 				alert("다시 시도해주세요");
 			}
-			
-			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum="+restaurantsNum;
+			 var q = "restaurantsNum=${dto.restaurantsNum}";
+			location.href="<%=cp%>/dashboard/orderlist?" + q;
 		}
 
 		//alert(foodorderNum);
 		ajaxJSON(url, "post", query, fn);
 	});
 });
+
 
 
 $(function(){
@@ -77,8 +78,8 @@ $(function(){
 			if(state == false){
 				alert("다시 시도해주세요");
 			}
-			
-			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum="+restaurantsNum;
+			 var q = "restaurantsNum=${dto.restaurantsNum}";
+				location.href="<%=cp%>/dashboard/orderlist?" + q;
 		}
 
 		//alert(foodorderNum);
@@ -141,6 +142,7 @@ $(function(){
 $(function(){
 	$("body").on("click", ".btnOrderDelete", function(){
 		var foodorderNum=$(this).attr("data-foodorderNum");
+			 var q = "restaurantsNum=${dto.restaurantsNum}";
 		if(! confirm("완료된 주문을 삭제할까요?"))
 		    return;
 		var url = "<%=cp%>/dashboard/delete";
@@ -150,7 +152,7 @@ $(function(){
 			if(state == false){
 				alert("다시 시도해주세요");
 		}
-			location.href="<%=cp%>/dashboard/orderlist?restaurantsNum="+restaurantsNum;
+				location.href="<%=cp%>/dashboard/orderlist?" + q;
 		}
 		ajaxJSON(url, "post", query, fn);
 	});

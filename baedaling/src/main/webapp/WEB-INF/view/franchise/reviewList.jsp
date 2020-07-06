@@ -13,7 +13,7 @@
 	</ul>
 </div>
 
-<div class="reviewContent2" style="width: 600px; height: 50px; border: 1px solid #dadadb;">
+<div class="reviewContent" style="width: 600px; height: 50px; border: 1px solid #dadadb;">
 	<ul>
 		<li style="float: right; padding-right : 20px; padding-top: 12px;">
 			사진 리뷰만 <input type="checkbox">
@@ -24,7 +24,7 @@
 		<li style="padding-left: 20px; padding-top: 12px;">리뷰 <span id="bold">  587</span>개 | 사장님 댓글 <span id="bold"> 0</span>개</li>
 	</ul>
 
-<div class="reviewContent3">
+<div class="reviewContent">
 	<ul style="padding-left: 10px; padding-top: 10px;">
 		<li > <span style="font-size: 15px; font-weight: bold;">홍*동님  </span> 2020-06-21</li>
 		<li id="star_deco">★★★★★</li>

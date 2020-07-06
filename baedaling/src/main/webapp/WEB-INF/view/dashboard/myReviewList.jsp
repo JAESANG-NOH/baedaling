@@ -89,7 +89,7 @@
 			<td style="width: 100px;"><a href="" style="color: gray;">${dto.reviewNum}</a></td>
 			<td style="width: 150px;"><a href="" style="color: gray;">${dto.userName}</a></td>
 			<td style="width: 150px;"><a href="" style="color: gray;">${dto.menuName}</a></td>
-			<td class="ellipsis" style="width: 200px;"><a href="" style="color: gray;">${dto.content}</a></td>
+			<td class="ellipsis" style="width: 200px;"><a href="${articleUrl}&reviewNum=${dto.reviewNum}" style="color: gray;">${dto.content}</a></td>
 			<td style="width: 100px;"><a href="" style="color: gray;">${dto.starCount}</a></td>
 			<td style="width: 150px;"><a href="" style="color: gray;">${dto.created}</a></td>
 		</tr>

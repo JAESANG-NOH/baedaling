@@ -21,11 +21,10 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/fcinfo.css" type="text/css">
 <script type="text/javascript">
 function updateSend() {
-	  var q = "restaurantsNum=restaurantsNum";
+	 var q = "restaurantsNum=${dto.restaurantsNum}";
 	  var url = "<%=cp%>/dashboard/update?" + q;
 		  	location.href=url;
 	}
-
 
 
 </script>

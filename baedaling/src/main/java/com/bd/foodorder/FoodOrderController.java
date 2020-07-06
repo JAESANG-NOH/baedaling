@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
+import com.bd.freeboard.Reply;
+import com.bd.user.SessionInfo;
 
 
 @Controller("foodorder.foodOrderController")
@@ -339,33 +341,24 @@ public class FoodOrderController {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + File.separator + "resource" + File.separator + "dashboard";
 			service.updateInfo(dto, pathname);
+			service.updateFcState(dto);
 		} catch (Exception e) {
 		}
 		return "redirect:/dashboard/fcinfo_read?restaurantsNum="+dto.getRestaurantsNum();
 	}
 	
 	
-	@RequestMapping(value="updateFcState", method=RequestMethod.POST, produces="application/json;charset=utf-8")
-	@ResponseBody
-	public Map<String, Object> updateFcState(
-			@RequestParam int restaurantsNum,
-			@RequestParam String ready
+	@RequestMapping(value="updateFcState")
+	public String updateFcState(
+			FoodOrder dto,
+			@RequestParam int restaurantsNum
 			) throws Exception{
 		
-		String reayState = "false";
 		try {
-			Map<String, Object> map = new HashMap<>();
-			map.put("ready", ready);
-			map.put("restaurantsNum", restaurantsNum);
-			
-			service.updateFcState(map);
-			reayState = "true";
+			service.updateFcState(dto);
 		} catch (Exception e) {
 		}
-		Map<String, Object> model = new HashMap<>();
-		model.put("reayState", reayState);
-		
-		return model;
+		return "redirect:/dashboard/fcinfo_read?restaurantsNum="+dto.getRestaurantsNum();
 	}
 	
 	
@@ -434,7 +427,11 @@ public class FoodOrderController {
 	       dto.setListNum(listNum);
 	       n++;
 	      }
-	    String listUrl = cp+"/dashboard/myReviewList";
+	    
+	    String query = "restaurantsNum="+restaurantsNum;
+	    String listUrl = cp+"/dashboard/myReviewList?"+query;
+        String articleUrl = cp+"/dashboard/reviewRead?"+query+"&page=" + current_page;
+
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
 		
 		
@@ -443,7 +440,7 @@ public class FoodOrderController {
 		model.addAttribute("pageNo", current_page);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
-		
+		model.addAttribute("articleUrl", articleUrl);
 		return "dashboard/myReviewList";
 	}
 	
@@ -501,6 +498,42 @@ public class FoodOrderController {
 		
 		return "dashboard/myReplyList";
 	}
+	
+	
+	@RequestMapping("reviewRead")
+	public String reviewRead(
+			@RequestParam int restaurantsNum,
+			@RequestParam int reviewNum,
+			@RequestParam String page,
+			Model model
+			) {
+		String query="page="+page;
+		FoodOrder dto = service.reviewRead(reviewNum);
+		
+		model.addAttribute("query", query);
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		return "dashboard/reviewRead";
+	}
+	
+	
+	/*@RequestMapping(value="insertReply", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertReply(
+			FoodOrder dto
+			) {
+		String state="true";
+		
+		try {
+			service.insertReply(dto);
+		} catch (Exception e) {
+			state="false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
+	}*/
 	
 	
 	

@@ -187,9 +187,9 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 	
 	
 	@Override
-	public void updateFcState(Map<String, Object> map) throws Exception {
+	public void updateFcState(FoodOrder dto) throws Exception {
 		try {
-			dao.updateData("fo.updateFcState", map);
+			dao.updateData("fo.updateFcState", dto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -273,6 +273,31 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 				
 		return result;
 	}
+
+	@Override
+	public FoodOrder reviewRead(int reviewNum) {
+		FoodOrder dto = null;
+		try {
+			dto = dao.selectOne("fo.reviewRead", reviewNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public void insertReply(FoodOrder dto) throws Exception {
+		
+		try {
+			dao.updateData("fo.updateReply", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	
 
 
 

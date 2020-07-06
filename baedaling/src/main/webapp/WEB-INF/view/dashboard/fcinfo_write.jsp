@@ -57,53 +57,12 @@ function deleteFile(fileNum) {
 </c:if>
 
 
-
-function ajaxJSON(url, type, query, fn) {
-	$.ajax({
-		type:type
-		,url:url
-		,data:query
-		,dataType:"json"
-		,success:function(data) {
-			fn(data);
-		}
-		,beforeSend:function(jqXHR) {
-	        jqXHR.setRequestHeader("AJAX", true);
-	    }
-	    ,error:function(jqXHR) {
-	    	if(jqXHR.status==403) {
-	    		login();
-	    		return false;
-	    	}
-	    	console.log(jqXHR.responseText);
-	    }
-	});
-}
-
-$(function(){
-	$("body").on("click", ".btnReadyOk", function(){
-		var restaurantsNum=$(this).attr("data-restaurantsNum");
-		var ready = $(this).attr("data-ready");
-		var url = "<%=cp%>/dashboard/updateFcState";
-		var query = "foodorderNum="+foodorderNum+"&ready=" + ready;
-		var fn = function(data) {
-			var state = data.state;
-			if(state == false){
-				alert("다시 시도해주세요");
-			}
-			
-			location.href="<%=cp%>/dashboard/fcinfo_read?restaurantsNum=21";
-		}
-
-		//alert(foodorderNum);
-		ajaxJSON(url, "post", query, fn);
-	});
-});
-
-
-
+function  updateFcState() {
+	  var q = "restaurantsNum=${dto.restaurantsNum}";
+	  var url = "<%=cp%>/dashboard/updateFcState?" + q;
+		  	location.href=url;
+	}
 	
-
 
 </script>
 </head>
@@ -247,7 +206,7 @@ $(function(){
 					</ul>
 					<ul>
 						<li>
-							<button type="submit" data-foodorderNum="${dto.restaurantsNum}" data-ready=1 class="btnReadyOk">등록하기</button> <button type="reset">다시입력</button>
+							<button type="submit" onclick="updateFcState();" >등록하기</button> <button type="reset">다시입력</button>
 					<c:if test="${mode=='update'}">
 			         	 <input type="hidden" name="restaurantsNum" value="${dto.restaurantsNum}">
 			        </c:if>
