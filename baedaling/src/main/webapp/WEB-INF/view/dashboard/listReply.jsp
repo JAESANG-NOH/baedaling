@@ -19,19 +19,18 @@
 	</thead>
 	
 	<tbody id='listReplyBody'>
-	<c:forEach var="vo" items="${listReply}">
+	<c:forEach var="dto" items="${listReply}">
 	    <tr height='35' style='background: #eeeeee;'>
 	       <td width='50%' style='padding:5px 5px; border:1px solid #cccccc; border-right:none;'>
-	           <span><b>${vo.userName}</b></span>
+	           <span><b>주인장</b></span>
 	        </td>
 	       <td width='50%' style='padding:5px 5px; border:1px solid #cccccc; border-left:none;' align='right'>
-	           <span>${vo.created}</span> |
-	           <span class="deleteReply" style="cursor: pointer;" data-replyNum='${vo.replyNum}' data-pageNo='${pageNo}'>삭제</span>
+	           <span>${dto.replyCreated}</span> |
 	        </td>
 	    </tr>
 	    <tr>
 	        <td colspan='2' valign='top' style='padding:5px 5px;'>
-	              ${vo.content}
+	              ${dto.reply}
 	        </td>
 	    </tr>
 	</c:forEach>

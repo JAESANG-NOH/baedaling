@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
-import com.bd.freeboard.Reply;
-import com.bd.user.SessionInfo;
 
 
 @Controller("foodorder.foodOrderController")
@@ -517,7 +515,7 @@ public class FoodOrderController {
 	}
 	
 	
-	/*@RequestMapping(value="insertReply", method=RequestMethod.POST)
+	@RequestMapping(value="insertReply", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> insertReply(
 			FoodOrder dto
@@ -533,8 +531,52 @@ public class FoodOrderController {
 		Map<String, Object> model = new HashMap<>();
 		model.put("state", state);
 		return model;
-	}*/
+	}
 	
+	
+	@RequestMapping(value="listReply")
+	public String listReply(
+			@RequestParam int restaurantsNum,
+			@RequestParam(value="pageNo", defaultValue="1") int current_page,
+			Model model
+			) throws Exception {
+		
+		int rows=5;
+		int total_page=0;
+		int dataCount=0;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("restaurantsNum", restaurantsNum);
+		dataCount=service.replyCount(map);
+
+		total_page = myUtil.pageCount(rows, dataCount);
+		if(current_page>total_page)
+			current_page=total_page;
+		
+        int offset = (current_page-1) * rows;
+		if(offset < 0) offset = 0;
+        map.put("offset", offset);
+        map.put("rows", rows);
+		List<FoodOrder> listReply=service.replyList(map);
+		
+		for(FoodOrder dto : listReply) {
+			dto.setContent(dto.getReply().replaceAll("\n", "<br>"));
+		}
+		
+		// AJAX 용 페이징
+		String paging=myUtil.pagingMethod(current_page, total_page, "listPage");
+		
+		// 포워딩할 jsp로 넘길 데이터
+		model.addAttribute("listReply", listReply);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("replyCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+		model.addAttribute("restaurantsNum", restaurantsNum);
+		
+		return "dashboard/listReply";
+	}
+
 	
 	
 }

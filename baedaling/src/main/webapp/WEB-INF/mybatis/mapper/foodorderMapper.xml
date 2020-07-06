@@ -202,18 +202,16 @@ ORDER BY bestSales desc
 	 
 
 <select id="replyList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
-	SELECT rv.reviewNum, rp.content, TO_CHAR(rp.created,'YY-MM-DD HH24:MI') created 
-	FROM reviewReply rp
-	JOIN review rv ON rp.reviewNum = rv.reviewNum
+	SELECT reviewNum, reply, TO_CHAR(replyCreated,'YY-MM-DD HH24:MI') replyCreated ,restaurantsNum
+	FROM review
 	WHERE restaurantsNum = #{restaurantsNum}
-	ORDER BY rp.reviewNum DESC
+	ORDER BY reviewNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>
 
  <select id="replyCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*),0)
-		FROM reviewReply rp
-		JOIN review rv ON rp.reviewNum = rv.reviewNum
+		FROM review
         WHERE restaurantsNum =#{restaurantsNum}
  </select>
 
@@ -228,9 +226,9 @@ ORDER BY bestSales desc
    group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'), starCount, reviewNum, u.userName
  </select>	 
  
- <!-- <update id="updateReply" parameterType="com.bd.foodorder.FoodOrder">
- 	UPDATE review SET reply = #{reply}, replyCreated = #{replyCreated} WHERE replyNum = #{replyNum} 
- </update> -->
+ <update id="updateReply" parameterType="com.bd.foodorder.FoodOrder">
+ 	UPDATE review SET reply = #{reply}, replyCreated = SYSDATE WHERE reviewNum = #{reviewNum} 
+ </update>
 
 </mapper>
 

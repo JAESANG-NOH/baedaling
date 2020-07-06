@@ -88,7 +88,7 @@
 		<tr style=" border: 1px solid #E6E5E5; text-align: center; width: 800px; height: 45px;">
 			<td style="width: 100px;"><a href="" style="color: gray;">${dto.reviewNum}</a></td>
 			<td style="width: 150px;"><a href="" style="color: gray;">${dto.userName}</a></td>
-			<td style="width: 150px;"><a href="" style="color: gray;">${dto.menuName}</a></td>
+			<td style="width: 150px;"><a href="${articleUrl}&reviewNum=${dto.reviewNum}" style="color: gray;">${dto.menuName}</a></td>
 			<td class="ellipsis" style="width: 200px;"><a href="${articleUrl}&reviewNum=${dto.reviewNum}" style="color: gray;">${dto.content}</a></td>
 			<td style="width: 100px;"><a href="" style="color: gray;">${dto.starCount}</a></td>
 			<td style="width: 150px;"><a href="" style="color: gray;">${dto.created}</a></td>

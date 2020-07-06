@@ -5,11 +5,6 @@
 <%
    String cp=request.getContextPath();
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://unpkg.com/@kfonts/bm-hanna-pro/index.css" />
 <link rel="stylesheet" href="<%=cp%>/resource/css/dashboard.css" type="text/css">
@@ -20,6 +15,28 @@
 
 
 <script type="text/javascript">
+
+function ajaxHTML(url, type, query, selector) {
+	$.ajax({
+		type:type
+		,url:url
+		,data:query
+		,success:function(data) {
+			$(selector).html(data);
+		}
+		,beforeSend:function(jqXHR) {
+	        jqXHR.setRequestHeader("AJAX", true);
+	    }
+	    ,error:function(jqXHR) {
+	    	if(jqXHR.status==403) {
+	    		login();
+	    		return false;
+	    	}
+	    	console.log(jqXHR.responseText);
+	    }
+	});
+}
+
 function ajaxJSON(url, type, query, fn) {
 	$.ajax({
 		type:type
@@ -43,25 +60,40 @@ function ajaxJSON(url, type, query, fn) {
 }
 
 $(function(){
+	listPage(1);
+});
+
+function listPage(page) {
+	var url = "<%=cp%>/dashboard/listReply";
+	var query = "restaurantsNum=${dto.restaurantsNum}&pageNo="+page;
+	var selector = "#listReply";
+	
+	ajaxHTML(url, "get", query, selector);
+}
+
+
+
+
+$(function(){
 	$(".sendReply").click(function(){
-		var num="${dto.reviewNum}";
+		var restaurantsNum="${dto.restaurantsNum}";
 		var $tb = $(this).closest("table");
-		var content=$tb.find("textarea").val().trim();
-		if(! content) {
+		var reply=$tb.find("textarea").val().trim();
+		if(! reply) {
 			$tb.find("textarea").focus();
 			return false;
 		}
-		content = encodeURIComponent(content);
+		reply = encodeURIComponent(reply);
 		
-		var url="<%=cp%>/freeboard/insertReply";
-		var query="reviewNum="+reviewNum +"&reply="+reply;
+		var url="<%=cp%>/dashboard/insertReply";
+		var query="restaurantsNum="+restaurantsNum +"&reply="+reply;
 		
 		var fn = function(data){
 			$tb.find("textarea").val("");
 			
 			var state=data.state;
 			if(state=="true") {
-				listPage(1);
+				 listPage(1); 
 			} else if(state=="false") {
 				alert("댓글을 추가 하지 못했습니다.");
 			}
@@ -72,8 +104,7 @@ $(function(){
 });
 
 </script>
-</head>
-<body>
+
 <div class="sidebox">
 <aside>
 <div style="width: 100%; height: 1000px;" >
@@ -165,11 +196,8 @@ $(function(){
 		    </td>
 	    </tr>
 </table>
-</div>
 <div id="listReply" style="width: 1000px; margin: 0px auto;"></div>
 </div>
+</div>
 
 
-
-</body>
-</html>
