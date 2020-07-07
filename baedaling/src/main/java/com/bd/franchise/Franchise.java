@@ -1,5 +1,7 @@
 package com.bd.franchise;
 
+import java.util.List;
+
 public class Franchise {
 	private int restaurantsNum;
 	private String Longitude;
@@ -21,6 +23,21 @@ public class Franchise {
 	private String fctel;
 	private int minorder;
 	
+	private List<Integer> quantity;
+	private List<Integer> menuNum;
+	
+	public List<Integer> getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(List<Integer> quantity) {
+		this.quantity = quantity;
+	}
+	public List<Integer> getMenuNum() {
+		return menuNum;
+	}
+	public void setMenuNum(List<Integer> menuNum) {
+		this.menuNum = menuNum;
+	}
 	public int getRestaurantsNum() {
 		return restaurantsNum;
 	}
@@ -123,6 +140,5 @@ public class Franchise {
 	public void setFctel(String fctel) {
 		this.fctel = fctel;
 	}
-	
 	
 }

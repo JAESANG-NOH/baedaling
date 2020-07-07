@@ -99,6 +99,15 @@ public class FranchiseController {
 		return map;
 	}
 	
+	@RequestMapping(value="pay")
+	public String insertorder(
+			Franchise dto,
+			@RequestParam int restaurantsNum
+			){
+		
+		return "";
+	}
+	
 }
 
 

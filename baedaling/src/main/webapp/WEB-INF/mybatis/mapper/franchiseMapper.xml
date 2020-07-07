@@ -36,6 +36,8 @@
 		FROM restaurantmenu
 		WHERE menuNum = #{menuNum}
 	</select>
-	
+	<select id="readmenuprice" parameterType="com.bd.franchise.FranchiseMenu" resultType="com.bd.franchise.FranchiseMenu">
+		SELECT menuprice from RESTAURANTMENU where MENUNUM = #{restaurantmenu}
+	</select>
 
 </mapper>

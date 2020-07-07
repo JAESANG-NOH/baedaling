@@ -300,9 +300,6 @@ $(function(){
 	$("body").on("click","#order",function(){
 		var payTotalBuyAmt = $("#totalBuyAmt").text();
 		$("#choiceMenu").hide();
-		
-		
-		
 		$("#buyList input[name=quantity]").each(function(){
 			var menuNum = $(this).attr("data-code");
 			var menuName = $(this).attr("data-menuName");
@@ -329,13 +326,8 @@ $(function(){
 		});
 		
 		
-		
 		$("#pay").show();
-		
-		
 		$("#payTotalBuyAmt").text(payTotalBuyAmt);
-		
-		
 	});
 	
 });
@@ -347,12 +339,25 @@ $(function(){
 		$("#choiceMenu").show();
 	});
 });
+
+$(function(){
+	$("body").on("click","#pay_btn",function(){
+		var f = document.payForm;
+		f.action = "<%=cp%>/franchise/pay";
+		f.submit();
+	});
+});
+
+$(function(){
+	$("")
+})
+
 </script>
 </head>
 <body>
 
 
-<form method="post">
+<form method="post" name="payForm">
 <!-- 메뉴 선택회면 -->
 <div id="choiceMenu">
 	<div class="sideOrderBox" style="overflow: scroll; max-height: 400px;">
@@ -362,8 +367,7 @@ $(function(){
 		      <tr class="orderBoxTitile">
 		         <td colspan="3" style="color: white; font-size: 15.4px;">&nbsp; 주문표<a class="allCancel"><span style="float: right; padding-right: 20px; color: white;"><i class="fas fa-trash-alt"></i></span></a> </td>
 		      </tr>
-		  
-		     
+		      
 		      <tbody id = "buyList">
 		      </tbody>
 		      
@@ -386,7 +390,7 @@ $(function(){
 	<div class="storeBox">
 			<div class="store_basic">
 				<ul>
-					<li id="shop_title">${dto.name }</li>
+					<li id="shop_title">${dto.name}</li>
 				</ul>
 				<div id="store_content">
 					<ul>
@@ -432,7 +436,7 @@ $(function(){
 </div>
 
 <!-- 결제화면 -->
-<div id="pay" style="display: none;">
+<div id="pay" style="display: none; min-height: 1045px">
 
 <div class="sideOrderBox" style="overflow: scroll; max-height: 400px;">
 	<aside class="sideOrderBox2">
@@ -459,7 +463,7 @@ $(function(){
 		      </tr>
 		      
 		      <tr height="46px;" style="padding-top: 10px;">
-		         <td colspan="2" style="background-color:#38BCC6; text-align: center; color:white; font-size: 17px; border-top:1px solid #DCDBDB;">결제하기</td>
+		         <td id="pay_btn" colspan="2" style="background-color:#38BCC6; text-align: center; color:white; font-size: 17px; border-top:1px solid #DCDBDB;">결제하기</td>
 		         <td  style="background-color:#c8c8c8; text-align: center; color:white; font-size: 17px; border-top:1px solid #DCDBDB;" id = "orderCancel">취소</td>
 		      </tr>
 		      
@@ -475,15 +479,15 @@ $(function(){
 			<table class="location_table">
 				<tr>
 					<td class="pay_table_info">주소</td>
-					<td class="pay_table_input"><input type="text"></td>
+					<td class="pay_table_input"><input type="text" name="detailaddr"></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td class="pay_table_input"><input type="text" placeholder="(필수)상세주소 입력">
+					<td class="pay_table_input"><input type="text" placeholder="(필수)상세주소 입력" name="foodorderaddr">
 				</tr>
 				<tr>
 					<td class="pay_table_info">휴대전화번호</td>
-					<td class="pay_table_input"><input type="text" placeholder="(필수)휴대전화 번호 입력"></td>
+					<td class="pay_table_input"><input type="text" placeholder="(필수)휴대전화 번호 입력" name="tel"></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -494,7 +498,7 @@ $(function(){
 		
 		<div class="order_container_box">
 			<div class="order_sub_header">주문시 요청사항</div>
-			<div class="pay_textarea"><textarea placeholder="코로나 19 예방을 위해 비대면 배달 권장드립니다 요기서 결제 선택 후 '문 앞 배달'을 요청사항에 남겨주세요" style="resize: none;"></textarea>
+			<div class="pay_textarea"><textarea placeholder="코로나 19 예방을 위해 비대면 배달 권장드립니다 요기서 결제 선택 후 '문 앞 배달'을 요청사항에 남겨주세요" style="resize: none;" name="memo"></textarea>
 			<p style="text-align: right; margin: 0px; font-size: 13px; ">0 / 100자</p>
 			</div>
 		</div>
@@ -524,9 +528,29 @@ $(function(){
 				</tr>
 			</table>
 		</div>
+		
+		<div class="order_container_box">
+			<div class="order_sub_header">수령 방법</div>
+			<table class="each_pay_table">
+			<tr>
+					<td class="each_pay" style="width: 304px;"><i class="fas fa-shopping-bag"></i>배달</td>
+					<td class="each_pay"><i class="fas fa-shopping-bag"></i>직접수령</td>
+			</tr>
+			</table>
+		</div>
+		
+		<div class="order_container_box">
+			<div class="order_sub_header">마일리지 사용</div>
+			<table class="each_pay_table">
+				<tr>
+					<td>마일리지</td>
+					<td class="point_use_input"><input type="text"></td>
+				</tr>
+			</table>
+		</div>	
 	</div>
-
 </div>
+<input type="hidden" name="orderState" value="">
 </form>
 </body>
 </html>

@@ -69,6 +69,33 @@ public class FranchiseServiceImpl implements FranchiseService {
 		}
 		return dto;
 	}
+
+	@Override
+	public void insertOrder(Franchise dto) throws Exception {
+		try {
+			
+		} catch (Exception e) {
+		
+		}
+		
+	}
+
+	@Override
+	public void insertDetailOrder(Franchise dto) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Franchise readMenuPrice(int restaurantmenu) {
+		Franchise dto = null;
+		try {
+			dto = dao.selectOne("fc.readmenuprice", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
 	
 	
 
