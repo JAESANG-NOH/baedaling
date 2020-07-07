@@ -424,9 +424,9 @@ $(function(){
 	
 				<div style="clear: both;">
 					<ul class="tabs">				 
-							<li id="tab-0" data-tab="0" style="width: 150px">메뉴</li>
-							<li id="tab-1" data-tab="1" style="width: 150px">리뷰</li>
-							<li id="tab-2" data-tab="2" style="width: 150px">정보</li>
+							<li id="tab-0" data-tab="0" style="width: 182px">메뉴</li>
+							<li id="tab-1" data-tab="1" style="width: 182px">리뷰</li>
+							<li id="tab-2" data-tab="2" style="width: 183px">정보</li>
 					</ul>
 				</div>
 				<div id="contentLayout"></div>

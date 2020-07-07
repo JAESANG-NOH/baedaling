@@ -46,7 +46,6 @@ $(function(){
 		if(! confirm("주문을 받을까요?"))
 		    return;
 		var restaurantsNum = $(this).next().next().val();
-
 		var foodorderNum=$(this).attr("data-foodorderNum");
 		var orderState = $(this).attr("data-orderState");
 		var url = "<%=cp%>/dashboard/updateState";
