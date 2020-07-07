@@ -15,7 +15,7 @@ ul li{
 }
 
 .store_basic{
-	width: 600px;
+	width: 700px;
 	margin: 30px auto;
 	background-color: white;
 }
@@ -23,7 +23,6 @@ ul li{
 
 #shop_title{
 	font-size : 14.5px;
-	color
 	height : 40px;
 	padding-top : 10px;
 	padding-bottom : 5px;
@@ -61,21 +60,21 @@ ul li{
 
 #st_menu_btn{
 	border: 1px solid #dadadb;
-	width: 196px;
+	width: 220px;
 	height: 40px;
 	background-color: white;
 }
 
 #st_review_btn{
 	border: 1px solid #dadadb;
-	width: 197px;
+	width: 220px;
 	height: 40px;
 	background-color: white;
 }
 
 #st_info{
 	border: 1px solid #dadadb;
-	width: 197.5px;
+	width: 220px;
 	height: 40px;
 	background-color: white;
 }
@@ -109,7 +108,7 @@ button{
 /* 메뉴 부분 */
 
 .menuImg_table{
-	width:600px;
+	width:700px;
 	height : 200px;
 	padding: 5px;
 	margin: 5px;
@@ -145,7 +144,7 @@ button{
 }
 
 .menu_table td{
-	 width : 600px;
+	 width : 700px;
 	 height: 40px;	
 	font-size: 15px;
 	padding-left: 15px;
@@ -179,7 +178,7 @@ button{
 
 .reviewContent{
 	text-align: center;
-	width: 600px; 
+	width: 700px; 
 	height: 50px; 
 	border: 1px solid #dadadb;
 	border-bottom: none;
@@ -195,14 +194,14 @@ button{
 }
 
 .reviewContent2{
-	width: 600px; 
+	width: 700px; 
 	height: 50px; 
 	border: 1px solid #dadadb;
 	border-bottom: none;
 }
 
 .reviewContent3{
-	width: 600px; 
+	width: 700px; 
 	height: 120px; 
 	border: 1px solid #dadadb;
 	border-top : none;
@@ -212,7 +211,7 @@ button{
 /* 가게정보 */
 
 .infoContent{
-	width: 598px; 
+	width: 698px; 
 	height: 600px;
 	margin: 0px auto;
 	border: 1px solid #dadadb;
