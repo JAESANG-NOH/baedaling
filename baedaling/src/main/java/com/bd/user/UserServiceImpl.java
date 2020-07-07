@@ -87,11 +87,11 @@ public class UserServiceImpl implements UserService{
 	public User readUser(String userId) {
 		User dto = null;
 		try {
-			
-		} catch (Exception e) {
-			// TODO: handle exception
+			dto = dao.selectOne("user.readUserId", userId);
+			} catch (Exception e) {
+				e.printStackTrace();
 		}
-		return null;
+		return dto;
 	}
 
 	@Override
