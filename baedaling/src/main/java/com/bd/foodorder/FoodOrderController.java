@@ -537,6 +537,7 @@ public class FoodOrderController {
 	@RequestMapping(value="listReply")
 	public String listReply(
 			@RequestParam int restaurantsNum,
+			@RequestParam int reviewNum,
 			@RequestParam(value="pageNo", defaultValue="1") int current_page,
 			Model model
 			) throws Exception {
@@ -547,6 +548,7 @@ public class FoodOrderController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("restaurantsNum", restaurantsNum);
+		map.put("reviewNum", reviewNum);
 		dataCount=service.replyCount(map);
 
 		total_page = myUtil.pageCount(rows, dataCount);
@@ -560,7 +562,7 @@ public class FoodOrderController {
 		List<FoodOrder> listReply=service.replyList(map);
 		
 		for(FoodOrder dto : listReply) {
-			dto.setContent(dto.getReply().replaceAll("\n", "<br>"));
+			dto.setReply(dto.getReply());
 		}
 		
 		// AJAX 용 페이징
@@ -572,7 +574,6 @@ public class FoodOrderController {
 		model.addAttribute("replyCount", dataCount);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
-		model.addAttribute("restaurantsNum", restaurantsNum);
 		
 		return "dashboard/listReply";
 	}

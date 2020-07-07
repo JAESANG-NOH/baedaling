@@ -39,7 +39,6 @@
 	<tfoot id='listReplyFooter'>
 		<tr height='40' align="center">
             <td colspan='2' >
-              ${paging}
             </td>
            </tr>
 	</tfoot>

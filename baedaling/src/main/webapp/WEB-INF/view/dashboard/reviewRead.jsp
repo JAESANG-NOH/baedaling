@@ -64,8 +64,10 @@ $(function(){
 });
 
 function listPage(page) {
+	var restaurantsNum = ${dto.restaurantsNum};
+	var reviewNum = ${dto.reviewNum};
 	var url = "<%=cp%>/dashboard/listReply";
-	var query = "restaurantsNum=${dto.restaurantsNum}&pageNo="+page;
+	var query = "restaurantsNum="+restaurantsNum+"&reviewNum="+reviewNum+"&pageNo="+page;
 	var selector = "#listReply";
 	
 	ajaxHTML(url, "get", query, selector);
@@ -76,7 +78,7 @@ function listPage(page) {
 
 $(function(){
 	$(".sendReply").click(function(){
-		var restaurantsNum="${dto.restaurantsNum}";
+		var reviewNum="${dto.reviewNum}";
 		var $tb = $(this).closest("table");
 		var reply=$tb.find("textarea").val().trim();
 		if(! reply) {
@@ -86,7 +88,7 @@ $(function(){
 		reply = encodeURIComponent(reply);
 		
 		var url="<%=cp%>/dashboard/insertReply";
-		var query="restaurantsNum="+restaurantsNum +"&reply="+reply;
+		var query="reviewNum="+reviewNum +"&reply="+reply;
 		
 		var fn = function(data){
 			$tb.find("textarea").val("");
@@ -181,7 +183,7 @@ $(function(){
 	<table  class="reviewContent3" style=" border-spacing: 0px;">
 		<tr height='30'> 
 			 <td align='left'>
-			 	<span style="font-size: 20px; font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; color: gray;" >댓글쓰기</span><span style="font-size:18px; font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; color: #B3B2B2;"> - 타인을 비방하거나 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
+			 	<span style="font-size: 20px; font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; color: gray;" >댓글쓰기</span><span style="font-size:18px; font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; color: #B3B2B2;"> - 고객의 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
 			 </td>
 			 
 		</tr>

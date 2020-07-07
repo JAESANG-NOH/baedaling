@@ -56,7 +56,6 @@
 <!-- 주문 내역 수  -->
 <select id="orderCount" parameterType="map" resultType="Integer">
  SELECT COUNT(foodOrderState) FROM foodorder f
- JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
  WHERE INSTR(foodOrderState , #{foodOrderState}) =1 AND restaurantsNum = #{restaurantsNum} AND TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
 </select>
 
@@ -158,7 +157,7 @@ ORDER BY bestSales desc
  		UPDATE restaurantsInfo SET openingHour = TO_DATE( #{openingHour}, 'HH24:MI'), endingHour = TO_DATE( #{endingHour}, 'HH24:MI'), 
  				mutualName=#{mutualName}, licenseNumber=#{licenseNumber}, introduce=#{introduce},
  				origin=#{origin}, minorder=#{minorder}
- 		WHERE restaurantsNum = #{restaurantsNum}
+ 		WHERE restaurantsNum = #{restaurantsNum} 
  	</update>
  	
  	<update id="updateFcState" parameterType="com.bd.foodorder.FoodOrder">
@@ -204,7 +203,7 @@ ORDER BY bestSales desc
 <select id="replyList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
 	SELECT reviewNum, reply, TO_CHAR(replyCreated,'YY-MM-DD HH24:MI') replyCreated ,restaurantsNum
 	FROM review
-	WHERE restaurantsNum = #{restaurantsNum}
+	WHERE restaurantsNum = #{restaurantsNum} AND reviewNum = #{reviewNum}
 	ORDER BY reviewNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>
@@ -216,14 +215,14 @@ ORDER BY bestSales desc
  </select>
 
  <select id="reviewRead" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
- 	SELECT r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+ 	SELECT r.foodorderNum,r.restaurantsNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
    FROM review r
    JOIN foodorder f ON r.foodorderNum = f.foodorderNum
    JOIN orderdetail o ON o.foodorderNum = f.foodorderNum
    JOIN restaurantMenu rm ON rm.menuNum = o.menuNum
    JOIN user1 u ON r.userIdx = u.userIdx
    WHERE r.reviewNum = #{reviewNum}
-   group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'), starCount, reviewNum, u.userName
+   group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'), starCount, reviewNum, u.userName,r.restaurantsNum
  </select>	 
  
  <update id="updateReply" parameterType="com.bd.foodorder.FoodOrder">
