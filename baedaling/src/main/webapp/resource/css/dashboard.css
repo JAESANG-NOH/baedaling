@@ -21,7 +21,7 @@ ul li{
 .dash_title{
 	margin-left : 20px;
 	margin-top : 10px;
-	color : white;
+	color : #197880;
 	font-size: 30px; 
 	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
 }
@@ -97,5 +97,60 @@ margin: 0px;
 
 #waiting_text{
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 24px;
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+}
+
+
+
+
+
+
+
+
+
+
+@import url(https://fonts.googleapis.com/css?family=Raleway:500);
+.snip1284 * {
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+}
+.snip1284 li {
+  list-style: outside none none;
+  margin: 0.5em 1.2em;
+  padding: 0;
+}
+.snip1284 a {
+  padding: 0 0.6em;
+  color: rgba(255, 255, 255, 0.5);
+  position: relative;
+  text-decoration: none;
+}
+.snip1284 a:before,
+.snip1284 a:after {
+  width: 3px;
+  height: 0;
+  position: absolute;
+  content: '';
+  -webkit-transition: all 0.35s ease;
+  transition: all 0.35s ease;
+  background-color: #348990;;
+}
+.snip1284 a:before {
+  top: 0;
+  right: 0;
+}
+.snip1284 a:after {
+  bottom: 0;
+  left: 0;
+}
+.snip1284 a:hover,
+.snip1284 .current a {
+  color: #ffffff;
+}
+.snip1284 a:hover:before,
+.snip1284 .current a:before,
+.snip1284 a:hover:after,
+.snip1284 .current a:after {
+  height: 100%;
 }
