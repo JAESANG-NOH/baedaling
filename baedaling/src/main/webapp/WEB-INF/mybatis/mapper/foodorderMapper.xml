@@ -27,7 +27,7 @@
     SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
 		   foodOrderTotalPrice, foodOrderAddr, foodOrderHowPay,
 		   foodOrderPay, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
-		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI') foodOrderCompletionDate,memo,f.userIdx, o.menuNum,orderOnePrice,qty,f.restaurantsNum,rm.menuName
+		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI') foodOrderCompletionDate,memo,f.userIdx, o.menuNum,orderOnePrice,qty,f.restaurantsNum, LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
@@ -215,7 +215,7 @@ ORDER BY bestSales desc
  </select>
 
  <select id="reviewRead" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
- 	SELECT r.foodorderNum,r.restaurantsNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+   SELECT r.foodorderNum,r.restaurantsNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
    FROM review r
    JOIN foodorder f ON r.foodorderNum = f.foodorderNum
    JOIN orderdetail o ON o.foodorderNum = f.foodorderNum
