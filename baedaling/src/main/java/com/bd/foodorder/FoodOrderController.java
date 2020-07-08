@@ -74,7 +74,7 @@ public class FoodOrderController {
 		model.addAttribute("orderCount3", orderCount3);
 		model.addAttribute("orderCount4", orderCount4);
 		model.addAttribute("restaurantsNum", restaurantsNum);
-		return "dashboard/orderlist";
+		return ".dashboard.orderlist";
 	}
 	
 	
@@ -137,7 +137,7 @@ public class FoodOrderController {
 	//	model.addAttribute("sSales", sSales);
 		// model.addAttribute("bestlist",bestlist);
 		
-		return "dashboard/salesList";
+		return ".dashboard.salesList";
 	}
 	
 	
@@ -309,7 +309,7 @@ public class FoodOrderController {
 		model.addAttribute("listFile", listFile);
 	//	model.addAttribute("query", query);
 		
-		return "dashboard/fcinfo_read";
+		return ".dashboard.fcinfo_read";
 	}
 	
 	
@@ -327,7 +327,7 @@ public class FoodOrderController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("listFile", listFile);
 		
-		return "dashboard/fcinfo_write";
+		return ".dashboard.fcinfo_write";
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
@@ -439,7 +439,7 @@ public class FoodOrderController {
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
 		model.addAttribute("articleUrl", articleUrl);
-		return "dashboard/myReviewList";
+		return ".dashboard.myReviewList";
 	}
 	
 	
@@ -494,7 +494,7 @@ public class FoodOrderController {
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
 		
-		return "dashboard/myReplyList";
+		return ".dashboard.myReplyList";
 	}
 	
 	
@@ -575,7 +575,7 @@ public class FoodOrderController {
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
 		
-		return "dashboard/listReply";
+		return ".dashboard.listReply";
 	}
 
 	

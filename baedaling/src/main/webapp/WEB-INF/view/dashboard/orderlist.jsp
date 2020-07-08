@@ -194,7 +194,7 @@ $(function(){
 		<td width="300px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
 		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문내역</td>
 		<td width="150px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문시간</td>
-		<td width="100" style="border-bottom: 1px dotted #F6F5F5;">확인</td>
+		<td width="100" style="border-bottom: 1px dotted #F6F5F5;" id="waiting_text">확인</td>
 	</tr>
 <c:forEach var="dto" items="${list1}">	
 	<tr style="width: 800px; text-align: center;">
@@ -224,7 +224,7 @@ $(function(){
 		<td width="300px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
 		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문내역</td>
 		<td width="150px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문시간</td>
-		<td width="100" style="border-bottom: 1px dotted #F6F5F5;">확인</td>
+		<td width="100" style="border-bottom: 1px dotted #F6F5F5;" id="waiting_text">확인</td>
 	</tr>
 <c:forEach var="dto" items="${list2}">	
 	<tr style="width: 800px; text-align: center;">
