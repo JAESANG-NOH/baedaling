@@ -14,21 +14,34 @@
 	</definition>
 	
    <!-- 3단 관리자 -->
-	<definition name=".adminLayout" template="/WEB-INF/view/admin/layout/layout3.jsp">
+	<definition name=".dashboardLayout" template="/WEB-INF/view/layout/dashboardLayout.jsp">
 	    <put-attribute name="title" value="spring" />
-	  	<put-attribute name="header" value="/WEB-INF/view/admin/layout/header.jsp" />
-		<put-attribute name="body" value="/WEB-INF/view/admin/main/main.jsp" />
-		<put-attribute name="footer" value="/WEB-INF/view/layout/footer.jsp" />
-		<put-attribute name="topheader" value="/WEB-INF/view/layout/topheader.jsp"/>
+	    <put-attribute name="side" value="/WEB-INF/view/layout/dashboardside.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/dashboard/dashboard.jsp" />
 	</definition>
-	<definition name=".admin.*.*.*" extends=".adminLayout">
-		<put-attribute name="body" value="/WEB-INF/view/admin/{1}/{2}/{3}.jsp"/>
+	<definition name=".dashboard.*.*.*" extends=".dashboardLayout">
+		<put-attribute name="body" value="/WEB-INF/view/dashboard/{1}/{2}/{3}.jsp"/>
 	</definition>
-	<definition name=".admin.*.*" extends=".adminLayout">
-		<put-attribute name="body" value="/WEB-INF/view/admin/{1}/{2}.jsp"/>
+	<definition name=".dashboard.*.*" extends=".dashboardLayout">
+		<put-attribute name="body" value="/WEB-INF/view/dashboard/{1}/{2}.jsp"/>
 	</definition>
-	<definition name=".admin.*" extends=".adminLayout">
-    	<put-attribute name="body" value="/WEB-INF/view/admin/{1}.jsp" />
+	<definition name=".dashboard.*" extends=".dashboardLayout">
+    	<put-attribute name="body" value="/WEB-INF/view/dashboard/{1}.jsp" />
+	</definition>
+	
+	<definition name=".menuLayout" template="/WEB-INF/view/layout/dashboardLayout.jsp">
+	    <put-attribute name="title" value="spring" />
+	    <put-attribute name="side" value="/WEB-INF/view/layout/dashboardside.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/dashboard/dashboard.jsp" />
+	</definition>
+	<definition name=".menu.*.*.*" extends="menuLayout">
+		<put-attribute name="body" value="/WEB-INF/view/menu/{1}/{2}/{3}.jsp"/>
+	</definition>
+	<definition name=".mune.*.*" extends="menuLayout">
+		<put-attribute name="body" value="/WEB-INF/view/menu/{1}/{2}.jsp"/>
+	</definition>
+	<definition name=".menu.*" extends="menuLayout">
+    	<put-attribute name="body" value="/WEB-INF/view/menu/{1}.jsp" />
 	</definition>
 	
 	<!-- 순서가 바뀌면 안됨(* 많은것이 위에) -->
