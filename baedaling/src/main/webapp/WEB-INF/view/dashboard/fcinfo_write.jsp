@@ -17,7 +17,7 @@
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/js/util-jquery.js"></script>
 
-<link rel="stylesheet" href="<%=cp%>/resource/css/restaurants_info.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/fcinfo_write.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/dashboard.css" type="text/css">
 <script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -206,7 +206,7 @@ function  updateFcState() {
 					</ul>
 					<ul>
 						<li>
-							<button type="submit" onclick="updateFcState();" >등록하기</button> <button type="reset">다시입력</button>
+							<button type="submit" onclick="updateFcState();" style="margin: 5px 5px; padding: 10px;" >등록하기</button> <button type="reset" style="margin: 5px 5px; padding: 10px;">다시입력</button>
 					<c:if test="${mode=='update'}">
 			         	 <input type="hidden" name="restaurantsNum" value="${dto.restaurantsNum}">
 			        </c:if>
