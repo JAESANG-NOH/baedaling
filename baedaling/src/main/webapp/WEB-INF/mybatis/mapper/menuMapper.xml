@@ -18,9 +18,10 @@
 	
 	<select id="listMenu" parameterType="map" resultType="com.bd.menu.Menu">
 		SELECT menuNum, menuName, restaurantsNum, saveFilename, menucategoryNum
-		FROM restaurantmenu 
+		FROM restaurantmenu
+		WHERE restaurantsNum = #{restaurantsNum} 
 		<if test="group != 0">
-				WHERE menuCategoryNum = #{group}
+				AND menuCategoryNum = #{group}
 		</if>
 		ORDER BY menuNum DESC
 		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
@@ -30,6 +31,7 @@
 		SELECT NVL(COUNT(*),0)
 		FROM restaurantmenu r
 		JOIN menucategory m ON r.menuCategoryNum = m.menuCategoryNum
+		WHERE restaurantsNum = #{restaurantsNum} 
 		<where>
 			<if test="group != 0">
 				AND r.menuCategoryNum = #{group}

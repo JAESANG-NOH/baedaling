@@ -36,9 +36,11 @@ public class MenuController {
 			@RequestParam(value="page", defaultValue="1") int current_page,
 			@RequestParam(defaultValue="0") int group,
 			HttpServletRequest req,
+			HttpSession session,
 			Model model
 			) throws Exception{
 		String cp = req.getContextPath();
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
 		
 		int rows = 12;
 		int total_page = 0;
@@ -46,6 +48,7 @@ public class MenuController {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("group", group);
+		map.put("restaurantsNum", info.getRestaurantsNum());
 		
 		dataCount = service.dataCount(map);
 		if(dataCount != 0 ) {
@@ -60,7 +63,6 @@ public class MenuController {
 		if(offset < 0) offset = 0;
         map.put("offset", offset);
         map.put("rows", rows);
-        
         List<Menu> list = service.listMenu(map);
         int listNum = 0;
         int n = 0;
