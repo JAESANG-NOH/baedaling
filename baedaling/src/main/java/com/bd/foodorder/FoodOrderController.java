@@ -578,6 +578,14 @@ public class FoodOrderController {
 		return "dashboard/listReply";
 	}
 
+	@RequestMapping("readRestaurant")
+	public String readRestaurant(
+			Model model
+			) {
+		return "";
+	}
+	
+	
 	
 	
 }
