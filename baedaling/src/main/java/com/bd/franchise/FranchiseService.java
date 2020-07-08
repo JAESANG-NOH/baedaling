@@ -14,4 +14,10 @@ public interface FranchiseService {
 	
 	public void insertOrder(Franchise dto) throws Exception;
 	public void insertDetailOrder(Franchise dto) throws Exception;
+
+
+	public List<FranchiseReview> listReview(Map<String, Object> map);
+	public int reviewCount(int restaurantsNum);
+	public double aveStarCount(int restaurantsNum);
+
 }

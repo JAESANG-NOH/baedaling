@@ -96,6 +96,39 @@ public class FranchiseServiceImpl implements FranchiseService {
 		}
 		return dto;
 	}
+
+	@Override
+	public List<FranchiseReview> listReview(Map<String, Object> map) {
+		List<FranchiseReview> list = null;
+		try {
+			list = dao.selectList("fc.reviewList",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int reviewCount(int restaurantsNum) {
+		int result = 0;
+		try {
+			result = dao.selectOne("fc.reviewCount", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public double aveStarCount(int restaurantsNum) {
+		double result = 0.0;
+		try {
+			result = dao.selectOne("fc.aveStarCount", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
 

@@ -72,9 +72,9 @@ $(function(){
 		$("ul.tabs li").each(function(){
 			$(this).removeClass("active");
 		});
+
 		
 		$("#tab-"+tab).addClass("active");
-		
 		listPage();
 	});
 });
@@ -82,26 +82,40 @@ $(function(){
 function listPage(){
 	var $tab = $(".tabs .active");
 	var tab = $tab.attr("data-tab");
-	var url = "<%=cp%>/franchise/";
+	var url = "<%=cp%>/franchise";
 	var query = "restaurantsNum="+${dto.restaurantsNum};
 	var purl = "";
 	if(tab == 0){
-		purl = "menu";
-	}
-	if(tab == 1){
-		purl = "review";
-	}
-	
-	if(tab == 2){
-		purl = "info";
+		purl = "/menu";
+	}else if(tab == 1){
+		listPagee(1);
+		return;
+	}else if(tab == 2){
+		purl = "/info";
 	}
 	
 	url = url + purl;
+	
 	$("#contentLayout").empty();
 	
 	var selector = "#contentLayout";
 	ajaxHTML(url, "get", query, selector);
 }
+
+function listPagee(page) {
+	var $tab = $(".tabs .active");
+	var tab = $tab.attr("data-tab");
+	
+	var url="<%=cp%>/franchise/review";
+	var query="pageNo="+page;
+	query += "&restaurantsNum="+${dto.restaurantsNum};
+	
+	$("#contentLayout").empty();
+	var selector = "#contentLayout";
+	
+	ajaxHTML(url, "get", query, selector);
+}
+
 
 $(function(){
 	$("body").on("click",".listCatrgory",function(){
