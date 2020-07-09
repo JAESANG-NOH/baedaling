@@ -77,7 +77,18 @@ public class RestaurantsController {
 		map.put("rows", rows);
 		map.put("offset", offset);
 		
-		List<Restaurants> list = service.listRestaurants(map);
+		
+		List<Restaurants> list = null;
+		try {
+			if(typecategorynum==13) { 
+				list = service.listRestaurants(map);
+			} else {
+				list = service.listRestaurants(map);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 
 		String query = "";
         
@@ -88,6 +99,8 @@ public class RestaurantsController {
 
         
         String paging = myUtil.paging(current_page, total_page, listUrl);
+        
+        model.addAttribute("searchBar", "true");
         
         model.addAttribute("list", list);
         model.addAttribute("articleUrl", articleUrl);

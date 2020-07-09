@@ -23,6 +23,23 @@ function forward(url){
 </script>
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/restaurantsmenulist.css" type="text/css">
+<div id="mini_menu">
+	<table class="mini_menu2">
+		<tr>
+			<td class="mini_menu_box">한식</td>
+			<td class="mini_menu_box">중식</td>
+			<td class="mini_menu_box">일식</td>
+			<td class="mini_menu_box">양식</td>
+			<td class="mini_menu_box">치킨</td>
+			<td class="mini_menu_box">피자</td>
+			<td class="mini_menu_box">패스트푸드</td>
+			<td class="mini_menu_box">분식</td>
+			<td class="mini_menu_box">브런치</td>
+			<td class="mini_menu_box">야식</td>
+			<td class="mini_menu_box">디저트</td>
+		</tr>
+		</table>
+</div>
 <div class="menu_content_box" style="min-height: 400px;">
 <form name="listform" method="post">
 	<div class="select_sort">
