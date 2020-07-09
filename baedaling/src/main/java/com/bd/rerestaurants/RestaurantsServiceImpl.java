@@ -40,4 +40,24 @@ public class RestaurantsServiceImpl implements RestaurantsService {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Restaurants> listAllRestaurants(Map<String, Object> map) throws Exception {
+		List<Restaurants> list = null;
+		try {
+			dao.callSelectListProcedureMap("resto.listAllRestaurants", map);
+			list = (List<Restaurants>)map.get("result");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return list;
+	}
+
+	@Override
+	public int dataAllCount(Map<String, Object> map) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

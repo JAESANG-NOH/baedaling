@@ -152,24 +152,39 @@
 			</ul>
       </div>
    </div>
-   <div id="logo" class="container">
-      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 40px;"><a href="#"> "&nbsp;&nbsp;어&nbsp;디&nbsp;로&nbsp;<span style="color:#276CA2; ">&nbsp;배&nbsp;달&nbsp;</span>해&nbsp;드&nbsp;릴&nbsp;까&nbsp;요&nbsp;?&nbsp;&nbsp;"</a></h1>
-   </div>
    
-   <div id="page" class="container">
-      <div>
-         <div class="entry" style="margin: 0px;" align="center">
-            <ul>
-               <li style="list-style: none;">
-                  <input id="inputline" type="search" placeholder="주소입력창" value="">
-                  <button id="inputbutton" type="button">검색</button>
-               </li>
-            </ul>
-            <div id="point_result_list" style="display: none; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;">
-				<ul class="point_search_ul">
-            	</ul>
-			</div>
-         </div>
-      </div>
-   </div>
-   <hr style="border: 0.5px solid #D8D8D8;">
+   <c:choose>
+   	<c:when test="${searchBar=='true' }">
+	    <div id="logo" class="container">
+	      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 40px;"><a href="#"> "&nbsp;&nbsp;어&nbsp;디&nbsp;로&nbsp;<span style="color:#276CA2; ">&nbsp;배&nbsp;달&nbsp;</span>해&nbsp;드&nbsp;릴&nbsp;까&nbsp;요&nbsp;?&nbsp;&nbsp;"</a></h1>
+	   </div>
+	   <div id="page" class="container">
+	      <div>
+	         <div class="entry" style="margin: 0px;" align="center">
+	            <ul>
+	               <li style="list-style: none;">
+	                  <input id="inputline" type="search" placeholder="주소입력창" value="">
+	                  <button id="inputbutton" type="button">검색</button>
+	               </li>
+	            </ul>
+	            <div id="point_result_list" style="display: none; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;">
+					<ul class="point_search_ul">
+	            	</ul>
+				</div>
+	         </div>
+	      </div>
+	   </div> 
+	    <hr style="border: 0.5px solid #D8D8D8;"> 		
+   	</c:when>
+   	<c:otherwise>
+   		<div style="background-image: url('<%=cp%>/resource/img/recommandbanner.jpg'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;오&nbsp;늘&nbsp;은&nbsp;&nbsp;단&nbsp;게&nbsp;&nbsp;땡&nbsp;긴&nbsp;다&nbsp;.&nbsp;"</a></h1>
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:otherwise>
+   </c:choose>
+
+   
+  
