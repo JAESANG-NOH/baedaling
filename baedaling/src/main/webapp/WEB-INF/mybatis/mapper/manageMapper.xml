@@ -88,8 +88,8 @@
 	
 	<!-- 전체 주문 리스트 -->
 	<select id="allOrderList" parameterType="map" resultType="com.bd.manage.Manage">
-	SELECT f.foodOrderNum, foodOrderPay, foodOrderAddr, foodOrderDeliveryMethod, foodOrderHowPay, u.userName,
-	    TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH24:MI') ,TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH24:MI') ,
+	SELECT f.foodOrderNum, qty*foodOrderPay foodOrderTotalPrice, foodOrderAddr, foodOrderDeliveryMethod, foodOrderHowPay, u.userName,
+	    TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH24:MI') foodOrderPayCompletionDate,TO_CHAR(foodOrderCompletionDate ,'YY-MM-DD HH24:MI') foodOrderCompletionDate ,
 	    r.name, LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
 		FROM foodorder f 
 		JOIN orderdetail o ON f.foodorderNum = o.foodorderNum 
@@ -101,8 +101,8 @@
 				<include refid="search-list"/>
 			</if>
 	</where>
-	GROUP BY f.foodOrderNum, f.foodOrderPay, f.foodOrderAddr, foodOrderDeliveryMethod, foodOrderHowPay, foodOrderPayCompletionDate, u.userName,
-    foodOrderCompletionDate,f.userIdx, r.name
+	GROUP BY f.foodOrderNum, foodOrderPay, f.foodOrderAddr, foodOrderDeliveryMethod, foodOrderHowPay, foodOrderPayCompletionDate, u.userName,
+    foodOrderCompletionDate,f.userIdx, r.name, foodOrderTotalPrice, qty 
     ORDER BY f.foodOrderNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 	</select>

@@ -37,6 +37,7 @@
             <th style="color: #787878; width: 150px;">주문자</th>
             <th style="color: #787878; width: 300px;">메뉴</th>
             <th style="color: #787878; width: 100px;">결제금액</th>
+			<th style="color: #787878; width: 100px;">결제방법</th>
             <th style="color: #787878; width: 150px;">주문완료시간</th>
             <th style="color: #787878; width: 150px;">배달완료시간</th>
         </tr>
@@ -47,10 +48,10 @@
             <td>${dto.name}</td>
             <td>${dto.userName}</td>
             <td>${dto.menuName}</td>
-            <td>${dto.foodOrderPay}</td>
-            <td>${dto.userName}</td>
+            <td>${dto.foodOrderTotalPrice}</td>
+            <td>${dto.foodOrderHowPay}</td>
             <td>${dto.foodOrderPayCompletionDate}</td>
-            <td>${dto.foodOrderCompletionDate}</td>
+            <td>${dto.foodOrderCompletionDate }</td>
         </tr>
       </c:forEach>
         </table>

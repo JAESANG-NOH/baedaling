@@ -34,13 +34,13 @@
 	    <put-attribute name="side" value="/WEB-INF/view/layout/dashboardside.jsp"/>
 		<put-attribute name="body" value="/WEB-INF/view/dashboard/dashboard.jsp" />
 	</definition>
-	<definition name=".menu.*.*.*" extends="menuLayout">
+	<definition name=".menu.*.*.*" extends=".menuLayout">
 		<put-attribute name="body" value="/WEB-INF/view/menu/{1}/{2}/{3}.jsp"/>
 	</definition>
-	<definition name=".mune.*.*" extends="menuLayout">
+	<definition name=".mune.*.*" extends=".menuLayout">
 		<put-attribute name="body" value="/WEB-INF/view/menu/{1}/{2}.jsp"/>
 	</definition>
-	<definition name=".menu.*" extends="menuLayout">
+	<definition name=".menu.*" extends=".menuLayout">
     	<put-attribute name="body" value="/WEB-INF/view/menu/{1}.jsp" />
 	</definition>
 	
