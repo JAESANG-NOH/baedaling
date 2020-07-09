@@ -142,26 +142,27 @@ public class NoticeController {
 		if (req.getMethod().equalsIgnoreCase("GET")) { // GET 방식인 경우
 			keyword = URLDecoder.decode(keyword, "utf-8");
 		}
-
-		Notice dto = service.readNotice(num);
-		if (dto == null) {
-			return "redirect:/notice/list";
-		}
-		dto.setContent(dto.getContent().replaceAll("\n", "<br>"));
-
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("condition", condition);
-		map.put("keyword", keyword);
-		map.put("num", num);
-		Notice preReadDto = service.preReadNotice(map);
-		Notice nextReadDto = service.nextReadNotice(map);
-
-		List<Notice> listFile = service.listFile(num);
-
+		
 		String query = "page=" + page;
 		if (keyword.length() != 0) {
 			query += "&condition=" + condition + "&keyword=" + URLEncoder.encode(keyword, "UTF-8");
 		}
+		service.updateHitCount(num);
+		
+		Notice dto = service.readNotice(num);
+		if (dto == null) {
+			return "redirect:/notice/list?"+query;
+		}
+				
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		map.put("num", num);
+		
+		Notice preReadDto = service.preReadNotice(map);
+		Notice nextReadDto = service.nextReadNotice(map);
+		
+		List<Notice> listFile = service.listFile(num);
 
 		model.addAttribute("dto", dto);
 		model.addAttribute("preReadDto", preReadDto);
@@ -174,13 +175,14 @@ public class NoticeController {
 	}
 
 	@RequestMapping(value = "update", method = RequestMethod.GET)
-	public String updateForm(@RequestParam int num, @RequestParam String page,
-
+	public String updateForm(
+			@RequestParam int num,
+			@RequestParam String page,
 			Model model) throws Exception {
 
 		Notice dto = service.readNotice(num);
 		if (dto == null) {
-			return "redirect:/notice/list";
+			return "redirect:/notice/list?page="+page;
 		}
 
 		List<Notice> listFile = service.listFile(num);
@@ -207,7 +209,7 @@ public class NoticeController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/notice/list?page" + page;
+		return "redirect:/notice/list?article?page="+page;
 	}
 	
 	@RequestMapping(value="delete")
@@ -224,8 +226,7 @@ public class NoticeController {
 		if(keyword.length()!=0) {
 			query+="&condition="+condition+"&keyword="+URLEncoder.encode(keyword, "UTF-8");
 		}
-		
-		
+	
 		try {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + "uploads" + File.separator + "notice";

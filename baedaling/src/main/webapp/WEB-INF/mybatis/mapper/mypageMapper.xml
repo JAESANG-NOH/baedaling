@@ -101,9 +101,9 @@ SELECT f.num, f.userId, f.userIdx, subject, hitCount,
 	SELECT COUNT(*) FROM review WHERE restaurantsNum=#{restaurantsNum} AND foodOrderNum=#{foodOrderNum} AND userIdx=#{userIdx}
 </select>
 
-<!-- 내가 쓴 리뷰 -->
+<!-- 내가 쓴 리뷰 & 리뷰 삭제 -->
 <select id="reviewlist" parameterType="map" resultType="com.bd.mypage.Mypage">
-	SELECT r.foodorderNum,
+	SELECT r.foodorderNum, r.reviewNum,
 	    r.userIdx, r.content, TO_CHAR(r.created, 'YYYY-MM-DD') created,
 	    starCount, r.reviewNum, r.restaurantsNum, name, r.reply, TO_CHAR(r.replycreated, 'YYYY-MM-DD') replycreated
 		FROM review r
@@ -121,5 +121,10 @@ SELECT f.num, f.userId, f.userIdx, subject, hitCount,
 	JOIN user1 u ON r.userIdx = u.userIdx
 	WHERE u.userIdx = #{userIdx}
 </select>
+
+<delete id="deleteReview" parameterType="Integer">
+	DELETE FROM review
+	WHERE reviewNum=#{reviewNum}
+</delete>
 
 </mapper>

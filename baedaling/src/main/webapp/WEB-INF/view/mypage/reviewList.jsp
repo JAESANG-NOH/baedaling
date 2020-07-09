@@ -5,7 +5,15 @@
 <%
    String cp=request.getContextPath();
 %>
+<script type="text/javascript">
+function Deletebtn(reviewNum,page) {
+	var url = "<%=cp%>/mypage/delete?reviewNum=" + reviewNum +"&page="+page;
 
+	if(confirm("위 자료를 삭제 하시 겠습니까 ? ")) {
+			location.href=url;
+	}
+}
+</script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/reviewList.css" type="text/css">
 <div class="mypage_container">
@@ -13,13 +21,13 @@
         <div class="body-left">
             <div class="list-group">
                 <div class="list-group-item lefthead"> 마이페이지</div>
-                <a href="<%=cp%>/mypage/userInfo" class="list-group-item active">회원정보</a>
-                <a href="<%=cp%>/mypage/order/list" class="list-group-item">주문내역</a>
-                <a href="#" class="list-group-item">내가 쓴 게시물</a>
-                <a href="#" class="list-group-item">내가 쓴 리뷰</a>
-                <a href="<%=cp%>/mypage/complete/message" class="list-group-item">회원정보수정</a>
+                <a href="<%=cp%>/mapage/userInfo" class="list-group-item active">회원정보</a>
+                <a href="<%=cp%>/mypage/userorderList" class="list-group-item">주문내역</a>
+                <a href="<%=cp%>/mypage/recommendlist" class="list-group-item">내가 쓴 게시물</a>
+                <a href="<%=cp%>/mypage/reviewList" class="list-group-item">내가 쓴 리뷰</a>
+                <a href="<%=cp%>/mypage/message" class="list-group-item">회원정보수정</a>
                 <a href="#" class="list-group-item">회원탈퇴</a>
-            </div>     
+            </div>         
         </div>
     
         <div class="body-right">
@@ -42,11 +50,11 @@
 
         <div class="review_box">
         <c:forEach var="dto" items="${list}">
-        	<table style="border: 1px solid #808080; margin-bottom: 20px; width: 95%; border-collapse: collapse; border-spacing: 0;" >
+        	<table style="border-top: 2px solid #848484; border-bottom: 2px solid #848484; margin-bottom: 20px; width: 95%; border-collapse: collapse; border-spacing: 0;" >
         		<tr class="subtitle" height="35" style="border-bottom: 1px solid #cccccc;">
         			<td id="ftitle" style="font-weight: bold; ">가게명 </td>
         			<td id="ftitle" style="padding-top: 8px;"  > ${dto.name}
-                    	<button class="reviewDeletebtn">삭제</button>
+                    	<button type="button" class="reviewDeletebtn" onclick="Deletebtn('${dto.reviewNum}' , '${page}');">삭제</button>
                     </td>
                 </tr>
                 <tr class="subtitle" height="35" style="border-bottom: 1px solid #cccccc;">
@@ -58,7 +66,7 @@
                     <td id="ftitle">${dto.starCount} &nbsp;/&nbsp;5</td>
                 </tr>
                 <tr height="100" style="border-bottom: 1px solid #cccccc;">
-                	<td colspan="2" style="color:gray; padding-left: 10px;">${dto.content}</td>
+                	<td colspan="2" style="color:gray; padding-left: 10px; padding-bottom: 10px;"><br>${dto.content}</td>
                 </tr>
                 <tr class="subtitle2">
                 	<td width="300" style="border-right-color: #f8f8f8; font-weight: bold; color:black; border-top: 1px solid #cccccc;">
@@ -66,11 +74,12 @@
                 	<td align="right" colspan="2" style="color: black;" >${dto.replycreated}&nbsp;&nbsp;</td>
                 </tr>           
                 <tr height="80">
-                    <td colspan="2" style="color:black; border: 1px solid #BDBDBD; background-color: #f8f8f8;">${dto.reply}</td>
+                    <td colspan="2" style="color:black; border: 1px solid #BDBDBD; padding-left: 10px; background-color: #f8f8f8;">${dto.reply}</td>
                 </tr>                
            	</table>
 	                <input type="hidden" name="foodOrderNum" value="${foodOrderNum}">
-				   	<input type="hidden" name="restaurantsNum" value="${restaurantsNum}">      
+				   	<input type="hidden" name="restaurantsNum" value="${restaurantsNum}">    
+				   	<input type="hidden" name="reviewNum" value="${reviewNum}">    
            	</c:forEach>
            	
            	<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
