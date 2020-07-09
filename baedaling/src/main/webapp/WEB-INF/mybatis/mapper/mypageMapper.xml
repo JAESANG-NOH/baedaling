@@ -5,7 +5,7 @@
 
 <!-- 회원정보 -->
 <select id="readMypage" parameterType="Integer" resultType="com.bd.mypage.Mypage">
-	SELECT u1.userIdx, userId, userName, TO_CHAR(birth, 'YYYY-MM-DD') birth,
+	SELECT u1.userIdx, userId, userPwd, userName, TO_CHAR(birth, 'YYYY-MM-DD') birth,
 	tel, email, zip, addr1, addr2, TO_CHAR(created_date, 'YYYY-MM-DD') created_date
 	FROM user1 u1
 	LEFT OUTER JOIN user2 u2 ON u1.userIdx = u2.userIdx
@@ -24,11 +24,34 @@
 	WHERE userIdx = #{userIdx}
 </update>
 
-<!-- 비밀번호 체크 -->
-<select id="checkPwd" parameterType="map" resultType="Integer">
-	SELECT COUNT(*)
-	FROM user1
-	WHERE userIdx = #{userIdx} AND userPwd = #{userPwd}
+<select id="dataCount" parameterType="map" resultType="Integer">
+	SELECT NVL(COUNT(*),0)
+	FROM foodorder f
+	JOIN user1 u1 ON f.userIdx = u1.userIdx
+	LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+    LEFT OUTER JOIN restaurantsInfo ri ON ri.restaurantsNum = f.restaurantsNum
+    WHERE u1.userIdx = #{userIdx}
 </select>
+
+<!-- 주문내역 -->
+<select id="orderList" parameterType="map" resultType="com.bd.mypage.Mypage">
+	SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
+		   foodOrderTotalPrice, qty , f.restaurantsNum, menuName, mutualName
+	FROM foodorder f 
+    JOIN user1 u ON f.userIdx = u.userIdx
+    LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+    JOIN restaurantsInfo ri ON ri.restaurantsNum = f.restaurantsNum
+    WHERE u.userIdx = #{userIdx}
+    ORDER BY f.foodOrderNum DESC
+	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+</select>
+
+<!-- 리뷰 작성 확인 -->
+<select id="checkReview" parameterType="map" resultType="Integer">
+	SELECT COUNT(*) FROM review WHERE restaurantsNum=#{restaurantsNum} AND foodOrderNum=#{foodOrderNum} AND userIdx=#{userIdx}
+</select>
+
 
 </mapper>

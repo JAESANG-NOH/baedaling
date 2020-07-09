@@ -75,14 +75,14 @@
             </td>
             <td align="center">
                 <form name="searchForm" method="get">
-                  <select name="condition" class="selectField">
+                  <select name="condition" class="btn">
 		                  <option value="all" ${condition=="all"?"selected='selected'":""}>모두</option>
 		                  <option value="subject" ${condition=="subject"?"selected='selected'":""}>제목</option>
 		                  <option value="content" ${condition=="content"?"selected='selected'":""}>내용</option>
 		                  <option value="userName" ${condition=="userName"?"selected='selected'":""}>작성자</option>
 		                  <option value="created" ${condition=="created"?"selected='selected'":""}>등록일</option>
                   </select>
-                  <input type="text" name="keyword" value="${keyword}" class="boxTF">
+                  <input type="text" name="keyword" value="${keyword}" class="btn">
                   <button type="button" class="btn" onclick="searchList();">검색</button>
               </form>
             </td>

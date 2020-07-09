@@ -7,6 +7,15 @@
 %>
 
 <style type="text/css">
+.alert-info {
+    border: 1px solid #9acfea;
+    border-radius: 4px;
+    background-color: #d9edf7;
+    color: #31708f;
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    }
 
 .btn {
 	color: gray;
@@ -102,9 +111,9 @@ function updateBoard(num){
       </div>
       <div id="tab-content" style="clear:both; padding: 20px 0px 0px; ">
       
-         <div class="alert-info">
-              	 자주 묻는 질문들 리스트 입니다.
-         </div>
+		<div class="alert-info">
+		   자주 묻는 질문들 리스트 입니다.
+		</div>
          
          <table style="width: 100%; margin:0px auto; border-collapse: collapse; border-spacing: 0; table-layout: fixed;">
            <thead>
@@ -164,13 +173,13 @@ function updateBoard(num){
                </td>
                <td align="center">
                    <form name="searchForm" action="<%=cp%>/faq/list" method="post">
-                       <select name="condition" class="selectField">
+                       <select name="condition" class="btn" style="height: 30px; ">
                            <option value="all" ${condition=="all"?"selected='selected'":""}>모두 &nbsp;&nbsp;</option>
                            <option value="subject" ${condition=="subject"?"selected='selected'":""}>제목</option>
                            <option value="content" ${condition=="content"?"selected='selected'":""}>내용</option>
                      </select>
                       <input type="hidden" name="group" value="${group}"> 
-                     <input type="text" name="keyword" value="${keyword}" class="boxTF"> 
+                     <input type="text" class="btn" name="keyword" value="${keyword}" class="boxTF"> 
                      <button type="button" class="btn" onclick="searchList()">검색</button>
                  </form>
                </td>

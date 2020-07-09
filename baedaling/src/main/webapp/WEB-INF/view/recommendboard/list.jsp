@@ -63,14 +63,14 @@ function search(){
             </td>
             <td align="center">
                 <form name="searchForm" method="get">
-                    <select name="category" class="selectField">
+                    <select name="category" class="btn">
                         <option value="any" ${category=="any"?"selected='selected'":""}>모두</option>
                         <option value="subject" ${category=="subject"?"selected='selected'":""}>제목</option>
                         <option value="content" ${category=="content"?"selected='selected'":""}>내용</option>
                         <option value="userName" ${category=="userName"?"selected='selected'":""}>작성자</option>
                         <option value="created" ${category=="created"?"selected='selected'":""}>등록일</option>
                   </select>
-                  <input type="text" name="key" value="" class="boxTF">
+                  <input type="text" name="key" value="" class="btn">
                   <button type="button" class="btn" onclick="search();">검색</button>
               </form>
             </td>

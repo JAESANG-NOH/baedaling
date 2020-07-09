@@ -58,7 +58,6 @@ text-align: center;
 	width: 900px;
 }
 
-
 #list_table{
  	height: 50px;
 }
@@ -77,5 +76,17 @@ text-align: center;
 	height: 70px;
 }
 
+.btn {
+	color: gray;
+	font-weight:500;
+	border:1px solid #cccccc;
+	background-color:#ffffff;
+	text-align:center;
+	cursor:pointer;
+	padding:3px 10px 5px;
+	border-radius:4px;
+	font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+	margin-top: 20px;
+}
 
 

@@ -6,10 +6,18 @@ public class SessionInfo {
 	private String userId;
 	private String userName;
 	private int separate ;
+	private int restaurantsNum;
 	private String longitude;
 	private String latitude;
 	
 	
+	
+	public int getRestaurantsNum() {
+		return restaurantsNum;
+	}
+	public void setRestaurantsNum(int restaurantsNum) {
+		this.restaurantsNum = restaurantsNum;
+	}
 	public int getUserIdx() {
 		return userIdx;
 	}

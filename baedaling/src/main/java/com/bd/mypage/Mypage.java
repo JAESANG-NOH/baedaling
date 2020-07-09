@@ -22,6 +22,17 @@ public class Mypage {
 	private String longitude;
 	private String latitude;
 	
+	//userorder
+	private int listNum;
+	
+	private String mutualName; // 가게이름
+	private String menuName; // 메뉴이름
+	private int qty; // 수량
+	private int foodOrderTotalPrice; // 총 결제금액
+	private String foodOrderDate; // 주문날짜+시간
+	
+	private int restaurantsNum;
+	private int foodOrderNum;
 	public int getUserIdx() {
 		return userIdx;
 	}
@@ -117,5 +128,53 @@ public class Mypage {
 	}
 	public void setLatitude(String latitude) {
 		this.latitude = latitude;
+	}
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+	public String getMutualName() {
+		return mutualName;
+	}
+	public void setMutualName(String mutualName) {
+		this.mutualName = mutualName;
+	}
+	public String getMenuName() {
+		return menuName;
+	}
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	public int getFoodOrderTotalPrice() {
+		return foodOrderTotalPrice;
+	}
+	public void setFoodOrderTotalPrice(int foodOrderTotalPrice) {
+		this.foodOrderTotalPrice = foodOrderTotalPrice;
+	}
+	public String getFoodOrderDate() {
+		return foodOrderDate;
+	}
+	public void setFoodOrderDate(String foodOrderDate) {
+		this.foodOrderDate = foodOrderDate;
+	}
+	public int getRestaurantsNum() {
+		return restaurantsNum;
+	}
+	public void setRestaurantsNum(int restaurantsNum) {
+		this.restaurantsNum = restaurantsNum;
+	}
+	public int getFoodOrderNum() {
+		return foodOrderNum;
+	}
+	public void setFoodOrderNum(int foodOrderNum) {
+		this.foodOrderNum = foodOrderNum;
 	}
 }

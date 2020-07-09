@@ -7,21 +7,24 @@
 %>
 <script type="text/javascript">
 $(function(){
-	$("body").on("click","fc_list_table",function(){
-		var num = $(this).attr('data-restaurantsNum');
+	$("body").on("click",".fc_list_table",function(){
+		var num = parseInt($(this).attr('data-restaurantsNum'));
 		var url = "<%=cp%>/franchise/page?restaurantsNum="+num;
+		alert(url);
 		forward(url);
 	});
 });
 
 function forward(url){
-	return url;
+	var f = document.listform;
+	f.action = url;
+	f.submit();
 }
 </script>
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/restaurantsmenulist.css" type="text/css">
 <div class="menu_content_box" style="min-height: 400px;">
-<form name="listform">
+<form name="listform" method="post">
 	<div class="select_sort">
 		<select name="sort_type">
 			<option value="distance" ${state=="distance"?"selected='selected'":""}>기본 거리순</option>

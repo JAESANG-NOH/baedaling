@@ -8,6 +8,7 @@ ul.tabs {
 	height: 35px;
 	border-bottom: 1px solid #dddddd;
 	width: 100%;
+	margin-bottom: 10px;
 }
 ul.tabs li {
 	float: left;
@@ -43,7 +44,7 @@ ul.tabs li.active{
 
 .body{
 	font-size: 13px;
-	font-family: '맑은 고딕';
+	font-family: '留묒� 怨좊뵓';
 }
 
 .box{

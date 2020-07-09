@@ -27,18 +27,17 @@
     SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
 		   foodOrderTotalPrice, foodOrderAddr, foodOrderHowPay,
 		   foodOrderPay, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
-		   foodOrderCompletionDate,memo,f.userIdx, o.menuNum,orderOnePrice,qty,f.restaurantsNum,rm.menuName
+		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI') foodOrderCompletionDate,memo,f.userIdx, o.menuNum,orderOnePrice,qty,f.restaurantsNum,rm.menuName
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
     JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
     JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
     WHERE f.restaurantsNum = #{restaurantsNum} AND INSTR(foodOrderState , #{foodOrderState}) =1
+    ORDER BY f.foodorderNum DESC
+	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
                 
 </select>
-
-
-
 
 <!-- 주문 상태변경 -->
 <update id="updateState" parameterType="map">
@@ -58,7 +57,7 @@
 <select id="orderCount" parameterType="map" resultType="Integer">
  SELECT COUNT(foodOrderState) FROM foodorder f
  JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
- WHERE INSTR(foodOrderState , #{foodOrderState}) =1 AND restaurantsNum = #{restaurantsNum}
+ WHERE INSTR(foodOrderState , #{foodOrderState}) =1 AND restaurantsNum = #{restaurantsNum} AND TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
 </select>
 
 
@@ -135,7 +134,7 @@ ORDER BY bestSales desc
  <!-- 가맹점 정보-->
  
   <select id="readInfo" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-        SELECT r.restaurantsNum, TO_CHAR(openingHour,'HH24:MI') openingHour, TO_CHAR(endingHour,'HH24:MI') endingHour, deliTime, fctel, mutualName,licenseNumber,introduce,origin, minorder, name, 
+       SELECT r.restaurantsNum, TO_CHAR(openingHour,'HH24:MI') openingHour, TO_CHAR(endingHour,'HH24:MI') endingHour, deliTime, fctel, mutualName,licenseNumber,introduce,origin, minorder, name, 
          addr1, addr2
       FROM restaurantsInfo if
       JOIN restaurants r ON if.restaurantsnum = r.restaurantsnum 
@@ -149,15 +148,77 @@ ORDER BY bestSales desc
 		WHERE rf.restaurantsNum=#{restaurantsNum}    
 	</select>
 	
-	<!-- 파일보기 -->
+	<insert id="insertFile" parameterType="com.bd.foodorder.FoodOrder">
+		INSERT INTO restaurantfile(fileNum, restaurantsNum, saveFilename, separate)
+			VALUES(restaurantfile_seq.NEXTVAL, #{restaurantsNum}, #{saveFilename}, #{separate})
+	</insert>
 	
  
- 	<!-- <update id="fc_detailInfo" parameterType="com.bd.foodorder.FoodOrder">
- 		UPDATE restaurantsInfo SET openingHour = TO_DATE(#{openingHour}, 'HH24:MI'), endingHour = TO_DATE(#{openingHour}, 'HH24:MI'), 
+ 	<update id="updateInfo" parameterType="com.bd.foodorder.FoodOrder">
+ 		UPDATE restaurantsInfo SET openingHour = TO_DATE( #{openingHour}, 'HH24:MI'), endingHour = TO_DATE( #{endingHour}, 'HH24:MI'), 
  				mutualName=#{mutualName}, licenseNumber=#{licenseNumber}, introduce=#{introduce},
  				origin=#{origin}, minorder=#{minorder}
- 		WHERE restaurantsnum = #{restaurantsnum}
- 	</update> -->
+ 		WHERE restaurantsNum = #{restaurantsNum}
+ 	</update>
+ 	
+ 	<update id="updateFcState" parameterType="map">
+ 		UPDATE restaurants SET ready = #{ready}
+ 		WHERE restaurantsnum = #{restaurantsNum}
+ 	</update>
  
+ 	<select id="readFile" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+ 		SELECT fileNum, restaurantsNum, saveFilename, separate
+ 		FROM restaurantfile
+ 		WHERE restaurantsnum = #{restaurantsNum}
+ 	</select>
+ 	
+ 	<delete id="deleteFile" parameterType="map">
+		DELETE FROM restaurantfile WHERE ${field} = #{restaurantsNum}
+	</delete>	
+ 
+ 
+ 
+ 
+ <select id="reviewList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
+ 	SELECT rv.foodorderNum, rv.content, TO_CHAR(rv.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, rm.menuName,reviewNum
+	FROM review rv
+	JOIN restaurants r ON rv.restaurantsNum = r.restaurantsNum
+	JOIN restaurantMenu rm ON r.restaurantsNum = rm.restaurantsNum
+	JOIN user1 u ON rv.userIdx = u.userIdx
+	JOIN foodorder f ON rv.foodorderNum = f.foodorderNum
+	JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+	WHERE r.restaurantsNum = #{restaurantsNum}
+	ORDER BY rv.reviewNum DESC
+	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+ </select>
+ 
+ 
+ 	<select id="reviewCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0)
+		FROM review rv
+		JOIN restaurants r ON rv.restaurantsNum = r.restaurantsNum
+		JOIN restaurantMenu rm ON r.restaurantsNum = rm.restaurantsNum
+		JOIN user1 u ON rv.userIdx = u.userIdx
+		JOIN foodorder f ON rv.foodorderNum = f.foodorderNum
+		JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+        WHERE r.restaurantsNum =#{restaurantsNum}
+	 </select>
+	 
+
+<select id="replyList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
+	SELECT rv.reviewNum, rp.content, TO_CHAR(rp.created,'YY-MM-DD HH24:MI') created 
+	FROM reviewReply rp
+	JOIN review rv ON rp.reviewNum = rv.reviewNum
+	WHERE restaurantsNum = #{restaurantsNum}
+	ORDER BY rp.reviewNum DESC
+	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+</select>
+
+ 	<select id="replyCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(*),0)
+		FROM reviewReply rp
+		JOIN review rv ON rp.reviewNum = rv.reviewNum
+        WHERE restaurantsNum =#{restaurantsNum}
+	 </select>
 </mapper>
 

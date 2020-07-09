@@ -14,7 +14,7 @@
     background-color: #d9edf7;
     color: #31708f;
     padding: 15px;
-    margin-top: 10px;
+    margin-top: 20px;
     margin-bottom: 20px;
     }
     
@@ -28,6 +28,7 @@
 	padding:3px 10px 5px;
 	border-radius:4px;
 	font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+	margin-top: 20px;
 }
 }
 </style>
@@ -88,28 +89,13 @@ function sendOk() {
 
 
 
-/* $(function(){
-	$("#btnCategoryUpdate").click(function(){
-		$("#category-dialog").dialog({
-			  modal: true,
-			  height: 300,
-			  width: 450,
-			  title: '카테고리 수정',
-			  close: function(event, ui) {
-			  }
-		});
-	});
-	
-	// $('#category-dialog').dialog("close"); // 창종료
-}); */
-
 </script>
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/tabs.css" type="text/css">
 <div class="body-container" align="center" style="width: 1000px; margin: 0px auto; color: black;">
 		<div class="body-title" align="center">
 		<h3
-			style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
+			style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px; margin-top: 75px;">
 			FAQ&nbsp;<span><img id="f_img2"
 				src="<%=cp%>/resource/img/gangg.png"></span>
 		</h3>
@@ -123,7 +109,7 @@ function sendOk() {
 		<form name="boardForm" method="post">
 			  <table style="  width: 100%; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#ffffff" style="text-align: center; border-top: 1px solid #cccccc;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
+			      <td width="100" bgcolor="#ffffff" style="font-weight: bold; color:gray; text-align: center; border-top: 1px solid #cccccc;">제&nbsp;&nbsp;&nbsp;&nbsp;목</td>
 			      <td style="padding-left:10px; border-top: 1px solid #cccccc;" > 
 			        <input  type="text" name="subject" class="boxTF" style=" width: 835px; border:1px solid #DDDFE0; padding:3px 5px 5px; border-radius: 4px; background-color: #ffffff; height: 25px;" value="${dto.subject}">
 			      </td>
@@ -132,14 +118,14 @@ function sendOk() {
 			
 			
 			  <tr align="left" height="40" style="border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#ffffff" style="text-align: center;">작성자</td>
-			      <td style="padding-left:10px;"> 
+			      <td width="100" bgcolor="#ffffff" style="font-weight: bold; color:gray; text-align: center;">작성자</td>
+			      <td style="padding-left:10px; color:gray;"> 
 			          ${sessionScope.user.userName}
 			      </td>
 			  </tr>
 			
 			  <tr align="left" height="40" style="border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#ffffff" style="text-align: center;">분&nbsp;&nbsp;&nbsp;&nbsp;류</td>
+			      <td width="100" bgcolor="#ffffff" style="font-weight: bold; color:gray; text-align: center;">분&nbsp;&nbsp;&nbsp;&nbsp;류</td>
 			      <td style="padding-left:10px;"> 
 			        <select class="selectField" name="categoryNum" style="width: 150px;">
 			        	<option value="">&nbsp; 분류 선택 &nbsp;</option>
@@ -152,7 +138,7 @@ function sendOk() {
 			  </tr>
 
 			  <tr align="left" style="border-bottom: 1px solid #cccccc;"> 
-			      <td width="100" bgcolor="#ffffff" style="text-align: center; padding-top:5px;" valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
+			      <td width="100" bgcolor="#ffffff" style="font-weight: bold; color:gray; text-align: center; padding-top:5px;" valign="top">내&nbsp;&nbsp;&nbsp;&nbsp;용</td>
 			      <td valign="top" style="padding:5px 0px 5px 10px;"> 
 			        <textarea name="content" rows="12" class="boxTA" style=" height: 400px; width: 835px; border:1px solid #DDDFE0; padding:3px 5px 5px; border-radius: 4px; background-color: #ffffff; resize: none;">${dto.content}</textarea>
 			      </td>

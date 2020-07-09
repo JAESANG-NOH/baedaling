@@ -124,5 +124,16 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	@Override
+	public int readRestaurantsNum(int userIdx) {
+		int result = 0;
+		try {
+			result = dao.selectOne("user.readRestaurantsNum",userIdx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 
 }

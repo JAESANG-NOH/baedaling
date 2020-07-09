@@ -6,7 +6,7 @@
    String cp=request.getContextPath();
 %>
 
-<link rel="stylesheet" href="<%=cp%>/resource/css/mypage_reviewlist.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 
 <div class="container">
 
@@ -47,19 +47,32 @@
                       <div class="mypage_box">
                          <table border="1" style="margin: auto; width:95%; border-collapse: collapse; border-spacing: 0;">
                             <tr class="subtitle" align="center" style="height:30px;">
-                               <td align="center" style="font-weight: bold; color: gray;" class="subtitle">가게 이름 </td>
-                               <td align="center" id="ftitle" style="color:gray;">치킨 개잘하는 집 </td>
+                               <td style="font-weight: bold; color: gray;" class="subtitle">가게 이름 </td>
+                               <td  id="ftitle" style="color:gray;">치킨 개잘하는 집 
+                               <button class="btn">삭제</button></td>
                             </tr>
                             <tr class="subtitle" align="center" style="height:30px;">
                                <td align="center" style="font-weight: bold; color: gray;" class="subtitle">작성 날짜 </td> 
-                               <td  align="center" id="ftitle" style="color:gray;">2020-07-03</td>
+                               <td  id="ftitle" style="color:gray;">2020-07-03</td>
                             </tr>
-                            <tr align="center" height="80"> <span>&nbsp;&nbsp;&nbsp;★★★★★</span>
-                               <td colspan="2" style="color:gray; border: 1px solid #BDBDBD;">  리뷰내용zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</td>
+                            <tr class="subtitle" align="center" style="height:30px;">
+                               <td align="center" style="font-weight: bold; color: gray;" class="subtitle">내가 준 별점 </td> 
+                               <td id="ftitle" style="color:gray;">★★★★★</td>
                             </tr>
-                            <tr>
-                            	 <button type="button" class="btn">삭제</button> 
+                            <tr height="80">
+                               <td colspan="2" style="color:gray; border: 1px solid #BDBDBD;"></td>
                             </tr>
+                            
+                           <tr class="subtitle2" style=" height:30px; font-weight: bold; background-color: #f8f8f8;">
+                            	 <td style="border-right-color: #f8f8f8; font-weight: bold; color:black;">
+                            	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;RE : 사장님</td>
+                            	 <td align="right" colspan="2" style="color: black;" >2020-07-07&nbsp;&nbsp;</td>
+                            </tr>
+                            
+                            <tr align="center" height="80" >
+                            	<td colspan="2" style="color:black; border: 1px solid #BDBDBD; background-color: #f8f8f8;">답변 내용</td>
+                            </tr>
+                            
                          </table>
                       </div>
                  </div>

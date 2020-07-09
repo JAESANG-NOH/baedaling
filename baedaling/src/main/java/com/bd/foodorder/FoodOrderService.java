@@ -22,11 +22,21 @@ public interface FoodOrderService {
 	public List<FoodOrder> bestMenuChart(int restaurantsNum);
 	public Map<String, Object> montlyChart(int restaurantsNum);
 	
-	//가맹점상세정보
+	//가맹점정보
 	public FoodOrder readInfo(int restaurantsNum);
 	public List<FoodOrder> listFile(int restaurantsNum);
-	public void updateInfo(int restaurantsNum);
+	public void updateInfo(FoodOrder dto, String pathname);
 	public void insertFile(FoodOrder dto) throws Exception;
+	public FoodOrder readFile(int fileNum);
+	public void deleteFile(Map<String, Object> map) throws Exception;
+	public void updateFcState(Map<String, Object> map) throws Exception;
+	
+	//리뷰
+	public List<FoodOrder> reviewList(Map<String, Object> map);
+	public int reviewCount(Map<String, Object> map);
+	
+	public List<FoodOrder> replyList(Map<String, Object> map);
+	public int replyCount(Map<String, Object> map);
 	
 }
 

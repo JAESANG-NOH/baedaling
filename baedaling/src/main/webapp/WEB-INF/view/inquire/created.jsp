@@ -42,12 +42,9 @@ function sendOk() {
 	<input type="hidden" name="page" value="${page}">
 </c:if>
 <div align="center" class="box">
-	<h3
-		style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 35px;">
-		Q&nbsp;&amp;&nbsp;A<span><img id="f_img2"
-			src="<%=cp%>/delivery/img/gangg.png"></span>
-	</h3>
-	<br>
+     <h3 style="margin-top:70px; margin-bottom:20px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">
+     Q&nbsp; &amp; &nbsp;A <span><img width="70px" height="70px"
+			src="<%=cp%>/resource/img/gangg.png"></span> </h3>
 	
 	<table class="freeboard">
 		<tr class="f_line">

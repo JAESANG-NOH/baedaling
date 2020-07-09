@@ -1,8 +1,12 @@
 package com.bd.foodorder;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -14,12 +18,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bd.common.FileManager;
+import com.bd.common.MyUtil;
+
 
 @Controller("foodorder.foodOrderController")
 @RequestMapping("/dashboard/*")
 public class FoodOrderController {
 	@Autowired
 	private FoodOrderService service;
+	@Autowired
+	private FileManager fileManager;
+	@Autowired
+	private MyUtil myUtil;
+
 	
 	@RequestMapping(value="orderlist")
 	public String orderList(
@@ -61,6 +73,7 @@ public class FoodOrderController {
 		model.addAttribute("orderCount2", orderCount2);
 		model.addAttribute("orderCount3", orderCount3);
 		model.addAttribute("orderCount4", orderCount4);
+		model.addAttribute("restaurantsNum", restaurantsNum);
 		return "dashboard/orderlist";
 	}
 	
@@ -68,19 +81,53 @@ public class FoodOrderController {
 	@RequestMapping(value="salesList")
 	public String page(
 			@RequestParam int restaurantsNum,
+			@RequestParam (value="page", defaultValue="1") int current_page,
+			HttpServletRequest req,
 			Model model
 			) throws Exception{
 		// List<FoodOrder> bestlist = service.bestMenuChart(restaurantsNum);
+		String cp = req.getContextPath();
+		int rows = 10; // 한 화면에 보여주는 게시물 수
+		int total_page = 0;
+		int dataCount = 0;
 		Map<String, Object> mm = new HashMap<String, Object>();
 		mm.put("restaurantsNum", restaurantsNum);
 		mm.put("foodOrderState", "배달완료");
-		List<FoodOrder> listall = service.allList(mm);
+		dataCount = service.orderCount(mm);
+		if(dataCount != 0)
+            total_page = myUtil.pageCount(rows,  dataCount) ;
+		
+	     if(total_page < current_page) 
+	            current_page = total_page;
+			
+	        int offset = (current_page-1) * rows;
+	 		if(offset < 0) offset = 0;
+	         mm.put("offset", offset);
+	         mm.put("rows", rows);
+	    List<FoodOrder> listall = service.allList(mm);
 		
 		FoodOrder today = service.todaySalesRead(restaurantsNum);
 		FoodOrder month = service.monthlySalesRead(restaurantsNum);
 		FoodOrder annual = service.annualSalesRead(restaurantsNum);
 		
 		//Map<String, Object> sSales = service.montlyChart(restaurantsNum);
+	     int listNum =0;
+	     int n = 0;
+	     for(FoodOrder dto : listall) {
+	       listNum = dataCount - (offset + n);
+	       dto.setListNum(listNum);
+	       n++;
+	      }
+	     
+	    String query = "restaurantsNum="+restaurantsNum; 
+	    String listUrl = cp+"/dashboard/salesList?"+query;
+	    String paging = myUtil.paging(current_page, total_page, listUrl);
+		
+		
+		model.addAttribute("dataCount", dataCount);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
 		
 		model.addAttribute("today",today);
 		model.addAttribute("month",month);
@@ -114,9 +161,6 @@ public class FoodOrderController {
 		
 		return arr.toString();
 	}
-	
-	
-	
 	
 	
 	@RequestMapping(value="barChart", produces="application/json;charset=utf-8")
@@ -203,7 +247,7 @@ public class FoodOrderController {
 	}
 	
 	
-	@RequestMapping(value="updateState",method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	@RequestMapping(value="updateState" ,produces="application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String, Object> updateState(
 			@RequestParam int foodorderNum,
@@ -218,6 +262,7 @@ public class FoodOrderController {
 			map.put("foodorderNum", foodorderNum);
 			
 			service.updateOrderState(map);
+			service.orderCount(map);
 			state = "true";
 		} catch (Exception e) {
 			
@@ -255,10 +300,9 @@ public class FoodOrderController {
 			Model model
 			)throws Exception{
 		
-		//String query="restaurantsNum="+restaurantsNum;
 		FoodOrder dto = service.readInfo(restaurantsNum);
-	//	if(dto==null)
-	//		return "redirect:/dashboard/orderlist?"+query;
+		if(dto==null)
+			return "redirect:/dashboard/orderlist?";
 		
 		List<FoodOrder> listFile = service.listFile(restaurantsNum);
 		model.addAttribute("dto", dto);
@@ -266,6 +310,196 @@ public class FoodOrderController {
 	//	model.addAttribute("query", query);
 		
 		return "dashboard/fcinfo_read";
+	}
+	
+	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String updateForm(
+			@RequestParam int restaurantsNum,
+			Model model
+			) throws Exception{
+		FoodOrder dto = service.readInfo(restaurantsNum);
+		if(dto==null) {
+			return "redirect:/dachboard/orderlist?";
+		}
+		List<FoodOrder> listFile = service.listFile(restaurantsNum);
+		model.addAttribute("mode", "update");
+		model.addAttribute("dto", dto);
+		model.addAttribute("listFile", listFile);
+		
+		return "dashboard/fcinfo_write";
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updateSubmit(
+			FoodOrder dto,
+			HttpSession session
+			)throws Exception{
+		try {
+			String root = session.getServletContext().getRealPath("/");
+			String pathname = root + File.separator + "resource" + File.separator + "dashboard";
+			service.updateInfo(dto, pathname);
+		} catch (Exception e) {
+		}
+		return "redirect:/dashboard/fcinfo_read?restaurantsNum="+dto.getRestaurantsNum();
+	}
+	
+	
+	@RequestMapping(value="updateFcState", method=RequestMethod.POST, produces="application/json;charset=utf-8")
+	@ResponseBody
+	public Map<String, Object> updateFcState(
+			@RequestParam int restaurantsNum,
+			@RequestParam String ready
+			) throws Exception{
+		
+		String reayState = "false";
+		try {
+			Map<String, Object> map = new HashMap<>();
+			map.put("ready", ready);
+			map.put("restaurantsNum", restaurantsNum);
+			
+			service.updateFcState(map);
+			reayState = "true";
+		} catch (Exception e) {
+		}
+		Map<String, Object> model = new HashMap<>();
+		model.put("reayState", reayState);
+		
+		return model;
+	}
+	
+	
+	
+	@RequestMapping(value="deleteFile", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteFile(
+			@RequestParam int fileNum,
+			HttpSession session
+			)throws Exception{
+		String root=session.getServletContext().getRealPath("/");
+		String pathname=root+"resource"+File.separator+"dashboard";
+		
+		FoodOrder dto = service.readFile(fileNum);
+		if(dto!=null) {
+			fileManager.doFileDelete(dto.getSaveFilename(),pathname);
+		}
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("field", "fileNum");
+		map.put("num", fileNum);
+		service.deleteFile(map);
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", "true");
+		return model;
+		
+	}
+	
+	
+	@RequestMapping("myReviewList")
+	public String reviewList(
+			@RequestParam int restaurantsNum,
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			HttpServletRequest req,
+			Model model
+			) {
+		String cp = req.getContextPath();
+		int rows = 10; // 한 화면에 보여주는 게시물 수
+		int total_page = 0;
+		
+		int reviewCount = 0;
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("restaurantsNum", restaurantsNum);
+		reviewCount = service.reviewCount(map);
+		
+		if(reviewCount != 0)
+            total_page = myUtil.pageCount(rows,  reviewCount) ;
+		
+	    // 다른 사람이 자료를 삭제하여 전체 페이지수가 변화 된 경우
+        if(total_page < current_page) 
+            current_page = total_page;
+		
+        int offset = (current_page-1) * rows;
+ 		if(offset < 0) offset = 0;
+         map.put("offset", offset);
+         map.put("rows", rows);
+        
+		List<FoodOrder> list = service.reviewList(map);
+		
+	     int listNum =0;
+	     int n = 0;
+	     for(FoodOrder dto : list) {
+	       listNum = reviewCount - (offset + n);
+	       dto.setListNum(listNum);
+	       n++;
+	      }
+	    String listUrl = cp+"/dashboard/myReviewList";
+	    String paging = myUtil.paging(current_page, total_page, listUrl);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+		
+		return "dashboard/myReviewList";
+	}
+	
+	
+	
+	@RequestMapping("myReplyList")
+	public String replyList(
+			@RequestParam int restaurantsNum,
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			HttpServletRequest req,
+			Model model
+			) {
+		
+		String cp = req.getContextPath();
+		int rows = 10; // 한 화면에 보여주는 게시물 수
+		int total_page = 0;
+		
+		int reviewCount = 0;
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("restaurantsNum", restaurantsNum);
+		reviewCount = service.replyCount(map);
+		
+		if(reviewCount != 0)
+            total_page = myUtil.pageCount(rows,  reviewCount) ;
+		
+	    // 다른 사람이 자료를 삭제하여 전체 페이지수가 변화 된 경우
+        if(total_page < current_page) 
+            current_page = total_page;
+		
+        int offset = (current_page-1) * rows;
+ 		if(offset < 0) offset = 0;
+         map.put("offset", offset);
+         map.put("rows", rows);
+        
+		List<FoodOrder> list = service.replyList(map);
+		
+	     int listNum =0;
+	     int n = 0;
+	     for(FoodOrder dto : list) {
+	       listNum = reviewCount - (offset + n);
+	       dto.setListNum(listNum);
+	       n++;
+	      }
+	    String query = "restaurantsNum="+restaurantsNum;
+	    String listUrl = cp+"/dashboard/myReplyList?"+query;
+	    String paging = myUtil.paging(current_page, total_page, listUrl);
+		
+		
+		model.addAttribute("list", list);
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+		
+		return "dashboard/myReplyList";
 	}
 	
 	

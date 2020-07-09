@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 
 <div class="container">
+
+
+
     <div class="body-container">
         <div class="body-left">
             <div class="list-group">
@@ -26,46 +29,50 @@
         <div class="body-right">
             <div class="body-right-container">
                  <div class="body-title">
-                     <h3><span style="font-family: Webdings">4</span> 마이페이지 </h3>
+                     <h3><span  style=" font-family: Webdings">4</span> 마이페이지 </h3>
                  </div>
                  <div id="mypage_container">
                     <div class="alert-info">
-                   <p style="text-align: center;"><i class="fas fa-info-circle"></i>
-                   <span style="font-weight: bold; font-size: 16px;">&nbsp;${sessionScope.user.userName}</span>님의 회원 정보입니다. </p>
+                   <p style= "color:white; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 25px; text-align: center;">My Review List</p>
                </div>
+               
+        <div>
+             <table>
+               <tr>
+               		<td style=" border-bottom:1px solid gray; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 20px; ">내가 쓴 총 리뷰 1&nbsp;개</td>
+               </tr>
+             </table>
+        </div>
+               
                       <div class="mypage_box">
-                         <table border="1" style="border-color:#cccccc; margin: auto; width:95%; border-collapse: collapse; border-spacing: 0;">
-                            <tr align="center" height="35" >
-                               <td>아이디</td>
-                               <td>${dto.userId}</td>
+                         <table border="1" style="margin: auto; width:95%; border-collapse: collapse; border-spacing: 0;">
+                            <tr class="subtitle" align="center" style="height:30px;">
+                               <td style="font-weight: bold; color: gray;" class="subtitle">가게 이름 </td>
+                               <td  id="ftitle" style="color:gray;">치킨 개잘하는 집 
+                               <button class="btn">삭제</button></td>
                             </tr>
-                            <tr align="center" height="35">
-                               <td>이&nbsp;름</td>
-                               <td>${dto.userName}</td>
+                            <tr class="subtitle" align="center" style="height:30px;">
+                               <td align="center" style="font-weight: bold; color: gray;" class="subtitle">작성 날짜 </td> 
+                               <td  id="ftitle" style="color:gray;">2020-07-03</td>
                             </tr>
-                            <tr align="center" height="35">
-                               <td>생년월일</td>
-                               <td>${dto.birth}</td>
+                            <tr class="subtitle" align="center" style="height:30px;">
+                               <td align="center" style="font-weight: bold; color: gray;" class="subtitle">내가 준 별점 </td> 
+                               <td id="ftitle" style="color:gray;">★★★★★</td>
                             </tr>
-                            <tr align="center" height="35">
-                               <td>전화번호</td>
-                               <td>${dto.tel}</td>
+                            <tr height="80">
+                               <td colspan="2" style="color:gray; border: 1px solid #BDBDBD;"></td>
                             </tr>
-                            <tr align="center" height="35">
-                               <td>이메일</td>
-                               <td>${dto.email}</td>
+                            
+                           <tr class="subtitle2" style=" height:30px; font-weight: bold; background-color: #f8f8f8;">
+                            	 <td style="border-right-color: #f8f8f8; font-weight: bold; color:black;">
+                            	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;RE : 사장님</td>
+                            	 <td align="right" colspan="2" style="color: black;" >2020-07-07&nbsp;&nbsp;</td>
                             </tr>
-                            <tr align="center" height="35">
-                               <td>주&nbsp;소</td>
-                               <td>
-                                  [&nbsp;${dto.zip}&nbsp;] ${dto.addr1} <br>
-                                                     ${dto.addr2}
-                                  </td>
+                            
+                            <tr align="center" height="80" >
+                            	<td colspan="2" style="color:black; border: 1px solid #BDBDBD; background-color: #f8f8f8;">답변 내용</td>
                             </tr>
-                            <tr align="center" height="35">
-                               <td>가입날짜</td>
-                               <td>${dto.created_date}</td>
-                            </tr>
+                            
                          </table>
                       </div>
                  </div>

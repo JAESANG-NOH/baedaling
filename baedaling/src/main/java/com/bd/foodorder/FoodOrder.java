@@ -1,11 +1,10 @@
 package com.bd.foodorder;
 
+import java.util.List;
 import java.util.Map;
 
-/**
- * @author sist
- *
- */
+import org.springframework.web.multipart.MultipartFile;
+
 public class FoodOrder {
 	private int foodorderNum;
 	private int foodOrderTotalPrice;
@@ -22,7 +21,7 @@ public class FoodOrder {
 	private int restaurantsNum;
 	private Map<String, Object> mSales;
 	
-	//가맹점 상세정보 
+	//가맹점 정보 
 	private String name;
 	private String introduce;
 	private String openingHour;
@@ -37,6 +36,87 @@ public class FoodOrder {
 	private String addr1;
 	private String addr2;
 	
+	private int ready;
+	
+	//파일 
+	private int fileNum;
+	private String saveFilename;
+	private int separate;
+	private List<MultipartFile> upload;
+	
+	// 리뷰리스트 & 댓글 
+	private String content;
+	private String created;
+	private int starCount;
+	private int reviewNum;
+	private String userName;
+	private int listNum;
+	
+	public int getListNum() {
+		return listNum;
+	}
+	public void setListNum(int listNum) {
+		this.listNum = listNum;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	public int getStarCount() {
+		return starCount;
+	}
+	public void setStarCount(int starCount) {
+		this.starCount = starCount;
+	}
+	public int getReviewNum() {
+		return reviewNum;
+	}
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
+
+
+	
+
+	public int getSeparate() {
+		return separate;
+	}
+	public void setSeparate(int separate) {
+		this.separate = separate;
+	}
+	public int getFileNum() {
+		return fileNum;
+	}
+	public void setFileNum(int fileNum) {
+		this.fileNum = fileNum;
+	}
+	
+	public String getSaveFilename() {
+		return saveFilename;
+	}
+	public void setSaveFilename(String saveFilename) {
+		this.saveFilename = saveFilename;
+	}
+	public List<MultipartFile> getUpload() {
+		return upload;
+	}
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
+	}
 	public String getName() {
 		return name;
 	}
@@ -241,6 +321,14 @@ public class FoodOrder {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	
+	public int getReady() {
+		return ready;
+	}
+	public void setReady(int ready) {
+		this.ready = ready;
+	}
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -265,6 +353,7 @@ public class FoodOrder {
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
+
 	
 	
 	

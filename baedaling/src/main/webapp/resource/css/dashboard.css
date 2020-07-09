@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @charset "UTF-8";
 
 *{
@@ -98,3 +99,106 @@ margin: 0px;
 	font-weight: bold;
 	font-size: 16px;
 }
+=======
+@charset "UTF-8";
+
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+body{
+	font-family: '맑은고딕', '맑은 고딕';
+	text-align: left;
+	background-color: #f9f9fa;
+}
+
+ul li{
+	list-style: none;
+	font-size: 90%;
+	text-decoration: none;
+}
+
+
+.dash_title{
+	margin-left : 20px;
+	margin-top : 10px;
+	color : white;
+	font-size: 30px; 
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+}
+	
+.sidebox{
+	position : fixed;
+	background-color:#38BCC6;
+	height: 100%;
+	width: 15%;
+	position: fixed;
+}
+
+#dash_subTitle{
+	color: #D2D4D4;
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+#dash_subcontent{
+	color: white;
+	font-size: 17px;
+	font-weight: bold;
+	margin: 15px;
+}
+
+#menu_content{
+	padding-left:40px; 
+}
+
+a{
+	color: white;
+	text-decoration: none;
+}
+
+a:active {
+	background: #4FAEC0;
+}
+
+
+#dashboard_box{
+width: 100%;
+margin: 0px;
+}
+
+#dash_title{
+	font-size: 35px;
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+	width: 1400px;
+}
+
+#dash_title2{
+	width : 800px;
+}
+
+#dash_table{
+	width: 1400px;
+	height: 400px;
+	margin-top : 0px;
+	margin-left : 320px;
+	background-color: white; 
+}
+
+
+#dash_table2{
+	width: 1400px;
+	height: 400px;
+	margin-top: 20px;
+	margin-left: 320px;
+	background-color: white;
+}
+
+
+#waiting_text{
+	font-weight: bold;
+	font-size: 16px;
+}
+>>>>>>> branch 'master' of https://github.com:443/JAESANG-NOH/baedaling.git

@@ -13,61 +13,135 @@
 			</otherwise>
 		</choose>
 	</sql>
-	
+
+	<sql id="search-list">
+		<if test="condition=='name' ">
+			INSTR(name, #{keyword}) &gt;= 1
+		</if>
+		<if test="condition=='mutualName'">
+			INSTR( mutualName, #{keyword}) &gt;= 1
+		</if>
+		<if test="condition=='licenseNumber'">
+			licenseNumber=#{keyword}
+		</if>
+	</sql>
+
+
+
+
+
+
 	<!-- 가게 개수 -->
 	<select id="dataCount" parameterType="map" resultType="Integer">
 		SELECT COUNT(*)
 		FROM restaurants r
-		LEFT OUTER JOIN user1 u ON r.userIdx = u.userIdx
-		LEFT OUTER JOIN restaurantsInfo r1 ON r.restaurantsNum=r1.restaurantsNum
+		LEFT OUTER JOIN user1 u ON r.userIdx
+		= u.userIdx
+		LEFT OUTER JOIN restaurantsInfo r1 ON
+		r.restaurantsNum=r1.restaurantsNum
 		<where>
 			<if test="keyword!=null and keyword!='' ">
-				<include refid="where-list"/>
+				<include refid="where-list" />
 			</if>
 			<if test="enabled!=''">
 				AND enabled = #{enabled}
 			</if>
-				AND separate=1
+			AND separate=1
 		</where>
-		
+
 	</select>
-	
-	<!-- 가게 리스트  -->
-	<select id="listRestaurant" parameterType="map" resultType="com.bd.restaurantList.RestaurantList">
+
+	<!-- 가게 리스트 -->
+	<select id="listRestaurant" parameterType="map"
+		resultType="com.bd.restaurantList.RestaurantList">
 		SELECT u.userIdx, name, u.userId, mutualName, licenseNumber, enabled,
-				addr1, addr2
+		addr1, addr2
 		FROM restaurants r
-		LEFT OUTER JOIN user1 u ON r.userIdx = u.userIdx
-		LEFT OUTER JOIN restaurantsInfo r1 ON r.restaurantsNum=r1.restaurantsNum
-		
+		LEFT OUTER JOIN user1 u ON r.userIdx =
+		u.userIdx
+		LEFT OUTER JOIN restaurantsInfo r1 ON
+		r.restaurantsNum=r1.restaurantsNum
+
 		<where>
 			<if test="keyword!=null and keyword!='' ">
-				<include refid="where-list"/>
+				<include refid="where-list" />
 			</if>
 			<if test="enabled!=''">
 				AND enabled = #{enabled}
 			</if>
-				AND separate=1
+			AND separate=1
 		</where>
-		
+
 		ORDER BY u.userIdx DESC
-		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY 
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS
+		ONLY
 	</select>
-	
+
 	<!-- 가게 상세표 -->
-	<select id="readUser" parameterType="String" resultType="com.bd.restaurantList.RestaurantList">
-		SELECT u.userIdx, name, u.userId, mutualName, licenseNumber, u.enabled,
-				addr1, addr2
+	<select id="readUser" parameterType="String"
+		resultType="com.bd.restaurantList.RestaurantList">
+		SELECT u.userIdx, name, u.userId, mutualName,
+		licenseNumber, u.enabled,
+		addr1, addr2
 		FROM restaurants r
-		LEFT OUTER JOIN user1 u ON r.userIdx = u.userIdx
-		LEFT OUTER JOIN restaurantsInfo r1 ON r.restaurantsNum=r1.restaurantsNum
+		LEFT OUTER JOIN user1 u ON r.userIdx =
+		u.userIdx
+		LEFT OUTER JOIN restaurantsInfo r1 ON
+		r.restaurantsNum=r1.restaurantsNum
 		WHERE userId=#{userId}
 	</select>
-	
+
 	<!-- alter창 가게수정 -->
 	<update id="updateUserEnabled" parameterType="map">
-		UPDATE user1 SET enabled=#{enabled} WHERE userId=#{userId}
+		UPDATE user1 SET
+		enabled=#{enabled} WHERE userId=#{userId}
 	</update>
+
+
+	<!-- 대기중가게 리스트 -->
+	<select id="listWaitRestaurant" parameterType="map"
+		resultType="com.bd.restaurantList.RestaurantList">
+		SELECT r.restaurantsNum, u.userIdx,name, u.userId, mutualName, licenseNumber, r.addr1, r.addr2,
+		r.ready
+		FROM restaurants r
+		JOIN user1 u ON r.userIdx = u.userIdx
+		JOIN restaurantsInfo ri ON r.restaurantsNum = ri.restaurantsNum
+
+		<where>
+			<if test="keyword!=null and keyword!='' ">
+				<include refid="search-list" />
+			</if>
+			<if test="ready!=''">
+				AND ready = #{ready}
+			</if>
+		</where>
+
+		ORDER BY u.userIdx DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS
+		ONLY
+	</select>
+
+
+	<!-- 승인대기가게 개수 -->
+	<select id="watiDataCount" parameterType="map" resultType="Integer">
+		SELECT COUNT(*)
+		FROM restaurants r
+		JOIN user1 u ON r.userIdx = u.userIdx
+		JOIN restaurantsInfo ri ON r.restaurantsNum = ri.restaurantsNum
+		<where>
+			<if test="keyword!=null and keyword!='' ">
+				<include refid="search-list" />
+			</if>
+			<if test="ready!=''">
+				AND ready = #{ready}
+			</if>
+		</where>
+
+	</select>
 	
+	<update id="updateReady" parameterType="Integer" >
+		UPDATE restaurants SET ready = 2 WHERE restaurantsNum = #{restaurantsNum}
+	
+	</update>
 
 </mapper>

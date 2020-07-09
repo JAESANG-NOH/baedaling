@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/list.css" type="text/css">
 <div class="body-container" align="center" style="width: 900px;">
     <div class="body-title" align="center">
-     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">Q&nbsp; &amp; &nbsp;A </h3>
+     <h3 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">
+     Q&nbsp; &amp; &nbsp;A <span><img width="70px" height="70px"
+			src="<%=cp%>/resource/img/gangg.png"></span> </h3>
     </div>
     
 <script type="text/javascript">
@@ -65,14 +67,14 @@
             </td>
             <td align="center">
                 <form name="searchForm" action="<%=cp%>/inquire/list" method="post">
-                    <select name="condition" class="selectField">
+                    <select name="condition" class="btn">
                         <option value="all" selected='selected'>모두</option>
                         <option value="subject" >제목</option>
                         <option value="content" >내용</option>
                         <option value="userId" >작성자</option>
                         <option value="created" >등록일</option>
                   </select>
-                  <input type="text" name="keyword" value="" class="boxTF">
+                  <input type="text" name="keyword" value="" class="btn">
                   <button type="button" class="btn" onclick="searchList()">검색</button>
               </form>
             </td>

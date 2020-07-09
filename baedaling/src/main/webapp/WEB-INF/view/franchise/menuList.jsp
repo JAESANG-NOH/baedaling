@@ -10,9 +10,9 @@
 
 <div class="menuImg_table" align="center" style="margin: 5px; padding: 5px;">
 	<c:forEach var="dto" items="${menuList }">
-		<ul >
+		<ul class="menu" data-menuNum="${dto.menuNum }">
 			<li><img class="store_menu_img" src="<%=cp%>/uploads/menu/${dto.saveFilename}" onerror="this.src='<%=cp%>/resource/img/ready.jpg'"></li>
-			<li style="text-align: center;" class="menuName" data-menuNum="${dto.menuNum }">${dto.menuName }</li>
+			<li style="text-align: center;" >${dto.menuName }</li>
 			<li style="text-align: center;">${dto.menuPrice }</li>
 		</ul>
 	</c:forEach>
@@ -47,34 +47,29 @@
 			  </tr>
 			
 			  <tr>
-			      <td colspan="2" class="detail-text" id="menuName" style="text-align: center; font-size: 25px; padding-top :15px;">
-			       <!--  <input class="detail-text" type="text" name="menuName" readonly="readonly"> -->
-			      		치즈케이크 블랙타이거피자 
+			      <td colspan="2" class="detail-text" id="menuNameView" style="text-align: center; font-size: 25px; padding-top :15px;">
+
+			      		
 			      </td>
 			  </tr>
 			  <tr>
-			  	<td style="text-align:center; color: #999999; padding: 10px;" colspan="2">인기 메뉴 블랙타이거 슈림프와 단종 메뉴 치즈케이크 샌드 콜라보</td>
+			  	<td style="text-align:center; color: #999999; padding: 10px;" colspan="2" id = "menuInfoView"></td>
 			  </tr>
 			
-			  <tr style="height: 50px;">
+			  <tr style="height: 100px;">
 			      <td style="border-top: 1px solid #f0f0f0; border-bottom:1px solid #f0f0f0;">
 			      	가격 
 			        <!-- <input class="detail-price" type="text" name="menuPrice" readonly="readonly"> -->
 			      </td >
 			      <td style="border-top: 1px solid #f0f0f0; border-bottom:1px solid #f0f0f0; text-align: right;">
-			      	<span style="text-align:right; font-weight: bold; padding-right: 15px; font-size: 14px;">30,000</span>원 
+			      	<span style="text-align:right; font-weight: bold; padding-right: 15px; font-size: 14px;" id="menuPriceView"></span>원 
 			      </td>
 			  </tr>
-					
-				<tr height="60px;" style="background-color: #f0f0f0;">
-					<td style="font-weight: bold;">총 주문금액</td>
-					<td style="font-size: 23px; color: red; text-align: right; padding-right: 10px;">35,900 원</td>
-				</tr>
 				
 			  <tr>
 			      
-			      <td style="width: 50%; text-align: center; background-color:#38BCC6; color: white; height: 60px;">
-			       	<span class="buyAdd" style="font-weight: bold;">주문표에 추가</span>
+			      <td style="width: 50%; text-align: center; background-color:#38BCC6; color: white; height: 60px;" class="buyAdd">
+			       	<span  style="font-weight: bold;">주문표에 추가</span>
 			      </td>
 			      <td style="width: 50%; text-align: center; background-color:#555555; color: white; height: 60px;">
 			      	<span style="font-weight: border: ;">취소</span>

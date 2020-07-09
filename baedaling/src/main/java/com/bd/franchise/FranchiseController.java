@@ -26,7 +26,7 @@ public class FranchiseController {
 		
 		Franchise dto= service.readBoard(restaurantsNum);
 		if(dto==null) {
-			return "redirect:/franchise/list?";
+			return "redirect:/restaurants/list";
 		}
 		
 		model.addAttribute("dto", dto);
@@ -97,18 +97,6 @@ public class FranchiseController {
 		map.put("dto", dto);
 		
 		return map;
-	}
-	
-	
-	@RequestMapping(value="review")
-	public String review(
-			@RequestParam int restaurantsNum,
-			Model model
-			) throws Exception{
-		
-		
-		
-		return "franchise/reviewList";
 	}
 	
 }

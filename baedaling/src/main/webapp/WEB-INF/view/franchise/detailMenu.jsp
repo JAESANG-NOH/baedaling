@@ -7,9 +7,9 @@
 %>
 <div class="menuImg_table" align="center" style="margin: 5px; padding: 5px;">
 	<c:forEach var="dto" items="${detailList }">
-		<ul >
+		<ul class="menu" data-menuNum="${dto.menuNum }">
 			<li><img class="store_menu_img" src="<%=cp%>/uploads/menu/${dto.saveFilename}" onerror="this.src='<%=cp%>/resource/img/ready.jpg'"></li>
-			<li style="text-align: center;" class="menuName" data-menuNum="${dto.menuNum }">${dto.menuName }</li>
+			<li style="text-align: center;" >${dto.menuName }</li>
 			<li style="text-align: center;">${dto.menuPrice }</li>
 		</ul>
 	</c:forEach>
