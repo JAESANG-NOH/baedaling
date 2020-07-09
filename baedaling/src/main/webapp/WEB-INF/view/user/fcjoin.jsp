@@ -115,6 +115,37 @@ $(function(){
 	    f.submit();
 	});
 });
+
+function userIdCheck() {
+	var str = $("#userId").val();
+	str = str.trim();
+	
+	var url="<%=cp%>/user/userIdCheck";
+	var q="userId="+str;
+	
+	$.ajax({
+		type:"post"
+		,url:url
+		,data:q
+		,dataType:"json"
+		,success:function(data) {
+			var p=data.passed;
+			if(p=="true") {
+				var s="<span style='color:red; text-align:centor;'>"+str+"</span> 아이디는 사용 가능합니다.";
+				$("#userId").parent().parent().next().find("#message_line1").html(s);
+			} else {
+				var s="<span style='color:red; text-align:centor;'>"+str+"</span> 아이디는 사용할 수 없습니다.";
+				$("#userId").parent().parent().next().find("#message_line1").html(s);
+				$("#userId").val("");
+				$("#userId").focus();
+			}
+		}
+	    ,error:function(e) {
+	    	console.log(e.responseText);
+	    }
+	});
+	
+}
 </script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/fcjoin.css" type="text/css">
  <div id="container_join">
@@ -128,7 +159,7 @@ $(function(){
 					<td class="textinfo_tr">아이디</td>
 				</tr>
 				<tr class="etch_list2">
-					<td class="inputinfo_tr"><input type="text" class="input_normal" name="userId"></td>
+					<td class="inputinfo_tr"><input type="text" class="input_normal" name="userId" id="userId" onchange="userIdCheck();"></td>
 				<tr class="etch_list3">
 					<td id="message_line1"></td>
 				</tr>
@@ -319,6 +350,10 @@ $(function(){
 				<tr class="etch_list1">
 					<td class="inputinfo_tr"><button class="send_info_btn" type="button">가입하기</button></td>
 				</tr>
+				<tr height="30">
+			        <td align="center" style="color: blue;">${message}</td>
+			    </tr>
+				
 				
 			</table>
 			<input type="hidden" id="longitude" name="longitude">

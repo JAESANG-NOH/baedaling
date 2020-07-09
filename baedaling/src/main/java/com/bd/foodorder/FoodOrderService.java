@@ -26,17 +26,20 @@ public interface FoodOrderService {
 	public FoodOrder readInfo(int restaurantsNum);
 	public List<FoodOrder> listFile(int restaurantsNum);
 	public void updateInfo(FoodOrder dto, String pathname);
+	public void updateFcState(FoodOrder dto) throws Exception;
 	public void insertFile(FoodOrder dto) throws Exception;
 	public FoodOrder readFile(int fileNum);
 	public void deleteFile(Map<String, Object> map) throws Exception;
-	public void updateFcState(Map<String, Object> map) throws Exception;
 	
 	//리뷰
 	public List<FoodOrder> reviewList(Map<String, Object> map);
 	public int reviewCount(Map<String, Object> map);
+	public FoodOrder reviewRead(int reviewNum);
 	
 	public List<FoodOrder> replyList(Map<String, Object> map);
 	public int replyCount(Map<String, Object> map);
+	public void insertReply(FoodOrder dto)throws Exception;
+	
 	
 }
 

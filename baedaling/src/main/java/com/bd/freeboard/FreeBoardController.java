@@ -355,7 +355,6 @@ public class FreeBoardController {
 		
 		Map<String, Object> map=new HashMap<>();
 		map.put("num", num);
-		System.out.println(num);
 		dataCount=service.replyCount(map);
 
 		total_page = myUtil.pageCount(rows, dataCount);

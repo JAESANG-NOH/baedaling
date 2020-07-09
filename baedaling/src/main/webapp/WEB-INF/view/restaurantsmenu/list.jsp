@@ -32,7 +32,11 @@ function forward(url){
 			<option value="review" ${state=="review"?"selected='selected'":""}>리뷰순</option>
 		</select>
 	</div>
-	
+	<c:if test="${empty list}">
+		<div style="margin-top: 50px;">
+			 <h3 style="text-align: center; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 20px; ">이런 주변에 검색되는 음식점이 없네요.<span><img src="<%=cp%>/resource/img/chicken.jpg" style="width: 50px; height: 50px;"></span></h3>
+		</div>
+	</c:if>
 <c:forEach var="dto" items="${list}" varStatus="status">
 	<c:if test="${status.index==0}">
            <c:out value="<div class='menu_content_etch_line lineheader'>" escapeXml="false"/>
@@ -46,7 +50,7 @@ function forward(url){
 				<td class="menu_td2">
 					<b>${dto.name}</b>
 					<br>
-					<span>★4.7 | 리뷰:94 | 거리:${dto.distance}Km</span>
+					<span>★${dto.starcount} | 리뷰:94 | 거리:${dto.distance}Km</span>
 					<br>
 					<div>
 						<div class="coupon_line">쿠폰할인</div>
@@ -57,5 +61,6 @@ function forward(url){
 		</table>
 </c:forEach>
 <c:out value="</div>" escapeXml="false"/>
+
 	</form>
 </div>

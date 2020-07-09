@@ -52,6 +52,21 @@ public class FoodOrder {
 	private String userName;
 	private int listNum;
 	
+	private String reply;
+	private String replyCreated;
+	
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+	public String getReplyCreated() {
+		return replyCreated;
+	}
+	public void setReplyCreated(String replyCreated) {
+		this.replyCreated = replyCreated;
+	}
 	public int getListNum() {
 		return listNum;
 	}

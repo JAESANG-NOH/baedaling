@@ -1,11 +1,14 @@
 package com.bd.user;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -95,26 +98,46 @@ public class UserController {
 	
 	@RequestMapping(value="join", method=RequestMethod.POST)
 	public String joinSubmit1(
-			User dto
+			User dto,
+			final RedirectAttributes reAttr,
+			Model model
 			 ){
 		try {
 			service.insertUser(dto);
 		} catch (Exception e) {
 			return ".user.join";
 		}
-		return "redirect:/user/login";
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(dto.getUserName()+"님의 회원가입이 정상 승인되었습니다.");
+		sb.append("메인화면으로 이동하여 로그인해주시요.<br>");
+		
+		reAttr.addFlashAttribute("message",sb.toString());
+		
+		
+		return "redirect:/user/message";
 	}
 	
 	@RequestMapping(value="fcjoin", method=RequestMethod.POST)
 	public String joinSubmit2(
-			User dto
+			User dto,
+			final RedirectAttributes reAttr,
+			Model model
 			) {
 		try {
 			service.insertfcUser(dto);
 		} catch (Exception e) {
+			model.addAttribute("message","회원가입 실패");
 			return ".user.fcjoin";
 		}
-		return "redirect:/user/login";
+		StringBuilder sb = new StringBuilder();
+		sb.append(dto.getUserName()+"님의 회원가입이 정상 승인되었습니다.");
+		sb.append("메인화면으로 이동하여 로그인해주시요.<br>");
+		
+		reAttr.addFlashAttribute("message",sb.toString());
+		
+		
+		return "redirect:/user/message";
 	}
 	
 	@RequestMapping(value="location", method=RequestMethod.POST)
@@ -137,5 +160,35 @@ public class UserController {
 		session.setAttribute("location", location);
 		return "";
 	}
+	
+	@RequestMapping(value="complete")
+	public String complete(
+			@ModelAttribute("message") String message
+			) throws Exception{
+		if(message == null || message.length()==0) {
+			return "redirect:/";
+		}
+		
+		return ".member.message";
+	}
+	
+	
+	
+	@RequestMapping(value="userIdCheck", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> idCheck(
+			@RequestParam String userId
+			) throws Exception {
+		
+		String p="true";
+		User dto=service.readUser(userId);
+		if(dto!=null)
+			p="false";
+		
+		Map<String, Object> model=new HashMap<>();
+		model.put("passed", p);
+		return model;
+	}
+	
 
 }

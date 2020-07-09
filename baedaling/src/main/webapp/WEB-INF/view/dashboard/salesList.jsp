@@ -5,16 +5,9 @@
 <%
    String cp=request.getContextPath();
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://unpkg.com/@kfonts/bm-hanna-pro/index.css" />
 <link rel="stylesheet" href="<%=cp%>/resource/css/dashboard.css" type="text/css">
-<script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.min.js"></script>
-
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
@@ -23,7 +16,7 @@
 $(function() {
 	var url ="<%=cp%>/dashboard/pie3d?restaurantsNum=${restaurantsNum}";
 	$.getJSON(url, function(data) {
-		//console.log(data);
+		console.log(data);
 		
 		Highcharts.chart('pie3dContainer', {
 		    chart: {
@@ -99,75 +92,18 @@ $(function() {
 			            '#F2F2F2',
 			            '#D0ECF3',
 			            '#0CA7D7',
-			            '#FAC44E'
-			            
+			            '#FAC44E'  
 			        ]
 		        }
 		    },
 
 		    series: data
-
 		});
 
 	});
 });
-
 </script>
-</head>
-<body>
-<div class="sidebox">
-<aside>
-<div style="width: 100%; height: 1000px;" >
-	<div>
-		<ul class="dash_title">
-			<li style="padding : 20px;">매장 관리</li>
-		</ul>
-	
-	<div id="menu_content">
-		<ul style="margin-top: 20px;">
-			<li id="dash_subTitle"><a style="color: #D2D4D4;" href="">주문관리</a></li>
-			<li id="dash_subcontent"><a href="">접수대기</a></li>
-			<li id="dash_subcontent"><a href="">배달중</a></li>
-			<li id="dash_subcontent"><a href="">완료</a></li>
-		</ul>
-	</div>
-	</div>
-	
-	<div id="menu_content">
-		<ul style="margin-top: 20px;">
-			<li id="dash_subTitle"><a style="color: #D2D4D4;" href="">메뉴관리</a></li>
-			<li id="dash_subcontent"><a href="">주메뉴</a></li>
-			<li id="dash_subcontent"><a href="">사이드메뉴</a></li>
-			<li id="dash_subcontent"><a href="">세트메뉴</a></li>
-		</ul>
-	</div>
-	
-	<div id="menu_content">
-		<ul style="margin-top: 20px;">
-			<li id="dash_subTitle"><a style="color: #D2D4D4;" href="">매출관리</a></li>
-			<li id="dash_subcontent"><a href="">날짜별매출</a></li>
-			<li id="dash_subcontent"><a href="">메뉴별매출</a></li>
-		</ul>
-	</div>
-	
-	<div id="menu_content">
-		<ul style="margin-top: 20px;">
-			<li id="dash_subTitle"><a style="color: #D2D4D4;" href="">게시글관리</a></li>
-			<li id="dash_subcontent"><a href="">내 가게 리뷰</a></li>
-			<li id="dash_subcontent"><a href="">내 댓글</a></li>
-		</ul>
-	</div>
-	
-	<div>
-		<ul style="text-align: center;">
-			<li style="margin-top:150px; font-weight:bold; font-size: 17px; color: black;">오늘매출 <span>${today.todaySales} 원</span></li>
-		</ul>
-	</div>
-	
-</div>	
 
-</aside>
-</div>
 <div style="width: 25px; background-color: #F6F5F5">&nbsp;</div>
 <div id="dashboard_box">
 <table id="dash_table">
@@ -225,7 +161,7 @@ $(function() {
 <table id="dash_table2">
 	<tr id="dash_title">
 		<td style="padding-left : 20px;">
-			연매출  <span style="color: #38BCC6;">${annual.annualSales} </span>원
+			연매출  <span style="color: #38BCC6;">${annual.annualSales}</span>원
 		</td>
 	</tr>
 	<tr style="width: 800px; text-align: center;">
@@ -235,6 +171,3 @@ $(function() {
 	</tr>
 </table>
 </div>
-
-</body>
-</html>

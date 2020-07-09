@@ -6,8 +6,9 @@
    String cp = request.getContextPath();
 %>
 
-<div class="all_menuList" style="width: 600px; margin: 0px auto;">
+<div class="all_menuList" style="width: 700px; margin: 0px auto;">
 
+<div style="width: 700px;">
 <div class="menuImg_table" align="center" style="margin: 5px; padding: 5px;">
 	<c:forEach var="dto" items="${menuList }">
 		<ul class="menu" data-menuNum="${dto.menuNum }">
@@ -18,14 +19,14 @@
 	</c:forEach>
 
 </div>
-
+</div>
 <table class="menu_table">
 	<tr>
-		<td><span><i class="fas fa-award"></i></span> 인기 메뉴 <span style="margin-left: 20px; padding-left: 430px;"><a href=""><i class="fas fa-chevron-down"></i></a></span></td>
+		<td><span><i class="fas fa-award"></i></span> 인기 메뉴 <span style="width:700px; margin-left: 20px; padding-left: 430px;"></span></td>
 	</tr>
 	<c:forEach var="vo" items="${listCatrgory }">
-		<tr class="listCatrgory" data-menuCategoryNum="${vo.menuCategoryNum }">
-			<td>${vo.menuCategoryName } <span style="margin-left: 20px; padding-left: 466px;"><a href=""><i class="fas fa-chevron-down"></i></a></span></td>
+		<tr style="width: 630px;"  class="listCatrgory" data-menuCategoryNum="${vo.menuCategoryNum }" >
+			<td style="width: 630px;">${vo.menuCategoryName } <span style="margin-left: 20px; padding-left: 466px;"><a href=""><i class="fas fa-chevron-down"></i></a></span></td>
 		</tr>
 		<tr class = "detailCategory" style="display: none;">
 			<td>

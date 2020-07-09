@@ -3,39 +3,85 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fc">
 	<select id="seq" resultType="Integer">
-		SELECT restaurants_seq.NEXTVAL FROM dual
+		SELECT restaurants_seq.NEXTVAL FROM
+		dual
 	</select>
-	<select id="readBoard" parameterType="Integer" resultType="com.bd.franchise.Franchise">
-		SELECT r.restaurantsNum, openingHour, endingHour, fctel, mutualName,licenseNumber,introduce,origin, minorder,name, 
-			addr1, addr2
+	<select id="readBoard" parameterType="Integer"
+		resultType="com.bd.franchise.Franchise">
+		SELECT r.restaurantsNum, openingHour, endingHour, fctel,
+		mutualName,licenseNumber,introduce,origin, minorder,name,
+		addr1, addr2
 		FROM restaurantsInfo if
-		JOIN restaurants r ON if.restaurantsnum = r.restaurantsnum 
+		JOIN restaurants r ON if.restaurantsnum =
+		r.restaurantsnum
 		WHERE r.restaurantsNum = #{restaurantsNum}
 	</select>
-	
-	<select id="listMenu" parameterType="Integer" resultType="com.bd.franchise.FranchiseMenu">
-		SELECT menuNum, menuName, restaurantsNum, saveFilename, menucategoryNum, menuPrice
-		FROM restaurantmenu 
+
+	<select id="listMenu" parameterType="Integer"
+		resultType="com.bd.franchise.FranchiseMenu">
+		SELECT menuNum, menuName, restaurantsNum, saveFilename,
+		menucategoryNum, menuPrice
+		FROM restaurantmenu
 		WHERE restaurantsNum = #{restaurantsNum}
 	</select>
-	
-	<select id="listCategory" resultType="com.bd.franchise.FranchiseMenu">
+
+	<select id="listCategory"
+		resultType="com.bd.franchise.FranchiseMenu">
 		SELECT menuCategoryNum, menuCategoryName
 		FROM menuCategory
 		ORDER BY menuCategoryNum
 	</select>
-	
-	<select id="detailMenu" parameterType="Map" resultType="com.bd.franchise.FranchiseMenu">
-		SELECT menuNum, menuName, restaurantsNum, saveFilename, menucategoryNum, menuPrice
-		FROM restaurantmenu 
-		WHERE restaurantsNum = #{restaurantsNum} AND menuCategoryNum = #{menuCategoryNum}
+
+	<select id="detailMenu" parameterType="Map"
+		resultType="com.bd.franchise.FranchiseMenu">
+		SELECT menuNum, menuName, restaurantsNum, saveFilename,
+		menucategoryNum, menuPrice
+		FROM restaurantmenu
+		WHERE restaurantsNum = #{restaurantsNum} AND menuCategoryNum =
+		#{menuCategoryNum}
 	</select>
-	
-	<select id="readMenu" parameterType="Integer" resultType="com.bd.franchise.FranchiseMenu">
-		SELECT menuNum, menuName, menuPrice, saveFilename,originalFilename, origin, menuInfo
+
+	<select id="readMenu" parameterType="Integer"
+		resultType="com.bd.franchise.FranchiseMenu">
+		SELECT menuNum, menuName, menuPrice,
+		saveFilename,originalFilename, origin, menuInfo
 		FROM restaurantmenu
 		WHERE menuNum = #{menuNum}
 	</select>
+	<select id="readmenuprice"
+		parameterType="com.bd.franchise.FranchiseMenu"
+		resultType="com.bd.franchise.FranchiseMenu">
+		SELECT menuprice from RESTAURANTMENU where MENUNUM =
+		#{restaurantmenu}
+	</select>
+
+	<select id="reviewList" parameterType="map"
+		resultType="com.bd.franchise.FranchiseReview">
+		SELECT r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI')
+		created, starCount, reviewNum, u.userName, LISTAGG(menuName,',')
+		WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+		FROM review r
+		JOIN foodorder f ON r.foodorderNum = f.foodorderNum
+		JOIN orderdetail o ON o.foodorderNum = f.foodorderNum
+		JOIN restaurantMenu rm ON rm.menuNum = o.menuNum
+		JOIN user1 u ON r.userIdx = u.userIdx
+		WHERE r.restaurantsNum = #{restaurantsNum}
+		group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'),
+		starCount, reviewNum,
+		u.userName
+		ORDER BY r.reviewNum DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
 	
+	<select id="reviewCount" parameterType="Integer" resultType="Integer">
+   		SELECT NVL(COUNT(*),0) 
+   		FROM review 
+  		 WHERE restaurantsNum = #{restaurantsNum}
+	 </select>
+	 
+	 <select id="aveStarCount" parameterType="Integer" resultType="Double">
+	 	select AVG(STARCOUNT) AS aveStarCount from review where restaurantsNum = #{restaurantsNum}
+
+	 </select>
 
 </mapper>

@@ -74,7 +74,7 @@ public class FoodOrderController {
 		model.addAttribute("orderCount3", orderCount3);
 		model.addAttribute("orderCount4", orderCount4);
 		model.addAttribute("restaurantsNum", restaurantsNum);
-		return "dashboard/orderlist";
+		return ".dashboard.orderlist";
 	}
 	
 	
@@ -137,7 +137,7 @@ public class FoodOrderController {
 	//	model.addAttribute("sSales", sSales);
 		// model.addAttribute("bestlist",bestlist);
 		
-		return "dashboard/salesList";
+		return ".dashboard.salesList";
 	}
 	
 	
@@ -309,7 +309,7 @@ public class FoodOrderController {
 		model.addAttribute("listFile", listFile);
 	//	model.addAttribute("query", query);
 		
-		return "dashboard/fcinfo_read";
+		return ".dashboard.fcinfo_read";
 	}
 	
 	
@@ -327,7 +327,7 @@ public class FoodOrderController {
 		model.addAttribute("dto", dto);
 		model.addAttribute("listFile", listFile);
 		
-		return "dashboard/fcinfo_write";
+		return ".dashboard.fcinfo_write";
 	}
 	
 	@RequestMapping(value="update", method=RequestMethod.POST)
@@ -339,33 +339,24 @@ public class FoodOrderController {
 			String root = session.getServletContext().getRealPath("/");
 			String pathname = root + File.separator + "resource" + File.separator + "dashboard";
 			service.updateInfo(dto, pathname);
+			service.updateFcState(dto);
 		} catch (Exception e) {
 		}
 		return "redirect:/dashboard/fcinfo_read?restaurantsNum="+dto.getRestaurantsNum();
 	}
 	
 	
-	@RequestMapping(value="updateFcState", method=RequestMethod.POST, produces="application/json;charset=utf-8")
-	@ResponseBody
-	public Map<String, Object> updateFcState(
-			@RequestParam int restaurantsNum,
-			@RequestParam String ready
+	@RequestMapping(value="updateFcState")
+	public String updateFcState(
+			FoodOrder dto,
+			@RequestParam int restaurantsNum
 			) throws Exception{
 		
-		String reayState = "false";
 		try {
-			Map<String, Object> map = new HashMap<>();
-			map.put("ready", ready);
-			map.put("restaurantsNum", restaurantsNum);
-			
-			service.updateFcState(map);
-			reayState = "true";
+			service.updateFcState(dto);
 		} catch (Exception e) {
 		}
-		Map<String, Object> model = new HashMap<>();
-		model.put("reayState", reayState);
-		
-		return model;
+		return "redirect:/dashboard/fcinfo_read?restaurantsNum="+dto.getRestaurantsNum();
 	}
 	
 	
@@ -434,7 +425,11 @@ public class FoodOrderController {
 	       dto.setListNum(listNum);
 	       n++;
 	      }
-	    String listUrl = cp+"/dashboard/myReviewList";
+	    
+	    String query = "restaurantsNum="+restaurantsNum;
+	    String listUrl = cp+"/dashboard/myReviewList?"+query;
+        String articleUrl = cp+"/dashboard/reviewRead?"+query+"&page=" + current_page;
+
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
 		
 		
@@ -443,8 +438,8 @@ public class FoodOrderController {
 		model.addAttribute("pageNo", current_page);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
-		
-		return "dashboard/myReviewList";
+		model.addAttribute("articleUrl", articleUrl);
+		return ".dashboard.myReviewList";
 	}
 	
 	
@@ -499,8 +494,99 @@ public class FoodOrderController {
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
 		
-		return "dashboard/myReplyList";
+		return ".dashboard.myReplyList";
 	}
+	
+	
+	@RequestMapping("reviewRead")
+	public String reviewRead(
+			@RequestParam int restaurantsNum,
+			@RequestParam int reviewNum,
+			@RequestParam String page,
+			Model model
+			) {
+		String query="page="+page;
+		FoodOrder dto = service.reviewRead(reviewNum);
+		
+		model.addAttribute("query", query);
+		model.addAttribute("dto", dto);
+		model.addAttribute("page", page);
+		return ".dashboard.reviewRead";
+	}
+	
+	
+	@RequestMapping(value="insertReply", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> insertReply(
+			FoodOrder dto
+			) {
+		String state="true";
+		
+		try {
+			service.insertReply(dto);
+		} catch (Exception e) {
+			state="false";
+		}
+		
+		Map<String, Object> model = new HashMap<>();
+		model.put("state", state);
+		return model;
+	}
+	
+	
+	@RequestMapping(value="listReply")
+	public String listReply(
+			@RequestParam int restaurantsNum,
+			@RequestParam int reviewNum,
+			@RequestParam(value="pageNo", defaultValue="1") int current_page,
+			Model model
+			) throws Exception {
+		
+		int rows=5;
+		int total_page=0;
+		int dataCount=0;
+		
+		Map<String, Object> map=new HashMap<>();
+		map.put("restaurantsNum", restaurantsNum);
+		map.put("reviewNum", reviewNum);
+		dataCount=service.replyCount(map);
+
+		total_page = myUtil.pageCount(rows, dataCount);
+		if(current_page>total_page)
+			current_page=total_page;
+		
+        int offset = (current_page-1) * rows;
+		if(offset < 0) offset = 0;
+        map.put("offset", offset);
+        map.put("rows", rows);
+		List<FoodOrder> listReply=service.replyList(map);
+		
+		for(FoodOrder dto : listReply) {
+			dto.setReply(dto.getReply());
+		}
+		
+		// AJAX 용 페이징
+		String paging=myUtil.pagingMethod(current_page, total_page, "listPage");
+		
+		// 포워딩할 jsp로 넘길 데이터
+		model.addAttribute("listReply", listReply);
+		model.addAttribute("pageNo", current_page);
+		model.addAttribute("replyCount", dataCount);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
+		
+		return "dashboard/listReply";
+	}
+
+	@RequestMapping("readRestaurant")
+	public String readRestaurant(
+			Model model
+			) {
+		
+		
+		return "";
+	}
+	
 	
 	
 	
