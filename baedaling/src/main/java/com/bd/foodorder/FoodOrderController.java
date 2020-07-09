@@ -376,7 +376,8 @@ public class FoodOrderController {
 		}
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("fileNum", fileNum);
+		map.put("field", "fileNum");
+		map.put("num", fileNum);
 		service.deleteFile(map);
 		
 		Map<String, Object> model = new HashMap<>();
@@ -577,6 +578,16 @@ public class FoodOrderController {
 		return "dashboard/listReply";
 	}
 
+	@RequestMapping("readRestaurant")
+	public String readRestaurant(
+			Model model
+			) {
+		
+		
+		return "";
+	}
+	
+	
 	
 	
 }

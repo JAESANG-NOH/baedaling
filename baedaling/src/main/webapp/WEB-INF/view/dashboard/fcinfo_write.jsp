@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://unpkg.com/@kfonts/bm-hanna-pro/index.css" />
 
-<link rel="stylesheet" href="<%=cp%>/resource/css/fcinfo_write.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/restaurants_info.css" type="text/css">
 <script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
 
@@ -57,6 +57,8 @@ function  updateFcState() {
 
 </script>
 
+</aside>
+</div>
 <div style="width: 25px; background-color: #F6F5F5">&nbsp;</div>
 <div class="storeBox">
 	<div class="store_basic">
@@ -107,8 +109,12 @@ function  updateFcState() {
 					<c:if test="${mode=='update'}">
 						 <c:forEach var="dto" items="${listFile}">
 						<li id="f${dto.fileNum}">
-							<span id="light_gray">1.로고파일 2.배경이미지</span>
+							<span id="light_gray">1.로고파일</span>
 								<a  style="color: gray;" href="javascript:deleteFile('${dto.fileNum}');"><i class="far fa-trash-alt"></i></a> 
+						</li>
+						<li id="f${dto.fileNum}">
+							<span id="light_gray">1.배경이미지</span>
+								<a style="color: gray;" href="javascript:deleteFile('${dto.fileNum}');"><i class="far fa-trash-alt"></i></a> 
 						</li>
 					 </c:forEach>
 					</c:if>

@@ -13,4 +13,14 @@ public interface MypageService {
 	public int dataCount(Map<String, Object> map);
 	
 	public int checkReview(Map<String, Object>map);
+	
+	public List<Mypage> freelist(Map<String, Object> map);
+	public int freeCount(Map<String, Object> map);
+	
+	public List<Mypage> recommendlist(Map<String, Object> map);
+	public int recommendCount(Map<String, Object> map);
+	
+	public List<Mypage> reviewlist(Map<String, Object> map);
+	public int reviewCount(Map<String, Object> map);
+
 }

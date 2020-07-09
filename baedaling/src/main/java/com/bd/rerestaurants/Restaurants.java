@@ -10,7 +10,15 @@ public class Restaurants {
 	private int minorder;
 	private String savefilename;
 	private double distance;
+	private double starcount;
 	
+	
+	public double getStarcount() {
+		return starcount;
+	}
+	public void setStarcount(double starcount) {
+		this.starcount = starcount;
+	}
 	public int getRestaurantsNum() {
 		return restaurantsNum;
 	}

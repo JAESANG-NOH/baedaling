@@ -106,59 +106,6 @@ public class FranchiseController {
 		return map;
 	}
 	
-	@RequestMapping(value="pay")
-	public String insertorder(
-			Franchise dto,
-			@RequestParam int restaurantsNum
-			){
-		
-		return "";
-	}
-	
-	@RequestMapping(value="review")
-	public String list(
-			@RequestParam(value="pageNo", defaultValue="1") int current_page,
-			HttpServletRequest req,
-			@RequestParam int restaurantsNum,
-			Model model	) throws Exception {
-		
-		int rows = 10;
-		int total_page;
-		int dataCount;
-		double aveStarCount;
-		aveStarCount = service.aveStarCount(restaurantsNum);
-		double aveStarCount1 = Double.parseDouble(String.format("%.1f",aveStarCount));
-
-
-
-		dataCount = service.reviewCount(restaurantsNum);
-		total_page = myUtil.pageCount(rows, dataCount);
-
-		if (total_page < current_page)
-			current_page = total_page;
-		
-		int offset = (current_page-1) * rows;
-		
-		Map<String, Object> map = new HashMap<>();
-		if(offset < 0) offset = 0;
-        map.put("offset", offset);
-        map.put("rows", rows);
-        map.put("restaurantsNum", restaurantsNum);
-		List<FranchiseReview> list = service.listReview(map);
-
-        // ajax 페이징처리
-        String paging = myUtil.pagingMethod(current_page, total_page, "listPagee");
-
-		model.addAttribute("list", list);
-		model.addAttribute("dataCount", dataCount);
-		model.addAttribute("pageNo", current_page);
-		model.addAttribute("paging", paging);
-		model.addAttribute("total_page", total_page);
-		model.addAttribute("aveStarCount",aveStarCount1);
-		
-		return "franchise/reviewList";
-	}
-	
 }
 
 

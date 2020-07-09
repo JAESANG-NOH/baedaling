@@ -6,7 +6,7 @@
 }
 
 body{
-	font-family: 'ë§‘ì€ê³ ë”•', 'ë§‘ì€ ê³ ë”•';
+	font-family: 'ë§‘ì?ê³ ë”•', 'ë§‘ì? ê³ ë”•';
 	text-align: left;
 	background-color: #f9f9fa;
 }
@@ -23,7 +23,7 @@ ul li{
 	margin-top : 10px;
 	color : #197880;
 	font-size: 30px; 
-	font-family: 'ë°°ë‹¬ì˜ë¯¼ì¡± í•œë‚˜ì²´ Pro', 'ë°°ë‹¬ì˜ë¯¼ì¡±í•œë‚˜ì²´Pro', 'bm-hanna-pro';
+	font-family: 'ë°°ë‹¬?˜ë¯¼ì¡± ?•œ?‚˜ì²? Pro', 'ë°°ë‹¬?˜ë¯¼ì¡±?•œ?‚˜ì²´Pro', 'bm-hanna-pro';
 }
 	
 .sidebox{
@@ -69,7 +69,7 @@ margin: 0px;
 
 #dash_title{
 	font-size: 35px;
-	font-family: 'ë°°ë‹¬ì˜ë¯¼ì¡± í•œë‚˜ì²´ Pro', 'ë°°ë‹¬ì˜ë¯¼ì¡±í•œë‚˜ì²´Pro', 'bm-hanna-pro';
+	font-family: 'ë°°ë‹¬?˜ë¯¼ì¡± ?•œ?‚˜ì²? Pro', 'ë°°ë‹¬?˜ë¯¼ì¡±?•œ?‚˜ì²´Pro', 'bm-hanna-pro';
 	width: 1400px;
 }
 
@@ -96,8 +96,17 @@ margin: 0px;
 
 
 #waiting_text{
+	font-weight: bold;
 	font-size: 24px;
+	font-family: 'ë°°ë‹¬?˜ë¯¼ì¡± ?•œ?‚˜ì²? Pro', 'ë°°ë‹¬?˜ë¯¼ì¡±?•œ?‚˜ì²´Pro', 'bm-hanna-pro';
 }
+
+
+
+
+
+
+
 
 
 

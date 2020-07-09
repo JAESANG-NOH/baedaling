@@ -15,8 +15,12 @@
 
 <script type="text/javascript">
 
+function move() { 
+	location.href=""
+}
 </script>
 
+<!--  -->
 <div style="width: 25px; height:5px; background-color: #F9F9FA">&nbsp;</div>
 <div style="width: 100%;">
 	<div style="width: 500px; height: 45px; margin-left: 330px; margin-top: 20px;">

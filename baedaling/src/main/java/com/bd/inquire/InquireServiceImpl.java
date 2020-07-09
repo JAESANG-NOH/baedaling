@@ -102,7 +102,7 @@ public class InquireServiceImpl implements InquireService {
 	}
 
 	@Override
-	public void deleteInquire(int num, String pathname, String userId) throws Exception {
+	public void deleteInquire(int num, String userId) throws Exception {
 		try {
 			Inquire dto = readInquire(num);
 			if(dto==null || (! userId.equals("admin") && !userId.equals(dto.getUserId()))) {
@@ -115,8 +115,5 @@ public class InquireServiceImpl implements InquireService {
 		}
 		
 	}
-
-
-
 
 }

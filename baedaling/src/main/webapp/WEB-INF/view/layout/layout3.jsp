@@ -48,9 +48,8 @@ $(function(){
 <div id="footer" align="center">
 	<tiles:insertAttribute name="footer"/>
 </div>
-	
 <div id="loadingLayout" style="display: none; position: absolute; left: 0; top:0; width: 100%; height: 100%; z-index: 9000; background: #eeeeee;">
-	<i id="loadingImage" class="fa fa-cog fa-spin fa-fw" style="font-size: 70px; color: 333;"></i> 
+	<i id="loadingImage" class="fa fa-spinner fa-pulse fa-3x fa-fw" style="font-size: 70px; color: 333;"></i>
 </div>
 
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery-ui.min.js"></script>

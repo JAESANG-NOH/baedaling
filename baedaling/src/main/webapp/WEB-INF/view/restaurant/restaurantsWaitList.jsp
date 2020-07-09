@@ -6,7 +6,7 @@
    String cp = request.getContextPath();
 %>	
 
-<link rel="stylesheet" href="<%=cp%>/resource/css/restaurants_list.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/restaurant_list.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/tabs.css" type="text/css">
 
 <script type="text/javascript">
@@ -101,12 +101,11 @@ $(function(){
 });
 
 </script>
-<div class="list_container">
-	<div style="width: 100%; margin: 20px auto;">
-		<div align="left">
-			<h2 style="width: 80%; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro'; font-size: 25px;">
-			|&nbsp;가맹점 목록&nbsp;<span><img width="70px" height="70px"
-			src="<%=cp%>/resource/img/gangg.png"></span></h2>
+
+<div class="body-container" align="center">
+	<div class="body-title" align="center">
+			 <h3 style="margin-top: 70px; margin-bottom: 25px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">
+			 |&nbsp;대기 중인 가게 목록 <span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"> </span></h3>
 		</div>
 		
 		<div style="clear: both;">
@@ -115,6 +114,8 @@ $(function(){
 				<li id="tab-2" data-tab="2">대기 중인 가게</li>
 			</ul>
 		</div>
+		
+		<div>
 		<table style="margin: 0px auto; width: 100%; border-spacing: 0px;" >
 				<tr height="35px;">
 					<td align="left" style="font-size: 13px;">
@@ -124,7 +125,7 @@ $(function(){
 					</td>
 					
 					 <td align="right">
-			          <select id="selectReady" class="selectField" onchange="searchList();">
+			          <select id="selectReady" class="btn" onchange="searchList();">
 			          		<option value="1" ${ready=="1" ? "selected='selected'":""}>대기중인 가게</option>
 			          		<option value="2" ${ready=="2" ? "selected='selected'":""}>승인된 가게</option>
 			          </select>
@@ -132,19 +133,19 @@ $(function(){
 				</tr>
 		</table>
 		
-		<table style="width: 1100px; margin: 0px auto; border-spacing: 0; border-collapse:collapse;">
-			<tr align="center" height="35" style="border-top: 2px solid #828282; border-bottom: 1px solid #828282; background: #41CDCD;">
-				<th width="60" style="color:white;">번호</th>
-				<th width="90" style="color:white;">이름</th>
-				<th width="80" style="color:white;">아이디</th>
-				<th width="80" style="color:white;">상호명</th>
-				<th width="130" style="color:white;">업체등록번호</th>
-				<th width="150" style="color:white;">주&nbsp;&nbsp;소</th>
-				<th width="100" style="color:white;">상&nbsp;&nbsp;태</th>
+	<table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
+			<tr id="list_table" align="center" bgcolor="#EFF1F3" style=" border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; ">
+				<th width="60" style="color:#787878;">번호</th>
+				<th width="90" style="color:#787878;">이름</th>
+				<th width="80" style="color:#787878;">아이디</th>
+				<th width="80" style="color:#787878;">상호명</th>
+				<th width="130" style="color:#787878;">업체등록번호</th>
+				<th width="150" style="color:#787878;">주&nbsp;&nbsp;소</th>
+				<th width="100" style="color:#787878;">상&nbsp;&nbsp;태</th>
 			</tr>
 			
 	<c:forEach var="dto" items="${list}">	
-			<tr align="center" height="50" style="border-bottom: 1px solid #cccccc; font-size: 12px;">
+			<tr align="center" height="50" style="border-bottom: 2px solid #cccccc; font-size: 12px;">
 				<td>${dto.listNum}</td>
 				<td>${dto.name}</td>
 				<td>${dto.userId}</td>
@@ -176,19 +177,19 @@ $(function(){
 		</table>
 		
 		
-		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
+		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 2px solid #cccccc;">
 			<tr height="100">
 				<td align="right">
-					<button type="button" onclick="javascript:location.href='<%=cp%>/restaurant/restaurantWaitlist'">새로고침</button>
+					<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/restaurant/restaurantWaitlist'">새로고침</button>
 				</td>
 				  <td align="center">
 					   <form name="searchForm" action="<%=cp%>/restaurant/restaurantWaitlist" method="post">
-			              <select name="condition" class="selectField">
+			              <select name="condition" class="btn">
 			                  <option value="name"     ${condition=="name" ? "selected='selected'":""}>가게이름</option>
 			                  <option value="mutualName"   ${condition=="mutualName" ? "selected='selected'":""}>상호명</option>
 			                  <option value="licenseNumber"  ${condition=="licenseNumber" ? "selected='selected'":""}>사업자등록번호</option>
 			            </select>
-			            <input type="text" name="keyword" class="boxTF" value="${keyword}">
+			            <input type="text" name="keyword" class="btn" value="${keyword}">
 			            <input type="hidden" name="ready" value="${ready}">
 			            <input type="hidden" name="page" value="1">
 			            <button type="button" class="btn" onclick="searchList()">검색</button>

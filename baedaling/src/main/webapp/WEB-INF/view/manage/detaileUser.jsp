@@ -40,13 +40,13 @@
 </tr>
 </table>
 
-<form id="detailedUserForm" name="detailedUserForm" method="post">
+<form id="detailedUserForm"  name="detailedUserForm" method="post">
 <h3 style="font-size: 15px;">회원 상태 변경</h3>
 <table style="margin: 5px auto 0px; width: 100%; border-spacing: 1px; background: #cccccc">
 <tr height="37" style="background: #ffffff;">
-   <td align="right" width="15%" style="padding-right: 9px;"><label style="font-weight: 900;">계정상태</label></td>
+   <td align="right" width="15%" style="padding-right: 9px; height:30px;"><label style="font-weight: 900;">계정상태</label></td>
    <td style="padding-left: 5px;">
-       <select class="selectField" id="stateCode" name="stateCode" onchange="selectStateChange()">
+       <select style="height: 30px;" class="selectField" id="stateCode" name="stateCode" onchange="selectStateChange()">
        	  <option value="">::상태코드::</option>
        	  <c:if test="${dto.enabled==0}"> <!-- 0일때 잠금해제 뜸 -->
        	      <option value="1">잠금 해제</option>

@@ -105,7 +105,6 @@ public class UserController {
 		try {
 			service.insertUser(dto);
 		} catch (Exception e) {
-			model.addAttribute("message","회원가입 실패");
 			return ".user.join";
 		}
 		

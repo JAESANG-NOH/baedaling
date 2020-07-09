@@ -61,3 +61,16 @@ table.controller td.left{
 table.controller td.right{
 	text-align:right;
 }
+
+.btn {
+	color: gray;
+	font-weight:500;
+	border:1px solid #cccccc;
+	background-color:#ffffff;
+	text-align:center;
+	cursor:pointer;
+	padding:3px 10px 5px;
+	border-radius:4px;
+	font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
+}
+

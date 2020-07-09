@@ -42,6 +42,14 @@
     margin: 0px auto;
 }
 
+.body-container11{
+    clear:both;
+    box-sizing: border-box;  /* padding과 border는 크기에 포함되지 않음 */
+    min-height: 500px;
+    width: 1100px;
+    margin: 0px auto;
+}
+
 .body-left{
     float:left;
     width: 230px;
@@ -203,7 +211,7 @@ ul.nav .current a, ul.nav li:hover > a{
     border: 1px solid #9acfea;
     border-radius: 4px;
     background-color: #69cccc;
-    color: #31708f;
+    color: #FAFAFA;
     padding: 15px;
     margin-bottom: 10px;
 }
@@ -216,9 +224,13 @@ ul.nav .current a, ul.nav li:hover > a{
 }
 
 .mypage_box {
-	width: 500px;
 	margin: auto;
 	padding-top: 20px;
+	font-size: 14px;
+}
+
+.mypage_box tr {
+	border-bottom: 1px solid #E6E6E6;
 }
 
 .body-container1{
@@ -230,4 +242,12 @@ ul.nav .current a, ul.nav li:hover > a{
 .mycontent_container {
 	margin: 30px auto;
 	width: 800px;
+}
+
+.mycontent_btn {
+	width: 80px;
+	height: 30px;
+	background-color: #EFEFEF;
+	border-radius: 4px;
+	border: 1px solid #cccccc;
 }
