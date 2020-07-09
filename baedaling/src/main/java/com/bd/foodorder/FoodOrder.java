@@ -35,6 +35,11 @@ public class FoodOrder {
 	private String zip;
 	private String addr1;
 	private String addr2;
+	private int typeCategoryNum;
+	private double longitude;
+	private double latitude;
+	
+	
 	
 	private int ready;
 	
@@ -367,6 +372,24 @@ public class FoodOrder {
 	}
 	public void setQty(int qty) {
 		this.qty = qty;
+	}
+	public int getTypeCategoryNum() {
+		return typeCategoryNum;
+	}
+	public void setTypeCategoryNum(int typeCategoryNum) {
+		this.typeCategoryNum = typeCategoryNum;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
 	}
 
 	

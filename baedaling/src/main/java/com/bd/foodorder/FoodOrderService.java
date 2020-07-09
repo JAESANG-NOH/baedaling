@@ -41,5 +41,9 @@ public interface FoodOrderService {
 	public void insertReply(FoodOrder dto)throws Exception;
 	
 	
+	// 가맹점 수정위한 가맹점정보
+	public FoodOrder readRestaurant(int restaurantsNum);
+	public void updateRestaurant(FoodOrder dto);
+	
 }
 
