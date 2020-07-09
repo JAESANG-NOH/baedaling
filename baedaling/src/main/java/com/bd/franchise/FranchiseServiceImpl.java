@@ -129,6 +129,17 @@ public class FranchiseServiceImpl implements FranchiseService {
 		}
 		return result;
 	}
+
+	@Override
+	public int reviewReplyCount(int restaurantsNum) {
+		int result = 0;
+		try {
+			result = dao.selectOne("fc.reviewReplyCount", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 	
 	
 

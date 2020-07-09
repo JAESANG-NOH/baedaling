@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/storepage.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/tabs.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/pay.css" type="text/css">
-
+<link rel="stylesheet" href="<%=cp%>/resource/css/review_re.css" type="text/css">
 <script type="text/javascript">
 function ajaxJSON(url, type, query, fn) {
 	$.ajax({

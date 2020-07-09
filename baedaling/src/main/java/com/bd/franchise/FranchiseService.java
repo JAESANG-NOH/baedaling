@@ -19,5 +19,6 @@ public interface FranchiseService {
 	public List<FranchiseReview> listReview(Map<String, Object> map);
 	public int reviewCount(int restaurantsNum);
 	public double aveStarCount(int restaurantsNum);
+	public int reviewReplyCount(int restaurantsNum);
 
 }

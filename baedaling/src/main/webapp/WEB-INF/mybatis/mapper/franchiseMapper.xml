@@ -22,7 +22,8 @@
 		SELECT menuNum, menuName, restaurantsNum, saveFilename,
 		menucategoryNum, menuPrice
 		FROM restaurantmenu
-		WHERE restaurantsNum = #{restaurantsNum}
+		WHERE restaurantsNum =
+		#{restaurantsNum}
 	</select>
 
 	<select id="listCategory"
@@ -37,7 +38,8 @@
 		SELECT menuNum, menuName, restaurantsNum, saveFilename,
 		menucategoryNum, menuPrice
 		FROM restaurantmenu
-		WHERE restaurantsNum = #{restaurantsNum} AND menuCategoryNum =
+		WHERE restaurantsNum =
+		#{restaurantsNum} AND menuCategoryNum =
 		#{menuCategoryNum}
 	</select>
 
@@ -57,31 +59,40 @@
 
 	<select id="reviewList" parameterType="map"
 		resultType="com.bd.franchise.FranchiseReview">
-		SELECT r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI')
-		created, starCount, reviewNum, u.userName, LISTAGG(menuName,',')
-		WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+		SELECT r.foodorderNum, r.content,
+		TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum,
+		u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY
+		f.foodorderNum)AS menuName,reply,replyCreated
 		FROM review r
 		JOIN foodorder f ON r.foodorderNum = f.foodorderNum
 		JOIN orderdetail o ON o.foodorderNum = f.foodorderNum
 		JOIN restaurantMenu rm ON rm.menuNum = o.menuNum
 		JOIN user1 u ON r.userIdx = u.userIdx
-		WHERE r.restaurantsNum = #{restaurantsNum}
+		WHERE r.restaurantsNum = 22
 		group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'),
-		starCount, reviewNum,
-		u.userName
+		r.created, 'YY-MM-DD HH24:MI',
+		starCount, reviewNum, u.userName, reply, replyCreated
 		ORDER BY r.reviewNum DESC
-		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS
+		ONLY
 	</select>
-	
-	<select id="reviewCount" parameterType="Integer" resultType="Integer">
-   		SELECT NVL(COUNT(*),0) 
-   		FROM review 
-  		 WHERE restaurantsNum = #{restaurantsNum}
-	 </select>
-	 
-	 <select id="aveStarCount" parameterType="Integer" resultType="Double">
-	 	select AVG(STARCOUNT) AS aveStarCount from review where restaurantsNum = #{restaurantsNum}
 
-	 </select>
+	<select id="reviewCount" parameterType="Integer"
+		resultType="Integer">
+		SELECT NVL(COUNT(*),0)
+		FROM review
+		WHERE restaurantsNum = #{restaurantsNum}
+	</select>
+
+	<select id="aveStarCount" parameterType="Integer"
+		resultType="Double">
+		select AVG(STARCOUNT) AS aveStarCount from review where restaurantsNum =
+		#{restaurantsNum}
+	</select>
+
+	<select id="reviewReplyCount" parameterType="Integer"
+		resultType="Integer">
+		SELECT COUNT(reply) FROM review WHERE restaurantsNum = #{restaurantsNum}
+	</select>
 
 </mapper>
