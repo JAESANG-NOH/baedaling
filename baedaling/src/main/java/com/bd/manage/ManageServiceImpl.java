@@ -81,4 +81,16 @@ public class ManageServiceImpl implements ManageService {
 		}
 		
 	}
+
+	@Override
+	public List<Manage> allOrderList(Map<String, Object> map) {
+		List<Manage> list = null;
+		try {
+			list = dao.selectList("manage.allOrderList", map);
+		} catch (Exception e) {
+		}
+		return list;
+	}
+	
+	
 }

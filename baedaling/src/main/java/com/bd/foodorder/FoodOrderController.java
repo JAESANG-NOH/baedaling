@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
-import com.bd.user.SessionInfo;
 
 
 @Controller("foodorder.foodOrderController")
@@ -579,18 +578,13 @@ public class FoodOrderController {
 		return "dashboard/listReply";
 	}
 
-	@RequestMapping(value = "updateRestaurant", method = RequestMethod.GET)
-	public String updateRestaurant(
-			HttpSession session,
+	@RequestMapping("readRestaurant")
+	public String readRestaurant(
 			Model model
 			) {
-		SessionInfo info = (SessionInfo)session.getAttribute("user");
-		int restaurantsNum = info.getRestaurantsNum();
-		FoodOrder dto = service.readRestaurant(restaurantsNum);
-		model.addAttribute("dto",dto);
 		
 		
-		return ".dashboard.fcupdate";
+		return "";
 	}
 	
 	

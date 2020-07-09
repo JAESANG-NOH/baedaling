@@ -45,7 +45,6 @@
 			SELECT num, COUNT(*) replyCount FROM freeBoardReply
 			GROUP BY num
 		) r ON f.num = r.num
-		
 		<where>
 			<if test="keyword!=null and keyword!=''">
 				<include refid="search-list"/>

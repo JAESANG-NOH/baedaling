@@ -229,16 +229,5 @@ ORDER BY bestSales desc
  	UPDATE review SET reply = #{reply}, replyCreated = SYSDATE WHERE reviewNum = #{reviewNum} 
  </update>
 
-	<select id="readRestaurant" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-		SELECT name, mutualName, licenseNumber, typecategoryNum, fctel, longitude, latitude, addr1,addr2, zip
-		FROM restaurants r
-		JOIN restaurantsinfo ri ON r.restaurantsNum = ri.restaurantsNum
-		WHERE r.restaurantsNum = #{restaurantsNum}
-	
-	</select>
-
-
-
-
 </mapper>
 
