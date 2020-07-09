@@ -22,7 +22,7 @@ public class Mypage {
 	private String longitude;
 	private String latitude;
 	
-	//userorder
+	// 주문 내역
 	private int listNum;
 	
 	private String mutualName; // 가게이름
@@ -33,6 +33,95 @@ public class Mypage {
 	
 	private int restaurantsNum;
 	private int foodOrderNum;
+
+	// 내가 쓴 추천/자유게시판
+	private int num;
+	private String subject;
+	private String created;
+	private int hitCount;
+	private int replyCount;
+	private int fileCount;
+	
+	// 내가 쓴 리뷰
+	private String name;
+	private String content;
+	private String reply;
+	private String replycreated;
+	private int reviewNum;
+	private int starCount;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
+	}
+	public String getReplycreated() {
+		return replycreated;
+	}
+	public void setReplycreated(String replycreated) {
+		this.replycreated = replycreated;
+	}
+	public int getReviewNum() {
+		return reviewNum;
+	}
+	public void setReviewNum(int reviewNum) {
+		this.reviewNum = reviewNum;
+	}
+	public int getStarCount() {
+		return starCount;
+	}
+	public void setStarCount(int starCount) {
+		this.starCount = starCount;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getCreated() {
+		return created;
+	}
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	public int getHitCount() {
+		return hitCount;
+	}
+	public void setHitCount(int hitCount) {
+		this.hitCount = hitCount;
+	}
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
+	public int getFileCount() {
+		return fileCount;
+	}
+	public void setFileCount(int fileCount) {
+		this.fileCount = fileCount;
+	}
 	public int getUserIdx() {
 		return userIdx;
 	}

@@ -297,6 +297,23 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 	}
 
+	@Override
+	public FoodOrder readRestaurant(int restaurantsNum) {
+		FoodOrder dto = null;
+		try {
+			dto = dao.selectOne("fo.readRestaurant", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public void updateRestaurant(FoodOrder dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 

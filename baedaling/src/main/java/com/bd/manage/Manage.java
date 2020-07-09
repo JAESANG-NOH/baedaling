@@ -17,6 +17,75 @@ public class Manage {
 	private int enabled;
 	
 	
+	//주문리스트 
+	private int foodOrderNum;
+	private int foodOrderPay; 
+	private String foodOrderAddr;
+	private String foodOrderDeliveryMethod;
+	private String foodOrderHowPay;
+	private String foodOrderPayCompletionDate;
+	private String foodOrderCompletionDate;
+	private String name;
+	private String menuName;
+	
+	
+	
+	
+	
+	public int getFoodOrderNum() {
+		return foodOrderNum;
+	}
+	public void setFoodOrderNum(int foodOrderNum) {
+		this.foodOrderNum = foodOrderNum;
+	}
+	public int getFoodOrderPay() {
+		return foodOrderPay;
+	}
+	public void setFoodOrderPay(int foodOrderPay) {
+		this.foodOrderPay = foodOrderPay;
+	}
+	public String getFoodOrderAddr() {
+		return foodOrderAddr;
+	}
+	public void setFoodOrderAddr(String foodOrderAddr) {
+		this.foodOrderAddr = foodOrderAddr;
+	}
+	public String getFoodOrderDeliveryMethod() {
+		return foodOrderDeliveryMethod;
+	}
+	public void setFoodOrderDeliveryMethod(String foodOrderDeliveryMethod) {
+		this.foodOrderDeliveryMethod = foodOrderDeliveryMethod;
+	}
+	public String getFoodOrderHowPay() {
+		return foodOrderHowPay;
+	}
+	public void setFoodOrderHowPay(String foodOrderHowPay) {
+		this.foodOrderHowPay = foodOrderHowPay;
+	}
+	public String getFoodOrderPayCompletionDate() {
+		return foodOrderPayCompletionDate;
+	}
+	public void setFoodOrderPayCompletionDate(String foodOrderPayCompletionDate) {
+		this.foodOrderPayCompletionDate = foodOrderPayCompletionDate;
+	}
+	public String getFoodOrderCompletionDate() {
+		return foodOrderCompletionDate;
+	}
+	public void setFoodOrderCompletionDate(String foodOrderCompletionDate) {
+		this.foodOrderCompletionDate = foodOrderCompletionDate;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMenuName() {
+		return menuName;
+	}
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
 	public int getStateCode() {
 		return stateCode;
 	}

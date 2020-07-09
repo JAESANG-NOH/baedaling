@@ -69,5 +69,42 @@
 		UPDATE user1 SET enabled=#{enabled} WHERE userId=#{userId}
 	</update>
 	
+	<sql id="search-list">
+		<if test="condition=='all'">
+			( INSTR(name, #{keyword}) &gt; 0
+				OR DBMS_LOB.INSTR(menuName, #{keyword}) &gt; 0 )
+		</if>
+		<if test="condition=='name' ">
+			INSTR(name, #{keyword}) &gt; 0
+		</if>
+		<if test="condition=='menuName'">
+			DBMS_LOB.INSTR( menuName, #{keyword}) &gt; 0 
+		</if>
+		<if test="condition=='foodOrderCompletionDate'">
+			( TO_CHAR(foodOrderCompletionDate, 'YYYY-MM-DD') = #{keyword}
+				OR TO_CHAR(foodOrderCompletionDate, 'YYYYMMDD') = #{keyword} )
+		</if>
+	</sql>
+	
+	<!-- 전체 주문 리스트 -->
+	<select id="allOrderList" parameterType="map" resultType="com.bd.manage.Manage">
+	SELECT f.foodOrderNum, foodOrderPay, foodOrderAddr, foodOrderDeliveryMethod, foodOrderHowPay, u.userName,
+	    TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH24:MI') ,TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH24:MI') ,
+	    r.name, LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+		FROM foodorder f 
+		JOIN orderdetail o ON f.foodorderNum = o.foodorderNum 
+		JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
+		JOIN user1 u ON f.userIdx = u.userIdx
+		JOIN restaurantMenu rm ON r.restaurantsNum = rm.restaurantsNum
+    <where>
+			<if test="keyword!=null and keyword!=''">
+				<include refid="search-list"/>
+			</if>
+	</where>
+	GROUP BY f.foodOrderNum, f.foodOrderPay, f.foodOrderAddr, foodOrderDeliveryMethod, foodOrderHowPay, foodOrderPayCompletionDate, u.userName,
+    foodOrderCompletionDate,f.userIdx, r.name
+    ORDER BY f.foodOrderNum DESC
+	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+	</select>
 	
 </mapper>
