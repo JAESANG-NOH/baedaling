@@ -8,7 +8,7 @@
 	<div style="margin-top: 40px; width: 100%; height: 30%;">
 		<table style="width: 75%; color:#868686; align: center;height:150px;">
 			<tr>
-				<td style="font-size:15px; text-align: center; height:55px; border-top: 1px solid #e9e8e8; border-bottom: 1px solid #e9e8e8;">
+				<td style="font-size:13px; text-align: center; height:55px; border-top: 1px solid #e9e8e8; border-bottom: 1px solid #e9e8e8;">
 					<a href="#">DAEDALING 정책 및 약관</a>&nbsp;&nbsp;&nbsp;
 					<a href="#">회사소개</a>&nbsp;&nbsp;&nbsp;
 					<a href="#">제휴제안</a>&nbsp;&nbsp;&nbsp;
