@@ -19,7 +19,7 @@ public class Manage {
 	
 	//주문리스트 
 	private int foodOrderNum;
-	private int foodOrderPay; 
+	private int foodOrderTotalPrice ; 
 	private String foodOrderAddr;
 	private String foodOrderDeliveryMethod;
 	private String foodOrderHowPay;
@@ -27,23 +27,21 @@ public class Manage {
 	private String foodOrderCompletionDate;
 	private String name;
 	private String menuName;
+
 	
-	
-	
-	
-	
+	public int getFoodOrderTotalPrice() {
+		return foodOrderTotalPrice;
+	}
+	public void setFoodOrderTotalPrice(int foodOrderTotalPrice) {
+		this.foodOrderTotalPrice = foodOrderTotalPrice;
+	}
 	public int getFoodOrderNum() {
 		return foodOrderNum;
 	}
 	public void setFoodOrderNum(int foodOrderNum) {
 		this.foodOrderNum = foodOrderNum;
 	}
-	public int getFoodOrderPay() {
-		return foodOrderPay;
-	}
-	public void setFoodOrderPay(int foodOrderPay) {
-		this.foodOrderPay = foodOrderPay;
-	}
+
 	public String getFoodOrderAddr() {
 		return foodOrderAddr;
 	}
