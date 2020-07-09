@@ -20,7 +20,7 @@
 			</tr>
 			
 			<tr>
-				<td style=" font-size: 25px; font-weight: bold; padding-top:60px; padding-bottom: 15px;">
+				<td style=" font-size: 23px; font-weight: bold; padding-top:60px; padding-bottom: 15px;">
 				<span><img src="<%=cp%>/resource/img/logo3.png" style="width:95px; height: 37px;"></span>
 				(유)배달ING 코리아
 				</td>
@@ -32,7 +32,7 @@
 			</tr>
 			
 			<tr>
-				<td style="padding-top: 40px; font-size: 30px; color:#666666; font-weight: bold; padding-left: 100px;">
+				<td style="padding-top: 40px; font-size: 26px; color:#666666; font-weight: bold; padding-left: 100px;">
 				<span><img src="<%=cp%>/resource/img/tel.png" style="width:25px; height:25px;"></span> 고객만족센터 1577-1254 <span style="font-size: 15px; margin-left: 10px; color:gray;">24시간, 연중무휴</span>
 				</td>
 			</tr>

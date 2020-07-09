@@ -38,7 +38,7 @@
             <th width="100" style="color: #787878;">작성자</th>
             <th width="80" style="color: #787878;">작성일</th>
             <th width="60" style="color: #787878;">조회수</th>
-            <th width="50" style="color: #787878;">첨부z</th>
+            <th width="50" style="color: #787878;">첨부</th>
         </tr>
        
       <c:forEach var="dto" items="${list}">

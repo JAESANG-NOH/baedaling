@@ -68,7 +68,7 @@ function search(){
                         <option value="subject" ${category=="subject"?"selected='selected'":""}>제목</option>
                         <option value="content" ${category=="content"?"selected='selected'":""}>내용</option>
                         <option value="userName" ${category=="userName"?"selected='selected'":""}>작성자</option>
-                        <option value="created" ${category=="created"?"selected='selected'":""}>등록일z</option>
+                        <option value="created" ${category=="created"?"selected='selected'":""}>등록일</option>
                   </select>
                   <input type="text" name="key" value="" class="btn">
                   <button type="button" class="btn" onclick="search();">검색</button>
