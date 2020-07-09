@@ -13,7 +13,6 @@ public class MypageServiceImpl implements MypageService {
 	@Autowired
 	private CommonDAO dao;
 	
-	
 	@Override
 	public Mypage readMypage(int userIdx) {
 		Mypage dto = null;
@@ -79,6 +78,51 @@ public class MypageServiceImpl implements MypageService {
 		return list;
 	}
 
+
+	@Override
+	public List<Mypage> freelist(Map<String, Object> map) {
+		List<Mypage> list = null;
+		try {
+			list = dao.selectList("mypage.freelist", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int freeCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("mypage.freeCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public List<Mypage> recommendlist(Map<String, Object> map) {
+		List<Mypage> list = null;
+		try {
+			list = dao.selectList("mypage.recommendlist", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int recommendCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("mypage.recommendCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 	@Override
 	public int checkReview(Map<String, Object> map) {
 		int result = 0;
@@ -89,4 +133,27 @@ public class MypageServiceImpl implements MypageService {
 		}
 		return result;
 	}
+
+	@Override
+	public List<Mypage> reviewlist(Map<String, Object> map) {
+		List<Mypage> list = null;
+		try {
+			list = dao.selectList("mypage.reviewlist", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int reviewCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("mypage.reviewCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.html.FormSubmitEvent.MethodType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,8 @@ public class MypageController {
 	private MypageService service;
 	@Autowired
 	private MyUtil myUtil;
+/*	@Autowired
+	private Recommend recommendservice;*/
 	
 	// 회원 정보
 	@RequestMapping(value="userInfo")
@@ -231,5 +232,187 @@ public class MypageController {
 			return model;
 		}
 		return model;
+	}
+	
+	// 내 게시물 리스트
+	@RequestMapping(value="freelist")
+	public String freelist(
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			HttpServletRequest req,
+			Model model,
+			HttpSession session
+			) throws Exception {
+	
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		String cp = req.getContextPath();	
+
+		int rows = 5;
+		int total_page = 0;
+		int dataCount = 0;
+			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userIdx", info.getUserIdx());
+
+		dataCount = service.freeCount(map);
+		
+		if(dataCount != 0) total_page = myUtil.pageCount(rows,  dataCount) ;
+
+		if(total_page < current_page) current_page = total_page;
+		
+		int offset = (current_page-1) * rows;
+		if(offset < 0) offset = 0;
+		map.put("offset", offset);
+		map.put("rows", rows);
+		 
+	    List<Mypage> list = service.freelist(map);
+	     
+	    int listNum = 0;
+	    int n = 0;
+	    for(Mypage vo : list) {
+	         listNum = dataCount - (offset + n);
+	         vo.setListNum(listNum);
+	         n++;
+	     }
+		
+	    String query = "";
+	    String listUrl = cp+"/mypage/freelist";
+	    String articleUrl = cp+"/freeboard/page?page=" + current_page;
+	    
+	    if(query.length()!=0) {
+	    	listUrl = cp+"/mypage/freelist?" + query;
+	    	articleUrl = cp+"/freeboard/page?page=" + current_page + "&"+ query;
+	    }
+	    
+	    String paging = myUtil.paging(current_page, total_page, listUrl);
+	
+	    model.addAttribute("list", list);
+	    model.addAttribute("articleUrl", articleUrl);
+	    model.addAttribute("page", current_page);
+	    model.addAttribute("dataCount", dataCount);
+	    model.addAttribute("total_page", total_page);
+	    model.addAttribute("paging", paging);
+	    
+		return ".mypage.freelist";
+	}
+	
+	// 내 게시물 리스트
+	@RequestMapping(value="recommendlist")
+	public String recommendlist(
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			HttpServletRequest req,
+			Model model,
+			HttpSession session
+			) throws Exception {
+	
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		String cp = req.getContextPath();	
+
+		int rows = 5;
+		int total_page = 0;
+		int dataCount = 0;
+			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userIdx", info.getUserIdx());
+
+		dataCount = service.recommendCount(map);
+		
+		if(dataCount != 0) total_page = myUtil.pageCount(rows,  dataCount) ;
+
+		if(total_page < current_page) current_page = total_page;
+		
+		int offset = (current_page-1) * rows;
+		if(offset < 0) offset = 0;
+		map.put("offset", offset);
+		map.put("rows", rows);
+		 
+	    List<Mypage> list = service.recommendlist(map);
+	     
+	    int listNum = 0;
+	    int n = 0;
+	    for(Mypage vo : list) {
+	         listNum = dataCount - (offset + n);
+	         vo.setListNum(listNum);
+	         n++;
+	     }
+		
+	    String query = "";
+	    String listUrl = cp+"/mypage/recommendlist";
+	    String articleUrl = cp+"/recommend/page?page=" + current_page;
+	    
+	    if(query.length()!=0) {
+	    	listUrl = cp+"/mypage/recommendlist?" + query;
+	    	articleUrl = cp+"/recommend/page?page=" + current_page + "&"+ query;
+	    }
+	    
+	    String paging = myUtil.paging(current_page, total_page, listUrl);
+	
+	    model.addAttribute("list", list);
+	    model.addAttribute("articleUrl", articleUrl);
+	    model.addAttribute("page", current_page);
+	    model.addAttribute("dataCount", dataCount);
+	    model.addAttribute("total_page", total_page);
+	    model.addAttribute("paging", paging);
+	    
+		return ".mypage.recommendlist";
+	}
+	
+	@RequestMapping(value="reviewList")
+	public String reviewList(
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			HttpServletRequest req,
+			Model model,
+			HttpSession session
+			) throws Exception {
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		String cp = req.getContextPath();	
+
+		int rows = 5;
+		int total_page = 0;
+		int dataCount = 0;
+			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userIdx", info.getUserIdx());
+
+		dataCount = service.reviewCount(map);
+		
+		if(dataCount != 0) total_page = myUtil.pageCount(rows,  dataCount) ;
+
+		if(total_page < current_page) current_page = total_page;
+		
+		int offset = (current_page-1) * rows;
+		if(offset < 0) offset = 0;
+		map.put("offset", offset);
+		map.put("rows", rows);
+		 
+	    List<Mypage> list = service.reviewlist(map);
+	     
+	    int listNum = 0;
+	    int n = 0;
+	    for(Mypage vo : list) {
+	         listNum = dataCount - (offset + n);
+	         vo.setListNum(listNum);
+	         n++;
+	     }
+		
+	    String query = "";
+	    String listUrl = cp+"/mypage/reviewlist";
+	 //   String articleUrl = cp+"/recommend/page?page=" + current_page;
+	    
+	    if(query.length()!=0) {
+	    	listUrl = cp+"/mypage/reviewlist?" + query;
+	  //  	articleUrl = cp+"/recommend/page?page=" + current_page + "&"+ query;
+	    }
+	    
+	    String paging = myUtil.paging(current_page, total_page, listUrl);
+	
+	    model.addAttribute("list", list);
+	//    model.addAttribute("articleUrl", articleUrl);
+	    model.addAttribute("page", current_page);
+	    model.addAttribute("dataCount", dataCount);
+	    model.addAttribute("total_page", total_page);
+	    model.addAttribute("paging", paging);
+	    
+		return ".mypage.reviewList";
 	}
 }

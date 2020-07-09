@@ -109,7 +109,7 @@ $(function(){
 	});
 });
 </script>
-<link rel="stylesheet" href="<%=cp%>/resource/css/join.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/mypage_infochange.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 
 <div class="mypage_container">
@@ -121,7 +121,6 @@ $(function(){
                 <a href="<%=cp%>/mypage/userorderList" class="list-group-item">주문내역</a>
                 <a href="#" class="list-group-item">내가 쓴 게시물</a>
                 <a href="#" class="list-group-item">내가 쓴 리뷰</a>
-                <a href="#" class="list-group-item">내가 쓴 댓글</a>
                 <a href="<%=cp%>/mypage/message" class="list-group-item">회원정보수정</a>
                 <a href="#" class="list-group-item">회원탈퇴</a>
             </div>     
@@ -141,10 +140,10 @@ $(function(){
 						</tr>
 						<tr class="etch_list2">
 							<td class="inputinfo_tr"><input type="text" class="input_normal" name="userId" value="${sessionScope.user.userId}" readonly='readonly'></td>
+						</tr>
 						<tr class="etch_list3">
 							<td id="message_line1"></td>
 						</tr>
-						
 						<tr class="etch_list1">
 							<td class="textinfo_tr">비밀번호</td>
 						</tr>
@@ -154,8 +153,6 @@ $(function(){
 						<tr class="etch_list3">
 							<td id="message_line2"></td>
 						</tr>
-						
-						
 						<tr class="etch_list1">
 							<td class="textinfo_tr">비밀번호 확인</td>
 						</tr>
