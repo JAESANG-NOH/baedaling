@@ -126,6 +126,7 @@
 		};
 		ajaxJSON(url, "post", query, fn);
 	}
+	
 </script>
 
 
@@ -152,7 +153,7 @@
       </div>
    </div>
    <div id="logo" class="container">
-      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px;"><a href="#"> &nbsp;&nbsp;어&nbsp;디&nbsp;로&nbsp;<span style="color:#276CA2; ">&nbsp;배&nbsp;달&nbsp;</span>해&nbsp;드&nbsp;릴&nbsp;까&nbsp;요&nbsp;?&nbsp; &nbsp; "</a></h1>
+      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 40px;"><a href="#"> "&nbsp;&nbsp;어&nbsp;디&nbsp;로&nbsp;<span style="color:#276CA2; ">&nbsp;배&nbsp;달&nbsp;</span>해&nbsp;드&nbsp;릴&nbsp;까&nbsp;요&nbsp;?&nbsp;&nbsp;"</a></h1>
    </div>
    
    <div id="page" class="container">
@@ -164,7 +165,7 @@
                   <button id="inputbutton" type="button">검색</button>
                </li>
             </ul>
-            <div id="point_result_list" style="display: none;">
+            <div id="point_result_list" style="display: none; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;">
 				<ul class="point_search_ul">
             	</ul>
 			</div>

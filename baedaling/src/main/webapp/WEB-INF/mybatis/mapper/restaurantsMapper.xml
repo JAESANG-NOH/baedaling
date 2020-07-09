@@ -12,6 +12,7 @@
 		<result property="minorder" column="minorder"/>
 		<result property="savefilename" column="savefilename"/>
 		<result property="distance" column="distance"/>
+		<result property="starcount" column="starcount"/>
 	</resultMap>
 	
 	<select id="listRestaurants" parameterType="map" statementType="CALLABLE">
