@@ -52,7 +52,7 @@
 	
 	
 	
-
+	
 	<div>
 		<ul style="text-align: center;" class="snip1284">
 			<li style="margin-top:200px; font-weight:bold; font-size: 20px; color: black;">오늘매출 ${dto.todaySales=='0'?dto.todaySales:0}원</span></li>
