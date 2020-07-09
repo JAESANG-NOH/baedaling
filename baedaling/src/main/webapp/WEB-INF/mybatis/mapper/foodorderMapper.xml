@@ -172,7 +172,7 @@ ORDER BY bestSales desc
  	</select>
  	
  	<delete id="deleteFile" parameterType="map">
-		DELETE FROM restaurantfile WHERE ${field} = #{restaurantsNum}
+		DELETE FROM restaurantfile WHERE fileNum = #{fileNum}
 	</delete>	
  
  
@@ -223,7 +223,7 @@ ORDER BY bestSales desc
    JOIN user1 u ON r.userIdx = u.userIdx
    WHERE r.reviewNum = #{reviewNum}
    group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'), starCount, reviewNum, u.userName,r.restaurantsNum
- </select>	 
+ </select>
  
  <update id="updateReply" parameterType="com.bd.foodorder.FoodOrder">
  	UPDATE review SET reply = #{reply}, replyCreated = SYSDATE WHERE reviewNum = #{reviewNum} 

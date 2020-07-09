@@ -15,9 +15,6 @@
 
 <script type="text/javascript">
 
-function move() { 
-	location.href=""
-}
 </script>
 
 <div style="width: 25px; height:5px; background-color: #F9F9FA">&nbsp;</div>

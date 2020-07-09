@@ -376,8 +376,7 @@ public class FoodOrderController {
 		}
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("field", "fileNum");
-		map.put("num", fileNum);
+		map.put("fileNum", fileNum);
 		service.deleteFile(map);
 		
 		Map<String, Object> model = new HashMap<>();
