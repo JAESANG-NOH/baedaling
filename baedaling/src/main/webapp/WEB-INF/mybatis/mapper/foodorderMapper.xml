@@ -203,6 +203,15 @@ ORDER BY bestSales desc
 	 </select>
 	 
 
+<select id="reply" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
+	SELECT reviewNum, reply, TO_CHAR(replyCreated,'YY-MM-DD HH24:MI') replyCreated ,restaurantsNum
+	FROM review
+	WHERE restaurantsNum = #{restaurantsNum} AND reviewNum = #{reviewNum}
+	ORDER BY reviewNum DESC
+	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+</select>
+
+
 <select id="replyList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
 	SELECT reviewNum, reply, TO_CHAR(replyCreated,'YY-MM-DD HH24:MI') replyCreated ,restaurantsNum
 	FROM review
@@ -210,6 +219,7 @@ ORDER BY bestSales desc
 	ORDER BY reviewNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>
+
 
  <select id="replyCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*),0)

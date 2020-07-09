@@ -49,13 +49,11 @@
 			<li id="dash_subTitle"><a style="color: #D2D4D4;" href="<%=cp%>/dashboard/myReviewList?restaurantsNum=${sessionScope.user.restaurantsNum}">게시글관리</a></li>
 		</ul>
 	</div>
-	
-	
-	
-	
+
 	<div>
 		<ul style="text-align: center;" class="snip1284">
-			<li style="margin-top:200px; font-weight:bold; font-size: 20px; color: black;">오늘매출 ${dto.todaySales=='0'?dto.todaySales:0}원</span></li>
+			<li style="margin-top:200px; font-weight:bold; font-size: 20px; color: black;">오늘매출 ${dto.todaySales=='0'?dto.todaySales:0}원</li>
+			<li style="margin-top:200px; font-weight:bold; font-size: 18px; color: white;"><a href="<%=cp%>/main">메인화면</a></li>
 		</ul>
 	</div>
 	
