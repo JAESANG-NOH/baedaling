@@ -12,7 +12,15 @@
 <div class="reviewContent">
 	<ul>
 		<li id="score_text">${aveStarCount } </li>
-		<li id="star_deco">★★★★☆</li>
+		<li id="star_deco">
+			<c:forEach  begin="1" end="${aveStarCount2 }">
+					★
+			</c:forEach>
+			<c:forEach  begin="${aveStarCount2+1 }" end="5">
+					☆
+			</c:forEach>
+		
+		</li>
 	</ul>
 </div>
 
@@ -27,7 +35,15 @@
 	<c:forEach var="dto" items="${list }">
 		<ul style="padding-left: 10px; padding-top: 10px;">
 			<li > <span style="font-size: 15px; font-weight: bold;">${dto.userName }님  </span> ${dto.created }</li>
-			<li id="star_deco">★★★★★</li>
+			<li id="star_deco">
+				<c:forEach  begin="1" end="${dto.starCount }">
+					★
+				</c:forEach>
+				<c:forEach  begin="${dto.starCount+1 }" end="5">
+					☆
+				</c:forEach>
+				
+			</li>
 			<li style="color: #15AFD6; margin-bottom: 10px;">${dto.menuName }</li>
 			<li style="border-bottom: 0.5px solid #c8c8c8;">
 				<div>
