@@ -241,13 +241,26 @@ ORDER BY bestSales desc
  </update>
 
 	<select id="readRestaurant" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-		SELECT name, mutualName, licenseNumber, typecategoryNum, fctel, longitude, latitude, addr1,addr2, zip
+		SELECT name, mutualName, licenseNumber, typecategoryNum, fctel, longitude, latitude, addr1,addr2, zip, r.restaurantsNum
 		FROM restaurants r
 		JOIN restaurantsinfo ri ON r.restaurantsNum = ri.restaurantsNum
 		WHERE r.restaurantsNum = #{restaurantsNum}
 	
 	</select>
 
+	<update id="updateRestaurant" parameterType="com.bd.foodorder.FoodOrder">
+		update restaurants SET 
+		name=#{name}, longitude=#{longitude}, latitude=#{latitude}, zip=#{zip}, addr1=#{addr1}, addr2=#{addr2}, typeCategoryNum=#{typeCategoryNum} 
+		WHERE restaurantsNum = #{restaurantsNum}
+	
+	</update>
+	
+	<update id="updateRestaurantInfo" parameterType="com.bd.foodorder.FoodOrder">
+		UPDATE restaurantsInfo SET
+		fctel=#{fctel}, mutualName=#{mutualName}, licenseNumber=#{licenseNumber} WHERE restaurantsNum = #{restaurantsNum}
+	
+	
+	</update>
 
 
 

@@ -322,7 +322,12 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 
 	@Override
 	public void updateRestaurant(FoodOrder dto) {
-		// TODO Auto-generated method stub
+		try {
+			dao.updateData("fo.updateRestaurant",dto);
+			dao.updateData("fo.updateRestaurantInfo",dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

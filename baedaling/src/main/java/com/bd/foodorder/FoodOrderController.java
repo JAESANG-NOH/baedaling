@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
-import com.bd.freeboard.FreeBoard;
 import com.bd.user.SessionInfo;
 
 
@@ -591,6 +590,25 @@ public class FoodOrderController {
 		model.addAttribute("dto",dto);	
 		return ".dashboard.fcupdate";
 	}
+	
+	
+	
+	@RequestMapping(value = "updateRestaurant", method = RequestMethod.POST)
+	public String updateRestaurantSubmit(
+			FoodOrder dto,
+			HttpSession session
+			)throws Exception {
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		int restaurantsNum = info.getRestaurantsNum();
+		try {
+			service.updateRestaurant(dto);
+		} catch (Exception e) {
+		}
+			
+		return "redirect:/dashboard/orderlist?restaurantsNum="+restaurantsNum;
+	}
+	
+	
 	
 	
 	

@@ -99,7 +99,7 @@ $(function(){
 	        return false;
 	    }
 	    
-	    str = f.fcName.value;
+	    str = f.name.value;
 	    str = str.trim();
 	    $messageon = $messageline.find("#message_line9");
 	    if(!str) {
@@ -107,11 +107,14 @@ $(function(){
 	        f.tel1.focus();
 	        return false;
 	    }
+
 	    
-	    $('#longitude').val(marker.getPosition().Ga);
-	    $('#latitude').val(marker.getPosition().Ha);
-	    
-	    f.action ="<%=cp%>/dashboard/fcupdate";
+	      if( geocoder){
+	   		$('#longitude').val(marker.getPosition().Ga);	  
+	   		$('#latitude').val(marker.getPosition().Ha);
+	    }      
+	   
+	    f.action ="<%=cp%>/dashboard/updateRestaurant";
 	    f.submit();
 	});
 });
@@ -291,7 +294,7 @@ $(function(){
 				</tr>
 				<tr class="etch_list2">
 					<td class="inputinfo_tr">
-						<select id="select_typecategoryNum" name="typecategoryNum">
+						<select id="select_typecategoryNum" name="typeCategoryNum">
 							<option value="">선택</option>
 							<option value="1">브런치</option>
 							<option value="2">한식</option>
@@ -356,10 +359,11 @@ $(function(){
 				
 				
 			</table>
-			<input type="hidden" id="longitude" name="longitude">
-			<input type="hidden" id="latitude" name="latitude">
+			<input type="hidden" id="longitude" name="longitude" value = "${dto.longitude }">
+			<input type="hidden" id="latitude" name="latitude" value = "${dto.latitude }">
 			<input type="hidden" id="beforeLongitude" name="beforeLongitude" value = "${dto.longitude }">
 			<input type="hidden" id="beforeLatitude" name="beforeLatitude" value = "${dto.latitude }">
+			<input type="hidden" name="restaurantsNum" value="${dto.restaurantsNum }">
 			</form>
 		</div>
 </div>
@@ -380,10 +384,11 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 </script>
 <script type="text/javascript">
 var marker = null;
+var geocoder = null;
 $(function(){
 	$("#find_lck_btn").on('click',function(){
 		var addrval = $("#addr1").val().replace(/ *\([^)]*\) */g, "")
-		var geocoder = new kakao.maps.services.Geocoder();
+		 geocoder = new kakao.maps.services.Geocoder();
 
 		// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(addrval, function(result, status) {
