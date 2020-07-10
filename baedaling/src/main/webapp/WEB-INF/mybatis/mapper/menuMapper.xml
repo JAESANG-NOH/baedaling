@@ -32,12 +32,9 @@
 		FROM restaurantmenu r
 		JOIN menucategory m ON r.menuCategoryNum = m.menuCategoryNum
 		WHERE restaurantsNum = #{restaurantsNum} 
-		<where>
 			<if test="group != 0">
 				AND r.menuCategoryNum = #{group}
 			</if>
-			
-		</where>
 	</select>
 	
 	<select id="listCategory" resultType="com.bd.menu.Menu">

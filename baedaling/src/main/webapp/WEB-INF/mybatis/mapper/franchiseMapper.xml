@@ -68,7 +68,7 @@
 		JOIN orderdetail o ON o.foodorderNum = f.foodorderNum
 		JOIN restaurantMenu rm ON rm.menuNum = o.menuNum
 		JOIN user1 u ON r.userIdx = u.userIdx
-		WHERE r.restaurantsNum = 22
+		WHERE r.restaurantsNum = #{restaurantsNum}
 		group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'),
 		r.created, 'YY-MM-DD HH24:MI',
 		starCount, reviewNum, u.userName, reply, replyCreated

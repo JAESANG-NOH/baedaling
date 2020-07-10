@@ -339,6 +339,11 @@ $(function(){
 			$("#payBuyList").append($tr);
 		});
 		
+		if(payTotalBuyAmt<${dto.minorder}){
+			alert("최소 주문금액을 초과해야 주문이 가능합니다.");
+			$("#choiceMenu").show();
+			return false; 
+		}
 		
 		$("#pay").show();
 		$("#payTotalBuyAmt").text(payTotalBuyAmt);
@@ -363,7 +368,7 @@ $(function(){
 });
 
 $(function(){
-	$("")
+	
 })
 
 </script>
@@ -493,11 +498,11 @@ $(function(){
 			<table class="location_table">
 				<tr>
 					<td class="pay_table_info">주소</td>
-					<td class="pay_table_input"><input type="text" name="detailaddr"></td>
+					<td class="pay_table_input"><input type="text" name="addr1"></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td class="pay_table_input"><input type="text" placeholder="(필수)상세주소 입력" name="foodorderaddr">
+					<td class="pay_table_input"><input type="text" placeholder="(필수)상세주소 입력" name="addr2">
 				</tr>
 				<tr>
 					<td class="pay_table_info">휴대전화번호</td>
@@ -547,24 +552,25 @@ $(function(){
 			<div class="order_sub_header">수령 방법</div>
 			<table class="each_pay_table">
 			<tr>
-					<td class="each_pay" style="width: 304px;"><i class="fas fa-shopping-bag"></i>배달</td>
+					<td class="each_pay" style="width: 304px;"><i class="fas fa-bicycle"></i>배달</td>
 					<td class="each_pay"><i class="fas fa-shopping-bag"></i>직접수령</td>
 			</tr>
 			</table>
+			<input type="hidden" name="foodorderdeliverymethod" value="">
 		</div>
 		
 		<div class="order_container_box">
 			<div class="order_sub_header">마일리지 사용</div>
 			<table class="each_pay_table">
 				<tr>
-					<td>마일리지</td>
-					<td class="point_use_input"><input type="text"></td>
+					<td style="text-align: center; width: 125px;">마일리지</td>
+					<td class="point_use_input" style="width: 225px;"><input type="text" style="width: 220px; height: 30px;border-radius: 2px; border: 1px solid #c8c8c8;"></td>
+					<td><button style="width: 75px; height: 35px; border-radius: 10px; font-size: 11px"><b>모두사용</b></button></td>
 				</tr>
 			</table>
 		</div>	
 	</div>
 </div>
-<input type="hidden" name="orderState" value="">
 </form>
 </body>
 </html>

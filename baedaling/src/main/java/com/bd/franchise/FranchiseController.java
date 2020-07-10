@@ -114,14 +114,14 @@ public class FranchiseController {
 			@RequestParam int restaurantsNum,
 			Model model	) throws Exception {
 		
-		int rows = 10;
+		int rows = 1;
 		int total_page;
 		int dataCount;
 		int replyCount;
 		double aveStarCount;
 		aveStarCount = service.aveStarCount(restaurantsNum);
 		double aveStarCount1 = Double.parseDouble(String.format("%.1f",aveStarCount));
-
+		int aveStarCount2 = (int) Math.floor(aveStarCount);
 
 		replyCount = service.reviewReplyCount(restaurantsNum);
 		dataCount = service.reviewCount(restaurantsNum);
@@ -149,8 +149,24 @@ public class FranchiseController {
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("aveStarCount",aveStarCount1);
 		model.addAttribute("replyCount",replyCount);
-		
+		model.addAttribute("aveStarCount2",aveStarCount2);
 		return "franchise/reviewList";
+	}
+	
+	@RequestMapping(value="newOrder")
+	public String newOrder(
+			Franchise dto,
+			@RequestParam int restaurantsNum
+			) throws Exception {
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return "";
 	}
 	
 }
