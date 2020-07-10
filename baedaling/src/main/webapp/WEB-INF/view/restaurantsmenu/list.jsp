@@ -7,10 +7,16 @@
 %>
 <script type="text/javascript">
 $(function(){
+	$(".mini_menu_box").click(function(){
+		var typecategorynum = $(this).attr('data-typecategorynum');
+		location.href = "<%=cp%>/restaurants/list?typecategorynum="+typecategorynum;
+	});
+});
+
+$(function(){
 	$("body").on("click",".fc_list_table",function(){
 		var num = parseInt($(this).attr('data-restaurantsNum'));
 		var url = "<%=cp%>/franchise/page?restaurantsNum="+num;
-		alert(url);
 		forward(url);
 	});
 });
@@ -26,17 +32,18 @@ function forward(url){
 <div id="mini_menu">
 	<table class="mini_menu2">
 		<tr>
-			<td class="mini_menu_box">한식</td>
-			<td class="mini_menu_box">중식</td>
-			<td class="mini_menu_box">일식</td>
-			<td class="mini_menu_box">양식</td>
-			<td class="mini_menu_box">치킨</td>
-			<td class="mini_menu_box">피자</td>
-			<td class="mini_menu_box">패스트푸드</td>
-			<td class="mini_menu_box">분식</td>
-			<td class="mini_menu_box">브런치</td>
-			<td class="mini_menu_box">야식</td>
-			<td class="mini_menu_box">디저트</td>
+			<td class="mini_menu_box" data-typecategorynum="13">전체</td>
+			<td class="mini_menu_box" data-typecategorynum="2">한식</td>
+			<td class="mini_menu_box" data-typecategorynum="6">중식</td>
+			<td class="mini_menu_box" data-typecategorynum="5">일식</td>
+			<td class="mini_menu_box" data-typecategorynum="11">양식</td>
+			<td class="mini_menu_box" data-typecategorynum="7">치킨</td>
+			<td class="mini_menu_box" data-typecategorynum="10">피자</td>
+			<td class="mini_menu_box" data-typecategorynum="8">패스트푸드</td>
+			<td class="mini_menu_box" data-typecategorynum="3">분식</td>
+			<td class="mini_menu_box" data-typecategorynum="1">브런치</td>
+			<td class="mini_menu_box" data-typecategorynum="4">야식</td>
+			<td class="mini_menu_box" data-typecategorynum="9">디저트</td>
 		</tr>
 		</table>
 </div>
