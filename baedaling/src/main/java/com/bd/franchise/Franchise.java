@@ -29,9 +29,16 @@ public class Franchise {
 	private String tel;
 	private String meno;
 	private String foodorderhowpay;
+	private String foodorderdeliverymethod;
 	
 	
 	
+	public String getFoodorderdeliverymethod() {
+		return foodorderdeliverymethod;
+	}
+	public void setFoodorderdeliverymethod(String foodorderdeliverymethod) {
+		this.foodorderdeliverymethod = foodorderdeliverymethod;
+	}
 	public String getFoodorderhowpay() {
 		return foodorderhowpay;
 	}

@@ -155,10 +155,11 @@ public class FranchiseController {
 	
 	@RequestMapping(value="newOrder")
 	public String newOrder(
-			Franchise dto,
-			@RequestParam int restaurantsNum
+			Franchise dto
 			) throws Exception {
-		
+		if(dto==null) {
+			return "redirect:/main";
+		}
 		try {
 			
 		} catch (Exception e) {

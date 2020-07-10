@@ -340,7 +340,7 @@ $(function(){
 		});
 		
 		if(payTotalBuyAmt<${dto.minorder}){
-			alert("최소 주문금액을 초과해야 주문이 가능합니다.");
+			alert("최소 주문금액 이상부터 주문이 가능합니다.");
 			$("#choiceMenu").show();
 			return false; 
 		}
@@ -368,10 +368,34 @@ $(function(){
 });
 
 $(function(){
-	
-})
-
+	$("body").on("click",".howpay", function(){
+		var $table = $(this).closest("table");
+		
+		$table.find(".howpay").each(function(){
+			$(this).removeClass('userclick');
+		});
+		
+		$(this).addClass('userclick');
+		var foodorderhowpay = $(this).attr('data-foodorderhowpay');
+		$('#foodorderhowpay').val(foodorderhowpay);
+	});
+	$("body").on("click",".deliverymethod",function(){
+		var $table = $(this).closest("table");
+		$table.find(".deliverymethod").each(function(){
+			$(this).removeClass('userclick');
+		});
+		
+		$(this).addClass('userclick');
+		var deliverymethod = $(this).attr('data-deliverymethod');
+		$('#foodorderdeliverymethod').val(deliverymethod);
+	});
+});
 </script>
+<style type="text/css">
+.userclick {
+	background: #989898;
+}
+</style>
 </head>
 <body>
 
@@ -450,7 +474,6 @@ $(function(){
 				</div>
 				<div id="contentLayout"></div>
 			</div>
-	
 	</div>
 </div>
 
@@ -466,7 +489,7 @@ $(function(){
 		      </tr>
 		      
 		  	  <tr height="35px;" style="border-bottom: 1px solid black">
-		         <td colspan="3" style="border-top:1.5px solid #DCDBDB; text-align: left;">${dto.name }</td>
+		         <td colspan="3" style="border-top:1.5px solid #DCDBDB; text-align: left;">${dto.name}</td>
 		      </tr>
 		  		
 		     
@@ -531,32 +554,33 @@ $(function(){
 					</td>
 				</tr>
 				<tr>
-					<td class="each_pay"><i class="fas fa-credit-card"></i>신용카드</td>
-					<td class="each_pay"><i class="fas fa-mobile"></i>휴대전화</td>
+					<td class="each_pay howpay" data-foodorderhowpay="신용카드"><i class="fas fa-credit-card"></i>신용카드</td>
+					<td class="each_pay howpay" data-foodorderhowpay="휴대전화"><i class="fas fa-mobile"></i>휴대전화</td>
 				</tr>
 				<tr>
-					<td class="each_pay"><i class="fas fa-wallet"></i>카카오페이</td>
-					<td class="each_pay"><i class="fas fa-wallet"></i>네이버페이</td>
+					<td class="each_pay howpay" data-foodorderhowpay="카카오페이"><i class="fas fa-wallet"></i>카카오페이</td>
+					<td class="each_pay howpay" data-foodorderhowpay="네이버페이"><i class="fas fa-wallet"></i>네이버페이</td>
 				</tr>
 				<tr>
 					<td colspan="3" class="order_text_line"><b>현장결제</b> 음식받고 직접 결제</td>
 				</tr>
 				<tr>
-					<td class="each_pay"><i class="fas fa-credit-card"></i>신용카드</td>
-					<td class="each_pay"><i class="fas fa-money-bill-wave-alt"></i>현금</td>
+					<td class="each_pay howpay" data-foodorderhowpay="현장신용카드"><i class="fas fa-credit-card"></i>신용카드</td>
+					<td class="each_pay howpay" data-foodorderhowpay="현장현금"><i class="fas fa-money-bill-wave-alt"></i>현금</td>
 				</tr>
 			</table>
+			<input type="hidden" id="foodorderhowpay" name="foodorderhowpay" value="">
 		</div>
 		
 		<div class="order_container_box">
 			<div class="order_sub_header">수령 방법</div>
 			<table class="each_pay_table">
 			<tr>
-					<td class="each_pay" style="width: 304px;"><i class="fas fa-bicycle"></i>배달</td>
-					<td class="each_pay"><i class="fas fa-shopping-bag"></i>직접수령</td>
+					<td class="each_pay deliverymethod" style="width: 304px;" data-deliverymethod="배달"><i class="fas fa-bicycle"></i>배달</td>
+					<td class="each_pay deliverymethod" data-deliverymethod="직접수령"><i class="fas fa-shopping-bag"></i>직접수령</td>
 			</tr>
 			</table>
-			<input type="hidden" name="foodorderdeliverymethod" value="">
+			<input type="hidden" id="foodorderdeliverymethod" name="foodorderdeliverymethod" value="">
 		</div>
 		
 		<div class="order_container_box">

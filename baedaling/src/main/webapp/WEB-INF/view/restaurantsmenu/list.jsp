@@ -17,15 +17,9 @@ $(function(){
 	$("body").on("click",".fc_list_table",function(){
 		var num = parseInt($(this).attr('data-restaurantsNum'));
 		var url = "<%=cp%>/franchise/page?restaurantsNum="+num;
-		forward(url);
+		location.href = url;
 	});
 });
-
-function forward(url){
-	var f = document.listform;
-	f.action = url;
-	f.submit();
-}
 </script>
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/restaurantsmenulist.css" type="text/css">
