@@ -31,7 +31,7 @@
 	
 	<div id="menu_content" class="snip1284">
 		<ul style="margin-top: 20px;">
-			<li id="dash_subTitle" style="color: #D2D4D4;">가게정보관리</li>
+			<li id="dash_subTitle" style="color: #D2D4D4;"><a style="color: #D2D4D4;" href="">가게정보관리</a></li>
 			<li id="dash_subcontent" style="margin-left: 40px;"><a href="">가게정보수정</a></li>
 			<li id="dash_subcontent" style="margin-left: 40px;"><a href="<%=cp%>/dashboard/fcinfo_read?restaurantsNum=${sessionScope.user.restaurantsNum}">상세정보수정</a></li>
 		</ul>

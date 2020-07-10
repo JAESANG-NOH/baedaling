@@ -15,9 +15,6 @@
 
 <script type="text/javascript">
 
-function move() { 
-	location.href=""
-}
 </script>
 
 <!--  -->

@@ -91,7 +91,7 @@ function updateSend() {
 
 <c:forEach var="vo" items="${listFile}">
 <ul id="info_content2">
-	<li><a href="<%=cp%>/dashboard/download?fileNum=${vo.fileNum}">${vo.saveFilename}</a></li>
+	<li style="color: gray;">${vo.fileNum}">${vo.saveFilename}</li>
 </ul>
 </c:forEach>
 </div>
@@ -103,11 +103,4 @@ function updateSend() {
 	</div>
 
 </div>
-
-
-
-</body>
-
-
-</html>
 

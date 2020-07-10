@@ -175,10 +175,8 @@ ORDER BY bestSales desc
  	</select>
  	
  	<delete id="deleteFile" parameterType="map">
-		DELETE FROM restaurantfile WHERE ${field} = #{restaurantsNum}
+		DELETE FROM restaurantfile WHERE fileNum = #{fileNum}
 	</delete>	
- 
- 
  
  
  <select id="reviewList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
@@ -206,7 +204,7 @@ ORDER BY bestSales desc
 <select id="reply" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
 	SELECT reviewNum, reply, TO_CHAR(replyCreated,'YY-MM-DD HH24:MI') replyCreated ,restaurantsNum
 	FROM review
-	WHERE restaurantsNum = #{restaurantsNum} AND reviewNum = #{reviewNum}
+	WHERE restaurantsNum = #{restaurantsNum}
 	ORDER BY reviewNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>

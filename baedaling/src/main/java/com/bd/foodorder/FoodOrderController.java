@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.FileManager;
 import com.bd.common.MyUtil;
+import com.bd.freeboard.FreeBoard;
 import com.bd.user.SessionInfo;
 
 
@@ -377,8 +378,7 @@ public class FoodOrderController {
 		}
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("field", "fileNum");
-		map.put("num", fileNum);
+		map.put("fileNum", fileNum);
 		service.deleteFile(map);
 		
 		Map<String, Object> model = new HashMap<>();
@@ -475,7 +475,7 @@ public class FoodOrderController {
          map.put("offset", offset);
          map.put("rows", rows);
         
-		List<FoodOrder> list = service.replyList(map);
+		List<FoodOrder> list = service.reply(map);
 		
 	     int listNum =0;
 	     int n = 0;
@@ -578,6 +578,7 @@ public class FoodOrderController {
 		
 		return "dashboard/listReply";
 	}
+
 
 	@RequestMapping(value = "updateRestaurant", method = RequestMethod.GET)
 	public String updateRestaurant(

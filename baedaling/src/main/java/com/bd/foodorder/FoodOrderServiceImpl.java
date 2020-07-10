@@ -263,6 +263,18 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 	}
 
 	@Override
+	public List<FoodOrder> reply(Map<String, Object> map) {
+		List<FoodOrder> list = null;
+		try {
+			list =dao.selectList("fo.reply", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	
+	@Override
 	public int replyCount(Map<String, Object> map) {
 		int result = 0;
 		try {
@@ -313,6 +325,7 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		// TODO Auto-generated method stub
 		
 	}
+
 
 	
 
