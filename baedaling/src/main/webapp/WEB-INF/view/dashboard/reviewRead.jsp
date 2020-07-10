@@ -22,7 +22,7 @@ function ajaxHTML(url, type, query, selector) {
 			
 			if($("#listReplyBody").attr("data-count")!="0") {
 				$(".reviewReplyContent").hide();
-			}
+			}//수정버튼 - show()
 			
 		}
 		,beforeSend:function(jqXHR) {

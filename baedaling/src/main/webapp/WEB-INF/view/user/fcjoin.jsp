@@ -16,13 +16,13 @@ $(function(){
 		str = str.trim();
 		$messageon = $messageline.find("#message_line1");
 		if(!str) {
-			f.userId.focus();
 			$messageon.html("<span style='color:red; text-align:centor;'>아이디를 입력하세요</span>");
+			f.userId.focus();
 			return false;
 		}
 		if(!/^[a-z][a-z0-9_]{4,9}$/i.test(str)) { 
-			f.userId.focus();
 			$messageon.html("<span style='color:red; text-align:centor;'>아이디는 5~10자이며 첫글자는 영문자이어야 합니다.</span>");
+			f.userId.focus();
 			return false;
 		}
 		f.userId.value = str;
@@ -31,20 +31,20 @@ $(function(){
 		str = str.trim();
 		$messageon = $messageline.find("#message_line2");
 		if(!str) {
-			f.userPwd.focus();
 			$messageon.html("<span style='color:red; text-align:centor;'>패스워드를 입력하세요.</span>");
+			f.userPwd.focus();
 			return false;
 		}
-		if(/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,16}/i.test(str)) { 
-			f.userPwd.focus();
+		if(!/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,16}/i.test(str)) { 
 			$messageon.html("<span style='color:red; text-align:centor;'>패스워드는 6-16자리로 영문,숫자, 특수문자가 포함 되어야 합니다.</span>");
+			f.userPwd.focus();
 			return false;
 		}
 		f.userPwd.value = str;
 		$messageon = $messageline.find("#message_line3");
 		if(str!= f.userPwd2.value) {
-	        f.userPwd2.focus();
 	        $messageon.html("<span style='color:red; text-align:centor;'>패스워드가 일치하지 않습니다.</span>");
+	        f.userPwd2.focus();
 	        return false;
 		}
 		
@@ -52,8 +52,8 @@ $(function(){
 		str = str.trim();
 		$messageon = $messageline.find("#message_line4");
 	    if(!str) {
-	        f.userName.focus();
 	        $messageon.html("<span style='color:red; text-align:centor;'>이름을 입력하세요.</span>");
+	        f.userName.focus();
 	        return false;
 	    }
 	    f.userName.value = str;
@@ -65,8 +65,8 @@ $(function(){
 	    str.trim();
 	    $messageon = $messageline.find("#message_line5");
 	    if(!str || !isValidDateFormat(str)) {
-	        f.year.focus();
 	    	$messageon.html("<span style='color:red; text-align:centor;'>생년월일를 입력하세요[YYYY-MM-DD].</span>");
+	        f.year.focus();
 	        return false;
 	    }
 	    
@@ -74,26 +74,27 @@ $(function(){
 		str = str.trim();
 		$messageon = $messageline.find("#message_line6");
 	    if(!/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i.test(str)) {
-	        f.email.focus();
 	    	$messageon.html("<span style='color:red; text-align:centor;'>이메일을 입력하세요[ex>baedaling@dbing.com].</span>");
+	        f.email.focus();
 	        return false;
 	    }
+	    
 	    
 	    str = f.tel.value;
 		str = str.trim();
 		$messageon = $messageline.find("#message_line7");
-	    if(/^\d{3}-\d{3,4}-\d{4}$/.test(str)) {
+	    if(!/^\d{3}\d{3,4}\d{4}$/.test(str)) {
 	    	$messageon.html("<span style='color:red; text-align:centor;'>휴대전화번호를 입력하세요.[0100000000].</span>");
 	        f.tel.focus();
 	        return false;
 	    }
 	    
-	    
 	    str = f.zip.value;
+	    str = f.addr1.value;
 	    str = f.addr2.value;
 		str = str.trim();
 		$messageon = $messageline.find("#message_line8");
-	    if(!str|| !addr2) {
+	    if(!str) {
 	    	$messageon.html("<span style='color:red; text-align:centor;'>주소를 입력하세요.</span>");
 	        f.addr2.focus();
 	        return false;
@@ -103,8 +104,8 @@ $(function(){
 	    str = str.trim();
 	    $messageon = $messageline.find("#message_line9");
 	    if(!str) {
-	    	$messageon.html("<span style='color:red; text-align:centor;'>업체명을 입력하세요.</span>");
 	        f.fcName.focus();
+	    	$messageon.html("<span style='color:red; text-align:centor;'>업체명을 입력하세요.</span>");
 	        return false;
 	    }
 	    
@@ -122,21 +123,33 @@ $(function(){
 	    str = f.licenseNumber.value;
 		str = str.trim();
 		$messageon = $messageline.find("#message_line11");
-	    if(/^\d{10}$/.test(str)) {
-	    	$messageon.html("<span style='color:red; text-align:centor;'>사업자번호 10자리를 입력하세요.</span>");
+	    if(!/^\d{10}$/.test(str)) {
 	        f.licenseNumber.focus();
+	    	$messageon.html("<span style='color:red; text-align:centor;'>사업자번호 10자리를 입력하세요.</span>");
 	        return false;
 	    }
+	    
 	    
 	    str = f.fctel.value;
 		str = str.trim();
 		$messageon = $messageline.find("#message_line13");
-	    if(/^\d{2,3}-\d{3,4}-\d{4}$/.test(str)) { 
-	    	$messageon.html("<span style='color:red; text-align:centor;'>업체전화번호를 입력하세요.</span>");
+	    if(!/^\d{2,3}\d{3,4}\d{4}$/.test(str)) { 
 	        f.fctel.focus();
+	    	$messageon.html("<span style='color:red; text-align:centor;'>업체전화번호를 입력하세요.</span>");
 	        return false;
 	    }
 	    
+	    
+	    str = f.fczip.value;
+	    str = f.fcaddr1.value;
+	    str = f.fcaddr2.value;
+		str = str.trim();
+		$messageon = $messageline.find("#message_line8");
+	    if(!str) {
+	    	$messageon.html("<span style='color:red; text-align:centor;'>업체주소를 입력하세요.</span>");
+	        f.fcaddr2.focus();
+	        return false;
+	    }
 	   
 	    $('#longitude').val(marker.getPosition().Ga);
 	    $('#latitude').val(marker.getPosition().Ha);

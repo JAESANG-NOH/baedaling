@@ -10,7 +10,7 @@
 	
     <div style="margin: 0px auto; padding-top:90px; width:420px;">
     	<div style="text-align: center;">
-        	<span style="font-weight: bold; font-size:27px; color: #424951;"><strong>${title}</strong></span>
+        <%-- 	<span style="font-weight: bold; font-size:27px; color: #424951;"><strong>${title}</strong></span> --%>
         </div>
         
         <div class="messageBox">

@@ -137,7 +137,7 @@ public class UserController {
 		reAttr.addFlashAttribute("message",sb.toString());
 		
 		
-		return "redirect:/user/message";
+		return "redirect:/user/complete";
 	}
 	
 	@RequestMapping(value="location", method=RequestMethod.POST)
@@ -169,7 +169,7 @@ public class UserController {
 			return "redirect:/";
 		}
 		
-		return ".member.message";
+		return ".user.message";
 	}
 	
 	

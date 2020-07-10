@@ -26,7 +26,7 @@
 	<insert id="insertuser1" parameterType="com.bd.user.User">
 		INSERT INTO
 		user1(userIdx,userId,enabled,userName,userPwd,created_date,separate)
-		VALUES(#{userIdx},#{userId},0,#{userName},#{userPwd},SYSDATE,#{separate})
+		VALUES(#{userIdx},#{userId},1,#{userName},#{userPwd},SYSDATE,#{separate})
 	</insert>
 	<insert id="insertuser2" parameterType="com.bd.user.User">
 		INSERT INTO
@@ -37,8 +37,8 @@
 
 	<insert id="insertRestaurants" parameterType="com.bd.user.User">
 		INSERT INTO
-		restaurants(restaurantsNum,name,zip,addr1,addr2,userIdx,typecategoryNum,longitude,latitude)
-		VALUES(#{restaurantsNum},#{fcName},#{fczip},#{fcaddr1},#{fcaddr2},#{userIdx},#{typecategoryNum},#{longitude},#{latitude})
+		restaurants(restaurantsNum,name,zip,addr1,addr2,userIdx,typecategoryNum,longitude,latitude, enabled)
+		VALUES(#{restaurantsNum},#{fcName},#{fczip},#{fcaddr1},#{fcaddr2},#{userIdx},#{typecategoryNum},#{longitude},#{latitude},1)
 	</insert>
 	<insert id="insertRestaurantsInfo"
 		parameterType="com.bd.user.User">
