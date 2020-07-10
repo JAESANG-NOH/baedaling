@@ -109,7 +109,7 @@ $(function(){
 	});
 });
 </script>
-<link rel="stylesheet" href="<%=cp%>/resource/css/mypage_infochange.css" type="text/css">
+<link rel="stylesheet" href="<%=cp%>/resource/css/join.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 
 <div class="mypage_container">

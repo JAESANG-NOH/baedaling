@@ -37,12 +37,12 @@
 <!-- 주문내역 -->
 <select id="orderList" parameterType="map" resultType="com.bd.mypage.Mypage">
 	SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
-		   foodOrderTotalPrice, qty , f.restaurantsNum, menuName, mutualName
+		   foodOrderTotalPrice, qty , f.restaurantsNum, menuName, rr.name, foodOrderState
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
     LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
-    JOIN restaurantsInfo ri ON ri.restaurantsNum = f.restaurantsNum
+    LEFT OUTER JOIN restaurants rr ON rr.restaurantsNum = f.restaurantsNum
     WHERE u.userIdx = #{userIdx}
     ORDER BY f.foodOrderNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY

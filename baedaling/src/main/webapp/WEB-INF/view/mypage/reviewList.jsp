@@ -33,7 +33,7 @@ function Deletebtn(reviewNum,page) {
         <div class="body-right">
             <div class="body-right-container">
                  <div class="body-title">
-                     <h3><span  style=" font-family: Webdings">4</span> 마이페이지 </h3>
+                     <h3><span style=" font-family: Webdings">4</span> 내가 쓴 리뷰 </h3>
                  </div>
                  <div id="mypage_container">
                     <div class="alert-info">
@@ -51,23 +51,31 @@ function Deletebtn(reviewNum,page) {
         <div class="review_box">
         <c:forEach var="dto" items="${list}">
         	<table style="border-top: 2px solid #848484; border-bottom: 2px solid #848484; margin-bottom: 20px; width: 95%; border-collapse: collapse; border-spacing: 0;" >
-        		<tr class="subtitle" height="35" style="border-bottom: 1px solid #cccccc;">
-        			<td id="ftitle" style="font-weight: bold; ">가게명 </td>
+        		<tr class="subtitle" height="45" style="border-bottom: 1px solid #cccccc;">
+        			<td id="ftitle" style="font-weight: bold; background-color:#FAFAFA;">가게명 </td>
         			<td id="ftitle" style="padding-top: 8px;"  > ${dto.name}
                     	<button type="button" class="reviewDeletebtn" onclick="Deletebtn('${dto.reviewNum}' , '${page}');">삭제</button>
                     </td>
                 </tr>
-                <tr class="subtitle" height="35" style="border-bottom: 1px solid #cccccc;">
-                    <td id="ftitle" style="font-weight: bold;">작성 날짜 </td> 
+                <tr class="subtitle" height="45" style="border-bottom: 1px solid #cccccc;">
+                    <td id="ftitle" style="font-weight: bold; background-color:#FAFAFA;">작성 날짜 </td> 
                     <td id="ftitle">${dto.created}</td>
                 </tr>
-                <tr class="subtitle" height="35" style="border-bottom: 1px solid #cccccc;">
-                	<td id="ftitle" style="font-weight: bold;">내가 준 별점 </td> 
-                    <td id="ftitle">${dto.starCount} &nbsp;/&nbsp;5</td>
+                <tr class="subtitle" height="45" style="border-bottom: 1px solid #cccccc;">
+                	<td id="ftitle" style="font-weight: bold; background-color:#FAFAFA;">내가 준 별점 </td> 
+                    <td id="ftitle" style="color:#F2D51B;">
+                    	<c:forEach begin="1" end="${dto.starCount}">
+                    		★
+                    	</c:forEach>
+                    	<c:forEach begin="${dto.starCount+1}" end="5">
+                    		☆
+                    	</c:forEach>
+                    </td>
                 </tr>
-                <tr height="100" style="border-bottom: 1px solid #cccccc;">
+                <tr height="120" style="border-bottom: 1px solid #cccccc;">
                 	<td colspan="2" style="color:gray; padding-left: 10px; padding-bottom: 10px;"><br>${dto.content}</td>
                 </tr>
+                <c:if test="${not empty dto.reply}">
                 <tr class="subtitle2">
                 	<td width="300" style="border-right-color: #f8f8f8; font-weight: bold; color:black; border-top: 1px solid #cccccc;">
                 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└&nbsp;&nbsp;&nbsp;RE : ${dto.name}&nbsp;사장님</td>
@@ -76,11 +84,12 @@ function Deletebtn(reviewNum,page) {
                 <tr height="80">
                     <td colspan="2" style="color:black; border: 1px solid #BDBDBD; padding-left: 10px; background-color: #f8f8f8;">${dto.reply}</td>
                 </tr>                
+                </c:if>
            	</table>
 	                <input type="hidden" name="foodOrderNum" value="${foodOrderNum}">
 				   	<input type="hidden" name="restaurantsNum" value="${restaurantsNum}">    
 				   	<input type="hidden" name="reviewNum" value="${reviewNum}">    
-           	</c:forEach>
+        </c:forEach>
            	
            	<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
         		<tr height="35">

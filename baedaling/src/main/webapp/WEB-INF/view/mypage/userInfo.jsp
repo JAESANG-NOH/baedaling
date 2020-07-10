@@ -25,7 +25,7 @@
         <div class="body-right">
             <div class="body-right-container">
                  <div class="body-title">
-                     <h3><span style="font-family: Webdings">4</span> 마이페이지 </h3>
+                     <h3><span style="font-family: Webdings">4</span> 회원 정보 </h3>
                  </div>
                  <div id="mypage_container">
                  	<div class="alert-info">

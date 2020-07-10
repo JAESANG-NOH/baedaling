@@ -45,7 +45,7 @@ $(function(){
         <div class="body-right">
             <div class="body-right-container">
                  <div class="body-title">
-                     <h3><span style="font-family: Webdings">4</span> 마이페이지 </h3>
+                     <h3><span style="font-family: Webdings">4</span> 내가 쓴 게시물 </h3>
                  </div>
                  
         <div style="clear: both;">

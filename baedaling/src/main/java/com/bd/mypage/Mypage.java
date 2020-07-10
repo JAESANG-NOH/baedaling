@@ -24,12 +24,13 @@ public class Mypage {
 	
 	// 주문 내역
 	private int listNum;
-	
-	private String mutualName; // 가게이름
+	private String name; // 가게이름
 	private String menuName; // 메뉴이름
 	private int qty; // 수량
 	private int foodOrderTotalPrice; // 총 결제금액
-	private String foodOrderDate; // 주문날짜+시간
+	private String foodOrderState; // 주문상태
+	private String foodOrderDate; // 주문날짜와 시간
+	
 	
 	private int restaurantsNum;
 	private int foodOrderNum;
@@ -43,13 +44,18 @@ public class Mypage {
 	private int fileCount;
 	
 	// 내가 쓴 리뷰
-	private String name;
 	private String content;
 	private String reply;
 	private String replycreated;
 	private int reviewNum;
 	private int starCount;
 	
+	public String getFoodOrderState() {
+		return foodOrderState;
+	}
+	public void setFoodOrderState(String foodOrderState) {
+		this.foodOrderState = foodOrderState;
+	}
 	public String getName() {
 		return name;
 	}
@@ -223,12 +229,6 @@ public class Mypage {
 	}
 	public void setListNum(int listNum) {
 		this.listNum = listNum;
-	}
-	public String getMutualName() {
-		return mutualName;
-	}
-	public void setMutualName(String mutualName) {
-		this.mutualName = mutualName;
 	}
 	public String getMenuName() {
 		return menuName;

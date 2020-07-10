@@ -60,7 +60,7 @@ function forwordreview(foodOrderNum,restaurantsNum){
         <div class="body-right">
             <div class="body-right-container">
                  <div class="body-title">
-                     <h3><span style="font-family: Webdings">4</span> 마이페이지 </h3>
+                     <h3><span style="font-family: Webdings">4</span> 주문 내역 </h3>
                  </div>
 			<div class="order_container">
 				<div style="width: 100%; margin: 20px auto;">
@@ -77,23 +77,25 @@ function forwordreview(foodOrderNum,restaurantsNum){
 					</table>
 					
 					<table style="width: 800px; margin: 0px auto; border-spacing: 0; border-collapse:collapse;">
-						<tr align="center" height="35" style="border-top: 2px solid #828282; border-bottom: 1px solid #828282; background: #41CDCD;">
-							<th width="60" style="color:white;">번호</th>
-							<th width="400" style="color:white;" align="center">상호명&nbsp; & &nbsp;주문내역</th>
-							<th width="70" style="color:white;">&nbsp;금액</th>
-							<th style="color:white;">주문날짜</th>
-							<th width="80" style="color:white;"></th>
+						<tr align="center" bgcolor="#EFF1F3" height="50" style="border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 14px;">
+							<th width="60" style="color:#787878;">번호</th>
+							<th width="300" style="color:#787878;" align="center">상호명&nbsp; & &nbsp;주문내역</th>
+							<th width="80" style="color:#787878;">금&nbsp;액</th>
+							<th width="100" style="color:#787878;">주문날짜</th>
+							<th width="70" style="color:#787878;">주문상태</th>
+							<th width="70" style="color:#787878;"></th>
 						</tr>
 					
 						<c:forEach var="dto" items="${list}">
-						<tr align="center" height="140" style="border-bottom: 1px solid #41CDCD;">
+						<tr align="center" height="140" style="border-bottom: 1px solid #cccccc;">
 							<td>${dto.listNum}</td>
 							<td>
-								<p style="font-weight: bold;"> ${dto.mutualName} </p>
+								<p style="font-weight: bold;"> ${dto.name} </p>
 								<p> ${dto.menuName} X ${dto.qty} </p> 
 							</td>
 							<td>${dto.foodOrderTotalPrice}원</td>
 							<td>${dto.foodOrderDate}</td>
+							<td>${dto.foodOrderState}</td>
 							<td>
 								<button type="button" class="btn btn1 review_btn" data-orderNum="${dto.foodOrderNum}" data-restaurantsNum="${dto.restaurantsNum}">리뷰쓰기</button> <br>
 								<button type="button" class="btn btn2" onclick="javascript:location.href='<%=cp%>/franchise/page?restaurantsNum=${dto.restaurantsNum}'">가게보기</button> <br>
@@ -104,14 +106,14 @@ function forwordreview(foodOrderNum,restaurantsNum){
 					</table>
 				
 					<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
-					   <tr height="35">
+					   <tr height="40">
 							<td align="center">
 						        ${dataCount==0? "주문 내역이 없습니다." : paging}
 							</td>
 					   </tr>
 					</table>
 					
-					<table style="width: 800px; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
+					<table style="width: 800px; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #787878;">
 						<tr height="100">
 							<td align="right">
 								<button type="button" onclick="javascript:location.href='<%=cp%>/mypage/userorderList'">새로고침</button>

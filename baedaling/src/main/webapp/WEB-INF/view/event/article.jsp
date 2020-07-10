@@ -48,18 +48,8 @@ function delete_send() {
 				<div style="margin: 0px; width: 940px; min-height:300px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.content}</div>
 			</td>
 		</tr>
-	</table>
-
-	<table>
-		<tr height="45">
-			<td>
-				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/update?num=${dto.num}&page=${page}';">수정</button>
-				<button class="btn" type="submit" onclick="delete_send();">삭제</button>
-				<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/list';">리스트</button>
-			</td>
-		</tr>
 		<tr height="35" style="border-bottom: 1px solid #cccccc;">
-			<td align="left" style="padding-left: 5px; color: gray;">
+			<td colspan="2" align="left" style="padding-left: 5px; color: gray;">
 			      이전글 :
 			       <c:if test="${not empty preReadDto}">
 			              <a href="<%=cp%>/event/article?${query}&num=${preReadDto.num}">${preReadDto.subject}</a>
@@ -68,12 +58,19 @@ function delete_send() {
 		</tr>
 			
 		<tr height="35" style="border-bottom: 1px solid #cccccc;">
-			<td align="left" style= "width:100%; padding-left: 5px; color: gray;">
+			<td colspan="2" align="left" style= "padding-left: 5px; color: gray;">
 			      다음글 :
 			       <c:if test="${not empty nextReadDto}">
 			              <a href="<%=cp%>/event/article?${query}&num=${nextReadDto.num}">${nextReadDto.subject}</a>
 			       </c:if>
 			</td>
-		</tr>
+		</tr>		
 	</table>
+	
+	<div class="f_button" align="right" style="padding-right: 95px; padding-top: 10px;">
+		<button class="btn" type="button"onclick="javascript:location.href='<%=cp%>/event/update?num=${dto.num}&page=${page}';">수정</button>
+		<button class="btn" type="button" onclick="delete_send();">삭제</button> 
+		<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/list';">리스트</button>
+	</div>
+	
 </div>
