@@ -69,7 +69,7 @@ function sendOk() {
 	<tr class="f_line"> 
       <td align="left" style="color: gray;" class="subtitle">카테고리</td>
       <td style="padding-left:10px;"> 
-           <select name="category" class="selectField">
+           <select name="category" class="btn">
                <option value="스터디" ${dto.category=="스터디"?"selected='selected'":"" }>배송문의</option>
                <option value="결제문의" ${dto.category=="결제문의"?"selected='selected'":"" }>결제문의</option>
                <option value="회원가입" ${dto.category=="회원가입"?"selected='selected'":"" }>쿠폰문의</option>
@@ -79,7 +79,7 @@ function sendOk() {
   </tr>
 
 	<tr class="fcontent" align="left">
-		<td colspan="2" align="left" style="padding-left: 20px; border-bottom: 1px solid #cccccc;">
+		<td colspan="2" align="left" style="padding-left: 20px;">
 			<textarea name="question" style="margin: 0px; width: 940px; height: 420px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.question }</textarea>
 		</td>
 	</tr>

@@ -25,7 +25,37 @@ public class Franchise {
 	
 	private List<Integer> quantity;
 	private List<Integer> menuNum;
+	private List<Integer> eachprice;
+	private String tel;
+	private String meno;
+	private String foodorderhowpay;
 	
+	
+	
+	public String getFoodorderhowpay() {
+		return foodorderhowpay;
+	}
+	public void setFoodorderhowpay(String foodorderhowpay) {
+		this.foodorderhowpay = foodorderhowpay;
+	}
+	public List<Integer> getEachprice() {
+		return eachprice;
+	}
+	public void setEachprice(List<Integer> eachprice) {
+		this.eachprice = eachprice;
+	}
+	public String getMeno() {
+		return meno;
+	}
+	public void setMeno(String meno) {
+		this.meno = meno;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
 	public List<Integer> getQuantity() {
 		return quantity;
 	}

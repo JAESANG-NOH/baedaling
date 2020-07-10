@@ -153,6 +153,22 @@ public class FranchiseController {
 		return "franchise/reviewList";
 	}
 	
+	@RequestMapping(value="newOrder")
+	public String newOrder(
+			Franchise dto,
+			@RequestParam int restaurantsNum
+			) throws Exception {
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		return "";
+	}
+	
 }
 
 

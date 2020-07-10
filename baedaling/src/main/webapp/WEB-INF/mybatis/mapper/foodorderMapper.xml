@@ -27,13 +27,16 @@
     SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
 		   foodOrderTotalPrice, foodOrderAddr, foodOrderHowPay,
 		   foodOrderPay, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
-		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI') foodOrderCompletionDate,memo,f.userIdx, o.menuNum,orderOnePrice,qty,f.restaurantsNum, LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI') foodOrderCompletionDate,memo,f.userIdx, o.menuNum,qty,f.restaurantsNum, LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
     JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
     JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
     WHERE f.restaurantsNum = #{restaurantsNum} AND INSTR(foodOrderState , #{foodOrderState}) =1
+    GROUP BY f.foodOrderNum,foodOrderDate,foodOrderTotalPrice, foodOrderAddr, foodOrderHowPay, foodOrderPay
+    	,foodOrderPayCompletionDate, foodOrderPayCompletionDate, foodOrderCompletionDate, memo, f.userIdx
+    	,o.menuNum, qty,f.restaurantsNum,rm.menuName
     ORDER BY f.foodorderNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
                 
@@ -172,10 +175,8 @@ ORDER BY bestSales desc
  	</select>
  	
  	<delete id="deleteFile" parameterType="map">
-		DELETE FROM restaurantfile WHERE ${field} = #{restaurantsNum}
+		DELETE FROM restaurantfile WHERE fileNum = #{fileNum}
 	</delete>	
- 
- 
  
  
  <select id="reviewList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
@@ -200,6 +201,15 @@ ORDER BY bestSales desc
 	 </select>
 	 
 
+<select id="reply" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
+	SELECT reviewNum, reply, TO_CHAR(replyCreated,'YY-MM-DD HH24:MI') replyCreated ,restaurantsNum
+	FROM review
+	WHERE restaurantsNum = #{restaurantsNum}
+	ORDER BY reviewNum DESC
+	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+</select>
+
+
 <select id="replyList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
 	SELECT reviewNum, reply, TO_CHAR(replyCreated,'YY-MM-DD HH24:MI') replyCreated ,restaurantsNum
 	FROM review
@@ -207,6 +217,7 @@ ORDER BY bestSales desc
 	ORDER BY reviewNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>
+
 
  <select id="replyCount" parameterType="map" resultType="Integer">
 		SELECT NVL(COUNT(*),0)
