@@ -5,10 +5,11 @@
 <%
 	String cp=request.getContextPath();
 %>
+
 <c:if test="${empty sessionScope.user}">
-<div align="right" style="background: #fbfbfb; height: 25px; font-size: 15px; color: #C8C8C8; margin-right:100px; height: 30px; line-height: 32px;" > 
-		<a href="<%=cp%>/user/login">로그인</a> &nbsp;|&nbsp;
-		<a href="<%=cp%>/user/joincheck">회원가입</a>
+<div align="right" style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; background: #fbfbfb; height: 25px; font-size: 15px; font-color: #5a5a5a; margin-right:100px; height: 30px; line-height: 32px;" > 
+		<a href="<%=cp%>/user/login" style="color: #5a5a5a;">로그인</a> &nbsp;|&nbsp;
+		<a href="<%=cp%>/user/joincheck" style="color: #5a5a5a;">회원가입</a>
 </div>
 </c:if>
 

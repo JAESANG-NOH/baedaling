@@ -28,7 +28,7 @@ function detailUser(userId) {
 				$(this).dialog("close");
 			}
 		},
-		height: 520,
+		height: 450,
 		width: 800,
 		title: "회원상세정보",
 		close: function(event, ui) {
@@ -96,10 +96,10 @@ function updateOk() {
   
 <div class="body-container" align="center">
 		  <div class="body-title" align="center">
-     <h3 style="margin-bottom: 25px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">|&nbsp;회원 목록 <span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"> </span></h3>
+     <h3 style="margin-bottom: 40px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">|&nbsp;회원 목록 <span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"> </span></h3>
 		</div>
 		
-	<div>
+	<div style="width:125%; margin-left: -90px;" >
 		<table style="width: 100%; margin: 20px auto 0px; border-spacing: 0px;">
 				<tr height="35px;">
 					<td align="left" style="font-size: 13px; margin-bottom: 20px;">
@@ -160,12 +160,13 @@ function updateOk() {
 		   </tr>
 		</table>
 		
-		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 2px solid #cccccc;">
+		<div style="margin-left: 20px;">
+		<table style="width: 102%; margin: 10px auto; border-spacing: 0px; border-top: 2px solid #cccccc; margin-left: -17px; ">
 			<tr height="100">
-				<td align="right">
-					<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/manage/userlist'">새로고침</button>
+				<td align="right" style="margin: 10px auto; margin-left: 50px;">
+					<button class="btn" style="margin-left:-30px;"  type="button" onclick="javascript:location.href='<%=cp%>/manage/userlist'">새로고침</button>
 				</td>
-				   <td align="center">
+				<td align="center" style="padding-right: 120px;">
 				   <form name="searchForm" action="<%=cp%>/restaurant/userlist" method="post">
 			              <select name="condition" class="btn">
 			                  <option value="userId"     ${condition=="userId" ? "selected='selected'":""}>아이디</option>
@@ -181,7 +182,8 @@ function updateOk() {
 			      </td>
 			</tr>		
 		</table>
+		</div>
 		
 	</div>
-	<div id="user-dialog" style="display: none"></div>
+	<div id="user-dialog" style="display: none; height: 295px;"></div>
 </div>

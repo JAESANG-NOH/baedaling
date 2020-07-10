@@ -8,15 +8,26 @@
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/restaurant_list.css" type="text/css">
 <link rel="stylesheet" href="<%=cp%>/resource/css/tabs.css" type="text/css">
-<style>
+
+<style type="text/css">
+
 ul.mylist, ol.mylist {
     list-style: none;
     margin: 0px;
     padding: 0px;
-  
     max-width: 250px;
     width: 100%;
 }
+
+.ui-dialog .ui-dialog-buttonpane {
+    text-align: left;
+    border-width: 1px 0 0 0;
+    background-image: none;
+    margin-top: .5em;
+    padding: .3em 1em .5em .4em;
+    border-top-color: #dddada;
+}
+
 </style>
 
 <script type="text/javascript">
@@ -106,7 +117,7 @@ function detaileRestaurant(userId) {
 				$(this).dialog("close");
 			}
 		},
-		height: 520,
+		height: 430,
 		width: 800,
 		title: "가게상세정보",
 		close: function(event, ui){
@@ -175,19 +186,19 @@ function selectStateChange() {
 
 <div class="body-container" align="center">
 	<div class="body-title" align="center">
-			 <h3 style="margin-bottom: 25px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">
+			 <h3 style="margin-bottom: 30px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">
 			 |&nbsp;가게 목록 <span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"> </span></h3>
 		</div>
 		
-		<div class="mylist" style="border: 1px solid white; margin-bottom:20px; clear: both;">
-			<ul class="tabs">
+		<div class="mylist" style="border: 1px solid white; margin-bottom:20px; clear: both; margin-left: -93px; width: 125%;">
+			<ul class="tabs" style="margin-bottom: 20px;">
 				<li id="tab-1" data-tab="1">가게 계정 정보</li>
 				<li id="tab-2" data-tab="2">대기 중인 가게</li>
 			</ul>
 		</div>
 		
-		<div>
-		<table style="margin: 0px auto; width: 100%; border-spacing: 0px;" >
+		<div style="width:125%; margin-left: -90px;">
+		<table style="margin: 10px auto; width: 100%; border-spacing: 0px;" >
 				<tr height="35px;">
 					<td align="left" style="font-size: 13px;">
 					 ${dataCount}개(${page}/${total_page} 페이지)
@@ -195,9 +206,9 @@ function selectStateChange() {
 					<td align="right">
 					</td>
 					
-					 <td align="right">
+					 <td align="right" style="margin-bottom: 21px; margin-top: 10px;">
 			          <select id="selectEnabled" class="btn" onchange="searchList();">
-			          		<option value="" ${enabled=="" ? "selected='selected'":""}>::계정상태::</option>
+			          		<option value="" ${enabled=="" ? "selected='selected'":""}>&nbsp;계정상태&nbsp;</option>
 			          		<option value="1" ${enabled=="1" ? "selected='selected'":""}>활성 계정</option>
 			          		<option value="0" ${enabled=="0" ? "selected='selected'":""}>잠금 계정</option>
 			          </select>
@@ -205,7 +216,7 @@ function selectStateChange() {
 				</tr>
 		</table>
 		
-		<table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
+		<table style="width: 100%;  margin: 0px auto; border-spacing: 0px; border-collapse: collapse;">
 			<tr id="list_table" align="center" bgcolor="#EFF1F3" style=" border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; ">
 				<th width="60" style="color:#787878;">번호</th>
 				<th width="90" style="color:#787878;">이름</th>
@@ -240,7 +251,7 @@ function selectStateChange() {
 		</table>
 		
 		
-		<table style="width: 100%; margin: 0px auto; border-spacing: 0px; border-top: 2px solid #cccccc;">
+		<table style="width: 100%; margin: 10px auto; border-spacing: 0px; border-top: 2px solid #cccccc;">
 			<tr height="100">
 				<td align="left" style="width: 200px;">
 					<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/restaurant/restaurantlist'">새로고침</button>

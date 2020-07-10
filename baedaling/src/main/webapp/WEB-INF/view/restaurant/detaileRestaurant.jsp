@@ -6,7 +6,18 @@
    String cp = request.getContextPath();
 %>
 
-<table style="margin: 10px auto 20px; width: 100%; border-spacing: 1px; background: #cccccc">
+<style type="text/css">
+.ui-dialog .ui-dialog-titlebar {
+    padding: .4em 1em;
+    position: relative;
+    background: #d9edf7;
+    border: 1px solid #9acfea;
+    height: 26px;
+}
+
+</style>
+
+<table style="margin: 10px auto 20px; width: 100%; border-spacing: 1px; background: #e7e7e7">
 <tr height="37" style="background: #ffffff;">
     <td align="right" width="15%" style="padding-right: 7px;"><label style="font-weight: 900;">아이디</label></td>
     <td align="left" width="35%" style="padding-left: 5px;"><span>${dto.userId}</span></td>
@@ -35,13 +46,13 @@
 </table>
 
 <form id="detailedRestaurantForm" name="detailedRestaurantForm" method="post">
-<h3 style="font-size: 15px;">회원 상태 변경</h3>
-<table style="margin: 5px auto 0px; width: 100%; border-spacing: 1px; background: #cccccc">
+<h3 style="font-size: 13px; color: #6a6a6a; font-weight: bold;">회원 상태 변경</h3>
+<table style="margin: 5px auto 0px; width: 100%; border-spacing: 1px; background: #e7e7e7">
 <tr height="37" style="background: #ffffff;">
-   <td align="right" width="15%" style="padding-right: 9px;"><label style="font-weight: 900;">계정상태</label></td>
+   <td align="right" width="15%" style="padding-right: 9px;height:30px;"><label style="font-weight: 900;">계정상태</label></td>
    <td style="padding-left: 5px;">
-       <select class="selectField" id="stateCode" name="stateCode" onchange="selectStateChange()">
-       	  <option value="">::상태코드::</option>
+       <select class="btn" style="margin-bottom: 0px;"  id="stateCode" name="stateCode" onchange="selectStateChange()">
+       	  <option value="">&nbsp;상태코드&nbsp;</option>
        	  <c:if test="${dto.enabled==0}">
        	      <option value="1">잠금 해제</option>
        	  </c:if>

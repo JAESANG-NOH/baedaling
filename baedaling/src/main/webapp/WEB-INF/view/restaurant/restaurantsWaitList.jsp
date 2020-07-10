@@ -104,19 +104,19 @@ $(function(){
 
 <div class="body-container" align="center">
 	<div class="body-title" align="center">
-			 <h3 style="margin-top: 70px; margin-bottom: 25px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">
+			 <h3 style="margin-top: 70px; margin-bottom: 50px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 35px; ">
 			 |&nbsp;대기 중인 가게 목록 <span><img id="f_img2" src="<%=cp%>/resource/img/gangg.png"> </span></h3>
 		</div>
 		
-		<div style="clear: both;">
-			<ul class="tabs">
+		<div class="mylist" style="clear: both; margin-left: -93px; width: 125%;" >
+			<ul class="tabs" style="margin-bottom: 20px;">
 				<li id="tab-1" data-tab="1">가게 계정 정보</li>
 				<li id="tab-2" data-tab="2">대기 중인 가게</li>
 			</ul>
 		</div>
 		
-		<div>
-		<table style="margin: 0px auto; width: 100%; border-spacing: 0px;" >
+		<div style="width: 125%; margin-left: -90px;">
+		<table style="margin: 10px auto; width: 100%; border-spacing: 0px;" >
 				<tr height="35px;">
 					<td align="left" style="font-size: 13px;">
 					 ${dataCount}개(${page}/${total_page} 페이지)
@@ -177,12 +177,12 @@ $(function(){
 		</table>
 		
 		
-		<table style="width: 100%; margin: 20px auto; border-spacing: 0px; border-top: 2px solid #cccccc;">
+		<table style="width: 100%; margin: 10px auto; border-spacing: 0px; border-top: 2px solid #cccccc;">
 			<tr height="100">
-				<td align="right">
+				<td align="left" style="width: 200px;">
 					<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/restaurant/restaurantWaitlist'">새로고침</button>
 				</td>
-				  <td align="center">
+				  <td align="left" style="width: 460px;">
 					   <form name="searchForm" action="<%=cp%>/restaurant/restaurantWaitlist" method="post">
 			              <select name="condition" class="btn">
 			                  <option value="name"     ${condition=="name" ? "selected='selected'":""}>가게이름</option>
