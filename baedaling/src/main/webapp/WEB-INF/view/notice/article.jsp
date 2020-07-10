@@ -92,7 +92,7 @@ function updateBoard() {
 			<td colspan="2" align="left" style="padding-left: 5px; color: gray;">
 			       이전글 :
 			       <c:if test="${not empty preReadDto}">
-			              <a href="<%=cp%>/notice/page?${query}&num=${preReadDto.num}">${preReadDto.subject}</a>
+			              <a href="<%=cp%>/notice/article?${query}&num=${preReadDto.num}">${preReadDto.subject}</a>
 			        </c:if>
 			</td>
 		</tr>
@@ -101,7 +101,7 @@ function updateBoard() {
 			<td colspan="2" align="left" style="padding-left: 5px; color: gray;">
 			       다음글 :
 			      <c:if test="${not empty nextReadDto}">
-			              <a href="<%=cp%>/notice/page?${query}&num=${nextReadDto.num}">${nextReadDto.subject}</a>
+			              <a href="<%=cp%>/notice/article?${query}&num=${nextReadDto.num}">${nextReadDto.subject}</a>
 			       </c:if>
 			</td>
 		</tr>

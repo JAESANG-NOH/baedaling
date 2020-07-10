@@ -396,11 +396,11 @@ public class MypageController {
 	     }
 		
 	    String query = "";
-	    String listUrl = cp+"/mypage/reviewlist";
+	    String listUrl = cp+"/mypage/reviewList";
 	 //   String articleUrl = cp+"/recommend/page?page=" + current_page;
 	    
 	    if(query.length()!=0) {
-	    	listUrl = cp+"/mypage/reviewlist?" + query;
+	    	listUrl = cp+"/mypage/reviewList?" + query;
 	  //  	articleUrl = cp+"/recommend/page?page=" + current_page + "&"+ query;
 	    }
 	    
@@ -414,5 +414,28 @@ public class MypageController {
 	    model.addAttribute("paging", paging);
 	    
 		return ".mypage.reviewList";
+	}
+	
+	@RequestMapping(value="delete")
+	public String deleteReview(
+			@RequestParam int reviewNum,
+			@RequestParam String page,
+			HttpSession session) throws Exception {
+		
+		String query= "";
+		
+		if(query.length()!=0) {		
+			query += "page="+page;
+		}
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		
+		Map<String , Object> map = new HashMap<>();
+		map.put("reviewNum", reviewNum);
+		map.put("userIdx", info.getUserIdx());
+		
+		service.deleteReview(map);
+		
+		return "redirect:/mypage/reviewList?"+query;
 	}
 }

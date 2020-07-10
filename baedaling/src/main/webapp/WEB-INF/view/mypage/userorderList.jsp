@@ -9,6 +9,76 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 <script type="text/javascript">
 
+<%-- $(function(){
+	$("#addMenu").click(function(){
+		$("form[name=menuForm]").each(function(){
+			this.reset();
+		});
+		$('#addMenu-dialog').dialog({
+			  modal: true,
+			  height: 650,
+			  width: 600,
+			  title: '메뉴 등록',
+			  close: function(event, ui) {
+			  }
+		});
+	});
+});
+ --%>
+ 
+<%-- $(function(){
+	
+	$(".detailOrderBtn").click(function(){
+		var foodOrderNum = $(this).attr("data-foodOrderNum");
+		$("#orderDetail-dialog").each(function(){
+			this.reset();
+		});
+		
+		$('#orderDetail-dialog').dialog({
+			  modal: true,
+			  height: 650,
+			  width: 600,
+			  title: '주문 상세 내역',
+			  open: function() {
+	
+					f.menuNum.value=menuNum;
+					var url="<%=cp%>/menu/read";
+					var query = "menuNum="+menuNum;
+					
+					var fn = function(data){
+						
+						var dto = data.dto;
+						
+						var menuNum = dto.menuNum;
+						var menuName = dto.menuName;
+						var menuPrice = dto.menuPrice;
+						var menuCategoryNum = dto.menuCategoryNum;
+						var origin = dto.origin;
+						var menuInfo = dto.menuInfo;
+						var originalFilename = dto.originalFilename;
+						
+						f.menuName.value = menuName;
+						f.menuPrice.value = menuPrice;
+						f.menuCategoryNum.value = menuCategoryNum;
+						f.origin.value = origin;
+						f.menuInfo.value = menuInfo;
+						f.uploadFile.value = originalFilename;
+						
+						$("#btnDelete").attr("data-menuNum",menuNum);
+						
+					};
+
+					ajaxJSON(url, "get", query, fn);
+				
+			  },
+			  close: function(event, ui) {
+			  }
+		});
+	});
+});
+
+ --%>
+
 $(function(){
 	$("body").on("click",".review_btn",function(){
 		var url = "<%=cp%>/mypage/checkReview";
@@ -50,17 +120,17 @@ function forwordreview(foodOrderNum,restaurantsNum){
                 <div class="list-group-item lefthead"> 마이페이지</div>
                 <a href="<%=cp%>/mapage/userInfo" class="list-group-item active">회원정보</a>
                 <a href="<%=cp%>/mypage/userorderList" class="list-group-item">주문내역</a>
-                <a href="#" class="list-group-item">내가 쓴 게시물</a>
-                <a href="#" class="list-group-item">내가 쓴 리뷰</a>
+                <a href="<%=cp%>/mypage/recommendlist" class="list-group-item">내가 쓴 게시물</a>
+                <a href="<%=cp%>/mypage/reviewList" class="list-group-item">내가 쓴 리뷰</a>
                 <a href="<%=cp%>/mypage/message" class="list-group-item">회원정보수정</a>
                 <a href="#" class="list-group-item">회원탈퇴</a>
-            </div>     
+            </div>   
         </div>
     
         <div class="body-right">
             <div class="body-right-container">
                  <div class="body-title">
-                     <h3><span style="font-family: Webdings">4</span> 마이페이지 </h3>
+                     <h3><span style="font-family: Webdings">4</span> 주문 내역 </h3>
                  </div>
 			<div class="order_container">
 				<div style="width: 100%; margin: 20px auto;">
@@ -77,41 +147,43 @@ function forwordreview(foodOrderNum,restaurantsNum){
 					</table>
 					
 					<table style="width: 800px; margin: 0px auto; border-spacing: 0; border-collapse:collapse;">
-						<tr align="center" height="35" style="border-top: 2px solid #828282; border-bottom: 1px solid #828282; background: #41CDCD;">
-							<th width="60" style="color:white;">번호</th>
-							<th width="400" style="color:white;" align="center">상호명&nbsp; & &nbsp;주문내역</th>
-							<th width="70" style="color:white;">&nbsp;금액</th>
-							<th style="color:white;">주문날짜</th>
-							<th width="80" style="color:white;"></th>
+						<tr align="center" bgcolor="#EFF1F3" height="50" style="border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 14px;">
+							<th width="60" style="color:#787878;">번호</th>
+							<th width="300" style="color:#787878;" align="center">상호명&nbsp; & &nbsp;주문내역</th>
+							<th width="80" style="color:#787878;">금&nbsp;액</th>
+							<th width="100" style="color:#787878;">주문날짜</th>
+							<th width="70" style="color:#787878;">주문상태</th>
+							<th width="70" style="color:#787878;"></th>
 						</tr>
 					
 						<c:forEach var="dto" items="${list}">
-						<tr align="center" height="140" style="border-bottom: 1px solid #41CDCD;">
+						<tr align="center" height="140" style="border-bottom: 1px solid #cccccc;">
 							<td>${dto.listNum}</td>
 							<td>
-								<p style="font-weight: bold;"> ${dto.mutualName} </p>
+								<p style="font-weight: bold;"> ${dto.name} </p>
 								<p> ${dto.menuName} X ${dto.qty} </p> 
 							</td>
 							<td>${dto.foodOrderTotalPrice}원</td>
 							<td>${dto.foodOrderDate}</td>
+							<td>${dto.foodOrderState}</td>
 							<td>
 								<button type="button" class="btn btn1 review_btn" data-orderNum="${dto.foodOrderNum}" data-restaurantsNum="${dto.restaurantsNum}">리뷰쓰기</button> <br>
 								<button type="button" class="btn btn2" onclick="javascript:location.href='<%=cp%>/franchise/page?restaurantsNum=${dto.restaurantsNum}'">가게보기</button> <br>
-								<button type="button" class="btn btn3" onclick="">주문상세</button>
+								<button type="button" class="btn btn3 detailOrderBtn" data-foodOrderNum="${dto.foodOrderNum}">주문상세</button>
 							</td>
 						</tr>	
 						</c:forEach>
 					</table>
 				
 					<table style="width: 100%; margin: 0px auto; border-spacing: 0px;">
-					   <tr height="35">
+					   <tr height="40">
 							<td align="center">
 						        ${dataCount==0? "주문 내역이 없습니다." : paging}
 							</td>
 					   </tr>
 					</table>
 					
-					<table style="width: 800px; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #41CDCD;">
+					<table style="width: 800px; margin: 20px auto; border-spacing: 0px; border-top: 1px solid #787878;">
 						<tr height="100">
 							<td align="right">
 								<button type="button" onclick="javascript:location.href='<%=cp%>/mypage/userorderList'">새로고침</button>
@@ -125,3 +197,60 @@ function forwordreview(foodOrderNum,restaurantsNum){
 		</div>
 	</div>
 </div>
+
+
+<div class="orderdetail_container"id="orderDetail-dialog" style="display: none;">
+            	<div style="width: 800px;">
+            		<table style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse; border-spacing: 0;">
+						<tr height="45">
+							<td colspan="2" align="left" style="padding: 10px 10px 5px 15px; font-size: 20px; font-weight: bold; ">
+									불맛로맨스 
+							</td>
+						</tr>
+						<tr height="50" style="border-bottom:1px solid #cccccc;">	
+							<td align="left" style="font-size: 15px; padding: 5px 10px 5px 15px;">
+								주문일시 : 2020-06-01 18:30
+							</td>
+							<td align="right">
+								<button class="btn btn1">리뷰작성</button>
+								<button class="btn btn2">가게보기</button>
+							</td>
+						</tr>
+            			<tr height="40" style="border-bottom:1px solid #cccccc;">
+            				<td style="padding: 10px 10px 5px 15px; font-size: 15px;"> 짬뽕 2개 </td>
+            				<td style="padding: 10px 10px 10px 15px; font-size: 15px;" align="right"> 13,000원 </td>
+            			</tr>
+            			<tr height="40" style="border-bottom:1px solid #cccccc;">
+            				<td style="padding: 10px 10px 5px 15px; font-size: 15px;"> 찹쌀 탕수육 中 1개 </td>
+            				<td style="padding: 10px 10px 10px 15px; font-size: 15px;" align="right"> 16,000원 </td>
+            			</tr>
+            			<tr height="40">
+            				<td style="padding: 0px 0px 0px 15px; font-size: 17px; font-weight: bold;"> 총 주문금액 </td>
+            				<td style="padding: 10px 10px 10px 15px; font-size: 17px; font-weight: bold;" align="right"> 29,000원 </td>
+            			</tr>
+            			<tr style="border-bottom:1px solid #cccccc;">
+            				<td style="padding: 0px 10px 5px 15px; font-size:17px; font-weight: bold;"> 결제방법 </td>
+            				<td style="padding: 0px 10px 5px 5px; font-size:17px; font-weight: bold;" align="right"> 직접 만나서 결제 </td>
+            			</tr>
+            			<tr height="40">
+            				<td colspan="2" style="padding: 5px 0px 0px 15px; font-size:17px; font-weight: bold;"> 배달주소 </td>
+            			</tr>
+            			<tr style="border-bottom:1px solid #cccccc;">
+            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size:15px; font-weight: normal;"> 서울 성북구 석관동 </td>
+            			</tr>
+            			<tr>
+            				<td colspan="2" style="padding: 5px 0px 0px 15px; font-size:17px; font-weight: bold;"> 전화번호 </td>
+            			</tr>
+            			<tr style="border-bottom:1px solid #cccccc;">
+            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size: 15px;"> 010-1111-2222 </td>
+            			</tr>
+            			<tr>
+            				<td colspan="2" style="padding: 5px 0px 0px 15px; font-size:17px; font-weight: bold;"> 가게 사장님께 </td>
+            			</tr>
+            			<tr>
+            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size: 15px;"> 단무지 많이 주세여 </td>
+            			</tr>
+            		</table>
+            		
+            	</div>
+            </div>

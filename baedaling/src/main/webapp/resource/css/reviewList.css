@@ -63,9 +63,8 @@ border : 0.5px solid #F9F9FA;
 <!-- 마이페이지 '내가 쓴 리뷰' 관련 -->
 .subtitle {
 	padding-left : 20px;
-	width: 120px;
+	width: 100px;
 	color: gray;
-	border-bottom: 1px solid red;
 }
 
 #ftitle {
@@ -101,7 +100,7 @@ border : 0.5px solid #F9F9FA;
 
 
 .review_box {
-	width: 770px;
-	margin: auto;
+	width: 870px;
+	margin: 10px;
 	padding-top: 20px;
 }

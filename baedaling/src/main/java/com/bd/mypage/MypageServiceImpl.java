@@ -156,4 +156,15 @@ public class MypageServiceImpl implements MypageService {
 		return result;
 	}
 
+	@Override
+	public void deleteReview(Map<String, Object> map) throws Exception {
+		try {
+			dao.deleteData("mypage.deleteReview", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
 }
