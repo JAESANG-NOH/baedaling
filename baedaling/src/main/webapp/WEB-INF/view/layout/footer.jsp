@@ -17,31 +17,32 @@
 					<a href="#">고객센터</a>&nbsp;&nbsp;&nbsp;
 					<span style="color: gray;">© BAEDALING Corp.</span>
 				</td>
-			</tr>
-			
+			</tr>	
 			<tr>
-				<td style=" font-size: 23px; font-weight: bold; padding-top:60px; padding-bottom: 15px;">
+				<td style=" font-size: 23px; font-weight: bold; padding-top:20px; padding-bottom: 15px;">
 				<span><img src="<%=cp%>/resource/img/logo3.png" style="width:95px; height: 37px;"></span>
 				(유)배달ING 코리아
 				</td>
 			</tr>
 			
 			<tr> 
-				<td style="padding-top: 20px; padding-left: 100px;"> 서울특별시 마포구 월드컵북로 21 풍성빌딩 2층  | 대표자 : 노재상 | 사업자등록번호:211-80-5564 통신판매업신고:제 4545-서울강북-2592호 | 개인정보담당자: 첨지 | 제휴문의:baedaling@hero.co.kr |
-				고객센터:1547-8622 (24시간, 연중무휴) support@hero.co.kr | 호스트사업자:(주)쌍용통신
+				<td style="padding-top: 10px; padding-left: 100px;">
+					서울특별시 마포구 월드컵북로 21 풍성빌딩 2층  | 대표자 : 노재상 | 사업자등록번호 : 211-80-5564 | 통신판매업신고 : 제 4545-서울강북-2592호 | 개인정보담당자 : 첨지 | 제휴문의 : baedaling@hero.co.kr | <br>
+					고객센터 : 1547-8622 (24시간, 연중무휴) support@hero.co.kr | 호스트사업자 : (주)쌍용통신
+				</td>
 			</tr>
 			
 			<tr>
-				<td style="padding-top: 40px; font-size: 26px; color:#666666; font-weight: bold; padding-left: 100px;">
+				<td style="padding-top: 40px; font-size: 20px; color:#666666; font-weight: bold; padding-left: 100px; padding-right: 100px;">
 				<span><img src="<%=cp%>/resource/img/tel.png" style="width:25px; height:25px;"></span> 고객만족센터 1577-1254 <span style="font-size: 15px; margin-left: 10px; color:gray;">24시간, 연중무휴</span>
 				</td>
 			</tr>
 			
 			<tr>
-				<td style="padding-top: 40px; padding-bottom: 70px; padding-left: 100px;">
-				(유)배달ING 코리아는 통신판매중개자이며 통신판매의 당사자가 아닙니다. 
-				따라서 상품/거래정보 및 거래와 관련하여 배달링에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해
-				(유)배달ING 코리아는 책임을 지지 않습니다. 상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다. &nbsp;Copyright BAEDALING. All Rights Reserved
+				<td style="padding-top: 40px; padding-bottom: 70px; padding-left: 100px; padding-right: 100px;">
+				(유)배달ING 코리아는 통신판매중개자이며 통신판매의 당사자가 아닙니다.
+				따라서 상품/거래정보 및 거래와 관련하여 배달링에 등록된 판매자의 고의 또는 과실로 소비자에게 발생하는 손해에 대해 (유)배달ING 코리아는 책임을 지지 않습니다.
+				상품 및 거래에 관하여 보다 정확한 정보는 해당 판매자에게 직접 확인하여 주시기 바랍니다. &nbsp;Copyright BAEDALING. All Rights Reserved
 				</td>
 			</tr>
 		</table>

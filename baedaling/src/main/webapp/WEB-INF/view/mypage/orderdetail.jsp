@@ -25,15 +25,15 @@
 								<button class="btn btn2">가게보기</button>
 							</td>
 						</tr>
-            			<tr height="35" style="border-bottom:1px solid #cccccc;">
+            			<tr height="40" style="border-bottom:1px solid #cccccc;">
             				<td style="padding: 10px 10px 5px 15px; font-size: 15px;"> 짬뽕 2개 </td>
             				<td style="padding: 10px 10px 10px 15px; font-size: 15px;" align="right"> 13,000원 </td>
             			</tr>
-            			<tr height="35" style="border-bottom:1px solid #cccccc;">
+            			<tr height="40" style="border-bottom:1px solid #cccccc;">
             				<td style="padding: 10px 10px 5px 15px; font-size: 15px;"> 찹쌀 탕수육 中 1개 </td>
             				<td style="padding: 10px 10px 10px 15px; font-size: 15px;" align="right"> 16,000원 </td>
             			</tr>
-            			<tr height="35">
+            			<tr height="40">
             				<td style="padding: 0px 0px 0px 15px; font-size: 17px; font-weight: bold;"> 총 주문금액 </td>
             				<td style="padding: 10px 10px 10px 15px; font-size: 17px; font-weight: bold;" align="right"> 29,000원 </td>
             			</tr>
@@ -41,7 +41,7 @@
             				<td style="padding: 0px 10px 5px 15px; font-size:17px; font-weight: bold;"> 결제방법 </td>
             				<td style="padding: 0px 10px 5px 5px; font-size:17px; font-weight: bold;" align="right"> 직접 만나서 결제 </td>
             			</tr>
-            			<tr height="35">
+            			<tr height="40">
             				<td colspan="2" style="padding: 5px 0px 0px 15px; font-size:17px; font-weight: bold;"> 배달주소 </td>
             			</tr>
             			<tr style="border-bottom:1px solid #cccccc;">

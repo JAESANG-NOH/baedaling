@@ -48,6 +48,27 @@
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>
 
+<select id="orderdetailList" parameterType="map" resultType="com.bd.mypage.Mypage">
+SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate, foodOrderAddr, fctel,
+		   foodOrderTotalPrice, menuPrice, qty , f.restaurantsNum, menuName, rr.name, foodOrderState, memo
+	FROM foodorder f 
+    JOIN user1 u ON f.userIdx = u.userIdx
+    LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+    LEFT OUTER JOIN restaurants rr ON rr.restaurantsNum = f.restaurantsNum
+    LEFT OUTER JOIN restaurantsInfo ri ON ri.restaurantsNum = rr.restaurantsNum
+    WHERE u.userIdx = #{userIdx} AND f.foodorderNum = #{foodorderNum}
+</select>
+
+<select id="orderdetailMenu" parameterType="map" resultType="com.bd.mypage.Mypage">
+    SELECT menuName, menuprice, qty
+	FROM foodorder f 
+    JOIN user1 u ON f.userIdx = u.userIdx
+    LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+    WHERE u.userIdx = #{userIdx} AND f.foodorderNum = #{foodorderNum}
+</select>
+
 <!-- 내가 쓴 자유게시판 -->
 <select id="freelist" parameterType="map" resultType="com.bd.mypage.Mypage">
 SELECT f.num, f.userId, f.userIdx, subject, hitCount, 
