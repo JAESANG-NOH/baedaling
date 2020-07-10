@@ -37,9 +37,9 @@ public interface FoodOrderService {
 	public FoodOrder reviewRead(int reviewNum);
 	
 	public List<FoodOrder> replyList(Map<String, Object> map);
+	public List<FoodOrder> reply(Map<String, Object> map);
 	public int replyCount(Map<String, Object> map);
 	public void insertReply(FoodOrder dto)throws Exception;
-	
 	
 	// 가맹점 수정위한 가맹점정보
 	public FoodOrder readRestaurant(int restaurantsNum);
