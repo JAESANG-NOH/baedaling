@@ -105,6 +105,7 @@ public class ManageController {
 		
 		String paging = myUtil.paging(current_page, total_page, userListUrl);
 		
+		model.addAttribute("searchBar","manageBoard");
 		model.addAttribute("list", list);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);

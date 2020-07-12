@@ -97,6 +97,7 @@ public class InquireBoardController {
 		
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 		
+		model.addAttribute("searchBar","inquireBoard");
 		model.addAttribute("list", list);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);

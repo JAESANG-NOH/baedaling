@@ -110,7 +110,7 @@ function updateOk() {
 					
 				 <td align="right">
 			          <select id="selectEnabled" class="btn" onchange="searchList();">
-			          		<option value="" ${enabled=="" ? "selected='selected'":""}>::계정상태::</option>
+			          		<option value="" ${enabled=="" ? "selected='selected'":""}>&nbsp;계정상태&nbsp;</option>
 			          		<option value="1" ${enabled=="1" ? "selected='selected'":""}>활성 계정</option>
 			          		<option value="0" ${enabled=="0" ? "selected='selected'":""}>잠금 계정</option>
 			          </select>
