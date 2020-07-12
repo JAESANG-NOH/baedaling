@@ -442,7 +442,16 @@ $(function(){
 					</ul>
 					<div id="st_content">
 						<ul>
-							<li><span style="color: #F2D51B">&nbsp;★★★★☆</span> 4.5</li>
+							<li>
+								<span style="color: #F2D51B">&nbsp;
+									<c:forEach  begin="1" end="${aveStarCount2 }">
+										★
+									</c:forEach>
+								<c:forEach  begin="${aveStarCount2+1 }" end="5">
+										☆
+								</c:forEach>								
+								</span> ${aveStarCount }
+							</li>
 							<li id="red">&nbsp;4,000원 할인</li>
 							<li>&nbsp;<span id="light_gray">최소주문금액 </span>${dto.minorder}</li>
 							<li>&nbsp;<span id="light_gray">결제</span> 신용카드,현금,<span
