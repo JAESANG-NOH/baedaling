@@ -176,13 +176,71 @@
 	   </div> 
 	    <hr style="border: 0.5px solid #D8D8D8;"> 		
    	</c:when>
-   	<c:otherwise>
+   	<c:when test="${searchBar=='recommendBoard' }">
+   		<div style="background-image: url('<%=cp%>/resource/img/banner/recommandbanner.jpg'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;오&nbsp;늘&nbsp;&nbsp;저&nbsp;녁&nbsp;은&nbsp;&nbsp;<b style="color: #ffc107">치&nbsp;킨</b>&nbsp;이&nbsp;닭&nbsp;."</a></h1>
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:when>
+   	<c:when test="${searchBar=='freeboard' }">
+   		<div style="background-image: url('<%=cp%>/resource/img/banner/freeboardbanner.jpg'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;<b style="color: #ffc107">피&nbsp;자</b>&nbsp;도&nbsp;&nbsp;우&nbsp;리&nbsp;&nbsp;민&nbsp;족&nbsp;이&nbsp;였&nbsp;어&nbsp;."</a></h1>
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:when>
+   	<c:when test="${searchBar=='mypage' }">
+   		<div style="background-image: url('<%=cp%>/resource/img/banner/mypagebanner.jpg'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;오&nbsp;늘&nbsp;은&nbsp;&nbsp;단&nbsp;게&nbsp;&nbsp;땡&nbsp;긴&nbsp;다&nbsp;.&nbsp;"</a></h1>
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:when>
+   	<c:when test="${searchBar=='event' }">
+   		<div style="background-image: url('<%=cp%>/resource/img/banner/eventbanner.jpg'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;원&nbsp;하&nbsp;는&nbsp;&nbsp;모&nbsp;든&nbsp;&nbsp;음&nbsp;식&nbsp;은&nbsp;&nbsp;<b style="color: #ffc107">배&nbsp;달&nbsp;링</b>&nbsp;에&nbsp;서&nbsp;."</a></h1>
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:when>
+   	<c:when test="${searchBar=='faq' }">
+   		<div style="background-image: url('<%=cp%>/resource/img/banner/faqbanner.jpg'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;집&nbsp;에&nbsp;서&nbsp;&nbsp;<b style="color: #ffc107">맛&nbsp;집</b>&nbsp;&nbsp;여&nbsp;행&nbsp;중&nbsp;.&nbsp;"</a></h1>
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:when>
+   	<c:when test="${searchBar=='notice' }">
+   		<div style="background-image: url('<%=cp%>/resource/img/banner/noticebanner.jpg'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;저&nbsp;기&nbsp;압&nbsp;일&nbsp;땐&nbsp;&nbsp;<b style="color: #ffc107">고&nbsp;기</b>&nbsp;앞&nbsp;으&nbsp;로&nbsp;"</a></h1>
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:when>
+   	<c:when test="${searchBar=='inquireBoard' }">
+   		<div style="background-image: url('<%=cp%>/resource/img/banner/inquirebanner.jpg'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px; background-position-y: -90px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;오&nbsp;늘&nbsp;은&nbsp;&nbsp;달&nbsp;달&nbsp;한&nbsp;게&nbsp;&nbsp;땡&nbsp;긴&nbsp;다&nbsp;.&nbsp;"</a></h1>
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:when>
+   	<c:when test="${searchBar=='manage' }">
    		<div style="background-image: url('<%=cp%>/resource/img/recommandbanner.jpg'); width:100%; height:345px;">
 		   <div id="logo" class="container">
 		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;오&nbsp;늘&nbsp;은&nbsp;&nbsp;단&nbsp;게&nbsp;&nbsp;땡&nbsp;긴&nbsp;다&nbsp;.&nbsp;"</a></h1>
 		   </div>
 	   </div>
 	    <hr style="border: 0.5px solid #D8D8D8;"> 
+   	</c:when>
+   	<c:otherwise>
    	</c:otherwise>
    </c:choose>
 

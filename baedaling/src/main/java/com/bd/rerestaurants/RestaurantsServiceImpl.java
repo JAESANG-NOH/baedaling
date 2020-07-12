@@ -67,4 +67,60 @@ public class RestaurantsServiceImpl implements RestaurantsService {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Restaurants> listStarRestaurants(Map<String, Object> map) throws Exception {
+		List<Restaurants> list = null;
+		try {
+			dao.callSelectListProcedureMap("resto.listStarRestaurants", map);
+			list = (List<Restaurants>)map.get("result");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Restaurants> listAllStarRestaurants(Map<String, Object> map) throws Exception {
+		List<Restaurants> list = null;
+		try {
+			dao.callSelectListProcedureMap("resto.listAllStarRestaurants", map);
+			list = (List<Restaurants>)map.get("result");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Restaurants> listReviewRestaurants(Map<String, Object> map) throws Exception {
+		List<Restaurants> list = null;
+		try {
+			dao.callSelectListProcedureMap("resto.listReviewRestaurants", map);
+			list = (List<Restaurants>)map.get("result");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Restaurants> listAllReviewRestaurants(Map<String, Object> map) throws Exception {
+		List<Restaurants> list = null;
+		try {
+			dao.callSelectListProcedureMap("resto.listAllReviewRestaurants", map);
+			list = (List<Restaurants>)map.get("result");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return list;
+	}
+
 }

@@ -94,7 +94,7 @@ public class RecommendController {
 		
 		String paging = myUtil.paging(on_page, total_page, listUrl);
 		
-		
+		model.addAttribute("searchBar","recommendBoard");
 		model.addAttribute("list", list);
 		model.addAttribute("page", on_page);
 		model.addAttribute("dataCount", dataCount);

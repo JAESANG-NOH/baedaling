@@ -58,4 +58,50 @@
 	}
 	</select>
 	
+	<select id="listStarRestaurants" parameterType="map" statementType="CALLABLE">
+	{		
+			call listStarRestaurants(#{result,jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=listRestaurantsMap},
+							   	 #{typecategorynum, jdbcType=INTEGER, mode=IN},
+							  	 #{city, jdbcType=VARCHAR, mode=IN},
+							  	 #{longitude, jdbcType=INTEGER, mode=IN},
+							  	 #{latitude, jdbcType=INTEGER, mode=IN},
+							 	 #{offset, jdbcType=INTEGER, mode=IN},
+							 	 #{rows, jdbcType=INTEGER, mode=IN})
+	}
+	</select>
+	
+	<select id="listAllStarRestaurants" parameterType="map" statementType="CALLABLE">
+	{		
+			call listAllStarRestaurants(#{result,jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=listRestaurantsMap},
+							  	 #{city, jdbcType=VARCHAR, mode=IN},
+							  	 #{longitude, jdbcType=INTEGER, mode=IN},
+							  	 #{latitude, jdbcType=INTEGER, mode=IN},
+							 	 #{offset, jdbcType=INTEGER, mode=IN},
+							 	 #{rows, jdbcType=INTEGER, mode=IN})
+	}
+	</select>
+	
+	<select id="listReviewRestaurants" parameterType="map" statementType="CALLABLE">
+	{		
+			call listReviewRestaurants(#{result,jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=listRestaurantsMap},
+							   	 #{typecategorynum, jdbcType=INTEGER, mode=IN},
+							  	 #{city, jdbcType=VARCHAR, mode=IN},
+							  	 #{longitude, jdbcType=INTEGER, mode=IN},
+							  	 #{latitude, jdbcType=INTEGER, mode=IN},
+							 	 #{offset, jdbcType=INTEGER, mode=IN},
+							 	 #{rows, jdbcType=INTEGER, mode=IN})
+	}
+	</select>
+	
+	<select id="listAllReviewRestaurants" parameterType="map" statementType="CALLABLE">
+	{		
+			call listAllReviewRestaurants(#{result,jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=listRestaurantsMap},
+							  	 #{city, jdbcType=VARCHAR, mode=IN},
+							  	 #{longitude, jdbcType=INTEGER, mode=IN},
+							  	 #{latitude, jdbcType=INTEGER, mode=IN},
+							 	 #{offset, jdbcType=INTEGER, mode=IN},
+							 	 #{rows, jdbcType=INTEGER, mode=IN})
+	}
+	</select>
+	
 </mapper>

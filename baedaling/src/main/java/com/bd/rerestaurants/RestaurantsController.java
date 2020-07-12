@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.ddf.EscherSerializationListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +58,11 @@ public class RestaurantsController {
 		map.put("longitude",longitude);
 		map.put("latitude", latitude);
 		
-		dataCount = service.dataCount(map);
+		if(typecategorynum==13) {
+			dataCount = service.dataAllCount(map);
+		} else {
+			dataCount = service.dataCount(map);
+		}
 		total_page = myUtil.pageCount(rows, dataCount);
 		
 		if(current_page>total_page) {
@@ -82,9 +87,17 @@ public class RestaurantsController {
 					list = service.listRestaurants(map);
 				}
 			} else if(state.equals("star")) {
-				
+				if(typecategorynum==13) { 
+					list = service.listAllStarRestaurants(map);
+				} else {
+					list = service.listStarRestaurants(map);
+				}
 			} else if(state.equals("review")) {
-				
+				if(typecategorynum==13) { 
+					list = service.listAllReviewRestaurants(map);
+				} else {
+					list = service.listReviewRestaurants(map);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -37,8 +37,8 @@
 
 	<insert id="insertRestaurants" parameterType="com.bd.user.User">
 		INSERT INTO
-		restaurants(restaurantsNum,name,zip,addr1,addr2,userIdx,typecategoryNum,longitude,latitude, enabled)
-		VALUES(#{restaurantsNum},#{fcName},#{fczip},#{fcaddr1},#{fcaddr2},#{userIdx},#{typecategoryNum},#{longitude},#{latitude},1)
+		restaurants(restaurantsNum,name,zip,addr1,addr2,userIdx,typecategoryNum,longitude,latitude, enabled,ready)
+		VALUES(#{restaurantsNum},#{fcName},#{fczip},#{fcaddr1},#{fcaddr2},#{userIdx},#{typecategoryNum},#{longitude},#{latitude},1,0)
 	</insert>
 	<insert id="insertRestaurantsInfo"
 		parameterType="com.bd.user.User">

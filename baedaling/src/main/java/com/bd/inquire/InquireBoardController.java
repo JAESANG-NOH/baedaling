@@ -97,7 +97,7 @@ public class InquireBoardController {
 		
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 		
-		model.addAttribute("searchBar","inquireBoard");
+		model.addAttribute("searchBar","manage");
 		model.addAttribute("list", list);
 		model.addAttribute("articleUrl", articleUrl);
 		model.addAttribute("page", current_page);
@@ -115,7 +115,7 @@ public class InquireBoardController {
 	public String createdForm(
 			Model model
 			) throws Exception {
-		
+		model.addAttribute("searchBar","inquireBoard");
 		model.addAttribute("mode", "created");
 		return ".inquire.created";
 	}
