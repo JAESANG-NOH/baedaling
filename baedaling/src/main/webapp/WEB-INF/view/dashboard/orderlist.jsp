@@ -7,8 +7,6 @@
 %>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://unpkg.com/@kfonts/bm-hanna-pro/index.css" />
-<link rel="stylesheet" href="<%=cp%>/resource/css/dashboard.css" type="text/css">
-
 <script type="text/javascript" src="<%=cp%>/resource/jquery/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=cp%>/resource/js/util-jquery.js"></script>
 

@@ -25,7 +25,7 @@
 	           <span><b>주인장</b></span>
 	        </td>
 	       <td width='50%' style='padding:5px 5px; border:1px solid #cccccc; border-left:none;' align='right'>
-	           <span>${dto.replyCreated}</span> |
+	           <span>${dto.replyCreated}</span> | <a class="replyUpdate" style="color: gray;">수정</a><span style="color: gray;"> | 삭제</span>
 	        </td>
 	    </tr>
 	    <tr>
