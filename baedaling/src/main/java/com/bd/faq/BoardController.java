@@ -90,6 +90,8 @@ public class BoardController {
         
         String paging = myUtil.paging(current_page, total_page, listUrl);
 		List<Board> grouplist = service.listCategory();
+		
+		model.addAttribute("searchBar","faq");
 		model.addAttribute("groupList",grouplist);
         model.addAttribute("list",list);
         model.addAttribute("group",group);

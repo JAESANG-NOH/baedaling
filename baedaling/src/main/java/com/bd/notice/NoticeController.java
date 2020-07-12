@@ -91,6 +91,8 @@ public class NoticeController {
 
 		String paging = myUtil.paging(current_page, total_page, listUrl);
 
+		
+		model.addAttribute("searchBar","notice");
 		model.addAttribute("checkList", checkList);
 		model.addAttribute("list", list);
 		model.addAttribute("page", current_page);
