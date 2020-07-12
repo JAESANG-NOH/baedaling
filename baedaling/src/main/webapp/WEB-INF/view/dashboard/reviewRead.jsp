@@ -19,11 +19,6 @@ function ajaxHTML(url, type, query, selector) {
 		,data:query
 		,success:function(data) {
 			$(selector).html(data);
-			
-			if($("#listReplyBody").attr("data-count")!="0") {
-				$(".reviewReplyContent").hide();
-			}//수정버튼 - show()
-			
 		}
 		,beforeSend:function(jqXHR) {
 	        jqXHR.setRequestHeader("AJAX", true);
@@ -46,6 +41,9 @@ function ajaxJSON(url, type, query, fn) {
 		,dataType:"json"
 		,success:function(data) {
 			fn(data);
+			if($("#listReplyBody").attr("data-count")!="0") {
+				$(".reviewReplyContent").hide();
+			}//수정버튼 - show()
 		}
 		,beforeSend:function(jqXHR) {
 	        jqXHR.setRequestHeader("AJAX", true);
@@ -73,8 +71,6 @@ function listPage(page) {
 	
 	ajaxHTML(url, "get", query, selector);
 }
-
-
 
 
 $(function(){
@@ -105,6 +101,7 @@ $(function(){
 		ajaxJSON(url, "post", query, fn);
 	});
 });
+
 
 </script>
 
