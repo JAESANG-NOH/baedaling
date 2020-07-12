@@ -108,7 +108,7 @@ $(function(){
 
 </script>
 
-<div style="width: 25px; height:70px; background-color: #F6F5F5">&nbsp;</div>
+<div style="width: 25px; height:70px; background-color: #f9f9fa">&nbsp;</div>
 <div class="reviewList" style="width: 100px;  margin-left: 450px; ">
 
 <div class="reviewContent" style="background-color: white;">

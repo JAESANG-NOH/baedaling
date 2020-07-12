@@ -86,6 +86,9 @@ function  updateFcState() {
 						<li>
 							<span id="light_gray">전화번호</span> <input type="datetime" name="fctel" value="${dto.fctel}">
 						</li>
+						<li>
+							<span id="light_gray">예상배달시간</span> <input type="datetime" name="deliTime" value="${dto.deliTime}">
+						</li>
 					</ul>
 					<ul id="info_title">
 						<li><span style="font-size: 14px;"><i class="far fa-credit-card"></i> 결제정보</span></li>	
@@ -133,12 +136,12 @@ function  updateFcState() {
 					</ul>
 					<ul id="info_content2">
 						<li>
-							<textarea rows="10" cols="50" style="width: 577px; height: 104px;" name="origin">${dto.origin}</textarea>
+							<textarea rows="10" cols="60" style="width: 700px; height: 104px;" name="origin">${dto.origin}</textarea>
 						</li>
 					</ul>
 					<ul>
-						<li>
-							<button type="submit" onclick="updateFcState();" >등록하기</button> <button type="reset">다시입력</button>
+						<li style="margin-right: 10px; margin-top: 50px; text-align: right;">
+							<button style="width: 70px; height: 30px; background-color: white; border: 1px solid;" type="submit" onclick="updateFcState();" >등록하기</button> <button style="width: 70px; height: 30px; background-color: white; border: 1px solid;" type="reset">다시입력</button>
 					<c:if test="${mode=='update'}">
 			         	 <input type="hidden" name="restaurantsNum" value="${dto.restaurantsNum}">
 			        </c:if>

@@ -100,9 +100,9 @@ public class FreeBoardController {
         model.addAttribute("dataCount", dataCount);
         model.addAttribute("total_page", total_page);
         model.addAttribute("paging", paging);
-        
 		model.addAttribute("condition", condition);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("searchBar","freeboard");
 		
 		return ".freeboard.list";
 	}

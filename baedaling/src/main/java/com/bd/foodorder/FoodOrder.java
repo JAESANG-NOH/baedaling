@@ -40,7 +40,6 @@ public class FoodOrder {
 	private double latitude;
 	
 	
-	
 	private int ready;
 	
 	//파일 
@@ -173,6 +172,7 @@ public class FoodOrder {
 	public void setMinorder(String minorder) {
 		this.minorder = minorder;
 	}
+	
 	public String getDeliTime() {
 		return deliTime;
 	}

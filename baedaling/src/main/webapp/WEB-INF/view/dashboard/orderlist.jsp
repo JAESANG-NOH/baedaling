@@ -159,10 +159,10 @@ $(function(){
 </script>
 <div style="width: 25px; background-color: #F6F5F5">&nbsp;</div>
 <div id="dashboard_box">
-<table id="dash_table">
+<table id="dash_table" style="border-collapse: collapse;">
 	<tr id="dash_title">
 		<td colspan="3" style="padding-left : 20px;">
-		<span style="color: #38BCC6;">| </span>대시보드<span style="color: #38BCC6;"> |</span>
+		<span style="color: #38BCC6;">| </span>주문현황<span style="color: #38BCC6;"> |</span>
 		</td>
 	</tr>
 	<tr style="width: 800px; text-align: center;">
@@ -173,38 +173,40 @@ $(function(){
 	</tr>
 
 	<tr style="width: 800px; text-align: center;">
-		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount1}</td>
-		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount2}</td>
-		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount3}</td>
-		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount4}</td>
+		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount1 =='0'? 0 : orderCount1}</td>
+		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount2 =='0'? 0 : orderCount2}</td>
+		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount3 =='0'? 0 : orderCount3}</td>
+		<td width="150" style="font-size: 45px; font-weight: bold;">&nbsp;${orderCount4 =='0'? 0 : orderCount4}</td>
 	</tr>
 
 </table>
 </div>
 
 <div id="dashboard_box">
-<table id="dash_table2">
+<table id="dash_table2" style="border-collapse: collapse;">
 	<tr id="dash_title">
 		<td colspan="3" style="padding-left : 20px;">
 			 <span style="color: #38BCC6;">| </span>주문완료   <span style="color: #38BCC6;">|</span>
 		</td>
 	</tr>
-	<tr style="width: 800px; text-align: center;">
+	<tr style="width: 800px; text-align: center; border-bottom: 1px dotted #ABA9A9;">
 		<td width="100px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">No</td>
-		<td width="300px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
+		<td width="250px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
 		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문내역</td>
+		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">요청사항</td>
 		<td width="150px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문시간</td>
 		<td width="100" style="border-bottom: 1px dotted #F6F5F5;" id="waiting_text">확인</td>
 	</tr>
 <c:forEach var="dto" items="${list1}">	
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;">${dto.foodorderNum}</td>
-		<td width="300px;">${dto.foodOrderAddr}</td>
-		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
+		<td width="250px;">${dto.foodOrderAddr}</td>
+		<td width="200px;">${dto.menuNum}-${dto.menuName}-(${dto.qty}개)</td>
+		<td width="200px;">${dto.memo}</td>
 		<td width="150px;">${dto.foodOrderDate}</td>
 		<td width="100px;">
-			<button type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="접수완료" class="btnOrderOk">확인</button>
-			<button type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="주문취소" class="btnOrderCancel">취소</button>
+			<button id="orderbutton" type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="접수완료" class="btnOrderOk">확인</button>
+			<button id="orderbutton" type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="주문취소" class="btnOrderCancel">취소</button>
 			<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
 		</td>
 	</tr>
@@ -213,15 +215,15 @@ $(function(){
 </div>
 
 <div id="dash3board_box">
-<table id="dash_table2">
+<table id="dash_table2" style="border-collapse: collapse;">
 	<tr id="dash_title">
 		<td colspan="3" style="padding-left : 20px;">
 			 <span style="color: #38BCC6;">| </span>접수완료<span style="color: #38BCC6;"> |</span>
 		</td>
 	</tr>
-	<tr style="width: 800px; text-align: center;">
+	<tr style="width: 800px; text-align: center; border-bottom: 1px dotted #ABA9A9;">
 		<td width="100px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">No</td>
-		<td width="300px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
+		<td width="250px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
 		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문내역</td>
 		<td width="150px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문시간</td>
 		<td width="100" style="border-bottom: 1px dotted #F6F5F5;" id="waiting_text">확인</td>
@@ -229,10 +231,10 @@ $(function(){
 <c:forEach var="dto" items="${list2}">	
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;">${dto.foodorderNum}</td>
-		<td width="300px;">${dto.foodOrderAddr}</td>
+		<td width="250px;">${dto.foodOrderAddr}</td>
 		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
 		<td width="150px;">${dto.foodOrderDate}</td>
-		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달중" class="btnResOk">라이더요청</button>
+		<td width="100px;"><button id="orderbutton2" type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달중" class="btnResOk">라이더요청</button>
 							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
 							</td>
 		
@@ -242,26 +244,26 @@ $(function(){
 </div>
 
 <div id="dashboard_box">
-<table id="dash_table2">
+<table id="dash_table2" style="border-collapse: collapse;">
 	<tr id="dash_title">
 		<td colspan="3" style="padding-left : 20px;">
 			 <span style="color: #38BCC6;">| </span>배달중<span style="color: #38BCC6;"> |</span>
 		</td>
 	</tr>
 
-	<tr style="width: 800px; text-align: center;">
+	<tr style="width: 800px; text-align: center; border-bottom: 1px dotted #ABA9A9;">
 		<td width="100px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">No</td>
-		<td width="300px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
+		<td width="250px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
 		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문내역</td>
 		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문시간</td>
 	</tr>
 <c:forEach var="dto" items="${list3}">	
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;">${dto.foodorderNum}</td>
-		<td width="300px;">${dto.foodOrderAddr}</td>
-		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
+		<td width="250px;">${dto.foodOrderAddr}</td>
+		<td width="200px;">${dto.menuNum}-${dto.menuName}-(${dto.qty}개)</td>
 		<td width="200px;">${dto.foodOrderDate}</td>
-		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달완료" class="btnDeliOk">완료</button>
+		<td width="100px;"><button id="orderbutton" type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달완료" class="btnDeliOk">완료</button>
 							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
 							</td>
 	</tr>
@@ -271,16 +273,16 @@ $(function(){
 
 
 <div id="dashboard_box">
-<table id="dash_table2">
+<table id="dash_table2" style="border-collapse: collapse;">
 	<tr id="dash_title">
 		<td colspan="3" style="padding-left : 20px;">
 			 <span style="color: #38BCC6;">| </span>배달완료<span style="color: #38BCC6;"> |</span>
 		</td>
 	</tr>
 
-	<tr style="width: 800px; text-align: center;">
+	<tr style="width: 800px; text-align: center; border-bottom: 1px dotted #ABA9A9;">
 		<td width="100px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">No</td>
-		<td width="300px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
+		<td width="250px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주소</td>
 		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문내역</td>
 		<td width="200px;" style="border-bottom: 3px dotted #F6F5F5;" id="waiting_text">주문시간</td>
 	</tr>
@@ -288,13 +290,14 @@ $(function(){
 <c:forEach var="dto" items="${list4}">	
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;">${dto.foodorderNum}</td>
-		<td width="300px;">${dto.foodOrderAddr}</td>
-		<td width="200px;">${dto.menuNum}-${dto.menuName}</td>
+		<td width="250px;">${dto.foodOrderAddr}</td>
+		<td width="200px;">${dto.menuNum}-${dto.menuName}-(${dto.qty}개)</td>
 		<td width="200px;">${dto.foodOrderDate}</td>
-		<td width="100px;"><button type="button" data-foodorderNum="${dto.foodorderNum}" class="btnOrderDelete">삭제</button>
-							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum}">
-							</td>
 	</tr>
 </c:forEach>
+		<tr style="margin-left:400px; border: 1px solid #E6E5E5; text-align: center; width: 800px; height: 45px;">
+			<td style="margin-left:400px; width:200px; font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro'; color: gray;">${orderCount4== 0 ? "완료된 주문이 없습니다.": paging}</td>
+		</tr>
 </table>
+
 </div>

@@ -37,7 +37,7 @@ function updateSend() {
 		<li><span style="color:#F2D51B ">&nbsp;★★★★☆</span> 4.5</li>
 		<li id="red">&nbsp;4,000원 할인</li>
 		<li>&nbsp;<span id="light_gray">최소주문금액 </span> ${dto.minorder}</li>
-		<li style="margin-left: 80px;">&nbsp;<span id="light_gray">배달 시간</span> ${dto.deliTime}<span><a href=""><i class="far fa-question-circle"></i></a> </span> </li>
+		<li style="margin-left: 80px;">&nbsp;<span id="light_gray">배달 시간</span> ${dto.deliTime}<span>분<a href=""><i class="far fa-question-circle"></i></a> </span> </li>
 	</ul>
 	</div>
 </div>
@@ -96,11 +96,11 @@ function updateSend() {
 </c:forEach>
 </div>
 </div>	
-</div>
 <div class="f_button" align="right">
-		<button id="f_btn2" type="button"onclick="updateSend();">수정</button>
-		<button id="f_btn3" type="button" onclick="javascript:location.href='<%=cp%>/dashboard/list?">리스트</button>
+		<button style="width: 70px; height: 30px; background-color: white; border: 1px solid;" type="button"onclick="updateSend();">수정</button>
+		<button style="width: 70px; height: 30px;  background-color: white; border: 1px solid;"  type="button" onclick="javascript:location.href='<%=cp%>/dashboard/list?">리스트</button>
 	</div>
+</div>
 
 </div>
 

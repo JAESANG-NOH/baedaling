@@ -64,6 +64,31 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 		return result;
 	}
+	
+	
+	@Override
+	public int allorderCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("fo.allorderCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	@Override
+	public int todayOrderCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("fo.todayOrderCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
 
 	//매출
 	@Override
@@ -113,6 +138,19 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 		return list;
 	}
+	
+	
+	@Override
+	public List<FoodOrder> todayBestMenu(int restaurantsNum) {
+		List<FoodOrder> list = null;
+		try {
+			list = dao.selectList("fo.todayBest", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 
 	@Override
 	public Map<String,Object> montlyChart(int restaurantsNum) {
@@ -330,6 +368,10 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 		
 	}
+
+	
+
+	
 
 
 	

@@ -6,7 +6,7 @@
 }
 
 body{
-	font-family: '맑�?고딕', '맑�? 고딕';
+	font-family: '나눔고딕, 나눔 고딕';
 	text-align: left;
 	background-color: #f9f9fa;
 }
@@ -23,8 +23,18 @@ ul li{
 	margin-top : 10px;
 	color : #197880;
 	font-size: 30px; 
-	font-family: '배달?��민족 ?��?���? Pro', '배달?��민족?��?��체Pro', 'bm-hanna-pro';
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
 }
+
+
+.dash_title2{
+	margin-left : 20px;
+	margin-top : 200px;
+	color : #197880;
+	font-size: 30px; 
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+}
+
 	
 .sidebox{
 	position : fixed;
@@ -83,21 +93,43 @@ margin: 0px;
 	margin-top : 0px;
 	margin-left : 320px;
 	background-color: white; 
+	border-collapse: collapse;
 }
 
 
 #dash_table2{
 	width: 1400px;
 	height: 400px;
-	margin-top: 20px;
-	margin-left: 320px;
-	background-color: white;
+	margin-top : 30px;
+	margin-left : 320px;
+	background-color: white; 
+	border-collapse: collapse;
+}
+
+#dash_table3{
+	width: 1400px;
+	height: 200px;
+	margin-top : 50px;
+	margin-left : 330px;
+	background-color: #f9f9fa; 
+}
+
+#dash_table4{
+	width: 1800px;
+	height: 300px;
+	margin-top : 50px;
+	margin-left : 330px;
+	background-color: white; 
+	border-collapse: collapse;
+}
+
+#dash_table4 tr td{
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';	
 }
 
 
 #waiting_text{
-	font-weight: bold;
-	font-size: 24px;
+	font-size: 25px;
 	font-family: '배달?��민족 ?��?���? Pro', '배달?��민족?��?��체Pro', 'bm-hanna-pro';
 }
 
@@ -155,4 +187,16 @@ margin: 0px;
 .snip1284 a:hover:after,
 .snip1284 .current a:after {
   height: 100%;
+}
+
+#orderbutton{
+	background: white;
+	width: 60px;
+	padding: 2px;
+}
+
+#orderbutton2{
+	background: white;
+	width: 100px;
+	padding: 2px;
 }

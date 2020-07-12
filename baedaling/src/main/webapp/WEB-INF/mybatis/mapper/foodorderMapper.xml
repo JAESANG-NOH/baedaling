@@ -9,9 +9,9 @@
 <!-- 오더 리스트 -->
 <select id="orderComplete" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
     SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
-		   foodOrderTotalPrice, foodOrderAddr, foodOrderHowPay,
-		   foodOrderPay, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
-		   foodOrderCompletionDate,memo,f.userIdx, o.menuNum,orderOnePrice,qty,f.restaurantsNum,rm.menuName
+		  	foodOrderAddr, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
+		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI')foodOrderCompletionDate,memo,f.userIdx, o.menuNum,qty,f.restaurantsNum,
+		   LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
@@ -19,8 +19,9 @@
     JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
     WHERE f.restaurantsNum = #{restaurantsNum} AND INSTR(foodOrderState , #{foodOrderState}) =1 AND 
     	TO_CHAR(foodOrderDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
+    GROUP BY f.foodOrderNum, foodOrderDate, foodOrderAddr, foodOrderPayCompletionDate,foodOrderCompletionDate
+    	,memo, f.userIdx, o.menuNum,qty,f.restaurantsNum
 </select>
-
 
 <!-- 전체리스트 -->
 <select id="allOrderList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
@@ -62,6 +63,15 @@
  WHERE INSTR(foodOrderState , #{foodOrderState}) =1 AND restaurantsNum = #{restaurantsNum} AND TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
 </select>
 
+<select id="allorderCount" parameterType="map" resultType="Integer">
+ SELECT COUNT(foodOrderState) FROM foodorder f
+ WHERE INSTR(foodOrderState , #{foodOrderState}) =1 AND restaurantsNum = #{restaurantsNum}
+</select>
+
+<select id="todayOrderCount" parameterType="map" resultType="Integer">
+ SELECT COUNT(foodOrderState) FROM foodorder f
+ WHERE restaurantsNum = #{restaurantsNum} AND TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
+</select>
 
 <!-- 일별 매출  -->
 <select id="todaySales" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
@@ -102,6 +112,18 @@ WHERE TO_CHAR(foodOrderCompletionDate,'YYMM') = TO_CHAR(SYSDATE,'YYMM') AND f.re
 GROUP BY rm.menuName, rm.menuNum
 ORDER BY bestSales desc
 </select>
+
+<select id="todayBest" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
+SELECT rm.menuNum, rm.menuName, SUM(qty*foodOrderTotalPrice) bestSales 
+FROM foodorder f 
+JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
+JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+WHERE TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD') AND f.restaurantsNum = #{restaurantsNum}  
+GROUP BY rm.menuName, rm.menuNum
+ORDER BY bestSales desc
+</select>
+
 
 <!-- 월별 매출  -->
  <select id="monthlySalesChart" parameterType="Integer" resultType="map">
@@ -158,7 +180,7 @@ ORDER BY bestSales desc
  
  	<update id="updateInfo" parameterType="com.bd.foodorder.FoodOrder">
  		UPDATE restaurantsInfo SET openingHour = TO_DATE( #{openingHour}, 'HH24:MI'), endingHour = TO_DATE( #{endingHour}, 'HH24:MI'), 
- 				mutualName=#{mutualName}, licenseNumber=#{licenseNumber}, introduce=#{introduce},
+ 				mutualName=#{mutualName}, licenseNumber=#{licenseNumber}, introduce=#{introduce}, deliTime=#{deliTime},
  				origin=#{origin}, minorder=#{minorder}
  		WHERE restaurantsNum = #{restaurantsNum} 
  	</update>

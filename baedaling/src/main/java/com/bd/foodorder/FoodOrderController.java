@@ -34,9 +34,46 @@ public class FoodOrderController {
 	private MyUtil myUtil;
 
 	
+	@RequestMapping("dashboard")
+	public String dashboard(
+			@RequestParam int restaurantsNum,
+			HttpServletRequest req,
+			Model model
+			) {
+		int orderCount = 0; 
+		int waitngCount = 0;
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		//오늘 주문
+		map.put("restaurantsNum", restaurantsNum);
+		orderCount = service.todayOrderCount(map);
+		//대기중인 주문
+		map.put("restaurantsNum", restaurantsNum);
+		map.put("foodOrderState", "주문완료");
+		waitngCount = service.orderCount(map);
+		//오늘, 이달 매출
+		FoodOrder today = service.todaySalesRead(restaurantsNum);
+		FoodOrder month = service.monthlySalesRead(restaurantsNum);
+		//가게정보
+		FoodOrder dto = service.readInfo(restaurantsNum);
+
+		model.addAttribute("orderCount", orderCount);
+		model.addAttribute("waitngCount", waitngCount );
+		model.addAttribute("today", today);
+		model.addAttribute("month", month);
+		model.addAttribute("dto", dto);
+		model.addAttribute("restaurantsNum",restaurantsNum);
+		return ".dashboard.dashboard";
+		
+	}
+	
+	
+	
 	@RequestMapping(value="orderlist")
 	public String orderList(
 			@RequestParam int restaurantsNum,
+			@RequestParam (value="page", defaultValue="1") int current_page,
+			HttpServletRequest req,
 			Model model
 			) {
 		
@@ -45,6 +82,13 @@ public class FoodOrderController {
 		int orderCount3 =0;
 		int orderCount4 =0;
 	
+		String cp = req.getContextPath();
+		int rows = 10; // 한 화면에 보여주는 게시물 수
+		int total_page = 0;
+		int dataCount = 0;
+		int offset = (current_page-1) * rows;
+	 		if(offset < 0) offset = 0;
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("restaurantsNum", restaurantsNum);
 		map.put("foodOrderState", "주문완료");
@@ -63,8 +107,22 @@ public class FoodOrderController {
 		
 		map.put("restaurantsNum", restaurantsNum);
 		map.put("foodOrderState", "배달완료");
+		map.put("offset",offset);
+		map.put("rows",rows);
 		List<FoodOrder> list4 = service.readOrder(map);
 		orderCount4 = service.orderCount(map);
+		
+	     int listNum =0;
+	     int n = 0;
+	     for(FoodOrder dto : list4) {
+	       listNum = dataCount - (offset + n);
+	       dto.setListNum(listNum);
+	       n++;
+	      }
+	     
+	    String query = "restaurantsNum="+restaurantsNum; 
+	    String listUrl = cp+"/dashboard/orderlist?"+query;
+	    String paging = myUtil.paging(current_page, total_page, listUrl);
 		
 		model.addAttribute("list1", list1);
 		model.addAttribute("list2",list2);
@@ -75,6 +133,9 @@ public class FoodOrderController {
 		model.addAttribute("orderCount3", orderCount3);
 		model.addAttribute("orderCount4", orderCount4);
 		model.addAttribute("restaurantsNum", restaurantsNum);
+		model.addAttribute("page", current_page);
+		model.addAttribute("total_page", total_page);
+		model.addAttribute("paging", paging);
 		return ".dashboard.orderlist";
 	}
 	
@@ -94,7 +155,8 @@ public class FoodOrderController {
 		Map<String, Object> mm = new HashMap<String, Object>();
 		mm.put("restaurantsNum", restaurantsNum);
 		mm.put("foodOrderState", "배달완료");
-		dataCount = service.orderCount(mm);
+		dataCount = service.allorderCount(mm);
+		
 		if(dataCount != 0)
             total_page = myUtil.pageCount(rows,  dataCount) ;
 		
@@ -154,6 +216,28 @@ public class FoodOrderController {
 		
 		JSONArray ja = new JSONArray();
 		for(FoodOrder dto : bestlist) {
+			ja.put(new JSONArray("['"+dto.getMenuName()+"',"+dto.getBestSales()+"]"));
+		}
+		
+		job.put("data", ja);
+		arr.put(job);
+		
+		return arr.toString();
+	}
+	
+	
+	@RequestMapping(value="pie3d2", produces="application/json;charset=utf-8")
+	@ResponseBody	
+	public String pie3d2(
+			@RequestParam int restaurantsNum
+			) throws Exception{
+		List<FoodOrder> todaylist = service.todayBestMenu(restaurantsNum);
+		
+		JSONArray arr = new JSONArray();
+		JSONObject job = new JSONObject();
+		
+		JSONArray ja = new JSONArray();
+		for(FoodOrder dto : todaylist) {
 			ja.put(new JSONArray("['"+dto.getMenuName()+"',"+dto.getBestSales()+"]"));
 		}
 		

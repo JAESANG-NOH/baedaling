@@ -8,6 +8,8 @@ public interface FoodOrderService {
 	//주문관리
 	public List<FoodOrder> readOrder(Map<String, Object> map);
 	public int orderCount(Map<String, Object> map);
+	public int allorderCount(Map<String, Object> map);
+	public int todayOrderCount(Map<String, Object> map);
 	public void updateOrderState(Map<String, Object> map) throws Exception;
 	public void deleteOrder(int foodorderNum) throws Exception;
 	
@@ -20,6 +22,7 @@ public interface FoodOrderService {
 	
 	//차트
 	public List<FoodOrder> bestMenuChart(int restaurantsNum);
+	public List<FoodOrder> todayBestMenu(int restaurantsNum);
 	public Map<String, Object> montlyChart(int restaurantsNum);
 	
 	//가맹점정보
