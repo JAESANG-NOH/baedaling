@@ -132,7 +132,8 @@ public class UserController {
 		}
 		StringBuilder sb = new StringBuilder();
 		sb.append(dto.getUserName()+"님의 회원가입이 정상 승인되었습니다.");
-		sb.append("메인화면으로 이동하여 로그인해주시요.<br>");
+		sb.append("메인화면으로 이동하여 로그인해주세요.<br>");
+		sb.append("※가게 상세정보를 업데이트 하셔야 승인요청이 됩니다.<br>");
 		
 		reAttr.addFlashAttribute("message",sb.toString());
 		
