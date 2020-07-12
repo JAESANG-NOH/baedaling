@@ -35,6 +35,10 @@ public class FranchiseController {
 			@RequestParam int restaurantsNum,
 			Model model 
 			) {
+		double aveStarCount;
+		aveStarCount = service.aveStarCount(restaurantsNum);
+		double aveStarCount1 = Double.parseDouble(String.format("%.1f",aveStarCount));
+		int aveStarCount2 = (int) Math.floor(aveStarCount);
 		
 		Franchise dto= service.readBoard(restaurantsNum);
 		if(dto==null) {
@@ -42,6 +46,8 @@ public class FranchiseController {
 		}
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("aveStarCount2",aveStarCount2);
+		model.addAttribute("aveStarCount",aveStarCount1);
 		return ".franchise.page";
 	}
 

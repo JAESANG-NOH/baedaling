@@ -22,6 +22,7 @@ public class Franchise {
 	private String origin;
 	private String fctel;
 	private int minorder;
+	private String deliTime;
 	
 	private List<Integer> quantity;
 	private List<Integer> menuNum;
@@ -36,6 +37,12 @@ public class Franchise {
 	
 	
 	
+	public String getDeliTime() {
+		return deliTime;
+	}
+	public void setDeliTime(String deliTime) {
+		this.deliTime = deliTime;
+	}
 	public int getFoodordernum() {
 		return foodordernum;
 	}
