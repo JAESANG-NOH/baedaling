@@ -457,7 +457,7 @@ $(function(){
 							<li>&nbsp;<span id="light_gray">결제</span> 신용카드,현금,<span
 								id="red"> 배다링 결제</span></li>
 							<li style="margin-left: 80px;">&nbsp;<span id="light_gray">배달
-									시간</span> 45~55분 <span><a href=""><i
+									시간</span> ${dto.deliTime }분 <span><a href=""><i
 										class="far fa-question-circle"></i></a> </span>
 							</li>
 						</ul>

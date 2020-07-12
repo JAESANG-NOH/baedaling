@@ -10,7 +10,7 @@
 		resultType="com.bd.franchise.Franchise">
 		SELECT r.restaurantsNum, openingHour, endingHour, fctel,
 		mutualName,licenseNumber,introduce,origin, minorder,name,
-		addr1, addr2
+		addr1, addr2, deliTime
 		FROM restaurantsInfo if
 		JOIN restaurants r ON if.restaurantsnum =
 		r.restaurantsnum
