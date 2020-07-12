@@ -343,7 +343,7 @@ $(function(){
 			alert("최소 주문금액 이상부터 주문이 가능합니다.");
 			$("#choiceMenu").show();
 			return false; 
-		}
+		};
 		
 		$("#pay").show();
 		$("#payTotalBuyAmt").text(payTotalBuyAmt);
@@ -362,7 +362,7 @@ $(function(){
 $(function(){
 	$("body").on("click","#pay_btn",function(){
 		var f = document.payForm;
-		f.action = "<%=cp%>/franchise/pay";
+		f.action = "<%=cp%>/franchise/newOrder";
 		f.submit();
 	});
 });

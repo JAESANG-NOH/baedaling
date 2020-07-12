@@ -111,7 +111,8 @@
 			    	var x = item.x;
 			    	var y = item.y;
 			    	var addr = item.address_name;
-			    	ajaxPoint(x,y,addr)
+			    	ajaxPoint(x,y,addr);
+					$("#inputline").val(addr);
 			    }
 			};
 			geocoder.addressSearch(point, callback);
@@ -122,7 +123,6 @@
 		var url = "<%=cp%>/user/location";
 		var query = "ln="+x+"&lt="+y+"&addr="+addr;
 		var fn = function(){
-			$("#inputline").val(addr);
 		};
 		ajaxJSON(url, "post", query, fn);
 	}

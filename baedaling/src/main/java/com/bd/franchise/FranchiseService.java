@@ -10,10 +10,10 @@ public interface FranchiseService {
 	public List<FranchiseMenu> detailList(Map<String, Object> map);
 	public FranchiseMenu readMenu(int menuNum);
 	
-	public Franchise readMenuPrice(int restaurantmenu);
+	public Franchise readMenuPrice(Franchise adto);
 	
 	public void insertOrder(Franchise dto) throws Exception;
-	public void insertDetailOrder(Franchise dto) throws Exception;
+	public void insertorderdetail(Franchise dto) throws Exception;
 
 
 	public List<FranchiseReview> listReview(Map<String, Object> map);

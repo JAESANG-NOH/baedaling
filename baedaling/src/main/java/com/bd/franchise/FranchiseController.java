@@ -5,15 +5,20 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bd.common.MyUtil;
+import com.bd.user.SessionInfo;
 
 	
 @Controller("franchise.franchiseController")
@@ -153,21 +158,31 @@ public class FranchiseController {
 		return "franchise/reviewList";
 	}
 	
-	@RequestMapping(value="newOrder")
+	@RequestMapping(value="newOrder",method=RequestMethod.POST)
 	public String newOrder(
-			Franchise dto
+			Franchise dto,
+			HttpSession session,
+			final RedirectAttributes reAttr
 			) throws Exception {
+		Franchise adto = dto;
+		String message = "구매처리를 실패했습니다.<br> 다시한번 주문을 시도해 주세요.";
 		if(dto==null) {
 			return "redirect:/main";
 		}
+		SessionInfo info = (SessionInfo) session.getAttribute("user");
+		adto.setUserIdx(info.getUserIdx());
+		
 		try {
-			
+			adto = service.readMenuPrice(adto);
+			service.insertOrder(adto);
+			service.insertorderdetail(adto);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
-		
-		return "";
+		message = "구매를 성공적으로 처리했습니다.<br> 마이페이지의 주문내역에서 확인해 주세요.";
+		reAttr.addFlashAttribute("message",message);
+		return "redirect:/user/complete";
 	}
 	
 }

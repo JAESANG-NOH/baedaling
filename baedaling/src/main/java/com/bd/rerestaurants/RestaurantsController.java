@@ -23,8 +23,6 @@ public class RestaurantsController {
 	@Autowired
 	private RestaurantsService service;
 	@Autowired
-	private DistanceManager distance;
-	@Autowired
 	private MyUtil myUtil;
 	
 	@RequestMapping(value="list")
@@ -37,15 +35,11 @@ public class RestaurantsController {
 			HttpSession session,
 			Model model
 			) throws Exception{
-		
 		Sessionlocation location = (Sessionlocation) session.getAttribute("location");
 		String cp = req.getContextPath();
-		
 		if(location==null) {
-			return "redirect:/";
+			return "redirect:/main/main";
 		}
-		
-		
 		Map<String, Object> map = new HashMap<String,Object>();
 		
 		int rows = 20;
@@ -80,10 +74,17 @@ public class RestaurantsController {
 		
 		List<Restaurants> list = null;
 		try {
-			if(typecategorynum==13) { 
-				list = service.listRestaurants(map);
-			} else {
-				list = service.listRestaurants(map);
+			System.out.println(state);
+			if(state.equals("distance")) {;
+				if(typecategorynum==13) { 
+					list = service.listAllRestaurants(map);
+				} else {
+					list = service.listRestaurants(map);
+				}
+			} else if(state.equals("star")) {
+				
+			} else if(state.equals("review")) {
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -92,7 +93,7 @@ public class RestaurantsController {
 
 		String query = "";
         
-        query = "state="+distance+"&typecategorynum="+typecategorynum;
+        query = "state="+state+"&typecategorynum="+typecategorynum;
 
         String listUrl = cp+"/restaurants/list?"+query;
         String articleUrl = cp+"/restaurants/page?page="+current_page+"&"+query;
@@ -101,7 +102,7 @@ public class RestaurantsController {
         String paging = myUtil.paging(current_page, total_page, listUrl);
         
         model.addAttribute("searchBar", "true");
-        
+        model.addAttribute("typecategorynum",typecategorynum);
         model.addAttribute("list", list);
         model.addAttribute("articleUrl", articleUrl);
         model.addAttribute("page", current_page);

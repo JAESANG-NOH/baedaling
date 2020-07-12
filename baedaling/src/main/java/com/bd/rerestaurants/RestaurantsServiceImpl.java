@@ -56,8 +56,15 @@ public class RestaurantsServiceImpl implements RestaurantsService {
 
 	@Override
 	public int dataAllCount(Map<String, Object> map) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		try {
+			dao.callSelectOneProcedureMap("resto.countAllRestaurants", map);
+			result = (Integer)map.get("result");
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		return result;
 	}
 
 }

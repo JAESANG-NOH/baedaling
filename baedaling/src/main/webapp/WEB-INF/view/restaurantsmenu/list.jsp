@@ -19,8 +19,14 @@ $(function(){
 		var url = "<%=cp%>/franchise/page?restaurantsNum="+num;
 		location.href = url;
 	});
+	$("body").on("change","#sort_type",function(){
+		var f = document.listform;
+		f.action="<%=cp%>/restaurants/list";
+		f.submit();
+	})
 });
 </script>
+
 
 <link rel="stylesheet" href="<%=cp%>/resource/css/restaurantsmenulist.css" type="text/css">
 <div id="mini_menu">
@@ -42,9 +48,9 @@ $(function(){
 		</table>
 </div>
 <div class="menu_content_box" style="min-height: 400px;">
-<form name="listform" method="post">
+<form name="listform" method="get">
 	<div class="select_sort">
-		<select name="sort_type">
+		<select id="sort_type" name="state">
 			<option value="distance" ${state=="distance"?"selected='selected'":""}>기본 거리순</option>
 			<option value="star" ${state=="star"?"selected='selected'":""}>별점순</option>
 			<option value="review" ${state=="review"?"selected='selected'":""}>리뷰순</option>
@@ -68,7 +74,7 @@ $(function(){
 				<td class="menu_td2">
 					<b>${dto.name}</b>
 					<br>
-					<span>★${dto.starcount} | 리뷰:94 | 거리:${dto.distance}Km</span>
+					<span>★${dto.starcount} | 리뷰:${dto.reviewcount}개 | 거리:${dto.distance}Km</span>
 					<br>
 					<div>
 						<div class="coupon_line">쿠폰할인</div>
@@ -79,6 +85,6 @@ $(function(){
 		</table>
 </c:forEach>
 <c:out value="</div>" escapeXml="false"/>
-
+	<input type="hidden" name="typecategorynum" id="typecategorynum" value="${typecategorynum}">
 	</form>
 </div>

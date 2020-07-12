@@ -13,6 +13,7 @@
 		<result property="savefilename" column="savefilename"/>
 		<result property="distance" column="distance"/>
 		<result property="starcount" column="starcount"/>
+		<result property="reviewcount" column="reviewcount"/>
 	</resultMap>
 	
 	<select id="listRestaurants" parameterType="map" statementType="CALLABLE">
@@ -31,6 +32,26 @@
 	{
 			call countRestaurants(#{result,jdbcType=INTEGER, mode=OUT},
 						   		   #{typecategorynum, jdbcType=INTEGER, mode=IN},
+								   #{city, jdbcType=VARCHAR, mode=IN},
+								   #{longitude, jdbcType=INTEGER, mode=IN},
+								   #{latitude, jdbcType=INTEGER, mode=IN})
+	}
+	</select>
+	
+	<select id="listAllRestaurants" parameterType="map" statementType="CALLABLE">
+	{		
+			call listAllRestaurants(#{result,jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=listRestaurantsMap},
+							  	 #{city, jdbcType=VARCHAR, mode=IN},
+							  	 #{longitude, jdbcType=INTEGER, mode=IN},
+							  	 #{latitude, jdbcType=INTEGER, mode=IN},
+							 	 #{offset, jdbcType=INTEGER, mode=IN},
+							 	 #{rows, jdbcType=INTEGER, mode=IN})
+	}
+	</select>
+	
+	<select id="countAllRestaurants" parameterType="map" statementType="CALLABLE">
+	{
+			call countAllRestaurants(#{result,jdbcType=INTEGER, mode=OUT},
 								   #{city, jdbcType=VARCHAR, mode=IN},
 								   #{longitude, jdbcType=INTEGER, mode=IN},
 								   #{latitude, jdbcType=INTEGER, mode=IN})

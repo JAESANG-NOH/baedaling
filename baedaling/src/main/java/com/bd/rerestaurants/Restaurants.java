@@ -11,8 +11,14 @@ public class Restaurants {
 	private String savefilename;
 	private double distance;
 	private double starcount;
+	private int reviewcount;
 	
-	
+	public int getReviewcount() {
+		return reviewcount;
+	}
+	public void setReviewcount(int reviewcount) {
+		this.reviewcount = reviewcount;
+	}
 	public double getStarcount() {
 		return starcount;
 	}

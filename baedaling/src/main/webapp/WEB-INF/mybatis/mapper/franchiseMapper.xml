@@ -50,12 +50,6 @@
 		FROM restaurantmenu
 		WHERE menuNum = #{menuNum}
 	</select>
-	<select id="readmenuprice"
-		parameterType="com.bd.franchise.FranchiseMenu"
-		resultType="com.bd.franchise.FranchiseMenu">
-		SELECT menuprice from RESTAURANTMENU where MENUNUM =
-		#{restaurantmenu}
-	</select>
 
 	<select id="reviewList" parameterType="map"
 		resultType="com.bd.franchise.FranchiseReview">
@@ -95,4 +89,24 @@
 		SELECT COUNT(reply) FROM review WHERE restaurantsNum = #{restaurantsNum}
 	</select>
 
+	<select id="readmenuprice" parameterType="Integer" resultType="integer">
+		SELECT menuprice FROM RESTAURANTMENU WHERE MENUNUM = #{menunum}
+	</select>
+	
+	<select id="orderseq" resultType="Integer">
+		SELECT foodOrder_seq.NEXTVAL FROM dual
+	</select>
+	
+	<insert id="insertorder" parameterType="com.bd.franchise.Franchise">
+		INSERT INTO foodOrder(FOODORDERNUM,FOODORDERDATE,FOODORDERTOTALPRICE,FOODORDERPAY,FOODORDERSTATE,FOODORDERADDR,DETAILADDR,FOODORDERDELIVERYMETHOD,FOODORDERHOWPAY,FOODORDERPAYCOMPLETIONDATE,MEMO,USERIDX,RESTAURANTSNUM,TEL)
+		VALUES (#{foodordernum},SYSDATE,#{foodordertotalprice},#{foodorderpay},'주문완료',#{addr1},#{addr2},#{foodorderdeliverymethod},#{foodorderhowpay},SYSDATE,#{memo},#{userIdx},#{restaurantsNum},#{tel})	   
+	</insert>
+	
+	<select id="detailseq" resultType="Integer">
+		SELECT orderdetail_seq.NEXTVAL FROM dual 
+	</select>
+	
+	<insert id="insertdetailorder" parameterType="map">
+		INSERT INTO orderdetail (ORDERDETAILNUM,FOODORDERNUM,MENUNUM,ORDERONEPRICE,QTY) VALUES(#{orderdetailnum},#{foodordernum},#{menunum},#{orderoneprice},#{qty})
+	</insert>
 </mapper>

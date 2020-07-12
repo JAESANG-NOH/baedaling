@@ -1,12 +1,17 @@
 package com.bd.franchise;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bouncycastle.crypto.modes.EAXBlockCipher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bd.common.dao.CommonDAO;
+
+import sun.print.resources.serviceui;
 
 @Service("franchise.franchiseService")
 public class FranchiseServiceImpl implements FranchiseService {
@@ -59,18 +64,74 @@ public class FranchiseServiceImpl implements FranchiseService {
 		return list;
 	}
 
-
 	@Override
-	public Franchise readMenuPrice(int restaurantmenu) {
-		Franchise dto = null;
+	public FranchiseMenu readMenu(int menuNum) {
+		FranchiseMenu dto = null;
 		try {
-			dto = dao.selectOne("fc.readmenuprice", dto);
+			dto = dao.selectOne("fc.readMenu",menuNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dto;
 	}
 
+	@Override
+	public void insertOrder(Franchise dto) throws Exception {
+		int req = 0;
+		try {
+			req = dao.selectOne("fc.orderseq");
+			dto.setFoodordernum(req);
+			dao.insertData("fc.insertorder", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public void insertorderdetail(Franchise dto) throws Exception {
+		int req = 0;
+		try {
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("foodordernum", dto.getFoodordernum());
+			for(int i=0; i<dto.getMenuNum().size(); i++) {
+				req = dao.selectOne("fc.detailseq");
+				map.put("orderdetailnum", req);
+				map.put("menunum", dto.getMenuNum().get(i));
+				map.put("qty",dto.getQuantity().get(i));
+				map.put("orderoneprice", dto.getEachprice().get(i));
+				dao.insertData("fc.insertdetailorder", map);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+	}
+
+	@Override
+	public Franchise readMenuPrice(Franchise adto) {
+		Franchise dto = adto;
+		try {
+			int i = 0;
+			int totalprice = 0;
+			List<Integer> list = new ArrayList<Integer>(); 
+			for(int menunum :dto.getMenuNum()) {
+				int price = dao.selectOne("fc.readmenuprice",menunum);
+				int eachprice = price * (dto.getQuantity().get(i++));
+				totalprice =  totalprice + eachprice;
+				list.add(eachprice);
+			}
+			dto.setFoodordertotalprice(totalprice);
+			dto.setFoodorderpay(totalprice);
+			dto.setEachprice(list);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+	
+	
 	@Override
 	public List<FranchiseReview> listReview(Map<String, Object> map) {
 		List<FranchiseReview> list = null;
@@ -115,32 +176,6 @@ public class FranchiseServiceImpl implements FranchiseService {
 		return result;
 	}
 	
-	@Override
-	public FranchiseMenu readMenu(int menuNum) {
-		FranchiseMenu dto = null;
-		try {
-			dto = dao.selectOne("fc.readMenu",menuNum);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return dto;
-	}
-	
-	@Override
-	public void insertOrder(Franchise dto) throws Exception {
-		try {
-			
-		} catch (Exception e) {
-			
-		}
-		
-	}
-	
-	@Override
-	public void insertDetailOrder(Franchise dto) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
 	
 
 }
