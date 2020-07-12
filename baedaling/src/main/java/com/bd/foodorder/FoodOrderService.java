@@ -24,6 +24,7 @@ public interface FoodOrderService {
 	public List<FoodOrder> bestMenuChart(int restaurantsNum);
 	public List<FoodOrder> todayBestMenu(int restaurantsNum);
 	public Map<String, Object> montlyChart(int restaurantsNum);
+	public Map<String, Object> reviewChart(int restaurantsNum);
 	
 	//가맹점정보
 	public FoodOrder readInfo(int restaurantsNum);

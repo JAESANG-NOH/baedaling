@@ -135,7 +135,7 @@ body {
 
 	<div>
 		<ul style="text-align: center;" class="snip1284">
-			<li style="margin-top:200px; font-weight:bold; font-size: 20px; color: #5D5E5F;">오늘매출 ${dto.todaySales == '0' ? 0 : dto.todaySales}원</li>
+			<li style="margin-top:200px; font-weight:bold; font-size: 20px; color: #5D5E5F;">오늘매출 ${today.todaySales == '0' ? 0 : today.todaySales}원</li>
 			<li style="margin-top:200px; font-weight:bold; font-size: 18px; color: white;"><a href="<%=cp%>/main">메인화면</a></li>
 		</ul>
 	</div>

@@ -162,7 +162,20 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 		return map;
 	}
-
+	
+	
+	@Override
+	public Map<String, Object> reviewChart(int restaurantsNum) {
+		Map<String, Object> map = null;
+		try {
+			map= dao.selectOne("fo.monthlyReviewChart", restaurantsNum);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return map;
+	}
+	
+	
 	@Override
 	public List<FoodOrder> allList(Map<String, Object> map) {
 		List<FoodOrder> list = null;
@@ -368,6 +381,8 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		}
 		
 	}
+
+
 
 	
 

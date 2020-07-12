@@ -146,6 +146,26 @@ ORDER BY bestSales desc
                 WHERE f.restaurantsNum =  #{restaurantsNum}  AND TO_CHAR(foodOrderCompletionDate,'YYYY') = TO_CHAR(SYSDATE,'YYYY')
  </select>
  
+ 
+ <!-- 월별 리뷰 개수 -->
+ <select id="monthlyReviewChart" parameterType="Integer" resultType="map">
+    SELECT NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '01', reviewNum)),0) M01,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '02', reviewNum)),0) M02, 
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '03', reviewNum)),0) M03,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '04', reviewNum)),0) M04,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '05', reviewNum)),0) M05,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '06', reviewNum)),0) M06,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '07', reviewNum)),0) M07,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '08', reviewNum)),0) M08,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '09', reviewNum)),0) M09,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '10', reviewNum)),0) M10,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '11', reviewNum)),0) M11,
+           NVL(COUNT(DECODE(TO_CHAR(created, 'MM'), '12', reviewNum)),0) M12
+   FROM review rv
+   WHERE rv.restaurantsNum = #{restaurantsNum}
+ </select>
+ 
+ 
 <select id="readinfo" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
       SELECT r.restaurantsNum, openingHour, endingHour, fctel, mutualName,licenseNumber,introduce,origin, minorder,name, 
          addr1, addr2,
