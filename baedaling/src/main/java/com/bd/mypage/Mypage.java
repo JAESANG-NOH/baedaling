@@ -33,8 +33,8 @@ public class Mypage {
 	private String foodOrderDate; // 주문날짜와 시간
 	private String foodOrderAddr; // 가게주소
 	private String memo;
-	private int fctel;
-	
+	private String fctel;
+	private String foodOrderHowPay;
 	private int restaurantsNum;
 	private int foodOrderNum;
 
@@ -53,7 +53,22 @@ public class Mypage {
 	private int reviewNum;
 	private int starCount;
 	
+	// 내 문의
+	private String answer;
 	
+	
+	public String getFoodOrderHowPay() {
+		return foodOrderHowPay;
+	}
+	public void setFoodOrderHowPay(String foodOrderHowPay) {
+		this.foodOrderHowPay = foodOrderHowPay;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 	public String getMenuPrice() {
 		return menuPrice;
 	}
@@ -72,10 +87,10 @@ public class Mypage {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
-	public int getFctel() {
+	public String getFctel() {
 		return fctel;
 	}
-	public void setFctel(int fctel) {
+	public void setFctel(String fctel) {
 		this.fctel = fctel;
 	}
 	public String getFoodOrderState() {

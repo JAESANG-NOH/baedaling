@@ -166,5 +166,49 @@ public class MypageServiceImpl implements MypageService {
 		
 	}
 
+	@Override
+	public List<Mypage> inquirelist(Map<String, Object> map) {
+		List<Mypage> list = null;
+		try {
+			list = dao.selectList("mypage.inquirelist", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int inquireCount(Map<String, Object> map) {
+		int result = 0;
+		try {
+			result = dao.selectOne("mypage.inquireCount", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@Override
+	public Mypage orderDetail(Map<String, Object> map) {
+		Mypage dto = null;
+		try {
+			dto = dao.selectOne("mypage.orderdetailList",map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return dto;
+	}
+
+	@Override
+	public List<Mypage> orderDetailMenu(Map<String, Object> map) {
+		List<Mypage> list=null;
+		try {
+			list=dao.selectList("mypage.orderdetailMenu", map);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return list;
+	}
+
 
 }

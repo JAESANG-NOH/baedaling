@@ -9,30 +9,15 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 <script type="text/javascript">
 
-<%-- $(function(){
-	$("#addMenu").click(function(){
-		$("form[name=menuForm]").each(function(){
-			this.reset();
-		});
-		$('#addMenu-dialog').dialog({
-			  modal: true,
-			  height: 650,
-			  width: 600,
-			  title: '메뉴 등록',
-			  close: function(event, ui) {
-			  }
-		});
-	});
-});
- --%>
+
  
-<%-- $(function(){
+$(function(){
 	
 	$(".detailOrderBtn").click(function(){
 		var foodOrderNum = $(this).attr("data-foodOrderNum");
-		$("#orderDetail-dialog").each(function(){
+		/* $("#orderDetail-dialog").each(function(){
 			this.reset();
-		});
+		}); */
 		
 		$('#orderDetail-dialog').dialog({
 			  modal: true,
@@ -41,30 +26,29 @@
 			  title: '주문 상세 내역',
 			  open: function() {
 	
-					f.menuNum.value=menuNum;
-					var url="<%=cp%>/menu/read";
-					var query = "menuNum="+menuNum;
+					
+					var url="<%=cp%>/mypage/readOrderDetail";
+					var query = "foodOrderNum="+foodOrderNum;
 					
 					var fn = function(data){
 						
 						var dto = data.dto;
+						var list = data.list;
+						var foodOrderDate = dto.foodOrderDate;
+						var name = dto.name;
+						var foodOrderTotalPrice = dto.foodOrderTotalPrice;
+						var foodOrderHowPay = dto.foodOrderHowPay;
+						var fctel = dto.fctel;
+						var foodOrderAddr = dto.foodOrderAddr;
+						var memo = dto.memo;
 						
-						var menuNum = dto.menuNum;
-						var menuName = dto.menuName;
-						var menuPrice = dto.menuPrice;
-						var menuCategoryNum = dto.menuCategoryNum;
-						var origin = dto.origin;
-						var menuInfo = dto.menuInfo;
-						var originalFilename = dto.originalFilename;
-						
-						f.menuName.value = menuName;
-						f.menuPrice.value = menuPrice;
-						f.menuCategoryNum.value = menuCategoryNum;
-						f.origin.value = origin;
-						f.menuInfo.value = menuInfo;
-						f.uploadFile.value = originalFilename;
-						
-						$("#btnDelete").attr("data-menuNum",menuNum);
+						$("#fcName").html(name);
+						$("#foodOrderDate").html(foodOrderDate);
+						$("#foodOrderTotalPrice").html(foodOrderTotalPrice);
+						$("#foodOrderHowPay").html(foodOrderHowPay);
+						$("#fctel").html(fctel);
+						$("#foodOrderAddr").html(foodOrderAddr);
+						$("#memo").html(memo);
 						
 					};
 
@@ -77,7 +61,7 @@
 	});
 });
 
- --%>
+
 
 $(function(){
 	$("body").on("click",".review_btn",function(){
@@ -122,6 +106,7 @@ function forwordreview(foodOrderNum,restaurantsNum){
                 <a href="<%=cp%>/mypage/userorderList" class="list-group-item">주문내역</a>
                 <a href="<%=cp%>/mypage/recommendlist" class="list-group-item">내가 쓴 게시물</a>
                 <a href="<%=cp%>/mypage/reviewList" class="list-group-item">내가 쓴 리뷰</a>
+                <a href="<%=cp%>/mypage/myInquire" class="list-group-item">내가 쓴 문의</a>
                 <a href="<%=cp%>/mypage/message" class="list-group-item">회원정보수정</a>
                 <a href="#" class="list-group-item">회원탈퇴</a>
             </div>   
@@ -200,16 +185,15 @@ function forwordreview(foodOrderNum,restaurantsNum){
 
 
 <div class="orderdetail_container"id="orderDetail-dialog" style="display: none;">
-            	<div style="width: 800px;">
+            	<div style="width: 590px;">
             		<table style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse; border-spacing: 0;">
 						<tr height="45">
-							<td colspan="2" align="left" style="padding: 10px 10px 5px 15px; font-size: 20px; font-weight: bold; ">
-									불맛로맨스 
+							<td colspan="2" align="left" style="padding: 10px 10px 5px 15px; font-size: 20px; font-weight: bold;" id="fcName">
 							</td>
 						</tr>
 						<tr height="50" style="border-bottom:1px solid #cccccc;">	
 							<td align="left" style="font-size: 15px; padding: 5px 10px 5px 15px;">
-								주문일시 : 2020-06-01 18:30
+								<span>주문일시 :</span> <span id="foodOrderDate"></span>
 							</td>
 							<td align="right">
 								<button class="btn btn1">리뷰작성</button>
@@ -226,29 +210,29 @@ function forwordreview(foodOrderNum,restaurantsNum){
             			</tr>
             			<tr height="40">
             				<td style="padding: 0px 0px 0px 15px; font-size: 17px; font-weight: bold;"> 총 주문금액 </td>
-            				<td style="padding: 10px 10px 10px 15px; font-size: 17px; font-weight: bold;" align="right"> 29,000원 </td>
+            				<td style="padding: 10px 10px 10px 15px; font-size: 17px; font-weight: bold;" align="right" id="foodOrderTotalPrice">  </td>
             			</tr>
             			<tr style="border-bottom:1px solid #cccccc;">
             				<td style="padding: 0px 10px 5px 15px; font-size:17px; font-weight: bold;"> 결제방법 </td>
-            				<td style="padding: 0px 10px 5px 5px; font-size:17px; font-weight: bold;" align="right"> 직접 만나서 결제 </td>
+            				<td style="padding: 0px 10px 5px 5px; font-size:17px; font-weight: bold;" align="right" id="foodOrderHowPay">  </td>
             			</tr>
             			<tr height="40">
             				<td colspan="2" style="padding: 5px 0px 0px 15px; font-size:17px; font-weight: bold;"> 배달주소 </td>
             			</tr>
             			<tr style="border-bottom:1px solid #cccccc;">
-            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size:15px; font-weight: normal;"> 서울 성북구 석관동 </td>
+            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size:15px; font-weight: normal;" id="foodOrderAddr"> 서울 성북구 석관동 </td>
             			</tr>
             			<tr>
             				<td colspan="2" style="padding: 5px 0px 0px 15px; font-size:17px; font-weight: bold;"> 전화번호 </td>
             			</tr>
             			<tr style="border-bottom:1px solid #cccccc;">
-            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size: 15px;"> 010-1111-2222 </td>
+            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size: 15px;"id="fctel"> </td>
             			</tr>
             			<tr>
             				<td colspan="2" style="padding: 5px 0px 0px 15px; font-size:17px; font-weight: bold;"> 가게 사장님께 </td>
             			</tr>
             			<tr>
-            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size: 15px;"> 단무지 많이 주세여 </td>
+            				<td colspan="2" style="padding: 0px 10px 5px 15px; font-size: 15px;" id="memo">  </td>
             			</tr>
             		</table>
             		

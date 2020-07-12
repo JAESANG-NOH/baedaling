@@ -188,6 +188,7 @@ public class MypageController {
 	    
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
 	
+	    model.addAttribute("searchBar", "mypage");
 	    model.addAttribute("list", list);
 	//  model.addAttribute("articleUrl", articleUrl);
 	    model.addAttribute("page", current_page);
@@ -198,11 +199,7 @@ public class MypageController {
 		return ".mypage.userorderList";
 	}
 	
-	// 주문 상세
-	@RequestMapping(value="orderdetail")
-	public String orderDetail() throws Exception {
-		return ".mypage.orderdetail";
-	}
+	
 	
 	@RequestMapping(value="checkReview", method=RequestMethod.POST)
 	@ResponseBody
@@ -285,6 +282,7 @@ public class MypageController {
 	    
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
 	
+	    model.addAttribute("searchBar", "mypage");
 	    model.addAttribute("list", list);
 	    model.addAttribute("articleUrl", articleUrl);
 	    model.addAttribute("page", current_page);
@@ -346,6 +344,7 @@ public class MypageController {
 	    
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
 	
+	    model.addAttribute("searchBar", "mypage");
 	    model.addAttribute("list", list);
 	    model.addAttribute("articleUrl", articleUrl);
 	    model.addAttribute("page", current_page);
@@ -406,6 +405,7 @@ public class MypageController {
 	    
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
 	
+	    model.addAttribute("searchBar", "mypage");
 	    model.addAttribute("list", list);
 	//    model.addAttribute("articleUrl", articleUrl);
 	    model.addAttribute("page", current_page);
@@ -415,7 +415,7 @@ public class MypageController {
 	    
 		return ".mypage.reviewList";
 	}
-	
+
 	@RequestMapping(value="delete")
 	public String deleteReview(
 			@RequestParam int reviewNum,
@@ -437,5 +437,86 @@ public class MypageController {
 		service.deleteReview(map);
 		
 		return "redirect:/mypage/reviewList?"+query;
+	}
+	
+	// 내 문의
+	@RequestMapping(value="myInquire")
+	public String myInquire(
+			@RequestParam(value="page", defaultValue="1") int current_page,
+			HttpServletRequest req,
+			Model model,
+			HttpSession session
+			) throws Exception {
+		
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		String cp = req.getContextPath();	
+
+		int rows = 10;
+		int total_page = 0;
+		int dataCount = 0;
+			
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userIdx", info.getUserIdx());
+
+		dataCount = service.inquireCount(map);
+		if(dataCount != 0) total_page = myUtil.pageCount(rows,  dataCount) ;
+
+		if(total_page < current_page) current_page = total_page;
+		
+		int offset = (current_page-1) * rows;
+		if(offset < 0) offset = 0;
+		map.put("offset", offset);
+		map.put("rows", rows);
+		
+		 
+	    List<Mypage> list = service.inquirelist(map);
+	     
+	    int listNum = 0;
+	    int n = 0;
+	    for(Mypage vo : list) {
+	         listNum = dataCount - (offset + n);
+	         vo.setListNum(listNum);
+	         n++;
+	     }
+		
+	    String query = "";
+	    String listUrl = cp+"/mypage/myInquire";
+	 //   String articleUrl = cp+"/inquire/page?page=" + current_page;
+	    
+	    if(query.length()!=0) {
+	    	listUrl = cp+"/mypage/myInquire?" + query;
+	  //  	articleUrl = cp+"/inquire/page?page=" + current_page + "&"+ query;
+	    }
+	    
+	    String paging = myUtil.paging(current_page, total_page, listUrl);
+	
+	    model.addAttribute("searchBar", "mypage");
+	    model.addAttribute("list", list);
+	//    model.addAttribute("articleUrl", articleUrl);
+	    model.addAttribute("page", current_page);
+	    model.addAttribute("dataCount", dataCount);
+	    model.addAttribute("total_page", total_page);
+	    model.addAttribute("paging", paging);
+	
+		return ".mypage.myInquire";
+	}
+	
+	@RequestMapping(value="readOrderDetail",method=RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> readOrderDetail(
+			@RequestParam int foodOrderNum,
+			HttpSession session) {
+		SessionInfo info = (SessionInfo)session.getAttribute("user");
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("userIdx", info.getUserIdx());
+		map.put("foodOrderNum", foodOrderNum);
+		Mypage dto = service.orderDetail(map);
+		List<Mypage> list = service.orderDetailMenu(map);
+		
+		Map<String , Object> model = new HashMap<>();
+		model.put("dto", dto);
+		model.put("list", list);
+		return model; 
 	}
 }

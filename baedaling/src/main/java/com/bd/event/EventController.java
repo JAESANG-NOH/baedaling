@@ -85,6 +85,7 @@ public class EventController {
         
         String paging = myUtil.paging(current_page, total_page, listUrl);
 		
+        model.addAttribute("searchBar", "event");
 		model.addAttribute("list", list);
 		model.addAttribute("page", current_page);
 		model.addAttribute("dataCount", dataCount);
@@ -194,7 +195,6 @@ public class EventController {
 		
 		String root=session.getServletContext().getRealPath("/");
 		String pathname=root+"resource"+File.separator+"event";
-		System.out.println(dto.getNum()+"ppppppppppppppppppppppppppppppppppp");
 		try {
 			service.updateEvent(dto, pathname);
 		} catch (Exception e) {

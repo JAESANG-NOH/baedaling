@@ -24,5 +24,11 @@ public interface MypageService {
 	public int reviewCount(Map<String, Object> map);
 	
 	public void deleteReview(Map<String, Object> map) throws Exception;
+	
+	public List<Mypage> inquirelist(Map<String, Object> map);
+	public int inquireCount(Map<String, Object> map);
 
+	public Mypage orderDetail(Map<String, Object> map);
+	public List<Mypage> orderDetailMenu(Map<String,Object> map);
+	
 }

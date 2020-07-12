@@ -50,14 +50,16 @@
 
 <select id="orderdetailList" parameterType="map" resultType="com.bd.mypage.Mypage">
 SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate, foodOrderAddr, fctel,
-		   foodOrderTotalPrice, menuPrice, qty , f.restaurantsNum, menuName, rr.name, foodOrderState, memo
+		   foodOrderTotalPrice, f.restaurantsNum, rr.name, foodOrderState, memo, foodOrderHowPay
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
     LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
     LEFT OUTER JOIN restaurants rr ON rr.restaurantsNum = f.restaurantsNum
     LEFT OUTER JOIN restaurantsInfo ri ON ri.restaurantsNum = rr.restaurantsNum
-    WHERE u.userIdx = #{userIdx} AND f.foodorderNum = #{foodorderNum}
+    WHERE u.userIdx = #{userIdx} AND f.foodorderNum = #{foodOrderNum}
+    group by f.foodorderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderAddr, fctel, foodOrderTotalPrice, 
+f.restaurantsNum, rr.name, foodOrderState, memo, foodOrderHowPay
 </select>
 
 <select id="orderdetailMenu" parameterType="map" resultType="com.bd.mypage.Mypage">
@@ -66,7 +68,7 @@ SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate, fo
     JOIN user1 u ON f.userIdx = u.userIdx
     LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
     LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
-    WHERE u.userIdx = #{userIdx} AND f.foodorderNum = #{foodorderNum}
+    WHERE u.userIdx = #{userIdx} AND f.foodorderNum = #{foodOrderNum}
 </select>
 
 <!-- 내가 쓴 자유게시판 -->
@@ -147,5 +149,22 @@ SELECT f.num, f.userId, f.userIdx, subject, hitCount,
 	DELETE FROM review
 	WHERE reviewNum=#{reviewNum}
 </delete>
+
+<!-- 내가 쓴 문의 -->
+<select id="inquirelist" parameterType="map" resultType="com.bd.mypage.Mypage">
+SELECT i.Num, u.userId, subject, TO_CHAR(i.created, 'YYYY-MM-DD') created, answer
+		FROM inquire i
+		JOIN user1 u ON i.userId=u.userId
+		WHERE u.userIdx = #{userIdx}
+	    ORDER BY i.Num DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
+</select>
+
+<select id="inquireCount" parameterType="map" resultType="Integer">
+	SELECT NVL(COUNT(*),0)
+	FROM inquire i
+	JOIN user1 u ON i.userId = u.userId
+	WHERE u.userIdx = #{userIdx}
+</select>
 
 </mapper>

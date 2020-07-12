@@ -37,6 +37,7 @@ $(function(){
                 <a href="<%=cp%>/mypage/userorderList" class="list-group-item">주문내역</a>
                 <a href="<%=cp%>/mypage/recommendlist" class="list-group-item">내가 쓴 게시물</a>
                 <a href="<%=cp%>/mypage/reviewList" class="list-group-item">내가 쓴 리뷰</a>
+                <a href="<%=cp%>/mypage/myInquire" class="list-group-item">내가 쓴 문의</a>
                 <a href="<%=cp%>/mypage/message" class="list-group-item">회원정보수정</a>
                 <a href="#" class="list-group-item">회원탈퇴</a>
             </div>     
@@ -77,7 +78,7 @@ $(function(){
 			 
 					<c:forEach var="dto" items="${list}">
 				        <tr id="list_table2" align="center" bgcolor="#ffffff" style="border-bottom: 1px solid #cccccc;"> 
-				            <td>${dto.num}</td>
+				            <td>${dto.listNum}</td>
 				            <td align="left" style="padding-left: 10px;">
 				            	<a href="${articleUrl}&num=${dto.num}">${dto.subject} (${dto.replyCount})</a>
 			    	        </td>
