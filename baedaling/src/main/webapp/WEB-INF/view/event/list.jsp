@@ -67,7 +67,9 @@
          <tr height="100">
             <td align="right">
                <button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/list'">새로고침</button>
-               <button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/created'">등록하기</button>
+                <c:if test="${sessionScope.user.separate==2}">
+               	<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/created'">등록하기</button>
+               </c:if>
             </td>            
          </tr>      
       </table>

@@ -138,20 +138,16 @@ function updateBoard(num){
                </td>
                <td>${dto.userName }</td>
            </tr>
-           <c:if test="${sessionScope.user.userId!='admin'}">
            <tr class="faqContent" align="left" height="35" style="display:none; border: 1px solid #ccc;"> 
                <td colspan="4" style="padding:10px; word-break:break-all;">${dto.content}</td>
            </tr>
-           </c:if>
-           
-           <c:if test="${sessionScope.user.userId=='admin'}">
+           <c:if test="${sessionScope.user.separate=='2'}">
            <tr class="faqContent" align="left" height="35" style="display:none; border: 1px solid #ccc;"> 
                <td colspan="3" style="padding:10px; ">${dto.content}</td>
                <td>
                   <button type="button" onclick="updateBoard(${dto.num})">수정</button> 
                   <button type="button" onclick="deleteBoard(${dto.num})">삭제</button>
-               </td>
-               
+               </td>  
            </tr>
            </c:if>
          </c:forEach>
