@@ -1,5 +1,5 @@
 @charset "UTF-8";
-
+ *:focus { outline:none; }
 #order_main_body{
 	width: 660px; 
 	height: 890px;
@@ -12,10 +12,11 @@
     color: #f3f2f0;
     padding: 10px 10px 10px 15px;
     font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
-    font-weight: 600;
+ 	font-size: 19px;
 }
 .order_sub_header{
     height: 18px;
+    font-size : 17px;
     background: #dcdcdc;
     padding: 10px 10px 10px 15px;
     font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
@@ -35,7 +36,7 @@
     font-size: 14px;
     font-weight: 600;
     width: 400px;
-    font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';
+    font-family: '맑은 고딕, 맑은고딕';
 }
 .pay_table_input{
 	width: 600px;

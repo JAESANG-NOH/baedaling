@@ -408,7 +408,7 @@ $(function(){
 	   <table style="width: 330px; border:1px solid #DCDBDB; height: 200px; background-color: white; max-height: 400px; border-collapse: collapse;">
 	      
 		      <tr class="orderBoxTitile">
-		         <td colspan="3" style="color: white; font-size: 15.4px;">&nbsp; 주문표<a class="allCancel"><span style="float: right; padding-right: 20px; color: white;"><i class="fas fa-trash-alt"></i></span></a> </td>
+		         <td colspan="3" rowspan="2"  style="color: white; font-size: 18.4px; font-family: '배달의민족 한나체 Pro','bm-hanna-pro';">&nbsp; 주문표<a class="allCancel"><span style="float: right; padding-right: 20px; color: white;"><i class="fas fa-trash-alt"></i></span></a> </td>
 		      </tr>
 		      
 		      <tbody id = "buyList">
@@ -494,11 +494,11 @@ $(function(){
 	   <table style="width: 330px; border:1px solid #DCDBDB; height: 200px; background-color: white; max-height: 400px; border-collapse: collapse;">
 	      
 		      <tr class="orderBoxTitile">
-		         <td colspan="3" style="color: white; font-size: 15.4px;">&nbsp; 주문내역 </td>
+		         <td colspan="3" style="color: white; font-size: 15.4px; font-family: '배달의민족 한나체 Pro','bm-hanna-pro';">&nbsp; 주문내역 </td>
 		      </tr>
 		      
 		  	  <tr height="35px;" style="border-bottom: 1px solid black">
-		         <td colspan="3" style="border-top:1.5px solid #DCDBDB; text-align: left;">${dto.name}</td>
+		         <td colspan="3" style="border-top:1.5px solid #DCDBDB; font-weight:bold; font-size:15px; text-align: left; padding-left: 13px;">${dto.name}</td>
 		      </tr>
 		  		
 		     
@@ -563,19 +563,19 @@ $(function(){
 					</td>
 				</tr>
 				<tr>
-					<td class="each_pay howpay" data-foodorderhowpay="신용카드"><i class="fas fa-credit-card"></i>신용카드</td>
-					<td class="each_pay howpay" data-foodorderhowpay="휴대전화"><i class="fas fa-mobile"></i>휴대전화</td>
+					<td class="each_pay howpay" data-foodorderhowpay="신용카드"><span style="color: #888787"><i class="fas fa-credit-card"></i>  </span>신용카드</td>
+					<td class="each_pay howpay" data-foodorderhowpay="휴대전화"><span style="color: #888787"><i class="fas fa-mobile"></i>  </span>휴대전화</td>
 				</tr>
 				<tr>
-					<td class="each_pay howpay" data-foodorderhowpay="카카오페이"><i class="fas fa-wallet"></i>카카오페이</td>
-					<td class="each_pay howpay" data-foodorderhowpay="네이버페이"><i class="fas fa-wallet"></i>네이버페이</td>
+					<td class="each_pay howpay" data-foodorderhowpay="카카오페이"><span style="color: #888787"><i class="fas fa-wallet"></i>  </span>카카오페이</td>
+					<td class="each_pay howpay" data-foodorderhowpay="네이버페이"><span style="color: #888787"><i class="fas fa-wallet"></i>  </span>네이버페이</td>
 				</tr>
 				<tr>
 					<td colspan="3" class="order_text_line"><b>현장결제</b> 음식받고 직접 결제</td>
 				</tr>
 				<tr>
-					<td class="each_pay howpay" data-foodorderhowpay="현장신용카드"><i class="fas fa-credit-card"></i>신용카드</td>
-					<td class="each_pay howpay" data-foodorderhowpay="현장현금"><i class="fas fa-money-bill-wave-alt"></i>현금</td>
+					<td class="each_pay howpay" data-foodorderhowpay="현장신용카드"><span style="color: #888787"><i class="fas fa-credit-card"></i>  </span>신용카드</td>
+					<td class="each_pay howpay" data-foodorderhowpay="현장현금"><span style="color: #888787"><i class="fas fa-money-bill-wave-alt"></i>  </span>현금</td>
 				</tr>
 			</table>
 			<input type="hidden" id="foodorderhowpay" name="foodorderhowpay" value="">
@@ -585,8 +585,8 @@ $(function(){
 			<div class="order_sub_header">수령 방법</div>
 			<table class="each_pay_table">
 			<tr>
-					<td class="each_pay deliverymethod" style="width: 304px;" data-deliverymethod="배달"><i class="fas fa-bicycle"></i>배달</td>
-					<td class="each_pay deliverymethod" data-deliverymethod="직접수령"><i class="fas fa-shopping-bag"></i>직접수령</td>
+					<td class="each_pay deliverymethod" style="width: 304px;" data-deliverymethod="배달"><span style="color: #888787"><i class="fas fa-bicycle"></i>  </span>배달</td>
+					<td class="each_pay deliverymethod" data-deliverymethod="직접수령"><span style="color: #888787"><i class="fas fa-shopping-bag"></i>  </span>직접수령</td>
 			</tr>
 			</table>
 			<input type="hidden" id="foodorderdeliverymethod" name="foodorderdeliverymethod" value="">

@@ -155,7 +155,6 @@ function updateBoard() {
 function delete_send() {
 	  var q = "num=${dto.num}&${query}";
 	  var url = "<%=cp%>/recommend/delete?"+q;
-	  alert(url);
 	  if(confirm("위 자료를 삭제 하시 겠습니까 ? ")){
 	  	location.href=url;
 	  }
