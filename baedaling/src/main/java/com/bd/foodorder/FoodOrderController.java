@@ -112,6 +112,7 @@ public class FoodOrderController {
 		List<FoodOrder> list4 = service.readOrder(map);
 		orderCount4 = service.orderCount(map);
 		
+		
 	     int listNum =0;
 	     int n = 0;
 	     for(FoodOrder dto : list4) {
@@ -138,6 +139,22 @@ public class FoodOrderController {
 		model.addAttribute("paging", paging);
 		return ".dashboard.orderlist";
 	}
+	
+	
+	@RequestMapping(value="updateCompleteDate")
+	public String updateCompleteDate(
+			FoodOrder dto,
+			@RequestParam int restaurantsNum
+			) throws Exception{
+		try {
+			service.updateCompleteDate(dto);
+		} catch (Exception e) {
+		}
+		return "redirect:/dashboard/orderlist?restaurantsNum="+dto.getRestaurantsNum();
+	}
+	
+
+	
 	
 	
 	@RequestMapping(value="salesList")
@@ -530,8 +547,7 @@ public class FoodOrderController {
 		}
 		return "redirect:/dashboard/fcinfo_read?restaurantsNum="+dto.getRestaurantsNum();
 	}
-	
-	
+			
 	
 	@RequestMapping(value="deleteFile", method=RequestMethod.POST)
 	@ResponseBody
@@ -763,7 +779,6 @@ public class FoodOrderController {
 	}
 	
 	
-	
 	@RequestMapping(value = "updateRestaurant", method = RequestMethod.POST)
 	public String updateRestaurantSubmit(
 			FoodOrder dto,
@@ -776,7 +791,7 @@ public class FoodOrderController {
 		} catch (Exception e) {
 		}
 			
-		return "redirect:/dashboard/orderlist?restaurantsNum="+restaurantsNum;
+		return "redirect:/dashboard/dashboard?restaurantsNum="+restaurantsNum;
 	}
 	
 	

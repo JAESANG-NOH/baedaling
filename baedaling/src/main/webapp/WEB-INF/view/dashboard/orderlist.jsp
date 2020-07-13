@@ -12,6 +12,13 @@
 
 <script type="text/javascript">
 
+function  updateDate() {
+	  var q = "restaurantsNum=${dto.restaurantsNum}";
+	  var url = "<%=cp%>/dashboard/updateCompleteDate?" + q;
+		  	location.href=url;
+	}
+
+
 function ajaxJSON(url, type, query, fn) {
 	$.ajax({
 		type:type
