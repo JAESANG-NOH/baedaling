@@ -105,7 +105,7 @@ function searchList() {
 	f.submit();
 }
 
-function detaileRestaurant(userId) {
+function detaileRestaurant(restaurantsNum) {
 	var dlg = $("#user-dialog").dialog({
 		autoOpen: false,
 		modal: true,
@@ -125,7 +125,7 @@ function detaileRestaurant(userId) {
 	});
 	
 	var url = "<%=cp%>/restaurant/detaileRestaurant";
-	var query = "userId="+userId;
+	var query = "restaurantsNum="+restaurantsNum;
 	
 	$.ajax({
 		url:url,
@@ -228,7 +228,7 @@ function selectStateChange() {
 			</tr>
 			
 	<c:forEach var="dto" items="${list}">	
-			<tr onclick="detaileRestaurant('${dto.userId}');" align="center" height="50" style="border-bottom: 1px solid #cccccc; font-size: 12px;">
+			<tr onclick="detaileRestaurant('${dto.restaurantsNum}');" align="center" height="50" style="border-bottom: 1px solid #cccccc; font-size: 12px;">
 				<td>${dto.listNum}</td>
 				<td>${dto.name}</td>
 				<td>${dto.userId}</td>

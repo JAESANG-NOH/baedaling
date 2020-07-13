@@ -44,7 +44,7 @@
 				<include refid="where-list" />
 			</if>
 			<if test="enabled!=''">
-				AND enabled = #{enabled}
+				AND r.enabled = #{enabled}
 			</if>
 			AND separate=1
 		</where>
@@ -54,49 +54,45 @@
 	<!-- 가게 리스트 -->
 	<select id="listRestaurant" parameterType="map"
 		resultType="com.bd.restaurantList.RestaurantList">
-		SELECT u.userIdx, name, u.userId, mutualName, licenseNumber, enabled,
-		addr1, addr2
+		SELECT u.userIdx, name, u.userId, mutualName, licenseNumber, r.enabled,
+			   addr1, addr2, r.restaurantsNum
 		FROM restaurants r
-		LEFT OUTER JOIN user1 u ON r.userIdx =
-		u.userIdx
-		LEFT OUTER JOIN restaurantsInfo r1 ON
-		r.restaurantsNum=r1.restaurantsNum
+		LEFT OUTER JOIN user1 u ON r.userIdx = u.userIdx
+		LEFT OUTER JOIN restaurantsInfo r1 ON r.restaurantsNum=r1.restaurantsNum
 
 		<where>
 			<if test="keyword!=null and keyword!='' ">
 				<include refid="where-list" />
 			</if>
 			<if test="enabled!=''">
-				AND enabled = #{enabled}
+				AND r.enabled = #{enabled}
 			</if>
 			AND separate=1
 		</where>
 
 		ORDER BY u.userIdx DESC
-		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS
-		ONLY
+		OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 	</select>
 
 	<!-- 가게 상세표 -->
 	<select id="readUser" parameterType="String"
 		resultType="com.bd.restaurantList.RestaurantList">
-		SELECT u.userIdx, name, u.userId, mutualName,
-		licenseNumber, u.enabled,
-		addr1, addr2
+		SELECT u.userIdx, name, u.userId, mutualName,r.restaurantsNum,
+		licenseNumber, r.enabled,
+		addr1, addr2  
 		FROM restaurants r
 		LEFT OUTER JOIN user1 u ON r.userIdx =
 		u.userIdx
 		LEFT OUTER JOIN restaurantsInfo r1 ON
 		r.restaurantsNum=r1.restaurantsNum
-		WHERE userId=#{userId}
+		WHERE r.restaurantsNum=#{restaurantsNum}
 	</select>
 
 	<!-- alter창 가게수정 -->
 	<update id="updateUserEnabled" parameterType="map">
-		UPDATE user1 SET
-		enabled=#{enabled} WHERE userId=#{userId}
+		UPDATE restaurants SET
+		enabled=#{enabled} WHERE restaurantsNum=#{restaurantsNum}
 	</update>
-
 
 	<!-- 대기중가게 리스트 -->
 	<select id="listWaitRestaurant" parameterType="map"

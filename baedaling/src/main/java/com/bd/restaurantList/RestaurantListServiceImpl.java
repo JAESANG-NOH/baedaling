@@ -48,11 +48,11 @@ public class RestaurantListServiceImpl implements RestaurantListService {
 	}
 
 	@Override
-	public RestaurantList readUser(String userId) {
+	public RestaurantList readUser(String restaurantsNum) {
 		RestaurantList dto = null;
 		
 		try {
-			dto = dao.selectOne("rsl.readUser", userId);
+			dto = dao.selectOne("rsl.readUser", restaurantsNum);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
