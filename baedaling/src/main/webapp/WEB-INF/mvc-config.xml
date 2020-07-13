@@ -106,7 +106,6 @@
                 <prop key="org.springframework.dao.DataAccessException">.error.dataAccessFailure</prop>
             </props>
         </property>
-        <property name="defaultErrorView" value=".error.error"/>
     </bean>
 
 </beans>

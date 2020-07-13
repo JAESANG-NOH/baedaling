@@ -107,7 +107,7 @@ body {
 		<ul style="margin-top: 20px;">
 			<li id="dash_subTitle" style="color: #D2D4D4;"><a style="color: #D2D4D4;" href="">가게 정보관리</a>
 			<ul class="accordion-item-content">
-			<li id="dash_subcontent" ><a href="<%=cp%>/dashboard/fcupdate?restaurantsNum=${sessionScope.user.restaurantsNum}">가게 정보수정</a></li>
+			<li id="dash_subcontent" ><a href="<%=cp%>/dashboard/updateRestaurant?restaurantsNum=${sessionScope.user.restaurantsNum}">가게 정보수정</a></li>
 			<li id="dash_subcontent" ><a href="<%=cp%>/dashboard/fcinfo_read?restaurantsNum=${sessionScope.user.restaurantsNum}">상세정보수정</a></li>
 			</ul>
 			</li>
@@ -144,7 +144,7 @@ body {
 	<div>
 		<ul style="text-align: center;" class="snip1284">
 			<li style="margin-top:200px; font-weight:bold; font-size: 20px; color: #5D5E5F;">오늘매출 ${today.todaySales == '0' ? 0 : today.todaySales}원</li>
-			<li style="margin-top:200px; font-weight:bold; font-size: 18px; color: white;"><a href="<%=cp%>/main">메인화면</a></li>
+			<li style="margin-top: 50px; font-weight:bold; font-size: 18px; color: white;"><a href="<%=cp%>/main">메인화면</a></li>
 		</ul>
 	</div>
 	
