@@ -199,7 +199,7 @@ $(function(){
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;">${dto.foodorderNum}</td>
 		<td width="250px;">${dto.foodOrderAddr}</td>
-		<td width="200px;">${dto.menuName}</td>
+		<td width="200px;">${dto.smenuName}</td>
 		<td width="200px;">${dto.memo}</td>
 		<td width="150px;">${dto.foodOrderDate}</td>
 		<td width="100px;">
@@ -230,7 +230,7 @@ $(function(){
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;">${dto.foodorderNum}</td>
 		<td width="250px;">${dto.foodOrderAddr}</td>
-		<td width="200px;">${dto.menuName}</td>
+		<td width="200px;">${dto.smenuName}</td>
 		<td width="150px;">${dto.foodOrderDate}</td>
 		<td width="100px;"><button id="orderbutton2" type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달중" class="btnResOk">라이더요청</button>
 							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
@@ -259,7 +259,7 @@ $(function(){
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;">${dto.foodorderNum}</td>
 		<td width="250px;">${dto.foodOrderAddr}</td>
-		<td width="200px;">${dto.menuName}</td>
+		<td width="200px;">${dto.smenuName}</td>
 		<td width="200px;">${dto.foodOrderDate}</td>
 		<td width="100px;"><button id="orderbutton" type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달완료" class="btnDeliOk">완료</button>
 							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
@@ -289,7 +289,7 @@ $(function(){
 	<tr style="width: 800px; text-align: center;">
 		<td width="100px;">${dto.foodorderNum}</td>
 		<td width="250px;">${dto.foodOrderAddr}</td>
-		<td width="200px;">${dto.menuName}</td>
+		<td width="200px;">${dto.smenuName}</td>
 		<td width="200px;">${dto.foodOrderDate}</td>
 	</tr>
 </c:forEach>

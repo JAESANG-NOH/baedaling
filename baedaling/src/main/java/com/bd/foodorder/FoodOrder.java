@@ -20,6 +20,8 @@ public class FoodOrder {
 	private int idx;
 	private int restaurantsNum;
 	private Map<String, Object> mSales;
+	private String sqty;
+	private String smenuName;
 	
 	//가맹점 정보 
 	private String name;
@@ -390,6 +392,18 @@ public class FoodOrder {
 	}
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+	}
+	public String getSqty() {
+		return sqty;
+	}
+	public void setSqty(String sqty) {
+		this.sqty = sqty;
+	}
+	public String getSmenuName() {
+		return smenuName;
+	}
+	public void setSmenuName(String smenuName) {
+		this.smenuName = smenuName;
 	}
 
 	
