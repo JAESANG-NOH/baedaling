@@ -10,8 +10,9 @@
 <select id="orderComplete" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
     SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
 		  	foodOrderAddr, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
-		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI')foodOrderCompletionDate,memo,f.userIdx, o.menuNum,qty,f.restaurantsNum,
-		   LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI')foodOrderCompletionDate,memo,f.userIdx,f.restaurantsNum,
+		   LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName,
+		   LISTAGG(o.qty,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS d
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
@@ -20,7 +21,7 @@
     WHERE f.restaurantsNum = #{restaurantsNum} AND INSTR(foodOrderState , #{foodOrderState}) =1 AND 
     	TO_CHAR(foodOrderDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
     GROUP BY f.foodOrderNum, foodOrderDate, foodOrderAddr, foodOrderPayCompletionDate,foodOrderCompletionDate
-    	,memo, f.userIdx, o.menuNum,qty,f.restaurantsNum
+    	,memo, f.userIdx,f.restaurantsNum,qty
 </select>
 
 <!-- 전체리스트 -->

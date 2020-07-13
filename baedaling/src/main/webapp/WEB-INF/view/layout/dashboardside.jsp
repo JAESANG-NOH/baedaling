@@ -132,6 +132,12 @@ body {
 		</ul>
 		</section>
 	</div>
+	
+	<div id="menu_content" class="snip1284">
+		<ul style="margin-top: 20px;">
+			<li id="dash_subTitle" style="margin-bottom: 40px;"><a style="color: #D2D4D4;" href="<%=cp%>/fcnotice/list"><span style="color: #D2D4D4;"></span>가맹점 공지사항</a></li>
+		</ul>
+	</div>
 
 	<div>
 		<ul style="text-align: center;" class="snip1284">

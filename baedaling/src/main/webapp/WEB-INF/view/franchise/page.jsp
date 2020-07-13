@@ -208,7 +208,7 @@ $(function(){
 		var vprice = "<span class='productPrice'>" + menuPrice + "</span>원";
 		
 		$tr = $("<tr height='40px'>");
-		$td = $("<td>",{colspan:"3",style:"padding: 15px; font-size: 14px;", html:menuName});
+		$td = $("<td>",{colspan:"3",style:"padding-left: 15px; font-size: 14px; font-weight:bold;", html:menuName});
 		$tr.append($td);
 		$("#buyList").append($tr);
 		
@@ -323,12 +323,12 @@ $(function(){
 			
 			var $tr, $td,$span;
 			$tr = $("<tr height='40px'>");
-			$td = $("<td>",{colspan:"3",style:"padding: 15px; font-size: 14px;", html:menuName});
+			$td = $("<td>",{colspan:"3",style:"padding-left: 15px; font-weight:bold; font-size: 14px;", html:menuName});
 			$tr.append($td);
 			$("#payBuyList").append($tr);
 			
-			$tr = $("<tr height='40px' style='border-bottom:1px solid black;'>");
-			$td = $("<td>",{colspan:"2",style:"padding: 15px; font-size: 14px;"});
+			$tr = $("<tr height='35px' style='border-bottom:1px solid black;'>");
+			$td = $("<td>",{colspan:"2",style:"padding-left: 15px; font-size: 14px;"});
 			$span = $("<span>",{text:quantity});
 			$td.append($span);
 			$span = $("<span>",{text:"개"});
