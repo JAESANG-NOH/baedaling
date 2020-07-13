@@ -59,7 +59,7 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		
 	}
 	
-	
+
 	@Override
 	public void deleteOrder(int foodorderNum) throws Exception {
 		try {
@@ -401,9 +401,12 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		
 	}
 
+	@Override
+	public void updateCompleteDate(FoodOrder dto) throws Exception {
+		
+	}
 
 
-	
 
 	
 
