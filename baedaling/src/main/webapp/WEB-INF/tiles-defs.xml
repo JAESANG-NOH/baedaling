@@ -55,7 +55,7 @@
 		<put-attribute name="body" value="/WEB-INF/view/manage/{1}/{2}/{3}.jsp"/>
 	</definition>
 	<definition name=".restaurant.*.*.*" extends=".manageLayout">
-		<put-attribute name="body" value="/WEB-INF/view/manage/{1}/{2}/{3}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/restaurant/{1}/{2}/{3}.jsp"/>
 	</definition>
 	<definition name=".inquire.list" extends=".manageLayout">
 		<put-attribute name="body" value="/WEB-INF/view/inquire/list.jsp"/>
@@ -64,13 +64,13 @@
 		<put-attribute name="body" value="/WEB-INF/view/manage/{1}/{2}.jsp"/>
 	</definition>
 	<definition name=".restaurant.*.*" extends=".manageLayout">
-		<put-attribute name="body" value="/WEB-INF/view/manage/{1}/{2}.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/view/restaurant/{1}/{2}.jsp"/>
 	</definition>
 	<definition name=".manage.*" extends=".manageLayout">
     	  <put-attribute name="body" value="/WEB-INF/view/manage/{1}.jsp" />
 	</definition>
 	<definition name=".restaurant.*" extends=".manageLayout">
-    	  <put-attribute name="body" value="/WEB-INF/view/manage/{1}.jsp" />
+    	  <put-attribute name="body" value="/WEB-INF/view/restaurant/{1}.jsp" />
 	</definition>
 	
 	<!-- 순서가 바뀌면 안됨(* 많은것이 위에) -->

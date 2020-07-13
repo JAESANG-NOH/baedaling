@@ -24,7 +24,7 @@
 	background-color:#ffffff;
 	text-align:center;
 	cursor:pointer;
-	padding:3px 10px 5px;
+	padding:4px 8px 5px;
 	border-radius:4px;
 	font-family:"Malgun Gothic", "맑은 고딕", NanumGothic, 나눔고딕, 돋움, sans-serif;
 }
@@ -148,8 +148,8 @@ function updateBoard(num){
            <tr class="faqContent" align="left" height="35" style="display:none; border: 1px solid #ccc;"> 
                <td colspan="3" style="padding:10px; ">${dto.content}</td>
                <td>
-                  <button type="button" onclick="updateBoard(${dto.num})">수정</button> 
-                  <button type="button" onclick="deleteBoard(${dto.num})">삭제</button>
+                  <button type="button" class="btn" onclick="updateBoard(${dto.num})">수정</button> 
+                  <button type="button" class="btn" onclick="deleteBoard(${dto.num})">삭제</button>
                </td>
                
            </tr>
@@ -172,7 +172,7 @@ function updateBoard(num){
                    <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/faq/list?group=${group}';">새로고침</button>
                </td>
                <td align="center">
-                   <form name="searchForm" action="<%=cp%>/faq/list" method="post">
+                   <form name="searchForm" action="<%=cp%>/faq/list" method="post" style="margin-left: -112px;">
                        <select name="condition" class="btn" style="height: 30px; ">
                            <option value="all" ${condition=="all"?"selected='selected'":""}>모두 &nbsp;&nbsp;</option>
                            <option value="subject" ${condition=="subject"?"selected='selected'":""}>제목</option>
