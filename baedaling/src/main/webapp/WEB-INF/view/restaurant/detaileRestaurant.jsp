@@ -56,15 +56,15 @@
        	  <c:if test="${dto.enabled==0}">
        	      <option value="1">잠금 해제</option>
        	  </c:if>
-       	  <option value="0">불법적인 방법으로 로그인</option>
-       	  <option value="0">불건전 게시물 등록</option>
+       	  <option value="0">위생 불량</option>
+       	  <option value="0">메뉴 불량</option>
        	  <option value="0">기타 약관 위반</option>
        </select>
    </td>
 </tr>
 
 </table>
-<input type="hidden" name="userId" value="${dto.userId}">
+<input type="hidden" name="restaurantsNum" value="${dto.restaurantsNum}">
 </form>
 
 

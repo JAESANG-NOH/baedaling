@@ -117,10 +117,10 @@ public class RestaurantListController {
 	// AJAX-Text
 	@RequestMapping(value="/restaurant/detaileRestaurant")
 	public String detaileRestaurant(
-			@RequestParam String userId,
+			@RequestParam String restaurantsNum,
 			Model model
 			) throws Exception {
-		RestaurantList dto = service.readUser(userId);
+		RestaurantList dto = service.readUser(restaurantsNum);
 		// List<RestaurantList> listState = service.listUserState(userId);
 		
 		model.addAttribute("dto", dto);
@@ -138,7 +138,7 @@ public class RestaurantListController {
 		
 		try {
 			Map<String, Object> map = new HashMap<>();
-			map.put("userId", dto.getUserId());
+			map.put("restaurantsNum", dto.getRestaurantsNum());
 			if(dto.getStateCode()==1) {
 				map.put("enabled", 1);
 			} else {
