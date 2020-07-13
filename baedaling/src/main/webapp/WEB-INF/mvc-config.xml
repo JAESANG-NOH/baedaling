@@ -66,6 +66,7 @@
             <mvc:exclude-mapping path="/"/>
             <mvc:exclude-mapping path="/main"/>
             <mvc:exclude-mapping path="/resource/**"/>
+            <mvc:exclude-mapping path="/upload/*"/>
             <mvc:exclude-mapping path="/user/*"/>
            
              
@@ -103,7 +104,6 @@
             <props>
                 <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">.error.fileuploadFailure</prop>
                 <prop key="org.springframework.dao.DataAccessException">.error.dataAccessFailure</prop>
-				<prop key="java.lang.Exception">.error.error</prop>
             </props>
         </property>
         <property name="defaultErrorView" value=".error.error"/>

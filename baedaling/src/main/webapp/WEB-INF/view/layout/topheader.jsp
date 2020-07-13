@@ -25,7 +25,7 @@
 		</c:if>
 		<c:if test="${sessionScope.user.separate=='1'}">
 			<a href="<%=cp%>/mypage/userInfo">마이페이지</a> &nbsp;|&nbsp;
-			<a href="<%=cp%>/dashboard/orderlist?restaurantsNum=${sessionScope.user.restaurantsNum}">점주</a>
+			<a href="<%=cp%>/dashboard/dashboard?restaurantsNum=${sessionScope.user.restaurantsNum}">점주</a>
 		</c:if>
 </div>
 </c:if>
