@@ -152,9 +152,6 @@ $(function(){
 </script>
 <link rel="stylesheet" href="<%=cp%>/resource/css/fcjoin.css" type="text/css">
  <div id="container_join">
-		<div id="head_line">
-			<span>수정</span>
-		</div>
 		<div id="body_line">
 		<form id="" name="fcjoinform" method="post">
 			<table>
