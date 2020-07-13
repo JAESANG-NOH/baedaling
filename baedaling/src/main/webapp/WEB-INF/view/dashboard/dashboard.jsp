@@ -271,7 +271,7 @@ $(function() {
 	</tr>
 	
 	<tr style="width: 800px; ">
-		<td style="color: gray; height: 20px">o 상호명 : ${dto.mutualName}</td>
+		<td style="color: gray; height: 20px;font-size: 18px;"><span style="color: #38BCC6;"><i class="fas fa-utensil-spoon"></i></span> 상호명 : ${dto.mutualName}</td>
 		<td width="400px" rowspan="5" style="padding-top:30px; text-align: center;">
 			<div id="pie3d2Container"></div>
 		</td>
@@ -281,15 +281,15 @@ $(function() {
 	</tr>
 	
 	<tr>
-		<td style="color: gray; height: 20px">o 가게 번호: ${dto.fctel}</td>
+		<td style="color: gray; height: 20px;font-size: 18px;"><span style="color: #38BCC6;"><i class="fas fa-utensil-spoon"></i></span> 가게 번호: ${dto.fctel}</td>
 	</tr>
 	
 	<tr>
-		<td style="color: gray; height: 20px">o 영업시간 :  ${dto.openingHour} - ${dto.endingHour}</td>
+		<td style="color: gray; height: 20px; font-size: 18px;"><span style="color: #38BCC6;"><i class="fas fa-utensil-spoon"></i></span> 영업시간 :  ${dto.openingHour} - ${dto.endingHour}</td>
 	</tr>
 	
 	<tr>
-		<td style="color: gray; height: 20px">o 사업자번호 : ${dto.licenseNumber}</td>
+		<td style="color: gray; height: 20px; font-size: 18px;"><span style="color: #38BCC6;"><i class="fas fa-utensil-spoon"></i></span> 사업자번호 : ${dto.licenseNumber}</td>
 	</tr>
 </table>
 
@@ -300,16 +300,16 @@ $(function() {
 <div style="background-color: white; height: 60px;">&nbsp;</div>
 <table id="dash_table4" style="margin-top: 30px;">	
 	<tr>
-		<td style="font-size: 17px;"><span style="color: #F4D005;"><i class="fas fa-trophy"></i>  </span>Monthly sales</td>
-		<td style="font-size: 17px;"><span style="color: #F4D005;"><i class="fas fa-trophy"></i>  </span>Monthly review Count</td>
+		<td style="font-size: 20px;"><span style="color: #38BCC6;"><i class="fas fa-hand-holding-usd"></i>  </span>Monthly sales</td>
+		<td style="font-size: 20px;"><span style="color: #38BCC6;"><i class="far fa-comment-dots"></i>  </span>Monthly review Count</td>
 	</tr>
 
 	<tr>
 		<td width=500px;>
-			<div id="barContainer">차트부분</div>
+			<div id="barContainer"></div>
 		</td>
 		<td width=500px;>
-			<div id="lineContainer">차트부분</div>
+			<div id="lineContainer"></div>
 		</td>
 	</tr>
 </table>
