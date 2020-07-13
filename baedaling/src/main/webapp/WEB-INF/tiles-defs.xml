@@ -54,10 +54,22 @@
 	<definition name=".manage.*.*.*" extends=".manageLayout">
 		<put-attribute name="body" value="/WEB-INF/view/manage/{1}/{2}/{3}.jsp"/>
 	</definition>
+	<definition name=".restaurant.*.*.*" extends=".manageLayout">
+		<put-attribute name="body" value="/WEB-INF/view/manage/{1}/{2}/{3}.jsp"/>
+	</definition>
+	<definition name=".inquire.list" extends=".manageLayout">
+		<put-attribute name="body" value="/WEB-INF/view/inquire/list.jsp"/>
+	</definition>
 	<definition name=".manage.*.*" extends=".manageLayout">
 		<put-attribute name="body" value="/WEB-INF/view/manage/{1}/{2}.jsp"/>
 	</definition>
+	<definition name=".restaurant.*.*" extends=".manageLayout">
+		<put-attribute name="body" value="/WEB-INF/view/manage/{1}/{2}.jsp"/>
+	</definition>
 	<definition name=".manage.*" extends=".manageLayout">
+    	  <put-attribute name="body" value="/WEB-INF/view/manage/{1}.jsp" />
+	</definition>
+	<definition name=".restaurant.*" extends=".manageLayout">
     	  <put-attribute name="body" value="/WEB-INF/view/manage/{1}.jsp" />
 	</definition>
 	

@@ -111,13 +111,13 @@ function updateBoard(num){
       </div>
       <div id="tab-content" style="clear:both; padding: 20px 0px 0px; ">
       
-		<div class="alert-info">
+		<div class="alert-info" style="color: #31708f; background-color:#B2E9ED;">
 		   자주 묻는 질문들 리스트 입니다.
 		</div>
          
          <table style="width: 100%; margin:0px auto; border-collapse: collapse; border-spacing: 0; table-layout: fixed;">
            <thead>
-           <tr height="45" id="list_table" align="center" bgcolor="#EFF1F3" style=" border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; "> 
+           <tr height="45" id="list_table" align="center" style=" border-top: 2px solid #cccccc; border-bottom: 1px solid #cccccc; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; background-color: white; "> 
                <th width="70" style="color: #787878;">번호</th>
                <th width="130" style="color: #787878;">분류</th>
                <th align="center" style="color: #787878;">제목</th>

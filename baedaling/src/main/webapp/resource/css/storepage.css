@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-
+ *:focus { outline:none; }
 
 ul li{
 	color: #333;

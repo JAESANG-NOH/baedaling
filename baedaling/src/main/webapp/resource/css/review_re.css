@@ -64,9 +64,18 @@ ul li{
 	border-bottom: none;
 }
 
+#star_deco1{
+	color: #F4D005;
+	font-size: 20px;	
+	padding: 5px;
+	font-weight: bold;
+}
+
 #star_deco{
-	color: #F2D51B;
-	font-size: 13px;	
+	color: #F4D005;
+	font-size: 16px;	
+	padding-left: 5px;
+	font-weight: bold;
 }
 
 #bold{

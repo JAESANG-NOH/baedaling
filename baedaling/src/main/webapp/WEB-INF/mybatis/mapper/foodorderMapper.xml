@@ -75,7 +75,7 @@
 
 <!-- 일별 매출  -->
 <select id="todaySales" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-SELECT SUM(foodOrderTotalPrice*qty) todaySales
+SELECT SUM(foodOrderTotalPrice) todaySales
 FROM foodorder f
 JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
 JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum 
@@ -84,7 +84,7 @@ WHERE TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD') AND 
 
 <!-- 월별 매출  -->
 <select id="monthlySales" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-SELECT SUM(foodOrderTotalPrice*qty) monthSales
+SELECT SUM(foodOrderTotalPrice) monthSales
 FROM foodorder f
 JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
 JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum 
@@ -93,7 +93,7 @@ WHERE TO_CHAR(foodOrderCompletionDate,'YYMM') = TO_CHAR(SYSDATE,'YYMM') AND f.re
 
 <!-- 연매출  -->
 <select id="annualSales" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-SELECT SUM(foodOrderTotalPrice*qty) annualSales
+SELECT SUM(foodOrderTotalPrice) annualSales
 FROM foodorder f
 JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
 JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum 
@@ -103,7 +103,7 @@ WHERE TO_CHAR(foodOrderCompletionDate,'YY') = TO_CHAR(SYSDATE,'YY') AND f.restau
 
 <!-- 이달의 메뉴별 판매 수량 -->
 <select id="monthlyBest" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-SELECT rm.menuNum, rm.menuName, SUM(qty*foodOrderTotalPrice) bestSales 
+SELECT rm.menuNum, rm.menuName, SUM(qty*orderOnePrice) bestSales 
 FROM foodorder f 
 JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
 JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
@@ -114,7 +114,7 @@ ORDER BY bestSales desc
 </select>
 
 <select id="todayBest" parameterType="Integer" resultType="com.bd.foodorder.FoodOrder">
-SELECT rm.menuNum, rm.menuName, SUM(qty*foodOrderTotalPrice) bestSales 
+SELECT rm.menuNum, rm.menuName, SUM(qty*orderOnePrice) bestSales 
 FROM foodorder f 
 JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
 JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
@@ -128,18 +128,18 @@ ORDER BY bestSales desc
 <!-- 월별 매출  -->
  <select id="monthlySalesChart" parameterType="Integer" resultType="map">
    
-        SELECT NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '01', foodOrderTotalPrice*qty)),0) M01,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '02', foodOrderTotalPrice*qty)),0) M02,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '03', foodOrderTotalPrice*qty)),0) M03,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '04', foodOrderTotalPrice*qty)),0) M04,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '05', foodOrderTotalPrice*qty)),0) M05,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '06', foodOrderTotalPrice*qty)),0) M06,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '07', foodOrderTotalPrice*qty)),0) M07,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '08', foodOrderTotalPrice*qty)),0) M08,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '09', foodOrderTotalPrice*qty)),0) M09,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '10', foodOrderTotalPrice*qty)),0) M10,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '11', foodOrderTotalPrice*qty)),0) M11,
-                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '12', foodOrderTotalPrice*qty)),0) M12
+        SELECT NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '01', foodOrderTotalPrice)),0) M01,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '02', foodOrderTotalPrice)),0) M02,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '03', foodOrderTotalPrice)),0) M03,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '04', foodOrderTotalPrice)),0) M04,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '05', foodOrderTotalPrice)),0) M05,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '06', foodOrderTotalPrice)),0) M06,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '07', foodOrderTotalPrice)),0) M07,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '08', foodOrderTotalPrice)),0) M08,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '09', foodOrderTotalPrice)),0) M09,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '10', foodOrderTotalPrice)),0) M10,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '11', foodOrderTotalPrice)),0) M11,
+                   NVL(SUM(DECODE(TO_CHAR(foodOrderCompletionDate, 'MM'), '12', foodOrderTotalPrice)),0) M12
                 FROM foodorder f 
                 JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
                 JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
