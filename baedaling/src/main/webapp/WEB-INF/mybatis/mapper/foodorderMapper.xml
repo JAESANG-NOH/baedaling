@@ -49,11 +49,11 @@ memo, f.userIdx, f.restaurantsNum
 	WHERE foodorderNum = #{foodorderNum}
 </update> 
 
-<update id="updateCompleteDate" parameterMap="map">
+<!-- <update id="updateCompleteDate" parameterMap="com.bd.foodorder.FoodOrder">
 	UPDATE foodorder SET foodOrderCompletionDate = SYSDATE
  	WHERE restaurantsnum = #{restaurantsNum}
 </update>
-
+ -->
 <delete id="deletedetailOrder" parameterType="Integer">
 	DELETE FROM orderdetail WHERE foodorderNum = #{foodorderNum}	
 </delete>
