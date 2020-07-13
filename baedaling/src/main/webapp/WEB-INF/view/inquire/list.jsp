@@ -66,7 +66,7 @@
                 <button type="button" class="btn" onclick="javascript:location.href='/baedaling/inquire/list';">새로고침</button>
             </td>
             <td align="center">
-                <form name="searchForm" action="<%=cp%>/inquire/list" method="post">
+                <form name="searchForm" action="<%=cp%>/inquire/list" method="post" style="margin-right: 100px;">
                     <select name="condition" class="btn">
                         <option value="all" selected='selected'>모두</option>
                         <option value="subject" >제목</option>
@@ -77,9 +77,6 @@
                   <input type="text" name="keyword" value="" class="btn">
                   <button type="button" class="btn" onclick="searchList()">검색</button>
               </form>
-            </td>
-            <td align="right" width="100">
-                <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/inquire/created';">글올리기</button>
             </td>
          </tr>
       </table>

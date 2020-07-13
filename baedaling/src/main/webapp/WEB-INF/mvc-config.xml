@@ -74,6 +74,9 @@
             
             <mvc:exclude-mapping path="/freeboard/list"/>
             <mvc:exclude-mapping path="/freeboard/page"/>
+            <mvc:exclude-mapping path="/freeboard/listReply"/>
+            <mvc:exclude-mapping path="/freeboard/download"/>
+            <mvc:exclude-mapping path="/freeboard/zipdownload"/>
             
             <mvc:exclude-mapping path="/recommend/list"/>
             <mvc:exclude-mapping path="/recommend/page"/>
