@@ -84,7 +84,7 @@ function  updateFcState() {
 							<input type="text" name="openingHour" value="${dto.openingHour}"> - <input type="datetime" name="endingHour" value="${dto.endingHour}">
 						</li>
 						<li>
-							<span id="light_gray">전화번호</span> <input type="datetime" name="fctel" value="${dto.fctel}">
+							<span id="light_gray">전화번호</span> <input type="tel" name="fctel" value="${dto.fctel}">
 						</li>
 						<li>
 							<span id="light_gray">예상배달시간</span> <input type="datetime" name="deliTime" value="${dto.deliTime}">

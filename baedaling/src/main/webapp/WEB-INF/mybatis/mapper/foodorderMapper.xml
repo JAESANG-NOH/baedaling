@@ -49,6 +49,11 @@ memo, f.userIdx, f.restaurantsNum
 	WHERE foodorderNum = #{foodorderNum}
 </update> 
 
+<update id="updateCompleteDate" parameterMap="map">
+	UPDATE foodorder SET foodOrderCompletionDate = SYSDATE
+ 	WHERE restaurantsnum = #{restaurantsNum}
+</update>
+
 <delete id="deletedetailOrder" parameterType="Integer">
 	DELETE FROM orderdetail WHERE foodorderNum = #{foodorderNum}	
 </delete>
@@ -59,8 +64,19 @@ memo, f.userIdx, f.restaurantsNum
 
 <!-- 주문 내역 수  -->
 <select id="orderCount" parameterType="map" resultType="Integer">
- SELECT COUNT(foodOrderState) FROM foodorder f
- WHERE INSTR(foodOrderState , #{foodOrderState}) =1 AND restaurantsNum = #{restaurantsNum} AND TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
+ SELECT COUNT(*) FROM (SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
+		  	foodOrderAddr, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
+		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI')foodOrderCompletionDate,memo,f.userIdx,f.restaurantsNum,
+		   LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS smenuName,
+		   LISTAGG(o.qty,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS sqty
+	FROM foodorder f 
+    JOIN user1 u ON f.userIdx = u.userIdx
+    JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
+    JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+    WHERE f.restaurantsNum = #{restaurantsNum} AND INSTR(foodOrderState , #{foodOrderState}) =1 AND 
+    	TO_CHAR(foodOrderDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')group by f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderAddr, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI'), TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI'), 
+memo, f.userIdx, f.restaurantsNum)
 </select>
 
 <select id="allorderCount" parameterType="map" resultType="Integer">
@@ -69,8 +85,20 @@ memo, f.userIdx, f.restaurantsNum
 </select>
 
 <select id="todayOrderCount" parameterType="map" resultType="Integer">
- SELECT COUNT(foodOrderState) FROM foodorder f
- WHERE restaurantsNum = #{restaurantsNum} AND TO_CHAR(foodOrderCompletionDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
+SELECT NVL(COUNT(*),0) FROM (SELECT f.foodOrderNum, TO_CHAR(f.foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
+		  	f.foodOrderAddr, TO_CHAR(f.foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
+		   TO_CHAR(f.foodOrderCompletionDate,'YY-MM-DD HH:MI')foodOrderCompletionDate,memo,f.userIdx,f.restaurantsNum,
+		   LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS ssmenuName,
+		   LISTAGG(o.qty,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS sqty
+	FROM foodorder f 
+    JOIN user1 u ON f.userIdx = u.userIdx
+    JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
+    JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+ WHERE r.restaurantsNum = #{restaurantsNum} AND TO_CHAR(foodorderdate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD') AND 
+ 	   INSTR(foodOrderState , '배달완료') =1 
+ group by f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderAddr, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI'), TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI'), 
+memo, f.userIdx, f.restaurantsNum)
 </select>
 
 <!-- 일별 매출  -->

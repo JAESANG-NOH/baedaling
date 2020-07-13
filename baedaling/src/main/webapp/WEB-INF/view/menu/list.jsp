@@ -12,6 +12,13 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/tabs.css" type="text/css">
 <title>Insert title here</title>
 <style type="text/css">
+.body{
+	background-color: white;
+}
+
+
+</style>
+<style type="text/css">
 * {
 	margin: 0;
 	padding: 0;
@@ -222,7 +229,7 @@ function btnSendOk(){
 </head>
 <body>
 	
-	<div class="body-container" style="width: 800px;">
+	<div class="body-container" style="width: 1000px; margin-left: 500px;">
     <div class="body-title">
         <h3><i class="far fa-image"></i> 메뉴 리스트 </h3>
     </div>
@@ -288,7 +295,7 @@ function btnSendOk(){
 			    ${dataCount==0?"등록된 게시물이 없습니다.":paging}
 			 </td>
 			 <td align="right" width="100">
-		         <button id="addMenu" type="button">메뉴추가</button>
+		         <button id="addMenu" type="button" style="background-color: white; height: 30px; width: 70px; border: 0.5px solid;">메뉴추가</button>
 		      </td>
 		   </tr>
 		</table>

@@ -21,7 +21,6 @@ import com.bd.user.SessionInfo;
 
 
 @Controller("menu.MenuController")
-
 public class MenuController {
 
 	@Autowired

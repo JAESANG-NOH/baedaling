@@ -5,11 +5,12 @@
 <%
 	String cp=request.getContextPath();
 %>
+<link rel="stylesheet" href="https://unpkg.com/@kfonts/bm-hanna-pro/index.css" />
 <style>
 /* The Magic */
 .accordion:hover .accordion-item:hover .accordion-item-content,
 .accordion .accordion-item--default .accordion-item-content {
-    height: 6em;
+    height: 7.5em;
 }
 
 .accordion-item-content,
@@ -89,11 +90,12 @@ body {
 	<div id="menu_content" class="accordion">
 		<section class="accordion-item">
 		<ul style="margin-top: 20px;">
-			<li id="dash_subTitle"><a style="color: #D2D4D4;" href="">메뉴관리</a>
+			<li id="dash_subTitle"><a style="color: #D2D4D4;" href="<%=cp%>/menu/list?group=0">메뉴관리</a>
 			<ul class="accordion-item-content">
-			<li id="dash_subcontent"><a href="">주메뉴</a></li>
-			<li id="dash_subcontent"><a href="">부메뉴</a></li>
-			<li id="dash_subcontent"><a href="">사이드메뉴</a></li>
+			<li id="dash_subcontent"><a href="<%=cp%>/menu/list?group=1">주메뉴</a></li>
+			<li id="dash_subcontent"><a href="<%=cp%>/menu/list?group=2">부메뉴</a></li>
+			<li id="dash_subcontent"><a href="<%=cp%>/menu/list?group=3">사이드메뉴</a></li>
+			<li id="dash_subcontent"><a href="<%=cp%>/menu/list?group=4">음료&주류</a></li>
 			</ul>
 			</li>
 		</ul>
