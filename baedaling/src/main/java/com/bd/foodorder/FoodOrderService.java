@@ -11,7 +11,7 @@ public interface FoodOrderService {
 	public int allorderCount(Map<String, Object> map);
 	public int todayOrderCount(Map<String, Object> map);
 	public void updateOrderState(Map<String, Object> map) throws Exception;
-	public void updateCompleteDate(FoodOrder dto) throws Exception;
+	public void updateCompleteDate(int foodorderNum) throws Exception;
 	public void deleteOrder(int foodorderNum) throws Exception;
 	
 	

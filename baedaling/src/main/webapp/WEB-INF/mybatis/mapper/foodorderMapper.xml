@@ -49,9 +49,9 @@ memo, f.userIdx, f.restaurantsNum
 	WHERE foodorderNum = #{foodorderNum}
 </update> 
 
-<update id="updateCompleteDate" parameterType ="com.bd.foodorder.FoodOrder">
+<update id="updateCompleteDate" parameterType ="Integer">
 	UPDATE foodorder SET foodOrderCompletionDate = SYSDATE
- 	WHERE restaurantsnum = #{restaurantsNum}
+ 	WHERE foodorderNum = #{foodorderNum}
 </update>
 
 <delete id="deletedetailOrder" parameterType="Integer">

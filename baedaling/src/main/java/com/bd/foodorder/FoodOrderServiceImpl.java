@@ -402,9 +402,9 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 	}
 
 	@Override
-	public void updateCompleteDate(FoodOrder dto) throws Exception {
+	public void updateCompleteDate(int foodorderNum) throws Exception {
 		try {
-			dao.updateData("fo.updateCompleteDate", dto);
+			dao.updateData("fo.updateCompleteDate", foodorderNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

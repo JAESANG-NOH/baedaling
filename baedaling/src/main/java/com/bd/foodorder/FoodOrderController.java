@@ -141,17 +141,7 @@ public class FoodOrderController {
 	}
 	
 	
-	@RequestMapping(value="updateCompleteDate")
-	public String updateCompleteDate(
-			FoodOrder dto,
-			@RequestParam int restaurantsNum
-			) throws Exception{
-		try {
-			service.updateCompleteDate(dto);
-		} catch (Exception e) {
-		}
-		return "redirect:/dashboard/orderlist?restaurantsNum="+dto.getRestaurantsNum();
-	}
+	
 	
 
 	
@@ -452,6 +442,9 @@ public class FoodOrderController {
 			
 			service.updateOrderState(map);
 			service.orderCount(map);
+			if(orderState.equals("배달완료")) {
+				service.updateCompleteDate(foodorderNum);
+			}
 			state = "true";
 		} catch (Exception e) {
 			

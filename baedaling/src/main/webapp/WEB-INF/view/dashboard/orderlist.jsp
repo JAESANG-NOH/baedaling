@@ -12,13 +12,6 @@
 
 <script type="text/javascript">
 
-function  updateDate() {
-	  var q = "restaurantsNum=${dto.restaurantsNum}";
-	  var url = "<%=cp%>/dashboard/updateCompleteDate?" + q;
-		  	location.href=url;
-	}
-
-
 function ajaxJSON(url, type, query, fn) {
 	$.ajax({
 		type:type
@@ -137,9 +130,6 @@ $(function(){
 		ajaxJSON(url, "post", query, fn);
 	});
 });
-
-
-
 
 
 $(function(){
@@ -268,7 +258,7 @@ $(function(){
 		<td width="250px;">${dto.foodOrderAddr}</td>
 		<td width="200px;">${dto.smenuName}</td>
 		<td width="200px;">${dto.foodOrderDate}</td>
-		<td width="100px;"><button id="orderbutton" type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달완료" class="btnDeliOk">완료</button>
+		<td width="100px;"><button id="orderbutton" type="button" data-foodorderNum="${dto.foodorderNum}" data-orderState="배달완료" class="btnDeliOk" onclick="updateDate();">완료</button>
 							<input type="hidden" name ="restaurantsNum" value = "${dto.restaurantsNum }">
 							</td>
 	</tr>
