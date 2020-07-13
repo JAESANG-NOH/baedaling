@@ -201,8 +201,10 @@ $(function(){
 		</tr>
 	</table>
 	<div class="f_button" align="right">
+	<c:if test="${sessionScope.user.userIdx==dto.userIdx||sessionScope.user.separate==2}">
 		<button id="f_btn2" type="button"onclick="updateSend();">수정</button>
 		<button id="f_btn" type="button" onclick="deleteSend();">삭제</button> 
+	</c:if>
 		<button id="f_btn3" type="button" onclick="javascript:location.href='<%=cp%>/freeboard/list?${query}';">리스트</button>
 	</div>
 </div>
@@ -210,8 +212,7 @@ $(function(){
 		<tr height='30'> 
 			 <td align='left'>
 			 	<span style='font-weight: bold;' >댓글쓰기</span><span> - 타인을 비방하거나 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>
-			 </td>
-			 
+			 </td> 
 		</tr>
 		<tr >
 		   	<td align="center" style='padding:5px 5px 0px;'>
