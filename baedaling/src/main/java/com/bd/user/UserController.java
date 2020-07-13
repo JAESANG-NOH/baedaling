@@ -109,13 +109,13 @@ public class UserController {
 		}
 		
 		StringBuilder sb = new StringBuilder();
-		sb.append(dto.getUserName()+"님의 회원가입이 정상 승인되었습니다.");
-		sb.append("메인화면으로 이동하여 로그인해주시요.<br>");
+		sb.append(dto.getUserName()+"님의 회원가입이 정상 승인되었습니다.<br>");
+		sb.append("메인화면으로 이동하여 로그인해주시요.");
 		
 		reAttr.addFlashAttribute("message",sb.toString());
 		
 		
-		return "redirect:/user/message";
+		return "redirect:/user/complete";
 	}
 	
 	@RequestMapping(value="fcjoin", method=RequestMethod.POST)

@@ -23,7 +23,6 @@
 		    }
 		    ,error:function(jqXHR) {
 		    	if(jqXHR.status==403) {
-		    		login();
 		    		return false;
 		    	}
 		    	console.log(jqXHR.responseText);
@@ -228,14 +227,6 @@
    		<div style="background-image: url('<%=cp%>/resource/img/banner/inquirebanner.jpg'); width:100%; height:345px;">
 		   <div id="logo" class="container">
 		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px; background-position-y: -90px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;<b style="color: #ffc107">햄&nbsp;버&nbsp;거</b>&nbsp;도&nbsp;&nbsp;배&nbsp;달&nbsp;링&nbsp;에&nbsp;서&nbsp;."</a></h1>
-		   </div>
-	   </div>
-	    <hr style="border: 0.5px solid #D8D8D8;"> 
-   	</c:when>
-   	<c:when test="${searchBar=='manage' }">
-   		<div style="background-image: url('<%=cp%>/resource/img/recommandbanner.jpg'); width:100%; height:345px;">
-		   <div id="logo" class="container">
-		      <h1 style="font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; font-size: 50px; padding: 100px 0px 0px 0px;"><a href="#" style="color: white; font-size: 50px;"> "&nbsp;&nbsp;오&nbsp;늘&nbsp;은&nbsp;&nbsp;단&nbsp;게&nbsp;&nbsp;땡&nbsp;긴&nbsp;다&nbsp;.&nbsp;"</a></h1>
 		   </div>
 	   </div>
 	    <hr style="border: 0.5px solid #D8D8D8;"> 

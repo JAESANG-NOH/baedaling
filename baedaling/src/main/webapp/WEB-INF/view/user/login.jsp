@@ -77,7 +77,7 @@ function sendLogin(){
 		       			<a href="<%=cp%>/" style="font-size: 15px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';">아이디찾기</a>&nbsp;&nbsp;&nbsp;
 		       			<a href="<%=cp%>/" style="font-size: 15px; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';">비밀번호찾기</a>&nbsp;&nbsp;&nbsp;
 		      			<p style="font-size: 15px; color:gray; font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';">아직&nbsp;회원이&nbsp;아니신가요? 
-		      				<a href="<%=cp%>/" style="font-size: 15px;">회원가입</a>
+		      				<a href="<%=cp%>/user/joincheck" style="font-size: 15px;">회원가입</a>
 		      			</p>
 		      		</td>
 		  		</tr>

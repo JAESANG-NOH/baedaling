@@ -20,7 +20,8 @@
 			<a href="<%=cp%>/mypage/userInfo" style="color: #5a5a5a;">마이페이지</a>
 		</c:if>
 		<c:if test="${sessionScope.user.separate=='2'}">
-			<a href="#" style="color: #5a5a5a; font-size: 16px;">관리자</a>
+			<a href="<%=cp%>/manage/userlist" style="color: #5a5a5a; font-size: 16px;">관리자</a> &nbsp;|&nbsp;
+			<a href="<%=cp%>/main" style="color: #5a5a5a; font-size: 16px;">유저</a>
 		</c:if>
 		<c:if test="${sessionScope.user.separate=='1'}">
 			<a href="<%=cp%>/mypage/userInfo">마이페이지</a> &nbsp;|&nbsp;

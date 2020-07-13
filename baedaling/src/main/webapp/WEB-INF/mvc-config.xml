@@ -59,7 +59,6 @@
     </bean>
 
 	<!-- Interceptor 설정. -->
-<!-- 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
@@ -67,17 +66,33 @@
             <mvc:exclude-mapping path="/"/>
             <mvc:exclude-mapping path="/main"/>
             <mvc:exclude-mapping path="/resource/**"/>
-            <mvc:exclude-mapping path="/member/login"/>
-            <mvc:exclude-mapping path="/member/logout"/>
-            <mvc:exclude-mapping path="/member/member"/>
-            <mvc:exclude-mapping path="/member/userIdCheck"/>
-            <mvc:exclude-mapping path="/member/complete"/>
-            <bean class="com.sp.member.LoginCheckInterceptor"/>
+            <mvc:exclude-mapping path="/user/*"/>
+           
+             
+            <mvc:exclude-mapping path="/point/search"/>
+            <mvc:exclude-mapping path="/user/location"/>
+            
+            <mvc:exclude-mapping path="/freeboard/list"/>
+            <mvc:exclude-mapping path="/freeboard/page"/>
+            
+            <mvc:exclude-mapping path="/recommend/list"/>
+            <mvc:exclude-mapping path="/recommend/page"/>
+            
+            <mvc:exclude-mapping path="/event/list"/>
+            <mvc:exclude-mapping path="/event/article"/>
+            
+            <mvc:exclude-mapping path="/notice/list"/>
+            <mvc:exclude-mapping path="/notice/article"/>
+            
+            <mvc:exclude-mapping path="/faq/list"/>
+            
+            <mvc:exclude-mapping path="/restaurants/list"/>
+            <mvc:exclude-mapping path="/franchise/*"/>
+            
+            <bean class="com.bd.user.LoginCheckInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>	 
---> 
+    </mvc:interceptors>	  
     <!-- 예외처리 -->
-<!--     
     <bean id="exceptionResolver"
                class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="order" value="1" />
@@ -90,6 +105,5 @@
         </property>
         <property name="defaultErrorView" value=".error.error"/>
     </bean>
- -->     
 
 </beans>

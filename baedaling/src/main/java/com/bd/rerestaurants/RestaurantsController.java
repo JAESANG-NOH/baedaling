@@ -37,7 +37,7 @@ public class RestaurantsController {
 		Sessionlocation location = (Sessionlocation) session.getAttribute("location");
 		String cp = req.getContextPath();
 		if(location==null) {
-			return "redirect:/main/main";
+			return "redirect:/main";
 		}
 		Map<String, Object> map = new HashMap<String,Object>();
 		
@@ -107,15 +107,12 @@ public class RestaurantsController {
         query = "state="+state+"&typecategorynum="+typecategorynum;
 
         String listUrl = cp+"/restaurants/list?"+query;
-        String articleUrl = cp+"/restaurants/page?page="+current_page+"&"+query;
-
         
         String paging = myUtil.paging(current_page, total_page, listUrl);
         
         model.addAttribute("searchBar", "true");
         model.addAttribute("typecategorynum",typecategorynum);
         model.addAttribute("list", list);
-        model.addAttribute("articleUrl", articleUrl);
         model.addAttribute("page", current_page);
         model.addAttribute("dataCount", dataCount);
         model.addAttribute("total_page", total_page);
