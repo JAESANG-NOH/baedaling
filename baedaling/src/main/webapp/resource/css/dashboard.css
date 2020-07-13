@@ -91,7 +91,7 @@ margin: 0px;
 	width: 1400px;
 	height: 400px;
 	margin-top : 0px;
-	margin-left : 320px;
+	margin-left : 400px;
 	background-color: white; 
 	border-collapse: collapse;
 }
@@ -101,7 +101,7 @@ margin: 0px;
 	width: 1400px;
 	height: 400px;
 	margin-top : 30px;
-	margin-left : 320px;
+	margin-left : 400px;
 	background-color: white; 
 	border-collapse: collapse;
 }
@@ -110,7 +110,7 @@ margin: 0px;
 	width: 1400px;
 	height: 200px;
 	margin-top : 50px;
-	margin-left : 330px;
+	margin-left : 550px;
 	background-color: #f9f9fa; 
 }
 
@@ -118,7 +118,7 @@ margin: 0px;
 	width: 1800px;
 	height: 300px;
 	margin-top : 50px;
-	margin-left : 330px;
+	margin-left : 400px;
 	background-color: white; 
 	border-collapse: collapse;
 }
@@ -130,13 +130,8 @@ margin: 0px;
 
 #waiting_text{
 	font-size: 25px;
-	font-family: '배달?��민족 ?��?���? Pro', '배달?��민족?��?��체Pro', 'bm-hanna-pro';
+	font-family: '배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro';	
 }
-
-
-
-
-
 
 @import url(https://fonts.googleapis.com/css?family=Raleway:500);
 .snip1284 * {

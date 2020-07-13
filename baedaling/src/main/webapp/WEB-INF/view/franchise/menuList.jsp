@@ -22,11 +22,11 @@
 </div>
 <table class="menu_table">
 	<tr>
-		<td><span><i class="fas fa-award"></i></span> 인기 메뉴 <span style="width:700px; margin-left: 20px; padding-left: 430px;"></span></td>
+		<td style="font-weight: bold;"><span style="color: #F4D005;"><i class="fas fa-trophy"></i> </span>&nbsp;인기 메뉴 <span style="width:700px; margin-left: 20px; padding-left: 430px;"></span></td>
 	</tr>
 	<c:forEach var="vo" items="${listCatrgory }">
 		<tr style="width: 630px;"  class="listCatrgory" data-menuCategoryNum="${vo.menuCategoryNum }" >
-			<td style="width: 630px;">${vo.menuCategoryName } <span style="margin-left: 20px; padding-left: 466px;"><a href=""><i class="fas fa-chevron-down"></i></a></span></td>
+			<td style="width: 630px;">${vo.menuCategoryName }</td>
 		</tr>
 		<tr class = "detailCategory" style="display: none;">
 			<td>

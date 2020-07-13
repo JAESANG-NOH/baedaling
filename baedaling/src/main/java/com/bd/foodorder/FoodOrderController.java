@@ -332,6 +332,93 @@ public class FoodOrderController {
 	}
 	
 	
+	
+	@RequestMapping(value="lineChart", produces="application/json;charset=utf-8")
+	@ResponseBody
+	public String lineChart2(
+			@RequestParam int restaurantsNum
+			)throws Exception{
+		
+		Map<String, Object> reviews = service.reviewChart(restaurantsNum);
+		
+		JSONArray arr = new JSONArray();
+		
+		JSONObject ob;
+		ob = new JSONObject();
+		ob.put("name", "1월");
+		ob.put("y", reviews.get("M01"));
+		arr.put(ob);
+		
+		ob = new JSONObject();
+		ob.put("name", "2월");
+		ob.put("y", reviews.get("M02"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "3월");
+		ob.put("y", reviews.get("M03"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "4월");
+		ob.put("y", reviews.get("M04"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "5월");
+		ob.put("y", reviews.get("M05"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "6월");
+		ob.put("y", reviews.get("M06"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "7월");
+		ob.put("y", reviews.get("M07"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "8월");
+		ob.put("y", reviews.get("M08"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "9월");
+		ob.put("y", reviews.get("M09"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "10월");
+		ob.put("y", reviews.get("M10"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "11월");
+		ob.put("y", reviews.get("M11"));
+		arr.put(ob);
+
+		ob = new JSONObject();
+		ob.put("name", "12월");
+		ob.put("y", reviews.get("M12"));
+		arr.put(ob);
+		
+		JSONObject job = new JSONObject();
+		job.put("name", "월별 리뷰 개수");
+		job.put("colorByPoint", true);
+		job.put("data", arr);
+
+		
+		JSONArray jarr = new JSONArray();
+		jarr.put(job);
+
+		return jarr.toString(); 
+	}
+	
+	
+	
+	
 	@RequestMapping(value="updateState" ,produces="application/json;charset=utf-8")
 	@ResponseBody
 	public Map<String, Object> updateState(

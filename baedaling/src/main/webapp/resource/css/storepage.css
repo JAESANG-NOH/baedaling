@@ -108,12 +108,10 @@ button{
 /* 메뉴 부분 */
 
 .menuImg_table{
-	width:700px;
 	height : 200px;
-	padding: 5px;
-	margin: 5px;
 	white-space:nowrap;
 	overflow-y:auto;
+	background-color: white;
   }
 
 
@@ -144,10 +142,11 @@ button{
 }
 
 .menu_table td{
-	 width : 700px;
-	 height: 40px;	
+	width : 700px;
+	height: 40px;	
 	font-size: 15px;
-	padding-left: 15px;
+	padding-left: 6px;
+	font-weight: bold;
 }
 
 
