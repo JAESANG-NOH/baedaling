@@ -247,7 +247,7 @@ $(function() {
 		<td style="font-size: 20px; height: 20px; font-family: '배달의민족 한나체 Pro','bm-hanna-pro';"><span style="color: #38BCC6; "><i class="fas fa-utensils"></i>  </span>대기 중인 주문</td>
 		<td style="font-size: 20px; height: 20px;font-family: '배달의민족 한나체 Pro','bm-hanna-pro';"><span style="color: #38BCC6; "><i class="fas fa-utensils"></i>  </span>오늘 주문건</td>
 		<td style="font-size: 20px; height: 20px;font-family: '배달의민족 한나체 Pro','bm-hanna-pro';"><span style="color: #38BCC6; "><i class="fas fa-coins"></i>  </span>오늘 매출</td>
-		<td style="font-size: 20px; height: 20px;font-family: '배달의민족 한나체 Pro','bm-hanna-pro';"><span style="color: #38BCC6; "><i class="fas fa-coins"></i>  </span>이달 매출</td>
+		<td style="font-size: 20px; height: 20px; font-family: '배달의민족 한나체 Pro','bm-hanna-pro';"><span style="color: #38BCC6; "><i class="fas fa-coins"></i>  </span>이달 매출</td>
 	</tr>
 	
 	<tr>
