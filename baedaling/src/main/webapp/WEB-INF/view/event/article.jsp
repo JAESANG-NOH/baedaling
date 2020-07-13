@@ -67,9 +67,11 @@ function delete_send() {
 		</tr>		
 	</table>
 	
-	<div class="f_button" align="right" style="padding-right: 95px; padding-top: 10px;">
-		<button class="btn" type="button"onclick="javascript:location.href='<%=cp%>/event/update?num=${dto.num}&page=${page}';">수정</button>
-		<button class="btn" type="button" onclick="delete_send();">삭제</button> 
+	<div class="f_button" align="right" style="padding-right: 250px; padding-top: 10px;">
+		<c:if test="${sessionScope.user.separate==2}">
+			<button class="btn" type="button"onclick="javascript:location.href='<%=cp%>/event/update?num=${dto.num}&page=${page}';">수정</button>
+			<button class="btn" type="button" onclick="delete_send();">삭제</button>
+		</c:if>
 		<button class="btn" type="button" onclick="javascript:location.href='<%=cp%>/event/list';">리스트</button>
 	</div>
 	

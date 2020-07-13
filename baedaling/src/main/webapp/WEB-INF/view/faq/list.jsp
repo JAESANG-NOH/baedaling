@@ -138,20 +138,18 @@ function updateBoard(num){
                </td>
                <td>${dto.userName }</td>
            </tr>
-           <c:if test="${sessionScope.user.userId!='admin'}">
+           <c:if test="${sessionScope.user.separate!=2}">
            <tr class="faqContent" align="left" height="35" style="display:none; border: 1px solid #ccc;"> 
                <td colspan="4" style="padding:10px; word-break:break-all;">${dto.content}</td>
            </tr>
            </c:if>
-           
-           <c:if test="${sessionScope.user.userId=='admin'}">
+           <c:if test="${sessionScope.user.separate==2}">
            <tr class="faqContent" align="left" height="35" style="display:none; border: 1px solid #ccc;"> 
                <td colspan="3" style="padding:10px; ">${dto.content}</td>
                <td>
                   <button type="button" class="btn" onclick="updateBoard(${dto.num})">수정</button> 
                   <button type="button" class="btn" onclick="deleteBoard(${dto.num})">삭제</button>
-               </td>
-               
+               </td>  
            </tr>
            </c:if>
          </c:forEach>
@@ -183,7 +181,7 @@ function updateBoard(num){
                      <button type="button" class="btn" onclick="searchList()">검색</button>
                  </form>
                </td>
-               <c:if test="${sessionScope.user.userId=='admin'}">
+               <c:if test="${sessionScope.user.separate==2}">
                      <td align="right" width="100">
                          <button type="button" class="btn" onclick="javascript:location.href='<%=cp%>/faq/created';">글올리기</button>
                      </td>   
