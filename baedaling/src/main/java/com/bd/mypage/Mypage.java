@@ -26,12 +26,13 @@ public class Mypage {
 	private int listNum;
 	private String name; // 가게이름
 	private String menuName; // 메뉴이름
-	private String menuPrice; // 메뉴단가
 	private int qty; // 수량
+	private int oneMenuTotalPrice;
 	private int foodOrderTotalPrice; // 총 결제금액
 	private String foodOrderState; // 주문상태
 	private String foodOrderDate; // 주문날짜와 시간
 	private String foodOrderAddr; // 가게주소
+	private int orderOnePrice;
 	private String memo;
 	private String fctel;
 	private String foodOrderHowPay;
@@ -57,6 +58,20 @@ public class Mypage {
 	private String answer;
 	
 	
+
+	
+	public int getOrderOnePrice() {
+		return orderOnePrice;
+	}
+	public void setOrderOnePrice(int orderOnePrice) {
+		this.orderOnePrice = orderOnePrice;
+	}
+	public int getOneMenuTotalPrice() {
+		return oneMenuTotalPrice;
+	}
+	public void setOneMenuTotalPrice(int oneMenuTotalPrice) {
+		this.oneMenuTotalPrice = oneMenuTotalPrice;
+	}
 	public String getFoodOrderHowPay() {
 		return foodOrderHowPay;
 	}
@@ -68,12 +83,6 @@ public class Mypage {
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
-	}
-	public String getMenuPrice() {
-		return menuPrice;
-	}
-	public void setMenuPrice(String menuPrice) {
-		this.menuPrice = menuPrice;
 	}
 	public String getFoodOrderAddr() {
 		return foodOrderAddr;

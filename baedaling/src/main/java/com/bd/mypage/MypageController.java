@@ -27,8 +27,6 @@ public class MypageController {
 	private MypageService service;
 	@Autowired
 	private MyUtil myUtil;
-/*	@Autowired
-	private Recommend recommendservice;*/
 	
 	// 회원 정보
 	@RequestMapping(value="userInfo")
@@ -46,7 +44,7 @@ public class MypageController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+	    model.addAttribute("searchBar", "mypage");
 		model.addAttribute("dto", dto);
 		
 		return ".mypage.userInfo";
@@ -96,7 +94,7 @@ public class MypageController {
 		if(dto==null) {
 			return "";
 		}
-		
+	    model.addAttribute("searchBar", "mypage");
 		model.addAttribute("dto", dto);
 		
 		return ".mypage.infochange";
@@ -198,8 +196,6 @@ public class MypageController {
 	    
 		return ".mypage.userorderList";
 	}
-	
-	
 	
 	@RequestMapping(value="checkReview", method=RequestMethod.POST)
 	@ResponseBody
@@ -511,8 +507,12 @@ public class MypageController {
 		Map<String, Object> map = new HashMap<>();
 		map.put("userIdx", info.getUserIdx());
 		map.put("foodOrderNum", foodOrderNum);
+		
+		
+		
 		Mypage dto = service.orderDetail(map);
 		List<Mypage> list = service.orderDetailMenu(map);
+		
 		
 		Map<String , Object> model = new HashMap<>();
 		model.put("dto", dto);

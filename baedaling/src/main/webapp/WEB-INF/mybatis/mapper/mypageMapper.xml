@@ -25,45 +25,52 @@
 </update>
 
 <select id="dataCount" parameterType="map" resultType="Integer">
-	SELECT NVL(COUNT(*),0)
-	FROM foodorder f
-	JOIN user1 u1 ON f.userIdx = u1.userIdx
-	LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
-    LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
-    LEFT OUTER JOIN restaurantsInfo ri ON ri.restaurantsNum = f.restaurantsNum
-    WHERE u1.userIdx = #{userIdx}
-</select>
-
-<!-- 주문내역 -->
-<select id="orderList" parameterType="map" resultType="com.bd.mypage.Mypage">
-	SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
-		   foodOrderTotalPrice, qty , f.restaurantsNum, menuName, rr.name, foodOrderState
+	SELECT NVL(COUNT(*),0)FROM(
+SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
+		   foodOrderTotalPrice, qty, f.restaurantsNum, rr.name, foodOrderState,
+           LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum) AS menuName
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
     LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
     LEFT OUTER JOIN restaurants rr ON rr.restaurantsNum = f.restaurantsNum
     WHERE u.userIdx = #{userIdx}
+    GROUP BY f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderTotalPrice, qty, f.restaurantsNum, 
+rr.name, foodOrderState)
+</select>
+
+<!-- 주문내역 -->
+<select id="orderList" parameterType="map" resultType="com.bd.mypage.Mypage">
+SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
+		   foodOrderTotalPrice, f.restaurantsNum, rr.name, foodOrderState,
+           LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum) AS menuName
+	FROM foodorder f 
+    JOIN user1 u ON f.userIdx = u.userIdx
+    LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
+    LEFT OUTER JOIN restaurants rr ON rr.restaurantsNum = f.restaurantsNum
+    WHERE u.userIdx = #{userIdx}
+    GROUP BY f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderTotalPrice, f.restaurantsNum, 
+	rr.name, foodOrderState
     ORDER BY f.foodOrderNum DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
 </select>
 
 <select id="orderdetailList" parameterType="map" resultType="com.bd.mypage.Mypage">
 SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate, foodOrderAddr, fctel,
-		   foodOrderTotalPrice, f.restaurantsNum, rr.name, foodOrderState, memo, foodOrderHowPay
+		   foodOrderTotalPrice, f.restaurantsNum, rr.name, memo, foodOrderHowPay
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
-    LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
-    LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
-    LEFT OUTER JOIN restaurants rr ON rr.restaurantsNum = f.restaurantsNum
-    LEFT OUTER JOIN restaurantsInfo ri ON ri.restaurantsNum = rr.restaurantsNum
+    JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
+    JOIN restaurants rr ON rr.restaurantsNum = f.restaurantsNum
+    JOIN restaurantsInfo ri ON ri.restaurantsNum = rr.restaurantsNum
     WHERE u.userIdx = #{userIdx} AND f.foodorderNum = #{foodOrderNum}
-    group by f.foodorderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderAddr, fctel, foodOrderTotalPrice, 
-f.restaurantsNum, rr.name, foodOrderState, memo, foodOrderHowPay
+    group by f.foodorderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') , foodOrderAddr, fctel, 
+    f.restaurantsNum, rr.name, foodOrderState, memo, foodOrderHowPay, foodOrderTotalPrice
 </select>
 
 <select id="orderdetailMenu" parameterType="map" resultType="com.bd.mypage.Mypage">
-    SELECT menuName, menuprice, qty
+SELECT menuName, qty, OrderOnePrice
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     LEFT OUTER JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
