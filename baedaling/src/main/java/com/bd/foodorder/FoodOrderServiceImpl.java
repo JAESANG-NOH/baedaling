@@ -23,44 +23,22 @@ public class FoodOrderServiceImpl implements FoodOrderService{
 		try {
 			list = dao.selectList("fo.orderComplete", map);
 			
-			String result, temp;
-			int c;
-			for(FoodOrder dto : list) {
-				String []ss=dto.getMenuName().split(",");
-				if(ss.length==1) {
-					continue;
-				}
+			
+			String s="";
+			for(FoodOrder vo : list) {
+				s="";
+				try {
+					String s1[] = vo.getSmenuName().split(",");
+					String s2[] = vo.getSqty().split(",");
 				
-				result="";
-				c=0;
-				temp="";
-				for(int i=0; i<ss.length; i++) {
-					if(i==0) {
-						c=1;
-						temp=ss[i];
-					} else if(i==ss.length-1) {
-						if(temp.equals(ss[i])) {
-							c++;
-						}
-						
-						if(c<=1) {
-							result+=temp;
-						} else {
-							result+=temp+"("+c+")";
-						}
-					} else if(temp.equals(ss[i])) {
-						c++;
-					} else {
-						if(c>1) {
-							result+=temp+"("+c+"),";
-						} else {
-							result+=temp+",";
-						}
-						c=1;
-						temp=ss[i];
+					for(int i=0; i<s1.length; i++) {
+						s+=s1[i]+"("+s2[i]+") ";
 					}
+				
+					System.out.println(s);
+					vo.setSmenuName(s);
+				} catch (Exception e) {
 				}
-				dto.setMenuName(result);
 			}
 			
 		} catch (Exception e) {

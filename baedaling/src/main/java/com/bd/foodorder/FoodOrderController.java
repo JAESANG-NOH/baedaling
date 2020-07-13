@@ -123,7 +123,7 @@ public class FoodOrderController {
 	    String query = "restaurantsNum="+restaurantsNum; 
 	    String listUrl = cp+"/dashboard/orderlist?"+query;
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
-		
+		System.out.println(list4.get(4).getSmenuName());
 		model.addAttribute("list1", list1);
 		model.addAttribute("list2",list2);
 		model.addAttribute("list3",list3);

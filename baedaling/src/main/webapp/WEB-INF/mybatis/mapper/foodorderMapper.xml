@@ -11,17 +11,16 @@
     SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
 		  	foodOrderAddr, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI') foodOrderPayCompletionDate,
 		   TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI')foodOrderCompletionDate,memo,f.userIdx,f.restaurantsNum,
-		   LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName,
-		   LISTAGG(o.qty,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS d
+		   LISTAGG(rm.menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS smenuName,
+		   LISTAGG(o.qty,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS sqty
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
     JOIN orderdetail o ON f.foodorderNum = o.foodorderNum
     JOIN restaurants r ON f.restaurantsNum = r.restaurantsNum
     JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
     WHERE f.restaurantsNum = #{restaurantsNum} AND INSTR(foodOrderState , #{foodOrderState}) =1 AND 
-    	TO_CHAR(foodOrderDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')
-    GROUP BY f.foodOrderNum, foodOrderDate, foodOrderAddr, foodOrderPayCompletionDate,foodOrderCompletionDate
-    	,memo, f.userIdx,f.restaurantsNum,qty
+    	TO_CHAR(foodOrderDate,'YYMMDD') = TO_CHAR(SYSDATE,'YYMMDD')group by f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderAddr, TO_CHAR(foodOrderPayCompletionDate,'YY-MM-DD HH:MI'), TO_CHAR(foodOrderCompletionDate,'YY-MM-DD HH:MI'), 
+memo, f.userIdx, f.restaurantsNum
 </select>
 
 <!-- 전체리스트 -->
@@ -202,7 +201,7 @@ ORDER BY bestSales desc
  	<update id="updateInfo" parameterType="com.bd.foodorder.FoodOrder">
  		UPDATE restaurantsInfo SET openingHour = TO_DATE( #{openingHour}, 'HH24:MI'), endingHour = TO_DATE( #{endingHour}, 'HH24:MI'), 
  				mutualName=#{mutualName}, licenseNumber=#{licenseNumber}, introduce=#{introduce}, deliTime=#{deliTime},
- 				origin=#{origin}, minorder=#{minorder}
+ 				origin=#{origin}, minorder=#{minorder}, fctel = #{fctel}
  		WHERE restaurantsNum = #{restaurantsNum} 
  	</update>
  	
