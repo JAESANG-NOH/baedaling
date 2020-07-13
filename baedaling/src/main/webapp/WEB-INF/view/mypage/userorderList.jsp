@@ -9,8 +9,6 @@
 <link rel="stylesheet" href="<%=cp%>/resource/css/mypage_user.css" type="text/css">
 <script type="text/javascript">
 
-
- 
 $(function(){
 	
 	$(".detailOrderBtn").click(function(){
@@ -18,11 +16,12 @@ $(function(){
 		/* $("#orderDetail-dialog").each(function(){
 			this.reset();
 		}); */
+		var restaurantsNum = $(this).attr("data-restaurantsNum");
 		
 		$('#orderDetail-dialog').dialog({
 			  modal: true,
-			  height: 650,
-			  width: 600,
+			  height: 546,
+			  width: 632,
 			  title: '주문 상세 내역',
 			  open: function() {
 	
@@ -34,8 +33,8 @@ $(function(){
 						
 						var dto = data.dto;
 						var list = data.list;
-						var foodOrderDate = dto.foodOrderDate;
 						var name = dto.name;
+						var foodOrderDate = dto.foodOrderDate;
 						var foodOrderTotalPrice = dto.foodOrderTotalPrice;
 						var foodOrderHowPay = dto.foodOrderHowPay;
 						var fctel = dto.fctel;
@@ -50,6 +49,27 @@ $(function(){
 						$("#foodOrderAddr").html(foodOrderAddr);
 						$("#memo").html(memo);
 						
+					
+						var out="";
+						for(var i=0; i<list.length; i++) {
+							var item = list[i];
+							if(item==null) continue;
+								
+							console.log(item);
+							
+							var menuName = item.menuName;
+							var qty = item.qty;
+							var orderOnePrice = item.orderOnePrice;
+							
+							out+="<tr height='40' style='border-bottom:1px solid #cccccc;'>";
+							out+="<td style='padding: 10px 10px 5px 15px; font-size: 15px;'>"+menuName+"("+qty+"개) </td>";
+							out+="<td style='padding: 10px 10px 10px 15px; font-size: 15px;' align='right'> "+orderOnePrice+"원 </td>";
+							out+="</tr>";
+						}
+						
+						$("#orderDetailMenuList").html(out);
+						$(".viewBtn").attr("data-restaurantsNum",restaurantsNum);
+						
 					};
 
 					ajaxJSON(url, "get", query, fn);
@@ -62,6 +82,12 @@ $(function(){
 });
 
 
+$(function(){
+	$("body").on("click",".viewBtn",function(){
+		var restaurantsNum = $(this).attr("data-restaurantsNum");
+		location.href = "<%=cp%>/franchise/page?restaurantsNum="+restaurantsNum;
+	});
+});
 
 $(function(){
 	$("body").on("click",".review_btn",function(){
@@ -146,7 +172,7 @@ function forwordreview(foodOrderNum,restaurantsNum){
 							<td>${dto.listNum}</td>
 							<td>
 								<p style="font-weight: bold;"> ${dto.name} </p>
-								<p> ${dto.menuName} X ${dto.qty} </p> 
+								<p> ${dto.menuName} </p> 
 							</td>
 							<td>${dto.foodOrderTotalPrice}원</td>
 							<td>${dto.foodOrderDate}</td>
@@ -154,7 +180,7 @@ function forwordreview(foodOrderNum,restaurantsNum){
 							<td>
 								<button type="button" class="btn btn1 review_btn" data-orderNum="${dto.foodOrderNum}" data-restaurantsNum="${dto.restaurantsNum}">리뷰쓰기</button> <br>
 								<button type="button" class="btn btn2" onclick="javascript:location.href='<%=cp%>/franchise/page?restaurantsNum=${dto.restaurantsNum}'">가게보기</button> <br>
-								<button type="button" class="btn btn3 detailOrderBtn" data-foodOrderNum="${dto.foodOrderNum}">주문상세</button>
+								<button type="button" class="btn btn3 detailOrderBtn" data-foodOrderNum="${dto.foodOrderNum}" data-restaurantsNum="${dto.restaurantsNum}">주문상세</button>
 							</td>
 						</tr>	
 						</c:forEach>
@@ -185,7 +211,7 @@ function forwordreview(foodOrderNum,restaurantsNum){
 
 
 <div class="orderdetail_container"id="orderDetail-dialog" style="display: none;">
-            	<div style="width: 590px;">
+            	<div style="width: 600px;">
             		<table style="width: 100%; border: 1px solid #cccccc; border-collapse: collapse; border-spacing: 0;">
 						<tr height="45">
 							<td colspan="2" align="left" style="padding: 10px 10px 5px 15px; font-size: 20px; font-weight: bold;" id="fcName">
@@ -195,19 +221,13 @@ function forwordreview(foodOrderNum,restaurantsNum){
 							<td align="left" style="font-size: 15px; padding: 5px 10px 5px 15px;">
 								<span>주문일시 :</span> <span id="foodOrderDate"></span>
 							</td>
-							<td align="right">
-								<button class="btn btn1">리뷰작성</button>
-								<button class="btn btn2">가게보기</button>
+							<td align="right" style="padding-right: 5px;">
+								<button class="btn btn2 viewBtn">가게보기</button>
 							</td>
 						</tr>
-            			<tr height="40" style="border-bottom:1px solid #cccccc;">
-            				<td style="padding: 10px 10px 5px 15px; font-size: 15px;"> 짬뽕 2개 </td>
-            				<td style="padding: 10px 10px 10px 15px; font-size: 15px;" align="right"> 13,000원 </td>
-            			</tr>
-            			<tr height="40" style="border-bottom:1px solid #cccccc;">
-            				<td style="padding: 10px 10px 5px 15px; font-size: 15px;"> 찹쌀 탕수육 中 1개 </td>
-            				<td style="padding: 10px 10px 10px 15px; font-size: 15px;" align="right"> 16,000원 </td>
-            			</tr>
+						
+						<tbody id="orderDetailMenuList"></tbody>
+            			
             			<tr height="40">
             				<td style="padding: 0px 0px 0px 15px; font-size: 17px; font-weight: bold;"> 총 주문금액 </td>
             				<td style="padding: 10px 10px 10px 15px; font-size: 17px; font-weight: bold;" align="right" id="foodOrderTotalPrice">  </td>
