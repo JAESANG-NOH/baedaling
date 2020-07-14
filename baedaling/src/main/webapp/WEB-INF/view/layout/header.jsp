@@ -76,7 +76,7 @@
 	
 	$(function(){
 		$("body").on("mouseover", ".point_search_ul li", function(){
-			$(this).css("background", "#A9F5E1");
+			$(this).css("background", "#76d1d8");
 		});
 		$("body").on("mouseout", ".point_search_ul li", function(){
 			$(this).css("background", "white");

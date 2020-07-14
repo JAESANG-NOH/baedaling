@@ -362,6 +362,38 @@ $(function(){
 $(function(){
 	$("body").on("click","#pay_btn",function(){
 		var f = document.payForm;
+		var str ="";
+		
+		str = f.addr1.value;
+		if(!str){
+			alert("정확한 주소를 입력해 주세요.");
+			return;
+		}
+		str = f.addr2.value;
+		if(!str){
+			alert("정확한 상세 주소를 입력해 주세요.");
+			return;
+		}
+		
+		str = f.tel.value;
+		if(!str){
+			alert("정확한 전화번호를 입력해 주세요.");
+			return;
+		}
+		
+		str = f.foodorderhowpay.value;
+		if(!str){
+			alert("결제 방법을 선택해 주세요.");
+			return;
+		}
+		
+		str = f.foodorderdeliverymethod.value;
+		if(!str){
+			alert("배달 방법을 선택해 주세요.");
+			return;
+		}
+		
+		
 		f.action = "<%=cp%>/franchise/newOrder";
 		f.submit();
 	});
@@ -389,6 +421,10 @@ $(function(){
 		var deliverymethod = $(this).attr('data-deliverymethod');
 		$('#foodorderdeliverymethod').val(deliverymethod);
 	});
+	
+	
+	var s = $(".preViewContent").text();
+	$(".preViewContent").html(s);
 });
 </script>
 <style type="text/css">
@@ -468,7 +504,7 @@ $(function(){
 					<ul>
 						<li><i class="fas fa-bullhorn"></i><span
 							style="font-weight: bold;"> 사장님알림</span></li>
-						<li style="color: gray; text-overflow: ellipsis; white-space: nowrap; width: 400px; overflow: hidden;">${dto.introduce}<span> <a
+						<li style="color: gray; text-overflow: ellipsis; white-space: nowrap; width: 400px; overflow: hidden;"><span class="preViewContent">${dto.introduce}</span><span> <a
 								href=""> <i class="fas fa-chevron-right"></i></a></span>
 						</li>
 					</ul>
@@ -530,15 +566,15 @@ $(function(){
 			<table class="location_table">
 				<tr>
 					<td class="pay_table_info">주소</td>
-					<td class="pay_table_input"><input type="text" name="addr1"></td>
+					<td class="pay_table_input"><input type="text" id="addr1" name="addr1"></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td class="pay_table_input"><input type="text" placeholder="(필수)상세주소 입력" name="addr2">
+					<td class="pay_table_input"><input type="text" id="addr2" placeholder="(필수)상세주소 입력" name="addr2">
 				</tr>
 				<tr>
 					<td class="pay_table_info">휴대전화번호</td>
-					<td class="pay_table_input"><input type="text" placeholder="(필수)휴대전화 번호 입력" name="tel"></td>
+					<td class="pay_table_input"><input type="text" id="usertel" placeholder="(필수)휴대전화 번호 입력" name="tel"></td>
 				</tr>
 				<tr>
 					<td></td>
