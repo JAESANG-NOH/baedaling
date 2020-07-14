@@ -107,7 +107,7 @@ margin: 0px;
 }
 
 #dash_table3{
-	width: 1400px;
+	width: 1300px;
 	height: 200px;
 	margin-top : 50px;
 	margin-left : 550px;
@@ -115,10 +115,10 @@ margin: 0px;
 }
 
 #dash_table4{
-	width: 1800px;
+	width: 1300px;
 	height: 300px;
 	margin-top : 50px;
-	margin-left : 400px;
+	margin-left : 420px;
 	background-color: white; 
 	border-collapse: collapse;
 }

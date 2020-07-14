@@ -305,10 +305,10 @@ $(function() {
 	</tr>
 
 	<tr>
-		<td width=500px;>
+		<td width=450px;>
 			<div id="barContainer"></div>
 		</td>
-		<td width=500px;>
+		<td width=450px;>
 			<div id="lineContainer"></div>
 		</td>
 	</tr>
