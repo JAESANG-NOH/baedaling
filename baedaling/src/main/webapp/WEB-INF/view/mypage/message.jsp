@@ -21,7 +21,7 @@
             </div>
             <div style="margin-top: 20px;">
             		 <div class="re-password">
-            		 	<input type="text" name="userPwd" style="width: 300px; height: 46px; padding-left: 28px; margin-left: 43px;">
+            		 	<input type="password" name="userPwd" style="width: 300px; height: 46px; padding-left: 28px; margin-left: 43px;">
             		 </div>
                      <button type="submit" class="btnConfirm">확&nbsp;&nbsp;인</button>
             </div>

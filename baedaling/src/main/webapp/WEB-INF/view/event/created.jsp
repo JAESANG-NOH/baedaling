@@ -22,7 +22,7 @@ function check() {
     var mode="${mode}";
     if(mode=="created"||mode=="update" && f.upload.value!="") {
 		if(! /(\.gif|\.jpg|\.png|\.jpeg)$/i.test(f.upload.value)) {
-			alert('이미지 파일만 가능합니다.(bmp 파일은 불가) !!!');
+			/* alert('이미지 파일만 가능합니다.(bmp 파일은 불가) !!!'); */
 			f.upload.focus();
 			return;
 		}
