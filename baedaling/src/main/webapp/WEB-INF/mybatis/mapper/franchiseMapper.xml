@@ -8,7 +8,7 @@
 	</select>
 	<select id="readBoard" parameterType="Integer"
 		resultType="com.bd.franchise.Franchise">
-		SELECT r.restaurantsNum, openingHour, endingHour, fctel,
+		SELECT r.restaurantsNum, TO_CHAR(openingHour, 'HH24:MI') openingHour,TO_CHAR(endingHour, 'HH24:MI') endingHour, fctel,
 		mutualName,licenseNumber,introduce,origin, minorder,name,
 		addr1, addr2, deliTime
 		FROM restaurantsInfo if
