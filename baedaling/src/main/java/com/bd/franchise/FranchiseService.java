@@ -20,5 +20,4 @@ public interface FranchiseService {
 	public int reviewCount(int restaurantsNum);
 	public double aveStarCount(int restaurantsNum);
 	public int reviewReplyCount(int restaurantsNum);
-
 }

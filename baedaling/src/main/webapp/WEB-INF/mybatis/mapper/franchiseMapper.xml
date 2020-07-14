@@ -109,4 +109,11 @@
 	<insert id="insertdetailorder" parameterType="map">
 		INSERT INTO orderdetail (ORDERDETAILNUM,FOODORDERNUM,MENUNUM,ORDERONEPRICE,QTY) VALUES(#{orderdetailnum},#{foodordernum},#{menunum},#{orderoneprice},#{qty})
 	</insert>
+	
+	<select id="readimage1" parameterType="Integer" resultType="String">
+		SELECT SAVEFILENAME FROM restaurantfile WHERE RESTAURANTSNUM = #{restaurantsNum} AND SEPARATE = 1
+	</select>
+	<select id="readimage2" parameterType="Integer" resultType="String">
+		SELECT SAVEFILENAME FROM restaurantfile WHERE RESTAURANTSNUM = #{restaurantsNum} AND SEPARATE = 2
+	</select>
 </mapper>

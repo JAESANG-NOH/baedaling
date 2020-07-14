@@ -23,6 +23,10 @@ public class FranchiseServiceImpl implements FranchiseService {
 		Franchise dto = null;
 		try {
 			dto = dao.selectOne("fc.readBoard", restaurantsNum);
+			String titleimg = dao.selectOne("fc.readimage1", restaurantsNum);
+			String bannerimg = dao.selectOne("fc.readimage2", restaurantsNum);
+			dto.setTitleimg(titleimg);
+			dto.setBannerimg(bannerimg);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

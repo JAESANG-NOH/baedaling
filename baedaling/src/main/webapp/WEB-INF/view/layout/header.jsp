@@ -231,6 +231,17 @@
 	   </div>
 	    <hr style="border: 0.5px solid #D8D8D8;"> 
    	</c:when>
+   	<c:when test="${searchBar=='page'}">
+   		<c:if test="${not empty dto.bannerimg}">
+   		<div style="background-image: url('<%=cp%>/resource/dashboard/${dto.bannerimg}'); width:100%; height:345px;">
+		   <div id="logo" class="container">
+		   </div>
+	   </div>
+	    <hr style="border: 0.5px solid #D8D8D8;"> 
+	    </c:if>
+	    <c:if test="${empty dto.bannerimg}">
+	    </c:if>
+   	</c:when>
    	<c:otherwise>
    	</c:otherwise>
    </c:choose>

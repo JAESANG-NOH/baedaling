@@ -468,7 +468,7 @@ $(function(){
 					<ul>
 						<li><i class="fas fa-bullhorn"></i><span
 							style="font-weight: bold;"> 사장님알림</span></li>
-						<li style="color: gray;">${dto.introduce}<span> <a
+						<li style="color: gray; text-overflow: ellipsis; white-space: nowrap; width: 400px; overflow: hidden;">${dto.introduce}<span> <a
 								href=""> <i class="fas fa-chevron-right"></i></a></span>
 						</li>
 					</ul>

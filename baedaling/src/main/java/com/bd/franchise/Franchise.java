@@ -34,9 +34,22 @@ public class Franchise {
 	private String foodorderdeliverymethod;
 	private int foodordertotalprice;
 	private int foodorderpay;
+	private String titleimg;
+	private String bannerimg;
 	
 	
-	
+	public String getTitleimg() {
+		return titleimg;
+	}
+	public void setTitleimg(String titleimg) {
+		this.titleimg = titleimg;
+	}
+	public String getBannerimg() {
+		return bannerimg;
+	}
+	public void setBannerimg(String bannerimg) {
+		this.bannerimg = bannerimg;
+	}
 	public String getDeliTime() {
 		return deliTime;
 	}

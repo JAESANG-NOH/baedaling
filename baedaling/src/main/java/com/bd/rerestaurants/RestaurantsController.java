@@ -117,7 +117,6 @@ public class RestaurantsController {
         model.addAttribute("dataCount", dataCount);
         model.addAttribute("total_page", total_page);
         model.addAttribute("paging", paging);
-        
         model.addAttribute("state", state);
         
 		return ".restaurantsmenu.list";
