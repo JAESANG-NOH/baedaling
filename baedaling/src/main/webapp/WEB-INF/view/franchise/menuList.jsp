@@ -9,7 +9,7 @@
 <div class="all_menuList" style="width: 700px; margin: 0px auto;">
 
 <div style="width: 700px;">
-<div class="menuImg_table" align="center" style="margin: 5px; padding: 5px;">
+<div class="menuImg_table" align="center" style=" width:705px; margin: 5px; padding: 5px;">
 	<c:forEach var="dto" items="${menuList }">
 		<ul class="menu" data-menuNum="${dto.menuNum }">
 			<li><img class="store_menu_img" src="<%=cp%>/uploads/menu/${dto.saveFilename}" onerror="this.src='<%=cp%>/resource/img/ready.jpg'"></li>
