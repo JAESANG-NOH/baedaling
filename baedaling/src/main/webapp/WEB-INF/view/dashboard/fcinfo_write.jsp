@@ -69,7 +69,7 @@ function  updateFcState() {
 					<div>
 						<ul style="padding: 10px;">
 							<li>
-								<textarea name="introduce" id="introduce"  style="margin: 0px; width: 580px; height: 350px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.introduce}</textarea>
+								<textarea name="introduce" id="content"  style="margin: 0px; width: 580px; height: 350px; border-color: #DDDFE0; resize: none; color: gray; border-radius: 4px;">${dto.introduce}</textarea>
 							</li>
 						</ul>
 					</div>
@@ -81,7 +81,7 @@ function  updateFcState() {
 					<ul id="info_content2">
 						<li>
 							<span id="light_gray">영업시간</span>
-							<input type="text" name="openingHour" value="${dto.openingHour}"> - <input type="datetime" name="endingHour" value="${dto.endingHour}">
+							<input type="time" name="openingHour" value="${dto.openingHour}"> - <input type="time" name="endingHour" value="${dto.endingHour}">
 						</li>
 						<li>
 							<span id="light_gray">전화번호</span> <input type="tel" name="fctel" value="${dto.fctel}">
