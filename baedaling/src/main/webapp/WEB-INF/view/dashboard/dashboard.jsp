@@ -272,10 +272,10 @@ $(function() {
 	
 	<tr style="width: 800px; ">
 		<td style="color: gray; height: 20px;font-size: 18px;"><span style="color: #38BCC6;"><i class="fas fa-utensil-spoon"></i></span> 상호명 : ${dto.mutualName}</td>
-		<td width="400px" rowspan="5" style="padding-top:30px; text-align: center;">
+		<td width="450px" rowspan="5" style="padding-top:30px; text-align: center;">
 			<div id="pie3d2Container"></div>
 		</td>
-		<td width="400px" rowspan="5" style="padding-top:30px; text-align: center;">
+		<td width="450px" rowspan="5" style="padding-top:30px; text-align: center;">
 			<div id="pie3dContainer"></div>
 		</td>
 	</tr>
