@@ -34,7 +34,7 @@
 
 	<!-- 회원 리스트 -->	
 	<select id="listManage" parameterType="map" resultType="com.bd.manage.Manage">
-		SELECT u0.userIdx, userName, userId, birth, enabled,
+		SELECT u0.userIdx, userName, userId, TO_CHAR(birth,'YYYY-MM-DD') birth, enabled,
 			   tel, email, addr1, addr2, TO_CHAR(created_date, 'YYYY-MM-DD') created_date
 		FROM user0 u0
 		LEFT OUTER JOIN user1 u1 ON u0.userIdx=u1.userIdx 
@@ -56,7 +56,7 @@
 	
 	<!-- 회원 상세표 -->
 	<select id="readUser" parameterType="String" resultType="com.bd.manage.Manage">
-		SELECT u0.userIdx, userName, userId, birth, enabled,
+		SELECT u0.userIdx, userName, userId, TO_CHAR(birth,'YYYY-MM-DD') birth, enabled,
 			   tel, email, addr1, addr2, TO_CHAR(created_date, 'YYYY-MM-DD') created_date
 		FROM user0 u0
 		LEFT OUTER JOIN user1 u1 ON u0.userIdx=u1.userIdx 

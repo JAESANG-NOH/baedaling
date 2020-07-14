@@ -41,7 +41,7 @@ public class RestaurantsController {
 		}
 		Map<String, Object> map = new HashMap<String,Object>();
 		
-		int rows = 20;
+		int rows = 10;
 		int total_page = 0;
 		int dataCount = 0;
 		
@@ -109,7 +109,7 @@ public class RestaurantsController {
         String listUrl = cp+"/restaurants/list?"+query;
         
         String paging = myUtil.paging(current_page, total_page, listUrl);
-        
+        System.out.println(list.get(0).getOpeninghour());
         model.addAttribute("searchBar", "true");
         model.addAttribute("typecategorynum",typecategorynum);
         model.addAttribute("list", list);

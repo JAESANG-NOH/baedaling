@@ -86,5 +86,6 @@ $(function(){
 </c:forEach>
 <c:out value="</div>" escapeXml="false"/>
 	<input type="hidden" name="typecategorynum" id="typecategorynum" value="${typecategorynum}">
+	${paging}
 	</form>
 </div>

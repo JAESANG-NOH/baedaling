@@ -66,7 +66,7 @@
             <mvc:exclude-mapping path="/"/>
             <mvc:exclude-mapping path="/main"/>
             <mvc:exclude-mapping path="/resource/**"/>
-            <mvc:exclude-mapping path="/upload/*"/>
+            <mvc:exclude-mapping path="/uploads/*"/>
             <mvc:exclude-mapping path="/user/*"/>
            
              
