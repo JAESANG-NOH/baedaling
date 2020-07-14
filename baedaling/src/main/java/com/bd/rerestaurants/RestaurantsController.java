@@ -77,7 +77,6 @@ public class RestaurantsController {
 		
 		List<Restaurants> list = null;
 		try {
-			System.out.println(state);
 			if(state.equals("distance")) {;
 				if(typecategorynum==13) { 
 					list = service.listAllRestaurants(map);
@@ -109,7 +108,6 @@ public class RestaurantsController {
         String listUrl = cp+"/restaurants/list?"+query;
         
         String paging = myUtil.paging(current_page, total_page, listUrl);
-        System.out.println(list.get(0).getOpeninghour());
         model.addAttribute("searchBar", "true");
         model.addAttribute("typecategorynum",typecategorynum);
         model.addAttribute("list", list);

@@ -211,7 +211,8 @@ button{
 
 .infoContent{
 	width: 698px; 
-	height: 600px;
+	min-height: 600px;
+	display: inline-block;
 	margin: 0px auto;
 	border: 1px solid #dadadb;
 	border-top: none;
