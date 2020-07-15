@@ -250,7 +250,7 @@ ORDER BY bestSales desc
  
  
  <select id="reviewList" parameterType="map" resultType="com.bd.foodorder.FoodOrder">
- 	SELECT r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
+   SELECT r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI') created, starCount, reviewNum, u.userName, LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum)AS menuName
    FROM review r
    JOIN foodorder f ON r.foodorderNum = f.foodorderNum
    JOIN orderdetail o ON o.foodorderNum = f.foodorderNum
@@ -259,7 +259,7 @@ ORDER BY bestSales desc
    WHERE r.restaurantsNum = #{restaurantsNum}
    group by r.foodorderNum, r.content, TO_CHAR(r.created,'YY-MM-DD HH24:MI'), starCount, reviewNum, 
     u.userName
-	ORDER BY r.reviewNum DESC
+	ORDER BY created DESC
 	OFFSET #{offset} ROWS FETCH FIRST #{rows} ROWS ONLY
  </select>
  

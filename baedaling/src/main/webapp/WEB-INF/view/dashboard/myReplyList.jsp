@@ -28,13 +28,11 @@
 	
 	<table id="reviewTable">
 		<tr style=" border: 1px solid #E6E5E5; text-align: center; width: 700px; height: 50px;">
-			<td style="font-weight:bold; border-bottom : 1px solid #E6E5E5; width: 150px;">No</td>
 			<td style="font-weight:bold; border-bottom: 1px solid #E6E5E5; width: 200px;">내용</td>
 			<td style="font-weight:bold; border-bottom: 1px solid #E6E5E5; width: 150px;">날짜</td>
 		</tr>
  <c:forEach var="dto" items="${list}">		
 		<tr style=" border: 1px solid #E6E5E5; text-align: center; width: 700px; height: 45px;">
-			<td style="width: 150px;"><a href="" style="color: gray;">${dto.reviewNum}</a></td>
 			<td class="ellipsis" style="width: 200px;"><a href="" style="color: gray;">${dto.reply}</a></td>
 			<td style="width: 150px;"><a href="" style="color: gray;">${dto.replyCreated}</a></td>
 		</tr>
