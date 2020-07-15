@@ -92,7 +92,8 @@
 	</select>
 	
 	<update id="updateEvent" parameterType="com.bd.event.Event">
-		UPDATE event SET subject=#{subject}, imageFilename=#{imageFilename}, content=#{content}, start_date = #{start_date}, end_date=#{end_date}
+		UPDATE event SET subject=#{subject}, imageFilename=#{imageFilename}, content=#{content},
+						 start_date=#{start_date}, end_date=#{end_date}
 		WHERE num=#{num}
 	</update>
 	
