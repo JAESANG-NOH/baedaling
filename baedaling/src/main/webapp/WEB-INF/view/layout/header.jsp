@@ -233,7 +233,7 @@
    	</c:when>
    	<c:when test="${searchBar=='page'}">
    		<c:if test="${not empty dto.bannerimg}">
-   		<div style="background-image: background-size:cover; url('<%=cp%>/resource/dashboard/${dto.bannerimg}'); width:100%; height:400px;">
+   		<div style="background-image: url('<%=cp%>/resource/dashboard/${dto.bannerimg}'); width:100%; height:345px;">
 		   <div id="logo" class="container">
 		   </div>
 	   </div>

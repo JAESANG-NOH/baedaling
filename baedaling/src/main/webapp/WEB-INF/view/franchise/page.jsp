@@ -474,7 +474,7 @@ $(function(){
 				<div id="store_content">
 					<ul>
 						<li><img id="store_img" alt="logo"
-							src="<%=cp%>/delivery/img/bhc.png" onerror="this.src='<%=cp%>/resource/img/ready.jpg'"></li>
+							src="<%=cp%>/resource/dashboard/${dto.titleimg}" onerror="this.src='<%=cp%>/resource/img/ready.jpg'"></li>
 					</ul>
 					<div id="st_content">
 						<ul>

@@ -125,7 +125,7 @@ public class FranchiseController {
 			@RequestParam int restaurantsNum,
 			Model model	) throws Exception {
 		
-		int rows = 1;
+		int rows = 5;
 		int total_page;
 		int dataCount;
 		int replyCount;

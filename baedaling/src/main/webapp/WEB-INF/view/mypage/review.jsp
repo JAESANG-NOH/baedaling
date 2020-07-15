@@ -24,6 +24,7 @@ $(function(){
 function sendReview(){
 	var form = document.reviewForm;
 	form.action = "<%=cp%>/review/${state}";
+	alert("리뷰 등록이 완료 되었습니다.");
 	return true;
 }
 </script>
