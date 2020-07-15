@@ -40,7 +40,7 @@
 		SELECT num, e.userId, e.userName, TO_CHAR(start_date, 'YYYY-MM-DD') start_date,
 		TO_CHAR(end_date, 'YYYY-MM-DD') end_date, imageFilename, hitCount,
 		CASE
-   		    WHEN end_date &lt; SYSDATE THEN '마    감'
+   		    WHEN end_date &lt; SYSDATE THEN '마  감'
     	    ELSE '진  행  중'
 		END AS eventState
 		FROM event e
@@ -92,7 +92,7 @@
 	</select>
 	
 	<update id="updateEvent" parameterType="com.bd.event.Event">
-		UPDATE event SET subject=#{subject}, imageFilename=#{imageFilename}, content=#{content}
+		UPDATE event SET subject=#{subject}, imageFilename=#{imageFilename}, content=#{content}, start_date = #{start_date}, end_date=#{end_date}
 		WHERE num=#{num}
 	</update>
 	

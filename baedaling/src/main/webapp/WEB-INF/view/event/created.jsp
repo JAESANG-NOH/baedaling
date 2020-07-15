@@ -57,8 +57,8 @@ function check() {
 				<tr class="f_line">
 					<td align="left" style="color: gray;" class="subtitle">이벤트 기간</td>
 					<td align="left" id="subcontent" >
-						<input type="date" name="start_date" value="${dto.start_date}" maxlength="10">~
-						<input type="date" name="end_date" value="${dto.end_date}" maxlength="10">
+						<input type="text" name="start_date" value="${dto.start_date}" maxlength="10">~
+						<input type="text" name="end_date" value="${dto.end_date}" maxlength="10">
 					</td>
 					
 				</tr>

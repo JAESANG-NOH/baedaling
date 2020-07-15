@@ -27,7 +27,7 @@
 <select id="dataCount" parameterType="map" resultType="Integer">
 	SELECT NVL(COUNT(*),0)FROM(
 SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
-		   foodOrderTotalPrice, qty, f.restaurantsNum, rr.name, foodOrderState,
+		   foodOrderTotalPrice, f.restaurantsNum, rr.name, foodOrderState,
            LISTAGG(menuName,',') WITHIN GROUP(ORDER BY f.foodorderNum) AS menuName
 	FROM foodorder f 
     JOIN user1 u ON f.userIdx = u.userIdx
@@ -35,8 +35,8 @@ SELECT f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI') foodOrderDate,
     LEFT OUTER JOIN restaurantMenu rm ON o.menuNum = rm.menuNum
     LEFT OUTER JOIN restaurants rr ON rr.restaurantsNum = f.restaurantsNum
     WHERE u.userIdx = #{userIdx}
-    GROUP BY f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderTotalPrice, qty, f.restaurantsNum, 
-rr.name, foodOrderState)
+    GROUP BY f.foodOrderNum, TO_CHAR(foodOrderDate,'YY-MM-DD HH:MI'), foodOrderTotalPrice, f.restaurantsNum, 
+	rr.name, foodOrderState)
 </select>
 
 <!-- 주문내역 -->

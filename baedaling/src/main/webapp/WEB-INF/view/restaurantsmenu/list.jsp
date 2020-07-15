@@ -74,7 +74,7 @@ $(function(){
 				<td class="menu_td2">
 					<b>${dto.name}</b>
 					<br>
-					<span>★${dto.starcount} | 리뷰:${dto.reviewcount}개 | 거리:${dto.distance}Km</span>
+					<span><span style="color: #d6822b;">★</span><fmt:formatNumber pattern="0.0" value="${dto.starcount}"/> | 리뷰:${dto.reviewcount}개 | 거리:${dto.distance}Km</span>
 					<br>
 					<div>
 						<div class="coupon_line">쿠폰할인</div>
