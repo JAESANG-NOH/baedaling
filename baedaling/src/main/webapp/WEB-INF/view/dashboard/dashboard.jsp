@@ -265,7 +265,7 @@ $(function() {
 <div style="background-color: white; height: 10px;">&nbsp;</div>
 <table id="dash_table4" >
 	<tr style="padding-top: 20px;">
-		<td width="350px" height="35px;" style="padding-top:30px; font-size: 20px; font-family: '배달의민족 한나체 Pro', 'bm-hanna-pro'; "><span style="color: #38BCC6;"><i class="fas fa-info"></i></span>  내 가게 정보<a style="color: #CCCACA; font-size: 15px; " href="<%=cp%>/dashboard/fcinfo_write?restaurantsNum=${sessionScope.user.restaurantsNum}"><span style="color:#38BCC6;">  <i class="fas fa-chevron-circle-right"></i>  </span>수정</a></td>
+		<td width="350px" height="35px;" style="padding-top:30px; font-size: 20px; font-family: '배달의민족 한나체 Pro', 'bm-hanna-pro'; "><span style="color: #38BCC6;"><i class="fas fa-info"></i></span>  내 가게 정보<a style="color: #CCCACA; font-size: 15px; " href="<%=cp%>/dashboard/fcinfo_read?restaurantsNum=${sessionScope.user.restaurantsNum}"><span style="color:#38BCC6;">  <i class="fas fa-chevron-circle-right"></i>  </span>수정</a></td>
 		<td style="font-size: 20px;"><span style="color: #F4D005;"><i class="fas fa-trophy"></i>  </span>Today's Best</td>
 		<td style="font-size: 20px;"><span style="color: #F4D005;"><i class="fas fa-trophy"></i>  </span>Monthly Best</td>
 	</tr>
