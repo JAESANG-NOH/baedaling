@@ -13,7 +13,7 @@
          	<ul class="snip1275">
             	<li><a href="<%=cp%>/manage/userlist" data-hover="회원">회원 관리</a></li>
             	<li><a href="<%=cp%>/restaurant/restaurantlist" data-hover="가게">가게 관리</a></li>
-               	<li><a href="<%=cp%>/#" data-hover="채팅">채팅</a></li>
+               	<li><a href="<%=cp%>/fcnotice/list" data-hover="가맹점">가맹점 공지사항</a></li>
 				<li><a href="<%=cp%>/inquire/list" data-hover="문의">1:1 문의 리스트</a></li>
 			</ul>
       </div>
