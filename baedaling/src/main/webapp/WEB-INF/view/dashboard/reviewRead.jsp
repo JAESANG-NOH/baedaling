@@ -119,16 +119,16 @@ $(function(){
 
 
 <div class="reviewContent3" style="background-color: white;">
-	<ul style="padding-left: 10px; padding-top: 10px;">
+	<ul style="padding-left: 10px; padding-top: 10px; height: auto;">
 		<li > <span style="font-size: 15px; font-weight: bold;">${dto.userName}</span> ${dto.created}</li>
 		<li id="star_deco">★★★★★</li>
 		<li style="color: #15AFD6;">${dto.menuName}</li>
-		<li>${dto.content}</li>
+		<li style="height: auto;">${dto.content}</li>
 	</ul>
 </div>
 	
 	
-	<table  class="reviewContent3 reviewReplyContent" style=" border-spacing: 0px;">
+	<table  class="reviewContent4 reviewReplyContent" style=" border-spacing: 0px;">
 		<tr height='30'> 
 			 <td align='left'>
 			 	<span style="font-size: 20px; font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; color: gray;" >댓글쓰기</span><span style="font-size:18px; font-family:'배달의민족 한나체 Pro', '배달의민족한나체Pro', 'bm-hanna-pro'; color: #B3B2B2;"> - 고객의 개인정보를 유출하는 글의 게시를 삼가 주세요.</span>

@@ -40,6 +40,14 @@ body{
 
 .reviewContent3{
 	width: 1000px; 
+	height: auto; 
+	border: 1px solid #dadadb;
+	border-top : none;
+	margin-top: 16px;
+}
+
+.reviewContent4{
+	width: 1000px; 
 	height: 150px; 
 	border: 1px solid #dadadb;
 	border-top : none;

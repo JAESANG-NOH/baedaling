@@ -26,16 +26,14 @@
 			<td style="font-weight:bold; border-bottom : 1px solid #E6E5E5; width: 100px;">No</td>
 			<td style="font-weight:bold; border-bottom: 1px solid #E6E5E5; width: 150px;">작성자</td>
 			<td style="font-weight:bold; border-bottom: 1px solid #E6E5E5; width: 150px;">메뉴</td>
-			<td style="font-weight:bold; border-bottom: 1px solid #E6E5E5; width: 200px;">내용</td>
 			<td style="font-weight:bold; border-bottom: 1px solid #E6E5E5; width: 100px;">별점</td>
 			<td style="font-weight:bold; border-bottom: 1px solid #E6E5E5; width: 150px;">날짜</td>
 		</tr>
  <c:forEach var="dto" items="${list}">		
 		<tr style=" border: 1px solid #E6E5E5; text-align: center; width: 800px; height: 45px;">
 			<td style="width: 100px;"><a href="" style="color: gray;">${dto.reviewNum}</a></td>
-			<td style="width: 150px;"><a href="" style="color: gray;">${dto.userName}</a></td>
+			<td style="width: 150px;"><a href="${articleUrl}&reviewNum=${dto.reviewNum}" style="color: gray;"><span style="font-weight: bold;">${dto.userName}</span>님의 리뷰 </a></td>
 			<td style="width: 150px;"><a href="${articleUrl}&reviewNum=${dto.reviewNum}" style="color: gray;">${dto.menuName}</a></td>
-			<td class="ellipsis" style="width: 200px;"><a href="${articleUrl}&reviewNum=${dto.reviewNum}" style="color: gray;">${dto.content}</a></td>
 			<td style="width: 100px;"><a href="" style="color: gray;">${dto.starCount}</a></td>
 			<td style="width: 150px;"><a href="" style="color: gray;">${dto.created}</a></td>
 		</tr>
