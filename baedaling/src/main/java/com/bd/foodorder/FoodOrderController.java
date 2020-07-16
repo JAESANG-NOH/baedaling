@@ -111,7 +111,7 @@ public class FoodOrderController {
 		map.put("rows",rows);
 		List<FoodOrder> list4 = service.readOrder(map);
 		orderCount4 = service.orderCount(map);
-		
+		FoodOrder today = service.todaySalesRead(restaurantsNum);
 		
 	     int listNum =0;
 	     int n = 0;
@@ -124,6 +124,7 @@ public class FoodOrderController {
 	    String query = "restaurantsNum="+restaurantsNum; 
 	    String listUrl = cp+"/dashboard/orderlist?"+query;
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
+	    
 		model.addAttribute("list1", list1);
 		model.addAttribute("list2",list2);
 		model.addAttribute("list3",list3);
@@ -136,6 +137,7 @@ public class FoodOrderController {
 		model.addAttribute("page", current_page);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("paging", paging);
+		model.addAttribute("today", today);
 		return ".dashboard.orderlist";
 	}
 	
@@ -446,7 +448,7 @@ public class FoodOrderController {
 			}
 			state = "true";
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		Map<String, Object> model = new HashMap<>();
 		model.put("state",state);
@@ -504,6 +506,8 @@ public class FoodOrderController {
 			return "redirect:/dachboard/orderlist?";
 		}
 		List<FoodOrder> listFile = service.listFile(restaurantsNum);
+		FoodOrder today = service.todaySalesRead(restaurantsNum);
+		model.addAttribute("today", today);
 		model.addAttribute("mode", "update");
 		model.addAttribute("dto", dto);
 		model.addAttribute("listFile", listFile);
@@ -611,7 +615,8 @@ public class FoodOrderController {
 
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
 		
-		
+	    FoodOrder today = service.todaySalesRead(restaurantsNum);
+		model.addAttribute("today", today);
 		model.addAttribute("list", list);
 		model.addAttribute("reviewCount", reviewCount);
 		model.addAttribute("pageNo", current_page);
@@ -666,7 +671,8 @@ public class FoodOrderController {
 	    String listUrl = cp+"/dashboard/myReplyList?"+query;
 	    String paging = myUtil.paging(current_page, total_page, listUrl);
 		
-		
+	    FoodOrder today = service.todaySalesRead(restaurantsNum);
+		model.addAttribute("today", today);
 		model.addAttribute("list", list);
 		model.addAttribute("reviewCount", reviewCount);
 		model.addAttribute("pageNo", current_page);
@@ -686,7 +692,8 @@ public class FoodOrderController {
 			) {
 		String query="page="+page;
 		FoodOrder dto = service.reviewRead(reviewNum);
-		
+		FoodOrder today = service.todaySalesRead(restaurantsNum);
+		model.addAttribute("today", today);
 		model.addAttribute("query", query);
 		model.addAttribute("dto", dto);
 		model.addAttribute("page", page);

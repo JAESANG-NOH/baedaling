@@ -66,6 +66,8 @@ body {
   background-image: linear-gradient(-90deg, hsl(80, 80%, 40%), hsl(80, 80%, 35%) 2em, hsl(80, 80%, 40%));
 }
 </style>
+
+
 <div class="sidebox">
 <aside>
 <div style="width: 100%; height: 1000px;" >

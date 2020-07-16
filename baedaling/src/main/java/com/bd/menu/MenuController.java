@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bd.common.MyUtil;
+import com.bd.foodorder.FoodOrder;
+import com.bd.foodorder.FoodOrderService;
 import com.bd.user.SessionInfo;
 
 
@@ -29,6 +31,8 @@ public class MenuController {
 	@Autowired
 	private MyUtil myUtil;
 	
+	@Autowired
+	private FoodOrderService fservice;
 	
 	@RequestMapping(value="/menu/list")
 	public String list(
@@ -74,7 +78,8 @@ public class MenuController {
         String listUrl = cp+"/menu/list?group="+group;
         String paging = myUtil.paging(current_page, total_page, listUrl);
 		List<Menu> groupList = service.listCategory();
-        
+		FoodOrder today = fservice.todaySalesRead(info.getRestaurantsNum());
+		model.addAttribute("today", today);
         model.addAttribute("groupList",groupList);
         model.addAttribute("list",list);
         model.addAttribute("group",group);
